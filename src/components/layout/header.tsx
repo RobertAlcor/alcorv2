@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { NAV } from '@/lib/site'
+import { MobileMenu } from './mobile-menu'
 
 export function Header() {
   return (
@@ -26,12 +27,7 @@ export function Header() {
           ))}
         </nav>
 
-        <Link
-          href="/kontakt"
-          className="md:hidden text-sm font-medium text-paper-mute hover:text-paper"
-        >
-          Kontakt
-        </Link>
+        <MobileMenu />
       </div>
     </header>
   )
