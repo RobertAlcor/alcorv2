@@ -1,98 +1,143 @@
-# Update-Anleitung – Sprint 2.5 (Bug Fixes + Erweiterungen)
+# Sprint 3 – Blog-System komplett
 
-## Was du machst
+## Was du manuell machst
 
-**1. ZIP entpacken** im Projektordner `C:\Projekte\webdesign-alcor\v2-nextjs\`. Folgende Files werden ersetzt oder neu angelegt:
+### 1. ZIP entpacken
+Im Projektordner `C:\Projekte\webdesign-alcor\v2-nextjs\` entpacken.
 
-### Neu angelegt
-- `src/app/impressum/page.tsx` (Next.js Page)
-- `src/app/datenschutz/page.tsx`
-- `src/app/blog/page.tsx`
-- `src/components/layout/skip-link.tsx`
-- `src/components/layout/scroll-to-top.tsx`
-- `src/components/sections/comparison-section.tsx`
-- `src/components/sections/process-section.tsx`
-- `public/logo.svg`
+**Wird ÜBERSCHRIEBEN:**
+- `src/app/blog/page.tsx` (alter Coming-Soon-Stub → echter Blog-Index)
+- `src/app/globals.css` (mit prose-blog Klassen für Artikel-Content)
+- `src/app/sitemap.ts` (mit dynamischen Blog-URLs)
 
-### Ersetzt (überschreibt existierende)
-- `package.json` (React 19 stable, Next 15.1, Tailwind 4 stable)
-- `src/app/layout.tsx` (mit SkipLink + ScrollToTop)
-- `src/app/page.tsx` (mit Process + Comparison Section)
-- `src/app/globals.css` (sr-only utility)
-- `src/components/layout/header.tsx` (Active-Route, MobileMenu Integration)
-- `src/components/layout/footer.tsx` (kleiner Polish, WhatsApp-Link)
-- `src/components/layout/mobile-menu.tsx` (animierter Burger, Spring-Physics, Slide-In)
-- `src/components/sections/hero.tsx` (ehrliche Trust-Points, Cursor-Glow Effekt)
+**Wird NEU angelegt:**
+- `src/app/blog/[slug]/page.tsx` – Artikel-Seite
+- `src/app/blog/tag/[tag]/page.tsx` – Tag-Filter
+- `src/app/feed.xml/route.ts` – RSS-Feed
+- `src/components/blog/post-card.tsx`
+- `src/components/blog/author-box.tsx`
+- `src/components/blog/reading-progress.tsx`
+- `src/lib/blog.ts` – MDX-Parser
+- `src/lib/markdown.ts` – Markdown→HTML Renderer
+- `src/content/blog/wordpress-oder-handcodiert-2026.mdx`
+- `src/content/blog/website-kosten-wien-2026.mdx`
+- `src/content/blog/handgeschriebener-code-erklaert.mdx`
 
-## 2. WICHTIG: Manuell löschen
-
-```powershell
-del src\app\impressum\impressum.html
-```
-
-Das alte HTML-File ist obsolet – die neue `page.tsx` ersetzt es vollständig.
-
-## 3. Dependencies neu installieren
+### 2. Dev-Server neustarten
 
 ```powershell
-# package.json wurde geändert, deshalb sauber neu installieren
-rmdir /s /q node_modules
-del package-lock.json
-npm install
-```
-
-## 4. Dev-Server starten
-
-```powershell
+# Strg+C im Terminal, dann
 npm run dev
 ```
 
-## 5. Browser-Tests
+**Kein neues npm install nötig** – server-only ist bereits in Next.js drin, kein extra Package.
 
-| URL | Was checken |
-|-----|-------------|
-| `/` | Process + Comparison Sektionen sichtbar, Hero-Cursor-Glow auf Desktop |
-| `/impressum` | Neue Seite, kein 404 mehr |
-| `/datenschutz` | Neue Seite, kein 404 mehr |
-| `/blog` | Coming-Soon mit geplanten Artikeln |
-| Mobile Menü | Burger animiert sich zu X, Slide-In von rechts mit Spring |
-| Header | Aktive Seite ist unterstrichen mit blauer Linie |
-| Beim Scrollen >600px | Scroll-Up-Button rechts unten erscheint |
-| Tab-Taste auf jeder Seite | "Zum Hauptinhalt springen" Button erscheint |
+### 3. Browser-Tests
 
-## 6. Git Commit
+| URL | Was zu sehen |
+|-----|--------------|
+| `/blog` | 3 Artikel, oberster ist Featured |
+| `/blog/wordpress-oder-handcodiert-2026` | Vollständiger Artikel |
+| `/blog/website-kosten-wien-2026` | Vollständiger Artikel |
+| `/blog/handgeschriebener-code-erklaert` | Vollständiger Artikel |
+| `/blog/tag/performance` | Filtert nach Tag |
+| `/feed.xml` | RSS-Feed im XML-Format |
+| `/sitemap.xml` | Enthält jetzt alle Blog-URLs |
+
+### 4. Beim Lesen testen
+- **Reading Progress Bar** oben am Bildschirm wird beim Scrollen blau
+- **Anchor-Links auf Headings**: Maus auf eine H2 → vor der Überschrift erscheint ein `#`
+- **Related Posts** unter jedem Artikel
+- **Author-Box** am Ende
+- **Tag-Klicks** im Artikel führen zur Tag-Seite
+
+### 5. Git commit
 
 ```powershell
 git add .
-git commit -m "feat: bug fixes + comparison + process + mobile menu professional"
+git commit -m "feat: sprint 3 - blog system with MDX, 3 articles, RSS, tags"
 git push
 ```
 
-## Was wurde gefixt
+## Was die Architektur kann
 
-🔴 **Kritische Bugs:**
-- Footer-Link "Impressum" führte zu 404 (alte HTML-Datei)
-- Footer-Link "Datenschutz" führte zu 404 (Ordner leer)
-- Header/Footer-Link "Blog" führte zu 404
-- Header hatte alten Coming-Soon-Code statt MobileMenu Integration
-- React 19 RC statt stable in package.json
+### MDX-Files schreiben
 
-🟡 **Verbesserungen:**
-- Mobile Menu: animierter Burger zu X, Slide-In von rechts, Spring-Physics
-- Hero: Trust-Points jetzt ehrlich und prüfbar
-- Hero: subtiler Cursor-Glow-Effekt auf Desktop
-- Header: aktive Route wird visuell hervorgehoben
-- Logo-Hover: A rotiert und skaliert dezent
+Neuer Artikel = neue `.mdx` Datei in `src/content/blog/`. Pflicht-Frontmatter:
 
-🟢 **Neue Features:**
-- Process-Sektion: visualisierter 4-Schritt-Ablauf auf Home
-- Comparison-Sektion: ehrlicher Vergleich Alcor vs WordPress-Agentur
-- ScrollToTop-Button (erscheint nach 600px Scroll)
-- SkipLink für Accessibility (sichtbar bei Tab-Navigation)
-- Logo.svg im public-Ordner
+```yaml
+---
+title: Mein Artikel-Titel
+description: Kurzer SEO-Description-Text
+date: 2026-05-01
+author: Robert Alchimowicz
+category: Strategie
+tags: [WordPress, Performance]
+---
 
-## Was als nächstes ansteht (Sprint 3)
+# H2 Überschrift
 
-- MDX-Blog-System
-- Migration der 5 alten Blog-Artikel
-- 2 neue Artikel
+Normaler Text mit **bold** und *italic*.
+
+[Link-Text](https://example.com)
+
+> Ein normales Zitat.
+
+> [!TIP] Mein Rat
+> Ein Hinweis-Box mit Tipp-Variante.
+
+> [!NOTE] Hinweis  
+> Ein Hinweis-Box mit Note-Variante.
+
+> [!WARN] Vorsicht
+> Ein Warnung mit Warn-Variante.
+
+- Liste Punkt 1
+- Liste Punkt 2
+
+1. Nummerierte Liste
+2. Funktioniert auch
+
+```code
+function example() {}
+```
+```
+
+Speichern → automatisch im Blog sichtbar (kein Re-Build nötig im Dev-Modus).
+
+### Markdown-Features die unterstützt werden
+
+- Überschriften: `## H2`, `### H3`, `#### H4` mit automatischen Anchor-Links
+- Bold: `**text**`
+- Italic: `*text*`
+- Inline Code: `` `code` ``
+- Code-Blöcke mit `~~~lang ... ~~~` (3 Backticks)
+- Links: `[text](url)` (externe automatisch mit `target="_blank"`)
+- Listen: `- item` oder `1. item`
+- Zitate: `> text`
+- Callouts: `> [!NOTE]`, `> [!WARN]`, `> [!TIP]`
+- Horizontaler Trenner: `---`
+
+### Was bewusst nicht drin ist
+
+- **Bilder im Artikel**: kommt in einem späteren Sprint mit `next/image`-Integration
+- **Syntax-Highlighting** für Code: kommt mit Shiki, falls du das brauchst
+- **Kommentare**: bewusst nicht (Spam-Magnet, DSGVO-Komplexität)
+- **Newsletter-Anmeldung**: kommt im Launch-Sprint
+
+### Schema.org
+
+Jeder Artikel hat:
+- `BlogPosting` Schema (Author, Datum, Wortanzahl, Tags)
+- `BreadcrumbList` Schema
+- Open Graph + Twitter Cards Metadata
+
+Das ist optimal für SEO und GEO (ChatGPT, Perplexity, Google AI Overviews).
+
+## Was als nächstes ansteht (Sprint 4)
+
+- Migration der 5 alten Blog-Artikel von webdesign-alcor.at
+- Echte Fotos für About-Seite
+- 2 weitere neue Artikel
+- Lighthouse-Optimierung auf 100/100/100/100
+- Final Polish vor Launch

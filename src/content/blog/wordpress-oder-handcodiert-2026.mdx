@@ -1,0 +1,133 @@
+---
+title: WordPress oder handcodiert? Ehrliche Vor- und Nachteile 2026
+description: Beide Wege haben ihre Berechtigung. Hier die ehrliche Analyse aus 24 Jahren Praxis – wann WordPress richtig ist und wann handgeschriebener Code überlegen ist.
+date: 2026-04-25
+author: Robert Alchimowicz
+category: Strategie
+tags: [WordPress, Performance, Architektur, Wartung]
+---
+
+Die meisten Wiener KMU-Webseiten laufen auf WordPress. Das ist kein Zufall – WordPress hat einen riesigen Marktanteil und ist die naheliegendste Wahl für viele Agenturen. Aber ist es auch die richtige Wahl für Sie?
+
+Ich entwickle seit 2002 Websites, ich habe mit WordPress, Drupal, Joomla, Typo3 und schließlich mit handgeschriebenem Code in PHP, Next.js und TypeScript gearbeitet. Was Sie hier lesen, ist keine Marketing-Aussage – es ist die ehrliche Analyse aus zwei Jahrzehnten Praxis.
+
+## Was WordPress wirklich ist
+
+WordPress ist ein Content-Management-System, das ursprünglich für Blogs entwickelt wurde und heute über 40 Prozent aller Websites weltweit antreibt. Die Stärke: ein riesiges Ökosystem aus Themes und Plugins. Die Schwäche: genau dieses Ökosystem.
+
+Eine durchschnittliche WordPress-Site nutzt zwischen 15 und 30 Plugins. Jedes Plugin ist:
+
+- Eine zusätzliche Codebasis, die gewartet werden muss
+- Eine potenzielle Sicherheitslücke
+- Ein potenzieller Konfliktpunkt mit anderen Plugins
+- Performance-Last beim Laden der Seite
+
+## Wann WordPress sinnvoll ist
+
+Ich werde oft gefragt: "Warum nicht einfach WordPress?". Meine ehrliche Antwort: WordPress ist die richtige Wahl, wenn folgende Punkte für Sie wichtig sind.
+
+### Sie wollen einen großen Plugin-Marketplace nutzen
+
+Über 60.000 Plugins stehen zur Verfügung – von Booking-Systemen über Mitgliederbereiche bis zu komplexen Shop-Lösungen. Wenn Sie eine sehr spezielle Funktionalität brauchen, gibt es oft ein WordPress-Plugin dafür.
+
+### Sie haben ein internes Team, das Inhalte ständig ändert
+
+Wenn drei Personen täglich Texte und Bilder editieren, ist ein Backend wertvoll. Der WordPress-Adminbereich ist nach kurzer Einarbeitung von jedem zu bedienen.
+
+### Ihr Budget ist sehr knapp
+
+Ein einfaches WordPress-Theme kostet 30 bis 80 Euro. Mit einem Theme-Builder wie Elementor können Sie sich selbst eine Website bauen – auch wenn das Ergebnis selten professionell aussieht.
+
+### Sie betreiben einen Standard-Blog mit hoher Frequenz
+
+Für einen klassischen Blog mit täglichen Beiträgen, vielen Autoren und Kommentaren ist WordPress immer noch eine vernünftige Wahl.
+
+## Wann WordPress problematisch wird
+
+In über 100 Audits von WordPress-Sites in den letzten Jahren sind mir die gleichen Probleme immer wieder begegnet.
+
+### Performance
+
+Eine durchschnittliche WordPress-Site lädt in 2 bis 5 Sekunden. Eine handgeschriebene Site mit gleichem Funktionsumfang lädt in unter einer Sekunde. Das hat zwei Gründe:
+
+**Erstens** lädt WordPress bei jedem Seitenaufruf das gesamte CMS, parsed die Datenbank und generiert die Seite dynamisch. Auch wenn Caching-Plugins helfen, bleibt diese Last vorhanden.
+
+**Zweitens** schleppen Themes und Plugins meist mehr CSS und JavaScript mit, als für die einzelne Seite nötig wäre. Eine WordPress-Site mit einem Standard-Theme lädt im Schnitt 1.500 bis 3.000 KB an Ressourcen pro Seite. Eine handgeschriebene Site liegt zwischen 50 und 200 KB.
+
+### Sicherheit
+
+WordPress-Sites sind das Hauptziel automatisierter Angriffe. Nicht weil WordPress per se unsicher wäre, sondern weil:
+
+- Die enorme Verbreitung Angriffe lohnenswert macht
+- Plugin-Code von tausenden unabhängigen Entwicklern geschrieben wird – mit unterschiedlicher Qualität
+- Viele Sites veraltete Plugin-Versionen einsetzen
+
+Ein nicht aktualisiertes Plugin kann eine ganze Site kompromittieren. Sucuri-Statistiken zeigen, dass über 50 Prozent der gehackten WordPress-Sites veraltete Komponenten als Einstiegspunkt hatten.
+
+### Wartungsaufwand
+
+Plugins müssen wöchentlich aktualisiert werden. Major-Updates können andere Plugins brechen. Das WordPress-Core selbst bekommt mehrere Updates pro Jahr.
+
+In der Praxis bedeutet das: Sie zahlen entweder eine monatliche Wartungsgebühr (typischerweise 30 bis 150 Euro), oder Ihre Site wird über die Zeit zu einem Sicherheitsrisiko. Es gibt keinen dritten Weg.
+
+### Skalierung
+
+Wenn Sie auf eine WordPress-Site mehr als 10.000 Besucher pro Tag bekommen, brauchen Sie spezialisiertes Hosting (Kinsta, WP Engine), das deutlich teurer ist als Standard-Hosting. Ein handgeschriebenes Setup auf Vercel oder Cloudflare skaliert auf Millionen von Aufrufen ohne Mehrkosten.
+
+## Was handgeschriebener Code anders macht
+
+Wenn ich eine Website für einen Kunden baue, schreibe ich den Code selbst – Zeile für Zeile, in TypeScript mit Next.js. Was bedeutet das konkret?
+
+### Es gibt nur, was wirklich gebraucht wird
+
+Ihre Site enthält keine Funktionen, die Sie nicht nutzen. Kein User-Management, wenn Sie kein Login haben. Keine Kommentar-Funktion, wenn Sie keinen Blog haben. Keine 14 Plugins, von denen 12 Schlafsysteme sind.
+
+Das macht den Code radikal kleiner und schneller. Eine typische handgeschriebene Site, die ich baue, kommt mit unter 80 KB JavaScript aus.
+
+### Updates sind keine laufende Pflicht
+
+Es gibt nichts zu aktualisieren. Der Code ist statisch. Wenn die Site einmal läuft, läuft sie. Ich überwache zwar Sicherheitsmeldungen für die wenigen Frameworks, die ich einsetze (Next.js, Tailwind), aber das passiert ein- bis zweimal pro Jahr und ist transparent.
+
+### Performance ist keine Optimierungsdisziplin, sondern der Default
+
+Wenn man einen Hammer in der Hand hat, sieht alles wie ein Nagel aus. Wenn man WordPress als Tool hat, optimiert man eine WordPress-Site mit Caching-Plugins und CDN-Tweaks, um auf eine Ladezeit von 2 Sekunden zu kommen. Wenn man von Grund auf handcodiert, lädt die Seite in 600 Millisekunden – ohne Optimierungs-Aufwand.
+
+### Sie besitzen den Code
+
+Bei WordPress ist Ihr Theme oft an einen Hersteller gebunden, Ihre Plugins haben Lizenzbedingungen, Ihr Hosting muss kompatibel sein. Bei handgeschriebenem Code bekommen Sie eine ZIP-Datei und ein Repository – das war's. Sie können den Code an jeden anderen Entwickler übergeben.
+
+## Direkter Vergleich
+
+Lassen Sie mich eine Standard-Anforderung vergleichen: eine Firmenwebsite mit fünf Seiten, Kontaktformular, Blog-Sektion, Bildergalerie.
+
+| Kriterium | WordPress-Lösung | Handgeschrieben |
+|-----------|------------------|------------------|
+| Erstkosten | 800 bis 3.000 Euro | 599 bis 2.500 Euro |
+| Lieferzeit | 4 bis 8 Wochen | 7 bis 14 Tage |
+| Monatliche Wartung | 30 bis 150 Euro | 0 Euro |
+| Ladezeit | 2 bis 5 Sekunden | unter 1 Sekunde |
+| Plugin-Updates | wöchentlich | keine |
+| Sicherheits-Audits | empfohlen | nicht nötig |
+| Hosting | spezialisiert nötig | Standard reicht |
+| Inhalte selbst pflegen | ja, im Backend | mit Mini-CMS möglich |
+
+## Was Sie wirklich entscheiden müssen
+
+Die Frage ist nicht "WordPress oder handcodiert" – die Frage ist:
+
+**Wollen Sie Inhalte täglich selbst ändern oder eher selten?** Wenn täglich, dann braucht es ein CMS-Backend. WordPress ist hier eine valide Wahl. Wenn selten (was für 80 Prozent der KMU-Sites zutrifft), ist handgeschriebener Code überlegen.
+
+**Wollen Sie laufende Wartungskosten oder einmalige höhere Anschaffung?** Über fünf Jahre gerechnet kostet eine WordPress-Site mit Wartung typischerweise 2.000 bis 9.000 Euro mehr als eine handgeschriebene Lösung.
+
+**Wie wichtig sind Performance und Sicherheit?** Für eine Praxis-Website oder einen Online-Shop mit Vertrauensanforderung sind beide Punkte direkt geschäftsrelevant. Für eine reine Visitenkarten-Site weniger.
+
+## Mein ehrliches Fazit
+
+WordPress ist nicht schlecht. Es ist nur für die meisten KMU-Websites das falsche Werkzeug. Ein Plugin-System mit 60.000 Erweiterungen ist großartig, wenn Sie 30 davon nutzen. Wenn Sie nur die Standardfunktionen brauchen, schleppen Sie das ganze Gewicht ohne Nutzen mit.
+
+Der Punkt ist: Eine professionelle Website soll ein Werkzeug für Ihr Geschäft sein, kein laufendes Wartungsprojekt. Sie soll schnell laden, sicher sein, gut aussehen und einfach funktionieren.
+
+> [!TIP] Mein Rat
+> Bevor Sie eine Entscheidung treffen, beantworten Sie sich eine Frage: Wer wird in fünf Jahren noch für meine Website verantwortlich sein? Und ist diese Person bereit, dann immer noch monatlich Plugin-Updates zu prüfen? Wenn die Antwort "vermutlich nicht" lautet, dann ist handgeschriebener Code die ehrlichere Wahl.
+
+Wenn Sie unsicher sind, welcher Weg für Sie der richtige ist, schreiben Sie mir kurz. In 15 Minuten klären wir, ob handgeschriebener Code Ihr Problem löst – oder ob Sie bei WordPress besser aufgehoben sind.

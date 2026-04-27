@@ -1,0 +1,117 @@
+---
+title: Handgeschriebener Code – was das wirklich bedeutet
+description: "Handgeschrieben" ist ein häufig verwendeter Begriff. Hier erkläre ich, was technisch dahintersteckt – und warum es für Ihre Website konkrete Vorteile bringt.
+date: 2026-04-18
+author: Robert Alchimowicz
+category: Technik
+tags: [Architektur, Performance, Strategie]
+---
+
+Der Begriff "handgeschriebener Code" wird häufig als Marketing-Floskel verwendet. In diesem Artikel erkläre ich, was tatsächlich dahintersteckt und warum es einen messbaren Unterschied für Ihre Website macht.
+
+## Drei Wege, wie Websites entstehen
+
+Es gibt im Wesentlichen drei Methoden, eine Website zu bauen.
+
+### Methode 1: Baukasten-System
+
+Sie nutzen einen Drag-and-Drop-Editor wie Wix, Squarespace oder Webflow. Sie ziehen Blöcke auf eine Leinwand, schreiben Texte hinein, fertig.
+
+**Was im Hintergrund passiert:** Das System generiert automatisch HTML, CSS und JavaScript. Sie haben keinen direkten Zugriff auf diesen Code. Er ist meist sehr viel umfangreicher als nötig, weil er alle möglichen Funktionen abdecken muss – auch die, die Sie nicht nutzen.
+
+### Methode 2: CMS mit Theme
+
+Sie nutzen ein Content-Management-System wie WordPress mit einem Theme. Das Theme ist eine Vorlage, die das Design vorgibt. Sie befüllen es mit Ihren Inhalten.
+
+**Was im Hintergrund passiert:** Bei jedem Seitenaufruf wird die Seite dynamisch aus der Datenbank gerendert. Theme und Plugins liefern den Code, der dabei zur Anwendung kommt. Sie haben theoretisch Zugriff auf den Code, aber jede Änderung bricht beim nächsten Theme-Update.
+
+### Methode 3: Handgeschrieben
+
+Ein Entwickler schreibt den Code Zeile für Zeile selbst. Es gibt keine Vorlage, kein generierendes System dazwischen. Was am Ende im Browser landet, hat exakt eine Person geplant und geschrieben.
+
+## Was "handgeschrieben" konkret bedeutet
+
+Wenn ich eine Website handcodiere, sieht das in der Praxis so aus.
+
+### Ich starte mit einer leeren Datei
+
+Kein Theme, keine Vorlage. Ein leeres Projekt mit Next.js und TypeScript, das nichts kann außer "Hallo Welt" auszugeben. Von hier aus baue ich alles, was Ihre Site braucht.
+
+### Jede Komponente wird einzeln entworfen
+
+Die Navigationsleiste wird programmiert, weil sie genau diese Funktionen haben soll. Das Kontaktformular wird programmiert, weil es genau diese Felder hat. Die Galerie wird programmiert, weil sie genau diese Bilder zeigen soll.
+
+Das ist deutlich mehr Aufwand als ein fertiges Plugin einzubinden – aber das Ergebnis enthält **nur**, was Sie brauchen.
+
+### Es gibt keine externen Abhängigkeiten, die ich nicht überblicke
+
+Ein WordPress-Plugin kann auf 50 andere Pakete verweisen, die ihrerseits auf 100 weitere verweisen. Bei einem handgeschriebenen Setup zähle ich die Abhängigkeiten an einer Hand: Next.js als Framework, Tailwind für Styling, Resend für Mails, Supabase für Datenbank. Das war's.
+
+## Was sich daraus konkret ergibt
+
+Diese Arbeitsweise hat messbare Konsequenzen.
+
+### Ladezeit
+
+Eine durchschnittliche WordPress-Site lädt in 2 bis 5 Sekunden. Eine handgeschriebene Site lädt typischerweise unter einer Sekunde. Das hat einen direkten Grund: weniger Code muss übertragen, geparst und ausgeführt werden.
+
+Konkret: Diese Seite, die Sie gerade lesen, lädt mit etwa 70 KB. Eine vergleichbare WordPress-Seite lädt mit 1.500 bis 3.000 KB. Das ist 20- bis 40-mal mehr.
+
+### Keine Plugin-Updates
+
+Bei einem klassischen WordPress-Setup müssen Sie regelmäßig Updates einspielen. Plugins werden aktualisiert, das Core wird aktualisiert, Themes werden aktualisiert. Jedes Update kann etwas brechen.
+
+Eine handgeschriebene Site hat keine Plugins. Es gibt nichts, was sich automatisch ändern könnte.
+
+### Keine Sicherheitslücken durch Drittanbieter
+
+Über 95 Prozent aller WordPress-Hacks geschehen über veraltete Plugins. Eine Site ohne Plugins kann auf diesem Weg nicht angegriffen werden.
+
+Das heißt nicht, dass handgeschriebene Sites unhackbar sind. Aber die Angriffsfläche ist um eine Größenordnung kleiner.
+
+### Volle Kontrolle über das Verhalten
+
+Wenn Sie einen Effekt anpassen wollen, ein Verhalten ändern, eine zusätzliche Funktion einbauen – ich gehe in die entsprechende Code-Datei und ändere genau die Stelle, die das betrifft. Bei einem CMS-Setup müssten Sie hoffen, dass es ein Plugin gibt, das Ihre Anforderung abdeckt.
+
+## Wo handgeschrieben nicht das Beste ist
+
+Es gibt Situationen, in denen handgeschriebener Code nicht der richtige Weg ist.
+
+### Sehr häufige Inhaltsänderungen
+
+Wenn Sie täglich neue Inhalte einpflegen – ein aktiver Blog, ein Online-Shop mit täglich neuen Produkten – brauchen Sie ein CMS-Backend. Ich kann das auch handcodiert bauen, aber dann sprechen wir über deutlich höhere Erstkosten.
+
+### Sehr niedriges Budget
+
+Wenn Sie unter 500 Euro für eine Website ausgeben können, sind Baukasten-Systeme der einzig sinnvolle Weg. Handgeschriebener Code rechnet sich erst ab einer gewissen Investitionsbereitschaft.
+
+### Spezielle Plugin-Funktionen
+
+Wenn Sie eine sehr spezielle Funktion brauchen, die ein WordPress-Plugin perfekt abdeckt, kann es wirtschaftlicher sein, das Plugin zu nutzen, statt die Funktion neu zu schreiben.
+
+## Wie Sie handgeschriebenen Code erkennen
+
+Es gibt einige Indikatoren, mit denen Sie prüfen können, ob eine Website wirklich handgeschrieben ist:
+
+**Im Quelltext** (rechtsklick, "Seitenquelltext anzeigen") finden Sie keine Verweise auf `wp-content/`, `wp-includes/` oder ähnliche WordPress-Pfade. Bei einer handgeschriebenen Next.js-Site sehen Sie typischerweise `_next/static/` Pfade.
+
+**In den Browser-DevTools** (F12, Tab "Network") sehen Sie deutlich weniger Requests. Eine WordPress-Site lädt typischerweise 80 bis 150 Ressourcen pro Seitenaufruf, eine handgeschriebene Site 15 bis 40.
+
+**Mit einem Performance-Test** wie pagespeed.web.dev sehen Sie den Unterschied direkt: handgeschriebene Sites kommen meist auf Lighthouse-Scores zwischen 95 und 100, WordPress-Sites zwischen 50 und 85.
+
+## Mein Anspruch
+
+Wenn ich eine Site handcodiere, gilt folgendes:
+
+- Lighthouse-Score von 100 in allen vier Kategorien (Performance, Accessibility, SEO, Best Practices)
+- Initiale Ladezeit unter 1 Sekunde
+- JavaScript-Bundle unter 100 KB
+- Keine externen Tracker, keine Cookies ohne Einwilligung
+- Code-Übergabe in einem Repository – Sie besitzen alles
+
+Das sind nicht Wünsche, sondern Mindestanforderungen.
+
+> [!TIP] Warum das so ist
+> Ich predige Performance, Sicherheit und Code-Qualität. Wenn meine eigene Visitenkarten-Website diese Standards nicht hält, wäre ich unglaubwürdig. Sie können diese Site jederzeit gegen die Werte messen, die ich nenne.
+
+Wenn Sie überlegen, ob handgeschriebener Code für Ihr Projekt der richtige Weg ist, schreiben Sie mir kurz. In 15 Minuten klären wir gemeinsam, ob es für Sie passt – ehrlich, ohne Verkaufsdruck.
