@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
+import { SkipLink } from '@/components/layout/skip-link'
+import { ScrollToTop } from '@/components/layout/scroll-to-top'
 import { organizationSchema, websiteSchema } from '@/lib/schema'
 import { SITE } from '@/lib/site'
 import './globals.css'
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
     template: `%s · ${SITE.name}`,
   },
   description:
-    'Handgeschriebene Webentwicklung aus Wien. Ohne WordPress, ohne Plugin-Chaos. Eine Person, 20 Jahre, voller Code-Besitz. Lieferung in 7 Tagen ab € 599,–.',
+    'Handgeschriebene Webentwicklung aus Wien. Ohne WordPress, ohne Plugin-Chaos. Eine Person, 24 Jahre, voller Code-Besitz. Lieferung in 7 Tagen ab € 599,–.',
   applicationName: SITE.name,
   authors: [{ name: SITE.founder.name }],
   creator: SITE.founder.name,
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
       'Handgeschriebene Webentwicklung aus Wien. Ohne WordPress. Eine Person, voller Code-Besitz.',
     images: [
       {
-        url: '/og-default.jpg',
+        url: '/og-default.png',
         width: 1200,
         height: 630,
         alt: SITE.name,
@@ -60,9 +62,7 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
   },
 }
 
@@ -70,7 +70,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="de-AT">
+    <html lang="de-AT" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -85,10 +85,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
+        <SkipLink />
         <Header />
-        <main>{children}</main>
+        <main id="main">{children}</main>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   )

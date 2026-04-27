@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { Hero } from '@/components/sections/hero'
 import { BentoGrid } from '@/components/sections/bento-grid'
 import { CaseCard } from '@/components/sections/case-card'
+import { ProcessSection } from '@/components/sections/process-section'
+import { ComparisonSection } from '@/components/sections/comparison-section'
 import { FaqSection } from '@/components/sections/faq-accordion'
 import { CtaBand } from '@/components/sections/cta-band'
 import { CASES } from '@/lib/cases'
@@ -43,6 +45,10 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      <ProcessSection />
+
+      <ComparisonSection />
 
       <FaqSection />
 

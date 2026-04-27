@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { motion } from 'motion/react'
 import { SITE } from '@/lib/site'
@@ -10,9 +11,41 @@ const fadeUp = {
 }
 
 export function Hero() {
+  const glowRef = useRef<HTMLDivElement | null>(null)
+
+  // Subtle cursor-following glow (desktop only, respects reduced-motion)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduceMotion) return
+    const isTouch = window.matchMedia('(hover: none)').matches
+    if (isTouch) return
+
+    const glow = glowRef.current
+    if (!glow) return
+
+    let raf = 0
+    const onMove = (e: MouseEvent) => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        const rect = glow.parentElement?.getBoundingClientRect()
+        if (!rect) return
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+        glow.style.transform = `translate3d(${x - rect.width / 2}px, ${y - rect.height / 2}px, 0)`
+      })
+    }
+
+    window.addEventListener('mousemove', onMove)
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      cancelAnimationFrame(raf)
+    }
+  }, [])
+
   return (
     <section className="relative pt-20 pb-32 md:pt-28 md:pb-40 overflow-hidden grain">
-      {/* Atmospheric gradient */}
+      {/* Static atmospheric gradient */}
       <div
         aria-hidden
         className="absolute -top-1/4 -right-1/4 w-[60vw] h-[60vw] pointer-events-none"
@@ -20,6 +53,18 @@ export function Hero() {
           background:
             'radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 60%)',
           filter: 'blur(60px)',
+        }}
+      />
+
+      {/* Cursor-following glow (desktop only) */}
+      <div
+        aria-hidden
+        ref={glowRef}
+        className="hidden md:block absolute top-1/2 left-1/2 w-[40vw] h-[40vw] pointer-events-none transition-transform duration-300 ease-out will-change-transform"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 50%)',
+          filter: 'blur(40px)',
         }}
       />
 
@@ -35,7 +80,7 @@ export function Hero() {
           <span>WEBDESIGN ALCOR · WIEN · SEIT 2002</span>
         </motion.div>
 
-        {/* Headline - Variant 4: Der Spiegel */}
+        {/* Headline */}
         <motion.h1
           initial="hidden"
           animate="visible"
@@ -61,8 +106,8 @@ export function Hero() {
           Stockfotos. Lila Gradients. „Wir sind Ihre digitale Familie."
           <br />
           <span className="text-paper">
-            Ich bin keine Familie. Ich bin Robert. Ich schreibe Code. Seit 20
-            Jahren.
+            Ich bin keine Familie. Ich bin Robert. Ich schreibe Code. Seit{' '}
+            {SITE.founder.yearsActive} Jahren.
           </span>
         </motion.p>
 
@@ -99,7 +144,7 @@ export function Hero() {
           </Link>
         </motion.div>
 
-        {/* Trust strip */}
+        {/* Trust strip - ehrlich und prüfbar */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -124,8 +169,8 @@ export function Hero() {
 }
 
 const TRUST_POINTS = [
-  { value: `${SITE.founder.yearsActive}+`, label: 'Jahre Code aus Wien' },
-  { value: '100+', label: 'Realisierte Projekte' },
+  { value: `${SITE.founder.yearsActive}+`, label: 'Jahre in Wien' },
   { value: `${SITE.pricing.deliveryDays}`, label: 'Tage Lieferzeit' },
-  { value: '0', label: 'WordPress-Plugins' },
+  { value: '< 1s', label: 'Ladezeit' },
+  { value: '0', label: 'Plugin-Updates' },
 ] as const
