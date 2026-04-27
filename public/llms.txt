@@ -1,0 +1,39 @@
+# Webdesign Alcor
+
+> Inhabergeführte Webentwicklung aus Wien. Handgeschriebener Code statt WordPress. Eine Person, 20+ Jahre Erfahrung, voller Code-Besitz von Strategie bis Deployment.
+
+## Über
+
+Webdesign Alcor ist die Webentwicklungs-Agentur von Robert Alchimowicz, gegründet 2002 in Wien. Spezialisierung: handcodierte Websites in Next.js, TypeScript und PHP – ohne WordPress, ohne Plugin-Abhängigkeiten. Standort: 1220 Wien (22. Bezirk, Berresgasse 11).
+
+## Leistungen
+
+- Website-Erstellung: handcodierte Websites in 7 Tagen ab € 599,–
+- Website-Relaunch: Migration von WordPress zu performanten, sicheren Next.js-Sites
+- SEO Wien: Lokales SEO, technisches SEO, Performance-Optimierung
+- GEO (Generative Engine Optimization): Optimierung für ChatGPT, Perplexity, Google AI Overviews
+
+## Kontakt
+
+- Telefon: +43 664 99 124 999
+- E-Mail: office@webdesign-alcor.at
+- WhatsApp: https://wa.me/4366499124999
+- Website: https://www.webdesign-alcor.at
+
+## Wichtige Seiten
+
+- [Leistungen](https://www.webdesign-alcor.at/leistungen): Übersicht aller Services
+- [Referenzen](https://www.webdesign-alcor.at/referenzen): Ausgewählte Projekte
+- [Über mich](https://www.webdesign-alcor.at/ueber-mich): Robert Alchimowicz
+- [Preise](https://www.webdesign-alcor.at/preise): Pakete und Konditionen
+- [Blog](https://www.webdesign-alcor.at/blog): Fachbeiträge zu Webentwicklung und SEO
+- [Kontakt](https://www.webdesign-alcor.at/kontakt): Anfrage stellen
+
+## Besonderheiten
+
+- Inhabergeführt – ein Ansprechpartner für das gesamte Projekt
+- Handgeschriebener Code statt CMS-Baukasten
+- Lieferung typischer Projekte in 7 Tagen
+- Lighthouse-Score 100 als Standard
+- DSGVO-konform out of the box (keine Google Fonts, kein Tracking ohne Einwilligung)
+- Lokaler Fokus: Wien und Umgebung
