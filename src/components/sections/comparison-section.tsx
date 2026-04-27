@@ -72,71 +72,131 @@ export function ComparisonSection() {
         </p>
       </div>
 
-      <div className="overflow-x-auto -mx-[var(--pad-x)] md:mx-0">
-        <div className="min-w-[700px] md:min-w-0 px-[var(--pad-x)] md:px-0">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-line">
-                <th className="text-left py-5 pr-6 font-mono text-xs text-paper-dim uppercase tracking-wider w-1/3">
-                  Aspekt
-                </th>
-                <th className="text-left py-5 px-6 font-serif text-base text-signal-2">
-                  Webdesign Alcor
-                </th>
-                <th className="text-left py-5 px-6 font-mono text-xs text-paper-dim uppercase tracking-wider">
-                  WordPress-Agentur
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {COMPARISON.map((row) => (
-                <tr
-                  key={row.aspect}
-                  className="border-b border-line hover:bg-deep-2/40 transition-colors"
-                >
-                  <td className="py-5 pr-6 text-paper font-medium">
-                    {row.aspect}
-                  </td>
-                  <td
-                    className={`py-5 px-6 ${
-                      row.advantage === 'alcor'
-                        ? 'text-paper font-medium'
-                        : 'text-paper-mute'
-                    }`}
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      {row.advantage === 'alcor' && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-signal-2 shrink-0" />
-                      )}
-                      {row.alcor}
-                    </span>
-                  </td>
-                  <td
-                    className={`py-5 px-6 ${
-                      row.advantage === 'wordpress'
-                        ? 'text-paper font-medium'
-                        : 'text-paper-dim'
-                    }`}
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      {row.advantage === 'wordpress' && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-paper-dim shrink-0" />
-                      )}
-                      {row.wordpress}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+      {/* MOBILE: Stacked cards - WCAG AA konform, beide Spalten voll lesbar */}
+      <div className="md:hidden space-y-3">
+        {COMPARISON.map((row) => (
+          <article
+            key={row.aspect}
+            className="bg-deep-2 border border-line rounded-sm p-5"
+          >
+            <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-paper-mute mb-4">
+              {row.aspect}
+            </h3>
+
+            <div className="grid grid-cols-2 gap-0">
+              {/* Alcor side */}
+              <div
+                className={`pr-3 border-r border-line relative ${
+                  row.advantage === 'alcor' ? 'pl-3 -ml-3 border-l-2 border-l-signal-2' : ''
+                }`}
+              >
+                <div className="text-[0.65rem] font-semibold text-signal-2 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                  Alcor
+                  {row.advantage === 'alcor' && (
+                    <span
+                      className="w-1.5 h-1.5 rounded-full bg-signal-2"
+                      aria-label="Vorteil"
+                    />
+                  )}
+                </div>
+                <div className="text-sm leading-snug text-paper font-medium">
+                  {row.alcor}
+                </div>
+              </div>
+
+              {/* WordPress side */}
+              <div
+                className={`pl-3 relative ${
+                  row.advantage === 'wordpress' ? 'pr-3 -mr-3 border-r-2 border-r-paper-mute' : ''
+                }`}
+              >
+                <div className="text-[0.65rem] font-semibold text-paper-mute uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                  WordPress
+                  {row.advantage === 'wordpress' && (
+                    <span
+                      className="w-1.5 h-1.5 rounded-full bg-paper-mute"
+                      aria-label="Vorteil"
+                    />
+                  )}
+                </div>
+                <div className="text-sm leading-snug text-paper font-medium">
+                  {row.wordpress}
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
 
-      <p className="mt-8 text-sm text-paper-dim italic max-w-2xl">
-        Hinweis: Wenn Sie zwingend einen WordPress-Backend benötigen oder
-        Plugins aus dem Marketplace nutzen wollen, ist eine WordPress-Agentur
-        der bessere Weg. Für alle anderen Fälle empfehle ich handgeschriebenen
-        Code.
+      {/* DESKTOP: Classic table - beide Spalten voll lesbar */}
+      <div className="hidden md:block">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-line">
+              <th className="text-left py-5 pr-6 font-mono text-xs text-paper-mute uppercase tracking-wider w-1/3">
+                Aspekt
+              </th>
+              <th className="text-left py-5 px-6 font-serif text-base text-signal-2">
+                Webdesign Alcor
+              </th>
+              <th className="text-left py-5 px-6 font-mono text-xs text-paper-mute uppercase tracking-wider">
+                WordPress-Agentur
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {COMPARISON.map((row) => (
+              <tr
+                key={row.aspect}
+                className="border-b border-line hover:bg-deep-2/40 transition-colors"
+              >
+                <td className="py-5 pr-6 text-paper font-medium">
+                  {row.aspect}
+                </td>
+                <td className="py-5 px-6 text-paper">
+                  <span className="inline-flex items-center gap-2">
+                    {row.advantage === 'alcor' && (
+                      <span
+                        className="w-1.5 h-1.5 rounded-full bg-signal-2 shrink-0"
+                        aria-label="Vorteil"
+                      />
+                    )}
+                    <span
+                      className={
+                        row.advantage === 'alcor' ? 'font-medium' : ''
+                      }
+                    >
+                      {row.alcor}
+                    </span>
+                  </span>
+                </td>
+                <td className="py-5 px-6 text-paper">
+                  <span className="inline-flex items-center gap-2">
+                    {row.advantage === 'wordpress' && (
+                      <span
+                        className="w-1.5 h-1.5 rounded-full bg-paper-mute shrink-0"
+                        aria-label="Vorteil"
+                      />
+                    )}
+                    <span
+                      className={
+                        row.advantage === 'wordpress' ? 'font-medium' : ''
+                      }
+                    >
+                      {row.wordpress}
+                    </span>
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p className="mt-8 text-sm text-paper-mute italic max-w-2xl">
+        Hinweis: Wenn Sie zwingend ein WordPress-Backend benötigen oder Plugins
+        aus dem Marketplace nutzen wollen, ist eine WordPress-Agentur der
+        bessere Weg. Für alle anderen Fälle empfehle ich handgeschriebenen Code.
       </p>
     </section>
   )
