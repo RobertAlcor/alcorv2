@@ -1,143 +1,86 @@
-# Sprint 3 – Blog-System komplett
+# Update v4 – Carbon Copper Final + WCAG 2.2 + FAB + Promo
 
-## Was du manuell machst
+## ZIP entpacken im Projektordner
 
-### 1. ZIP entpacken
-Im Projektordner `C:\Projekte\webdesign-alcor\v2-nextjs\` entpacken.
+Überschreibt:
+- `src/app/globals.css` – Carbon Copper als fixes Theme
+- `src/app/layout.tsx` – ThemeSwitcher raus, FabStack + PromoModal rein
+- `src/components/layout/header.tsx` – mit sticky "Anfragen"-Button
+- `src/components/layout/mobile-menu.tsx` – theme-aware Glow
+- `src/components/sections/hero.tsx` – Live-Indicator, Shimmer, 3 CTAs
+- `public/favicon.svg` – Carbon Copper Farben
+- `public/logo.svg` – Carbon Copper Farben
+- `public/llms.txt` – erweitert für GEO
 
-**Wird ÜBERSCHRIEBEN:**
-- `src/app/blog/page.tsx` (alter Coming-Soon-Stub → echter Blog-Index)
-- `src/app/globals.css` (mit prose-blog Klassen für Artikel-Content)
-- `src/app/sitemap.ts` (mit dynamischen Blog-URLs)
+Neu angelegt:
+- `src/components/layout/fab-stack.tsx` – WhatsApp/Tel/ScrollTop links unten
+- `src/components/layout/promo-modal.tsx` – Foto-Shooting €99 Aktion
+- `src/components/ui/animated-counter.tsx` – Zahlen zählen hoch
+- `src/components/ui/live-indicator.tsx` – Verfügbarkeits-Badge
 
-**Wird NEU angelegt:**
-- `src/app/blog/[slug]/page.tsx` – Artikel-Seite
-- `src/app/blog/tag/[tag]/page.tsx` – Tag-Filter
-- `src/app/feed.xml/route.ts` – RSS-Feed
-- `src/components/blog/post-card.tsx`
-- `src/components/blog/author-box.tsx`
-- `src/components/blog/reading-progress.tsx`
-- `src/lib/blog.ts` – MDX-Parser
-- `src/lib/markdown.ts` – Markdown→HTML Renderer
-- `src/content/blog/wordpress-oder-handcodiert-2026.mdx`
-- `src/content/blog/website-kosten-wien-2026.mdx`
-- `src/content/blog/handgeschriebener-code-erklaert.mdx`
+## Optional zu löschen (ehemals Theme-Switcher)
 
-### 2. Dev-Server neustarten
+Falls noch da:
+```powershell
+Remove-Item src\components\layout\theme-switcher.tsx
+Remove-Item src\components\layout\theme-script.tsx
+Remove-Item src\components\layout\scroll-to-top.tsx
+Remove-Item src\lib\themes.ts
+```
+
+Sind nicht mehr referenziert, Build funktioniert auch wenn sie liegen bleiben.
+
+## Dann
 
 ```powershell
-# Strg+C im Terminal, dann
+# Strg+C im Dev-Terminal
 npm run dev
 ```
 
-**Kein neues npm install nötig** – server-only ist bereits in Next.js drin, kein extra Package.
+## Was zu testen ist
 
-### 3. Browser-Tests
+| Was | Wo |
+|-----|-----|
+| Theme bleibt fix Carbon Copper | jede Seite |
+| Live-Indicator pulsiert | Hero oben |
+| Shimmer-Animation auf "Alle sahen gleich aus" | Hero Headline |
+| Counter zählen hoch beim Scrollen in Stats | Hero unten |
+| Magnetic-Effekt am "Projekt anfragen" | Hero CTA (Desktop, Maus drüber) |
+| WhatsApp-Button links unten pulsiert | jede Seite |
+| Telefon-Button links unten | jede Seite |
+| Tooltips rechts neben FAB-Buttons | Hover über FAB |
+| Header "Anfragen"-Button sticky | beim Scrollen |
+| Header Active-Underline | beim Wechseln zwischen Seiten |
+| Promo-Modal nach 30 Sek ODER Exit-Intent ODER 40% Scroll | egal welche Seite |
+| Promo-Modal nicht nochmal nach Schließen | localStorage merkt sich |
 
-| URL | Was zu sehen |
-|-----|--------------|
-| `/blog` | 3 Artikel, oberster ist Featured |
-| `/blog/wordpress-oder-handcodiert-2026` | Vollständiger Artikel |
-| `/blog/website-kosten-wien-2026` | Vollständiger Artikel |
-| `/blog/handgeschriebener-code-erklaert` | Vollständiger Artikel |
-| `/blog/tag/performance` | Filtert nach Tag |
-| `/feed.xml` | RSS-Feed im XML-Format |
-| `/sitemap.xml` | Enthält jetzt alle Blog-URLs |
+### Promo-Modal manuell triggern (zum Testen)
 
-### 4. Beim Lesen testen
-- **Reading Progress Bar** oben am Bildschirm wird beim Scrollen blau
-- **Anchor-Links auf Headings**: Maus auf eine H2 → vor der Überschrift erscheint ein `#`
-- **Related Posts** unter jedem Artikel
-- **Author-Box** am Ende
-- **Tag-Klicks** im Artikel führen zur Tag-Seite
-
-### 5. Git commit
-
-```powershell
-git add .
-git commit -m "feat: sprint 3 - blog system with MDX, 3 articles, RSS, tags"
-git push
+In der Browser-Console:
+```js
+localStorage.removeItem('alcor-promo-seen-photo-shoot-v1')
+location.reload()
 ```
 
-## Was die Architektur kann
+Dann 30 Sek warten, oder einfach nach unten scrollen, oder Maus zur Adressleiste bewegen.
 
-### MDX-Files schreiben
+## WCAG 2.2 AA Verbesserungen
 
-Neuer Artikel = neue `.mdx` Datei in `src/content/blog/`. Pflicht-Frontmatter:
+- ✅ Focus-Ring 3px (war 2px)
+- ✅ Touch-Targets min 44x44px (Header-Links, Buttons, FAB)
+- ✅ Spacing zwischen FABs >24px
+- ✅ Tooltips per aria-describedby
+- ✅ Promo-Modal mit role=dialog, aria-modal, aria-labelledby
+- ✅ Live-Indicator mit role=status, aria-live=polite
+- ✅ Skip-Link bleibt drin
 
-```yaml
----
-title: Mein Artikel-Titel
-description: Kurzer SEO-Description-Text
-date: 2026-05-01
-author: Robert Alchimowicz
-category: Strategie
-tags: [WordPress, Performance]
----
+## Was als nächstes
 
-# H2 Überschrift
+Erstmal das hier durchklicken und Feedback geben. Was als nächstes Sinn macht:
 
-Normaler Text mit **bold** und *italic*.
-
-[Link-Text](https://example.com)
-
-> Ein normales Zitat.
-
-> [!TIP] Mein Rat
-> Ein Hinweis-Box mit Tipp-Variante.
-
-> [!NOTE] Hinweis  
-> Ein Hinweis-Box mit Note-Variante.
-
-> [!WARN] Vorsicht
-> Ein Warnung mit Warn-Variante.
-
-- Liste Punkt 1
-- Liste Punkt 2
-
-1. Nummerierte Liste
-2. Funktioniert auch
-
-```code
-function example() {}
-```
-```
-
-Speichern → automatisch im Blog sichtbar (kein Re-Build nötig im Dev-Modus).
-
-### Markdown-Features die unterstützt werden
-
-- Überschriften: `## H2`, `### H3`, `#### H4` mit automatischen Anchor-Links
-- Bold: `**text**`
-- Italic: `*text*`
-- Inline Code: `` `code` ``
-- Code-Blöcke mit `~~~lang ... ~~~` (3 Backticks)
-- Links: `[text](url)` (externe automatisch mit `target="_blank"`)
-- Listen: `- item` oder `1. item`
-- Zitate: `> text`
-- Callouts: `> [!NOTE]`, `> [!WARN]`, `> [!TIP]`
-- Horizontaler Trenner: `---`
-
-### Was bewusst nicht drin ist
-
-- **Bilder im Artikel**: kommt in einem späteren Sprint mit `next/image`-Integration
-- **Syntax-Highlighting** für Code: kommt mit Shiki, falls du das brauchst
-- **Kommentare**: bewusst nicht (Spam-Magnet, DSGVO-Komplexität)
-- **Newsletter-Anmeldung**: kommt im Launch-Sprint
-
-### Schema.org
-
-Jeder Artikel hat:
-- `BlogPosting` Schema (Author, Datum, Wortanzahl, Tags)
-- `BreadcrumbList` Schema
-- Open Graph + Twitter Cards Metadata
-
-Das ist optimal für SEO und GEO (ChatGPT, Perplexity, Google AI Overviews).
-
-## Was als nächstes ansteht (Sprint 4)
-
-- Migration der 5 alten Blog-Artikel von webdesign-alcor.at
-- Echte Fotos für About-Seite
-- 2 weitere neue Artikel
-- Lighthouse-Optimierung auf 100/100/100/100
-- Final Polish vor Launch
+1. **Glossar** (du wolltest später)
+2. **Alle anderen Sektionen polish** (Process, Comparison, Bento bekommen den gleichen Lebendigkeit-Boost)
+3. **Über-mich** überarbeiten mit echtem Foto
+4. **Referenzen** mit echten Screenshots
+5. **OG-Image** generieren (für Social-Cards)
+6. **Vercel-Deploy** wenn alles steht

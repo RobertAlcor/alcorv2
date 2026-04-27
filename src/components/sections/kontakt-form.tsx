@@ -146,7 +146,7 @@ export function KontaktForm() {
         <button
           type="submit"
           disabled={state.status === 'submitting'}
-          className="inline-flex items-center gap-2 px-7 py-4 bg-signal text-paper font-medium text-sm rounded-sm hover:bg-signal-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_8px_30px_-8px_rgba(37,99,235,0.5)]"
+          className="inline-flex items-center gap-2 px-7 py-4 bg-signal text-paper font-medium text-sm rounded-sm hover:bg-signal-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_8px_30px_-8px_rgba(var(--signal-rgb),0.5)]"
         >
           {state.status === 'submitting' ? 'Wird gesendet…' : 'Anfrage senden'}
           {state.status !== 'submitting' && (

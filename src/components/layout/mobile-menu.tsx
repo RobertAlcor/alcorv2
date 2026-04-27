@@ -87,7 +87,7 @@ export function MobileMenu() {
               className="absolute -top-1/4 -right-1/4 w-[80vw] h-[80vw] pointer-events-none"
               style={{
                 background:
-                  'radial-gradient(circle, rgba(37,99,235,0.22) 0%, transparent 60%)',
+                  'radial-gradient(circle, rgba(var(--signal-rgb),0.22) 0%, transparent 60%)',
                 filter: 'blur(60px)',
               }}
             />

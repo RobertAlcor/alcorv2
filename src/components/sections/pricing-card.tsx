@@ -72,7 +72,7 @@ export function PricingCards() {
           key={tier.name}
           className={`relative flex flex-col bg-deep-2 border rounded-sm p-8 transition-colors duration-500 ${
             tier.highlight
-              ? 'border-signal-2 shadow-[0_0_60px_-20px_rgba(37,99,235,0.4)]'
+              ? 'border-signal-2 shadow-[0_0_60px_-20px_rgba(var(--signal-rgb),0.4)]'
               : 'border-line hover:border-paper-mute/30'
           }`}
         >
@@ -116,7 +116,7 @@ export function PricingCards() {
             href={tier.ctaHref}
             className={`group inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 font-medium text-sm rounded-sm transition-all duration-300 ${
               tier.highlight
-                ? 'bg-signal text-paper hover:bg-signal-2 shadow-[0_8px_30px_-8px_rgba(37,99,235,0.5)]'
+                ? 'bg-signal text-paper hover:bg-signal-2 shadow-[0_8px_30px_-8px_rgba(var(--signal-rgb),0.5)]'
                 : 'border border-line text-paper-mute hover:text-paper hover:border-paper-mute'
             }`}
           >

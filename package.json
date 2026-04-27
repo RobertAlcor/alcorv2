@@ -1,6 +1,6 @@
 {
   "name": "webdesign-alcor",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "private": true,
   "description": "webdesign-alcor.at - Next.js 15 Relaunch",
   "author": "Robert Alchimowicz",
@@ -16,6 +16,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
     "clsx": "^2.1.1",
+    "lucide-react": "^0.468.0",
     "motion": "^11.18.2",
     "next": "^15.1.0",
     "react": "^19.0.0",

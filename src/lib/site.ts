@@ -8,8 +8,8 @@ export const SITE = {
   founder: {
     name: 'Robert Alchimowicz',
     role: 'Webentwickler & SEO-Spezialist',
-    yearsActive: 24,
-    foundedIn: 2002,
+    yearsActive: 10,
+    foundedIn: 2014,
   },
 
   contact: {

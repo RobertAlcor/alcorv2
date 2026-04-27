@@ -25,7 +25,7 @@ export function CtaBand({
         className="absolute inset-0 pointer-events-none opacity-50"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(37,99,235,0.15) 0%, transparent 60%)',
+            'radial-gradient(ellipse at center, rgba(var(--signal-rgb),0.15) 0%, transparent 60%)',
         }}
       />
 
@@ -44,7 +44,7 @@ export function CtaBand({
         <div className="flex flex-wrap items-center gap-4">
           <Link
             href={primaryHref}
-            className="group inline-flex items-center gap-2 px-7 py-4 bg-signal text-paper font-medium text-sm rounded-sm hover:bg-signal-2 transition-all duration-300 shadow-[0_8px_30px_-8px_rgba(37,99,235,0.5)]"
+            className="group inline-flex items-center gap-2 px-7 py-4 bg-signal text-paper font-medium text-sm rounded-sm hover:bg-signal-2 transition-all duration-300 shadow-[0_8px_30px_-8px_rgba(var(--signal-rgb),0.5)]"
           >
             {primaryLabel}
             <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>

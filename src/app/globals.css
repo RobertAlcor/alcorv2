@@ -2,37 +2,47 @@
 
 @import 'tailwindcss';
 
-/* === DESIGN TOKENS === */
-@theme {
-  /* Colors */
-  --color-deep: #0a0e27;
-  --color-deep-2: #111638;
-  --color-paper: #fafaf7;
-  --color-paper-mute: #b8c0d9;
-  --color-paper-dim: #64748b;
-  --color-ink: #0f172a;
-  --color-signal: #2563eb;
-  --color-signal-2: #3b82f6;
-  --color-line: rgba(255, 255, 255, 0.08);
-  --color-line-light: rgba(15, 23, 42, 0.08);
+/* === CARBON COPPER (Final) === */
+:root {
+  --color-deep: #161618;
+  --color-deep-2: #232327;
+  --color-paper: #fafaf9;
+  --color-paper-mute: #c8b8a8;
+  --color-paper-dim: #998a7c;
+  --color-signal: #cf8755;
+  --color-signal-2: #e09f6f;
+  --color-line: rgba(207, 135, 85, 0.14);
+  --signal-rgb: 207, 135, 85;
+  --color-success: #6ec88a;
+  --color-error: #e88a8a;
   --color-amber: #f59e0b;
-  --color-success: #10b981;
-  --color-error: #ef4444;
+}
 
-  /* Typography */
+@theme {
+  --color-deep: var(--color-deep);
+  --color-deep-2: var(--color-deep-2);
+  --color-paper: var(--color-paper);
+  --color-paper-mute: var(--color-paper-mute);
+  --color-paper-dim: var(--color-paper-dim);
+  --color-ink: var(--color-deep);
+  --color-signal: var(--color-signal);
+  --color-signal-2: var(--color-signal-2);
+  --color-line: var(--color-line);
+  --color-line-light: rgba(15, 23, 42, 0.08);
+  --color-amber: var(--color-amber);
+  --color-success: var(--color-success);
+  --color-error: var(--color-error);
+
   --font-serif: 'Instrument Serif', Georgia, serif;
   --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Spacing additions */
   --spacing-18: 4.5rem;
   --spacing-128: 32rem;
 
-  /* Easing */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
-  /* Container */
   --container-max: 80rem;
 }
 
@@ -60,16 +70,17 @@
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
+    position: relative;
   }
 
   ::selection {
     background: var(--color-signal);
-    color: var(--color-paper);
+    color: var(--color-deep);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-signal-2);
-    outline-offset: 4px;
+    outline: 3px solid var(--color-signal-2);
+    outline-offset: 2px;
     border-radius: 2px;
   }
 
@@ -81,6 +92,11 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
+    }
+
+    .orb-soft-1,
+    .orb-soft-2 {
+      animation: none !important;
     }
   }
 }
@@ -104,17 +120,12 @@
     inset: 0;
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-    opacity: 0.04;
+    opacity: 0.05;
     mix-blend-mode: overlay;
   }
 
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .text-pretty {
-    text-wrap: pretty;
-  }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
 
   .sr-only {
     position: absolute;
@@ -152,6 +163,65 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  /* === ANIMATIONS === */
+
+  /* Shimmer */
+  .shimmer {
+    background: linear-gradient(
+      110deg,
+      var(--color-signal) 0%,
+      var(--color-signal-2) 30%,
+      #ffd5a8 50%,
+      var(--color-signal-2) 70%,
+      var(--color-signal) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+  }
+
+  /* Pulse Dot */
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+  .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+  /* Pulse Ring */
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+  .pulse-ring::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    animation: pulse-ring 2s ease-out infinite;
+    z-index: -1;
+  }
+
+  /* === Soft Orbs - sehr langsam, organisch === */
+  @keyframes orb-soft-1 {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(8vw, 6vh, 0); }
+  }
+  .orb-soft-1 { animation: orb-soft-1 90s ease-in-out infinite; }
+
+  @keyframes orb-soft-2 {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(-10vw, -8vh, 0); }
+  }
+  .orb-soft-2 { animation: orb-soft-2 120s ease-in-out infinite; }
 }
 
 /* === BLOG PROSE === */
@@ -160,9 +230,7 @@
   line-height: 1.75;
 }
 
-.prose-blog > *:first-child {
-  margin-top: 0;
-}
+.prose-blog > *:first-child { margin-top: 0; }
 
 .prose-blog .anchor-link {
   color: inherit;
@@ -202,7 +270,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--color-paper-dim);
+  color: var(--color-paper-mute);
   font-weight: 600;
 }
 

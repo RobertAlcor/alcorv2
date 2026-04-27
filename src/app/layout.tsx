@@ -2,13 +2,15 @@ import type { Metadata, Viewport } from 'next'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
 import { SkipLink } from '@/components/layout/skip-link'
-import { ScrollToTop } from '@/components/layout/scroll-to-top'
+import { FabStack } from '@/components/layout/fab-stack'
+import { PromoModal } from '@/components/layout/promo-modal'
+import { AnimatedBackground } from '@/components/layout/animated-background'
 import { organizationSchema, websiteSchema } from '@/lib/schema'
 import { SITE } from '@/lib/site'
 import './globals.css'
 
 export const viewport: Viewport = {
-  themeColor: '#0A0E27',
+  themeColor: '#161618',
   width: 'device-width',
   initialScale: 1,
 }
@@ -20,13 +22,17 @@ export const metadata: Metadata = {
     template: `%s · ${SITE.name}`,
   },
   description:
-    'Handgeschriebene Webentwicklung aus Wien. Ohne WordPress, ohne Plugin-Chaos. Eine Person, 24 Jahre, voller Code-Besitz. Lieferung in 7 Tagen ab € 599,–.',
+    'Handgeschriebene Webentwicklung aus Wien. Ohne WordPress, ohne Plugin-Chaos. Eine Person, über 10 Jahre, voller Code-Besitz. Lieferung in 7 Tagen ab € 599,–.',
   applicationName: SITE.name,
   authors: [{ name: SITE.founder.name }],
   creator: SITE.founder.name,
   publisher: SITE.brand,
   alternates: {
     canonical: '/',
+    languages: {
+      'de-AT': '/',
+      'x-default': '/',
+    },
   },
   openGraph: {
     type: 'website',
@@ -66,12 +72,23 @@ export const metadata: Metadata = {
   },
 }
 
+function CleanupScript() {
+  return (
+    <script
+      dangerouslySetInnerHTML={{
+        __html: `try{localStorage.removeItem('alcor-theme')}catch(e){}`,
+      }}
+    />
+  )
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="de-AT" suppressHydrationWarning>
       <head>
+        <CleanupScript />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -86,11 +103,13 @@ export default function RootLayout({
         />
       </head>
       <body suppressHydrationWarning>
+        <AnimatedBackground />
         <SkipLink />
         <Header />
         <main id="main">{children}</main>
         <Footer />
-        <ScrollToTop />
+        <FabStack />
+        <PromoModal />
       </body>
     </html>
   )

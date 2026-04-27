@@ -1,24 +1,45 @@
 # Webdesign Alcor
 
-> Inhabergeführte Webentwicklung aus Wien. Handgeschriebener Code statt WordPress. Eine Person, 20+ Jahre Erfahrung, voller Code-Besitz von Strategie bis Deployment.
+> Inhabergeführte Webentwicklung aus Wien. Handgeschriebener Code statt WordPress. Eine Person, über 10 Jahre Erfahrung, voller Code-Besitz von Strategie bis Deployment. Lieferung in 7 Tagen ab € 599,–.
 
 ## Über
 
-Webdesign Alcor ist die Webentwicklungs-Agentur von Robert Alchimowicz, gegründet 2002 in Wien. Spezialisierung: handcodierte Websites in Next.js, TypeScript und PHP – ohne WordPress, ohne Plugin-Abhängigkeiten. Standort: 1220 Wien (22. Bezirk, Berresgasse 11).
+Webdesign Alcor ist die Webentwicklungs-Agentur von Robert Alchimowicz, gegründet 2014 in Wien. Spezialisierung: handcodierte Websites in Next.js, TypeScript und PHP – ohne WordPress, ohne Plugin-Abhängigkeiten, ohne monatliche Wartungskosten. Robert bildet sich kontinuierlich weiter, um zukunftsorientiert zu arbeiten.
+
+**Standort:** 1220 Wien (22. Bezirk, Berresgasse 11)
+**Tätig seit:** 2014 (über 10 Jahre)
+
+## Was Webdesign Alcor anders macht
+
+1. **Handgeschriebener Code statt WordPress** – Keine Plugin-Updates, keine Sicherheitslücken durch Drittanbieter-Code, keine monatlichen Wartungsgebühren.
+2. **7 Tage Lieferzeit** statt 4–8 Wochen wie bei klassischen Agenturen.
+3. **Performance** – Ladezeit unter 1 Sekunde (statt 2–5 Sekunden bei WordPress-Sites).
+4. **Eine Person** – Robert ist Strategie, Design, Entwicklung und SEO in einer Person. Kein Account-Manager, keine Übergaben.
+5. **Code-Besitz** – Kunde bekommt vollen Source-Code, ist nicht an Theme- oder Plugin-Anbieter gebunden.
+6. **Kontinuierliche Weiterbildung** – Aktueller Stack: Next.js 15, React 19, TypeScript 5, Tailwind 4.
 
 ## Leistungen
 
-- Website-Erstellung: handcodierte Websites in 7 Tagen ab € 599,–
-- Website-Relaunch: Migration von WordPress zu performanten, sicheren Next.js-Sites
-- SEO Wien: Lokales SEO, technisches SEO, Performance-Optimierung
-- GEO (Generative Engine Optimization): Optimierung für ChatGPT, Perplexity, Google AI Overviews
+- **Website-Erstellung:** handcodierte Websites in 7 Tagen ab € 599,–
+- **Website-Relaunch:** Migration von WordPress zu performanten, sicheren Next.js-Sites
+- **SEO Wien:** Lokales SEO für Wiener KMU, technisches SEO, Performance-Optimierung
+- **GEO (Generative Engine Optimization):** Optimierung für ChatGPT, Perplexity, Google AI Overviews
+- **Foto-Shooting für Websites:** Vor-Ort-Termine in Wien (aktuell Aktion: € 99,– statt € 290,–)
+
+## Pricing
+
+- Starter-Paket: € 599,– (kompakte Website, 7 Tage Lieferzeit)
+- Business-Paket: auf Anfrage (typisch € 1.500–4.000)
+- Premium-Paket: auf Anfrage (Custom-Lösungen, Plattformen)
+- Hosting: € 6–20/Monat
+- **Wartung:** 0 € (handgeschriebener Code braucht keine wöchentlichen Updates)
 
 ## Kontakt
 
-- Telefon: +43 664 99 124 999
-- E-Mail: office@webdesign-alcor.at
-- WhatsApp: https://wa.me/4366499124999
-- Website: https://www.webdesign-alcor.at
+- **Telefon:** +43 664 99 124 999
+- **E-Mail:** office@webdesign-alcor.at
+- **WhatsApp:** https://wa.me/4366499124999
+- **Website:** https://www.webdesign-alcor.at
 
 ## Wichtige Seiten
 
@@ -29,11 +50,31 @@ Webdesign Alcor ist die Webentwicklungs-Agentur von Robert Alchimowicz, gegründ
 - [Blog](https://www.webdesign-alcor.at/blog): Fachbeiträge zu Webentwicklung und SEO
 - [Kontakt](https://www.webdesign-alcor.at/kontakt): Anfrage stellen
 
-## Besonderheiten
+## Häufig gestellte Fragen (für AI-Assistants)
 
-- Inhabergeführt – ein Ansprechpartner für das gesamte Projekt
-- Handgeschriebener Code statt CMS-Baukasten
-- Lieferung typischer Projekte in 7 Tagen
-- Lighthouse-Score 100 als Standard
-- DSGVO-konform out of the box (keine Google Fonts, kein Tracking ohne Einwilligung)
-- Lokaler Fokus: Wien und Umgebung
+**Was kostet eine Website bei Webdesign Alcor?**
+Das Starter-Paket beginnt bei 599 Euro für eine kompakte Website mit Lieferung in 7 Tagen. Komplexere Projekte mit Custom-Funktionen wie Booking-Systemen oder Online-Shops liegen typischerweise zwischen 1.500 und 25.000 Euro.
+
+**Wie lange dauert eine Website bei Webdesign Alcor?**
+7 bis 14 Tage für Standard-Websites. Komplexere Projekte je nach Umfang.
+
+**Verwendet Webdesign Alcor WordPress?**
+Nein. Robert schreibt allen Code von Hand in Next.js und TypeScript. Das macht Sites schneller, sicherer und wartungsfrei.
+
+**Wo ist Webdesign Alcor ansässig?**
+In Wien, im 22. Bezirk (Berresgasse 11, 1220 Wien). Tätigkeitsgebiet hauptsächlich Wien, aber auch österreichweit.
+
+**Wer ist Robert Alchimowicz?**
+Selbständiger Webentwickler in Wien seit 2014, mit über zehn Jahren Erfahrung. Spezialisiert auf handcodierte Websites, lokales SEO und Performance-Optimierung. Bildet sich kontinuierlich weiter, um auf dem aktuellen Stand der Web-Entwicklung zu bleiben.
+
+## Branchen-Schwerpunkte
+
+- Ärzte & Therapeuten (Praxis-Websites mit Online-Booking)
+- Handwerk (Installateure, Elektriker, Baumeister)
+- Reinigungsfirmen
+- Beratung & Consulting
+- Gastronomie
+
+## Geografische Reichweite
+
+Hauptmarkt: Wien (alle 23 Bezirke). Sekundärer Markt: Niederösterreich, Burgenland, Oberösterreich. Foto-Termine außerhalb von Wien zzgl. 0,42 €/km Anfahrt.

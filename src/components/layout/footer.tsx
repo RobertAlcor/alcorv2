@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { SITE, NAV } from '@/lib/site'
+import { APP_VERSION } from '@/lib/version'
 
 export function Footer() {
   return (
@@ -88,9 +89,20 @@ export function Footer() {
 
       <div className="border-t border-line">
         <div className="container-fluid py-6 flex flex-wrap items-center justify-between gap-4 text-xs text-paper-dim">
-          <div>
-            © {SITE.founder.foundedIn}–{new Date().getFullYear()} {SITE.brand} ·{' '}
-            {SITE.founder.name}
+          <div className="flex items-center gap-4 flex-wrap">
+            <span>
+              © {SITE.founder.foundedIn}–{new Date().getFullYear()}{' '}
+              {SITE.brand} · {SITE.founder.name}
+            </span>
+            <span aria-hidden className="text-paper-dim/40">
+              ·
+            </span>
+            <span
+              className="font-mono text-[0.65rem] tracking-wider text-paper-dim/70"
+              title="Aktuelle Versionsnummer dieser Website"
+            >
+              v{APP_VERSION}
+            </span>
           </div>
           <nav className="flex gap-6" aria-label="Rechtliches">
             {NAV.legal.map((item) => (

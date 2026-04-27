@@ -1,3 +1,8 @@
+'use client'
+
+import { motion } from 'motion/react'
+import { Check, X } from 'lucide-react'
+
 const COMPARISON = [
   {
     aspect: 'Lieferzeit',
@@ -58,7 +63,13 @@ const COMPARISON = [
 export function ComparisonSection() {
   return (
     <section className="container-fluid py-24 md:py-32 border-t border-line">
-      <div className="max-w-3xl mb-12 md:mb-16">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-3xl mb-12 md:mb-16"
+      >
         <p className="text-xs font-semibold tracking-[0.18em] uppercase text-signal-2 mb-6">
           <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
           Ehrlicher Vergleich
@@ -70,13 +81,17 @@ export function ComparisonSection() {
           Beide Wege haben ihre Berechtigung. Hier sehen Sie die Unterschiede –
           ehrlich, ohne Marketing-Filter.
         </p>
-      </div>
+      </motion.div>
 
-      {/* MOBILE: Stacked cards - WCAG AA konform, beide Spalten voll lesbar */}
+      {/* MOBILE: Stacked cards */}
       <div className="md:hidden space-y-3">
-        {COMPARISON.map((row) => (
-          <article
+        {COMPARISON.map((row, idx) => (
+          <motion.article
             key={row.aspect}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-30px' }}
+            transition={{ duration: 0.4, delay: idx * 0.04 }}
             className="bg-deep-2 border border-line rounded-sm p-5"
           >
             <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-paper-mute mb-4">
@@ -84,7 +99,6 @@ export function ComparisonSection() {
             </h3>
 
             <div className="grid grid-cols-2 gap-0">
-              {/* Alcor side */}
               <div
                 className={`pr-3 border-r border-line relative ${
                   row.advantage === 'alcor' ? 'pl-3 -ml-3 border-l-2 border-l-signal-2' : ''
@@ -93,10 +107,7 @@ export function ComparisonSection() {
                 <div className="text-[0.65rem] font-semibold text-signal-2 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
                   Alcor
                   {row.advantage === 'alcor' && (
-                    <span
-                      className="w-1.5 h-1.5 rounded-full bg-signal-2"
-                      aria-label="Vorteil"
-                    />
+                    <Check className="w-3 h-3" strokeWidth={3} aria-label="Vorteil" />
                   )}
                 </div>
                 <div className="text-sm leading-snug text-paper font-medium">
@@ -104,7 +115,6 @@ export function ComparisonSection() {
                 </div>
               </div>
 
-              {/* WordPress side */}
               <div
                 className={`pl-3 relative ${
                   row.advantage === 'wordpress' ? 'pr-3 -mr-3 border-r-2 border-r-paper-mute' : ''
@@ -113,10 +123,7 @@ export function ComparisonSection() {
                 <div className="text-[0.65rem] font-semibold text-paper-mute uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
                   WordPress
                   {row.advantage === 'wordpress' && (
-                    <span
-                      className="w-1.5 h-1.5 rounded-full bg-paper-mute"
-                      aria-label="Vorteil"
-                    />
+                    <Check className="w-3 h-3" strokeWidth={3} aria-label="Vorteil" />
                   )}
                 </div>
                 <div className="text-sm leading-snug text-paper font-medium">
@@ -124,11 +131,11 @@ export function ComparisonSection() {
                 </div>
               </div>
             </div>
-          </article>
+          </motion.article>
         ))}
       </div>
 
-      {/* DESKTOP: Classic table - beide Spalten voll lesbar */}
+      {/* DESKTOP: Classic table */}
       <div className="hidden md:block">
         <table className="w-full text-sm">
           <thead>
@@ -145,49 +152,43 @@ export function ComparisonSection() {
             </tr>
           </thead>
           <tbody>
-            {COMPARISON.map((row) => (
-              <tr
+            {COMPARISON.map((row, idx) => (
+              <motion.tr
                 key={row.aspect}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.04 }}
                 className="border-b border-line hover:bg-deep-2/40 transition-colors"
               >
                 <td className="py-5 pr-6 text-paper font-medium">
                   {row.aspect}
                 </td>
                 <td className="py-5 px-6 text-paper">
-                  <span className="inline-flex items-center gap-2">
-                    {row.advantage === 'alcor' && (
-                      <span
-                        className="w-1.5 h-1.5 rounded-full bg-signal-2 shrink-0"
-                        aria-label="Vorteil"
-                      />
+                  <span className="inline-flex items-center gap-2.5">
+                    {row.advantage === 'alcor' ? (
+                      <Check className="w-4 h-4 text-signal-2 shrink-0" strokeWidth={2.5} aria-label="Vorteil" />
+                    ) : (
+                      <X className="w-4 h-4 text-paper-dim shrink-0" strokeWidth={2} aria-hidden />
                     )}
-                    <span
-                      className={
-                        row.advantage === 'alcor' ? 'font-medium' : ''
-                      }
-                    >
+                    <span className={row.advantage === 'alcor' ? 'font-medium' : ''}>
                       {row.alcor}
                     </span>
                   </span>
                 </td>
                 <td className="py-5 px-6 text-paper">
-                  <span className="inline-flex items-center gap-2">
-                    {row.advantage === 'wordpress' && (
-                      <span
-                        className="w-1.5 h-1.5 rounded-full bg-paper-mute shrink-0"
-                        aria-label="Vorteil"
-                      />
+                  <span className="inline-flex items-center gap-2.5">
+                    {row.advantage === 'wordpress' ? (
+                      <Check className="w-4 h-4 text-signal-2 shrink-0" strokeWidth={2.5} aria-label="Vorteil" />
+                    ) : (
+                      <X className="w-4 h-4 text-paper-dim shrink-0" strokeWidth={2} aria-hidden />
                     )}
-                    <span
-                      className={
-                        row.advantage === 'wordpress' ? 'font-medium' : ''
-                      }
-                    >
+                    <span className={row.advantage === 'wordpress' ? 'font-medium' : ''}>
                       {row.wordpress}
                     </span>
                   </span>
                 </td>
-              </tr>
+              </motion.tr>
             ))}
           </tbody>
         </table>
