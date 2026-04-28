@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { TerminWizard } from '@/components/booking/termin-wizard'
 import { SITE } from '@/lib/site'
+import { RelatedPages } from '@/components/sections/related-pages'
+import { RELATED_FOR } from '@/lib/related-pages'
 
 export const metadata: Metadata = {
   title: 'Termin vereinbaren',
@@ -54,6 +56,8 @@ export default function TerminPage() {
           </a>
         </div>
       </section>
+      <RelatedPages pages={RELATED_FOR.termin} />
+
     </>
   )
 }

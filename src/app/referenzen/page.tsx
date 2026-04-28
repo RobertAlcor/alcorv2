@@ -5,6 +5,8 @@ import { CaseCard } from '@/components/sections/case-card'
 import { ToolsGrid } from '@/components/sections/tools-grid'
 import { CASES } from '@/lib/cases'
 import { TOOLS } from '@/lib/tools'
+import { RelatedPages } from '@/components/sections/related-pages'
+import { RELATED_FOR } from '@/lib/related-pages'
 
 export const metadata: Metadata = {
   title: 'Referenzen',
@@ -89,6 +91,8 @@ export default function ReferenzenPage() {
         title="Eigenes Projekt im Kopf?"
         subtitle="Ob klassische Website, Custom-Plattform oder eigenes Tool – im 15-Minuten-Erstgespräch klären wir, was möglich ist."
       />
+      <RelatedPages pages={RELATED_FOR.referenzen} />
+
     </>
   )
 }

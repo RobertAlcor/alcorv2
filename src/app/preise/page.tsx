@@ -4,6 +4,8 @@ import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { PricingCards } from '@/components/sections/pricing-card'
 import { CtaBand } from '@/components/sections/cta-band'
 import { SITE } from '@/lib/site'
+import { RelatedPages } from '@/components/sections/related-pages'
+import { RELATED_FOR } from '@/lib/related-pages'
 
 export const metadata: Metadata = {
   title: 'Preise',
@@ -278,6 +280,8 @@ export default function PreisePage() {
         title="Festpreis für Ihr Projekt?"
         subtitle="Im kostenfreien Erstgespräch klären wir Umfang und Festpreis. Schriftlich, verbindlich, ohne versteckte Kosten."
       />
+      <RelatedPages pages={RELATED_FOR.preise} />
+
     </>
   )
 }

@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { BentoGrid } from '@/components/sections/bento-grid'
 import { CtaBand } from '@/components/sections/cta-band'
+import { RelatedPages } from '@/components/sections/related-pages'
+import { RELATED_FOR } from '@/lib/related-pages'
 
 export const metadata: Metadata = {
   title: 'Leistungen',
@@ -42,6 +44,8 @@ export default function LeistungenPage() {
         title="Welche Leistung passt zu Ihnen?"
         subtitle="Wenn Sie sich nicht sicher sind, welches Paket richtig ist, klären wir das im kostenfreien Erstgespräch in 15 Minuten."
       />
+      <RelatedPages pages={RELATED_FOR.leistungen} />
+
     </>
   )
 }

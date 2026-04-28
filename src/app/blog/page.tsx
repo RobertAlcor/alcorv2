@@ -3,6 +3,8 @@ import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { CtaBand } from '@/components/sections/cta-band'
 import { BlogFilter, type BlogPost } from '@/components/blog/blog-filter'
 import { getAllPosts } from '@/lib/blog'
+import { RelatedPages } from '@/components/sections/related-pages'
+import { RELATED_FOR } from '@/lib/related-pages'
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -59,6 +61,8 @@ export default async function BlogPage() {
         title="Etwas konkret besprechen?"
         subtitle="Theorie ist gut – aber das eigentliche Gespräch über Ihr Projekt findet zwischen uns statt. 15 Minuten reichen meist."
       />
+      <RelatedPages pages={RELATED_FOR.blog} />
+
     </>
   )
 }

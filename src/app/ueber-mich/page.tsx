@@ -4,6 +4,8 @@ import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { CtaBand } from '@/components/sections/cta-band'
 import { personSchema } from '@/lib/schema'
 import { SITE } from '@/lib/site'
+import { RelatedPages } from '@/components/sections/related-pages'
+import { RELATED_FOR } from '@/lib/related-pages'
 
 export const metadata: Metadata = {
   title: 'Über Robert Alchimowicz',
@@ -273,6 +275,8 @@ export default function UeberMichPage() {
         title="Lust auf ein erstes Gespräch?"
         subtitle="15 Minuten reichen meistens, um einzuschätzen, ob wir zusammenpassen. Kostenlos, ohne Verkaufsdruck."
       />
+      <RelatedPages pages={RELATED_FOR.uebermich} />
+
     </>
   )
 }
