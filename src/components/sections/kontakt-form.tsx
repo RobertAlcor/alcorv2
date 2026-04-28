@@ -1,13 +1,23 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'motion/react'
+import { useEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import {
+  CheckCircle2,
+  AlertCircle,
+  Loader2,
+  Phone,
+  MessageCircle,
+  Mail,
+} from 'lucide-react'
 import { leadSchema, type LeadInput } from '@/lib/validation'
+import { SITE } from '@/lib/site'
 
 type FormState = {
   status: 'idle' | 'submitting' | 'success' | 'error'
   errors: Partial<Record<keyof LeadInput, string>>
   message?: string
+  refNumber?: string
 }
 
 const TOPICS: { value: LeadInput['topic']; label: string }[] = [
@@ -17,8 +27,25 @@ const TOPICS: { value: LeadInput['topic']; label: string }[] = [
   { value: 'other', label: 'Etwas anderes' },
 ]
 
+// === Form-Klassen für konsistente Lesbarkeit ===
+const LABEL_CLASS =
+  'block text-xs font-semibold tracking-[0.12em] uppercase text-paper-mute mb-2'
+
+const INPUT_CLASS =
+  'w-full min-h-[48px] px-4 py-3 bg-deep-2 border border-paper-dim/30 rounded-sm text-paper placeholder:text-paper-mute/70 focus:border-signal-2 focus:bg-deep-2 focus:outline-none transition-colors'
+
+const TEXTAREA_CLASS =
+  'w-full px-4 py-3 bg-deep-2 border border-paper-dim/30 rounded-sm text-paper placeholder:text-paper-mute/70 focus:border-signal-2 focus:outline-none transition-colors resize-y min-h-[140px]'
+
+const HINT_CLASS = 'mt-3 text-xs text-paper-mute leading-relaxed'
+
 export function KontaktForm() {
   const [state, setState] = useState<FormState>({ status: 'idle', errors: {} })
+  const formLoadTimeRef = useRef<number>(0)
+
+  useEffect(() => {
+    formLoadTimeRef.current = Date.now()
+  }, [])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -30,10 +57,16 @@ export function KontaktForm() {
     const parsed = leadSchema.safeParse(data)
     if (!parsed.success) {
       const errors: FormState['errors'] = {}
-      for (const [key, msgs] of Object.entries(parsed.error.flatten().fieldErrors)) {
+      for (const [key, msgs] of Object.entries(
+        parsed.error.flatten().fieldErrors,
+      )) {
         if (msgs?.[0]) errors[key as keyof LeadInput] = msgs[0]
       }
-      setState({ status: 'error', errors, message: 'Bitte überprüfen Sie Ihre Eingaben.' })
+      setState({
+        status: 'error',
+        errors,
+        message: 'Bitte überprüfen Sie Ihre Eingaben.',
+      })
       return
     }
 
@@ -41,79 +74,263 @@ export function KontaktForm() {
       const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(parsed.data),
+        body: JSON.stringify({
+          ...parsed.data,
+          formLoadTime: formLoadTimeRef.current,
+        }),
       })
 
-      if (!res.ok) {
-        throw new Error('Server error')
+      if (res.status === 429) {
+        const body = await res.json().catch(() => ({}))
+        setState({
+          status: 'error',
+          errors: {},
+          message:
+            body?.error ??
+            'Zu viele Anfragen in kurzer Zeit. Bitte rufen Sie direkt an.',
+        })
+        return
       }
 
-      setState({ status: 'success', errors: {} })
+      if (!res.ok) throw new Error('Server error')
+
+      const body = await res.json().catch(() => ({}))
+      setState({
+        status: 'success',
+        errors: {},
+        refNumber: body?.refNumber as string | undefined,
+      })
+
+      setTimeout(() => {
+        document
+          .getElementById('kontakt-form-result')
+          ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }, 100)
     } catch {
       setState({
         status: 'error',
         errors: {},
-        message: 'Etwas ist schiefgelaufen. Bitte rufen Sie kurz an.',
+        message:
+          'Es gab ein technisches Problem. Bitte versuchen Sie es noch einmal – oder rufen Sie direkt an.',
       })
     }
   }
 
+  // === SUCCESS ===
   if (state.status === 'success') {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
+        id="kontakt-form-result"
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="p-10 bg-deep-2 border border-line rounded-sm"
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="bg-deep-2 border border-success/40 rounded-sm p-8 md:p-10"
+        role="status"
+        aria-live="polite"
       >
-        <h3 className="font-serif text-3xl text-paper mb-3">
-          Danke. Ich melde mich.
-        </h3>
-        <p className="text-paper-mute leading-relaxed">
-          Ihre Anfrage ist eingegangen. Sie bekommen binnen weniger Minuten eine
-          Bestätigungs-E-Mail. Persönlich melde ich mich binnen 24 Stunden – meistens
-          schneller.
+        <div className="flex items-start gap-4 mb-5">
+          <CheckCircle2
+            className="w-8 h-8 text-success shrink-0 mt-1"
+            strokeWidth={1.75}
+          />
+          <div>
+            <h3 className="font-serif text-2xl md:text-3xl text-paper mb-2">
+              Anfrage erfolgreich versendet.
+            </h3>
+            {state.refNumber && (
+              <p className="font-mono text-xs text-paper-mute">
+                Ihre Referenznummer:{' '}
+                <strong className="text-signal-2">#{state.refNumber}</strong>
+              </p>
+            )}
+          </div>
+        </div>
+
+        <p className="text-paper-mute leading-relaxed mb-6">
+          Eine Bestätigung mit Ihren Angaben ist gerade an Ihre E-Mail-Adresse
+          unterwegs. Ich melde mich binnen 24 Stunden persönlich bei Ihnen
+          zurück, üblicherweise deutlich schneller.
         </p>
+
+        <div className="border-t border-line pt-6">
+          <p className="text-[0.7rem] font-mono uppercase tracking-wider text-signal-2 mb-3">
+            Falls es eilt – direkt erreichbar
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={`tel:${SITE.contact.phoneRaw}`}
+              className="inline-flex items-center gap-2 min-h-[44px] px-5 py-2.5 bg-signal text-deep font-medium text-sm rounded-sm hover:bg-signal-2 transition-colors"
+            >
+              <Phone className="w-4 h-4" strokeWidth={1.75} />
+              {SITE.contact.phoneFormatted}
+            </a>
+            <a
+              href={SITE.contact.whatsapp}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center gap-2 min-h-[44px] px-5 py-2.5 bg-deep border border-paper-dim/30 text-paper font-medium text-sm rounded-sm hover:border-signal-2 transition-colors"
+            >
+              <MessageCircle className="w-4 h-4" strokeWidth={1.75} />
+              WhatsApp
+            </a>
+          </div>
+        </div>
       </motion.div>
     )
   }
 
+  // === FORM ===
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
-      {/* Honeypot - hidden from users */}
-      <input
-        type="text"
-        name="website"
-        tabIndex={-1}
-        autoComplete="off"
-        className="absolute left-[-9999px] w-px h-px overflow-hidden"
-        aria-hidden="true"
-      />
+    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+      <AnimatePresence>
+        {state.status === 'error' && state.message && (
+          <motion.div
+            id="kontakt-form-result"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="bg-deep-2 border border-error/40 rounded-sm p-5"
+            role="alert"
+            aria-live="assertive"
+          >
+            <div className="flex items-start gap-3 mb-3">
+              <AlertCircle
+                className="w-5 h-5 text-error shrink-0 mt-0.5"
+                strokeWidth={1.75}
+              />
+              <div>
+                <p className="text-paper font-medium mb-1">
+                  Versand nicht möglich
+                </p>
+                <p className="text-paper-mute text-sm leading-relaxed">
+                  {state.message}
+                </p>
+              </div>
+            </div>
+            <div className="ml-8 mt-4 flex flex-wrap gap-2">
+              <a
+                href={`tel:${SITE.contact.phoneRaw}`}
+                className="inline-flex items-center gap-2 min-h-[40px] px-4 py-2 bg-signal text-deep text-sm font-medium rounded-sm hover:bg-signal-2 transition-colors"
+              >
+                <Phone className="w-3.5 h-3.5" strokeWidth={1.75} />
+                {SITE.contact.phoneFormatted}
+              </a>
+              <a
+                href={`mailto:${SITE.contact.email}`}
+                className="inline-flex items-center gap-2 min-h-[40px] px-4 py-2 bg-deep border border-paper-dim/30 text-paper text-sm rounded-sm hover:border-signal-2 transition-colors"
+              >
+                <Mail className="w-3.5 h-3.5" strokeWidth={1.75} />
+                {SITE.contact.email}
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <Field label="Name" name="name" required error={state.errors.name} />
-        <Field label="E-Mail" name="email" type="email" required error={state.errors.email} />
+      {/* Honeypot */}
+      <div
+        className="absolute -left-[9999px] w-px h-px overflow-hidden"
+        aria-hidden
+      >
+        <label htmlFor="website">Website (leer lassen)</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <Field label="Telefon" name="phone" type="tel" optional error={state.errors.phone} />
-        <Field label="Firma" name="company" optional error={state.errors.company} />
-      </div>
+      <input type="hidden" name="source" value="kontakt-form" />
 
+      {/* Name */}
       <div>
-        <label htmlFor="topic" className="block text-xs font-semibold tracking-[0.12em] uppercase text-paper-dim mb-2">
-          Worum geht es? <span className="text-error">*</span>
+        <label htmlFor="name" className={LABEL_CLASS}>
+          Ihr Name <span className="text-signal-2">*</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          autoComplete="name"
+          aria-invalid={Boolean(state.errors.name)}
+          className={INPUT_CLASS}
+        />
+        {state.errors.name && (
+          <p className="mt-2 text-sm text-error">{state.errors.name}</p>
+        )}
+      </div>
+
+      {/* Email + Phone Row */}
+      <div className="grid md:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="email" className={LABEL_CLASS}>
+            E-Mail <span className="text-signal-2">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            autoComplete="email"
+            aria-invalid={Boolean(state.errors.email)}
+            className={INPUT_CLASS}
+          />
+          {state.errors.email && (
+            <p className="mt-2 text-sm text-error">{state.errors.email}</p>
+          )}
+        </div>
+        <div>
+          <label htmlFor="phone" className={LABEL_CLASS}>
+            Telefon{' '}
+            <span className="text-paper-mute/70 normal-case">(optional)</span>
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            autoComplete="tel"
+            className={INPUT_CLASS}
+          />
+        </div>
+      </div>
+
+      {/* Company */}
+      <div>
+        <label htmlFor="company" className={LABEL_CLASS}>
+          Firma{' '}
+          <span className="text-paper-mute/70 normal-case">(optional)</span>
+        </label>
+        <input
+          type="text"
+          id="company"
+          name="company"
+          autoComplete="organization"
+          className={INPUT_CLASS}
+        />
+      </div>
+
+      {/* Topic */}
+      <div>
+        <label htmlFor="topic" className={LABEL_CLASS}>
+          Worum geht es? <span className="text-signal-2">*</span>
         </label>
         <select
           id="topic"
           name="topic"
           required
           defaultValue=""
-          className="w-full px-4 py-3.5 bg-deep-2 border border-line rounded-sm text-paper focus:border-signal-2 focus:outline-none transition-colors"
+          className={INPUT_CLASS}
         >
-          <option value="" disabled>Bitte auswählen</option>
+          <option value="" disabled>
+            Bitte auswählen
+          </option>
           {TOPICS.map((t) => (
-            <option key={t.value} value={t.value}>{t.label}</option>
+            <option key={t.value} value={t.value}>
+              {t.label}
+            </option>
           ))}
         </select>
         {state.errors.topic && (
@@ -121,78 +338,50 @@ export function KontaktForm() {
         )}
       </div>
 
+      {/* Message */}
       <div>
-        <label htmlFor="message" className="block text-xs font-semibold tracking-[0.12em] uppercase text-paper-dim mb-2">
-          Ihre Nachricht <span className="text-error">*</span>
+        <label htmlFor="message" className={LABEL_CLASS}>
+          Worum geht es konkret? <span className="text-signal-2">*</span>
         </label>
         <textarea
           id="message"
           name="message"
           required
           rows={6}
-          placeholder="Was haben Sie vor? Welche Ziele hat das Projekt? Gibt es Beispiele, die Ihnen gefallen?"
-          className="w-full px-4 py-3.5 bg-deep-2 border border-line rounded-sm text-paper placeholder:text-paper-dim focus:border-signal-2 focus:outline-none transition-colors resize-y min-h-[140px]"
+          minLength={10}
+          maxLength={2000}
+          placeholder="Beschreiben Sie kurz, was Sie vorhaben oder welches Problem Sie lösen möchten."
+          className={TEXTAREA_CLASS}
         />
         {state.errors.message && (
           <p className="mt-2 text-sm text-error">{state.errors.message}</p>
         )}
       </div>
 
-      {state.status === 'error' && state.message && (
-        <p className="text-sm text-error">{state.message}</p>
-      )}
-
-      <div className="flex flex-wrap items-center gap-4 pt-2">
+      {/* Submit */}
+      <div className="pt-2">
         <button
           type="submit"
           disabled={state.status === 'submitting'}
-          className="inline-flex items-center gap-2 px-7 py-4 bg-signal text-paper font-medium text-sm rounded-sm hover:bg-signal-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_8px_30px_-8px_rgba(var(--signal-rgb),0.5)]"
+          className="inline-flex items-center justify-center gap-2 min-h-[48px] px-7 py-4 bg-signal text-deep font-medium text-sm rounded-sm hover:bg-signal-2 transition-colors shadow-[0_8px_30px_-8px_rgba(var(--signal-rgb),0.5)] disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          {state.status === 'submitting' ? 'Wird gesendet…' : 'Anfrage senden'}
-          {state.status !== 'submitting' && (
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
+          {state.status === 'submitting' ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Wird gesendet …
+            </>
+          ) : (
+            <>Anfrage senden</>
           )}
         </button>
-        <p className="text-xs text-paper-dim">
-          Antwort binnen 24 Stunden · Kein Verkaufsdruck
+        <p className={HINT_CLASS}>
+          Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Daten gemäß{' '}
+          <a href="/datenschutz" className="text-signal-2 hover:underline">
+            Datenschutzerklärung
+          </a>{' '}
+          zu.
         </p>
       </div>
     </form>
-  )
-}
-
-function Field({
-  label,
-  name,
-  type = 'text',
-  required,
-  optional,
-  error,
-}: {
-  label: string
-  name: string
-  type?: string
-  required?: boolean
-  optional?: boolean
-  error?: string
-}) {
-  return (
-    <div>
-      <label htmlFor={name} className="block text-xs font-semibold tracking-[0.12em] uppercase text-paper-dim mb-2">
-        {label} {required && <span className="text-error">*</span>}
-        {optional && <span className="text-paper-dim font-normal normal-case tracking-normal text-[0.7rem] ml-1">(optional)</span>}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        required={required}
-        className="w-full px-4 py-3.5 bg-deep-2 border border-line rounded-sm text-paper placeholder:text-paper-dim focus:border-signal-2 focus:outline-none transition-colors"
-      />
-      {error && <p className="mt-2 text-sm text-error">{error}</p>}
-    </div>
   )
 }

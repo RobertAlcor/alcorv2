@@ -47,6 +47,7 @@ export function BentoGrid() {
             description={websiteService.description}
             icon={ICONS['website-erstellung']}
             patternKind="grid"
+            ctaLabel="Details ansehen"
             delay={0}
           />
         )}
@@ -60,6 +61,7 @@ export function BentoGrid() {
             description={relaunchService.description}
             icon={ICONS.relaunch}
             patternKind="circle"
+            ctaLabel="Details ansehen"
             delay={0.1}
           />
         )}
@@ -73,6 +75,7 @@ export function BentoGrid() {
             description={seoService.description}
             icon={ICONS['seo-wien']}
             patternKind="bars"
+            ctaLabel="Details ansehen"
             delay={0.2}
           />
         )}
@@ -91,6 +94,7 @@ type BentoCardProps = {
   description: string
   icon: React.ReactNode
   patternKind: 'grid' | 'circle' | 'bars'
+  ctaLabel: string
   delay?: number
 }
 
@@ -102,6 +106,7 @@ function BentoCard({
   description,
   icon,
   patternKind,
+  ctaLabel,
   delay = 0,
 }: BentoCardProps) {
   return (
@@ -116,7 +121,6 @@ function BentoCard({
         href={href}
         className="group relative overflow-hidden block bg-deep-2 border border-line rounded-sm p-8 md:p-10 hover:border-signal-2 transition-all duration-500 min-h-[280px] h-full flex flex-col justify-between"
       >
-        {/* Pattern background - very subtle */}
         <BentoPattern kind={patternKind} />
 
         <div className="relative z-10">
@@ -133,9 +137,13 @@ function BentoCard({
             {description}
           </p>
         </div>
-        <div className="relative z-10 flex items-center gap-2 text-sm text-paper-mute group-hover:text-signal-2 mt-8 transition-colors">
-          Mehr erfahren
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+
+        {/* CTA Footer - Button-Look, klar erkennbar */}
+        <div className="relative z-10 mt-8 pt-5 border-t border-line">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-deep border border-line rounded-sm text-sm font-medium text-paper group-hover:bg-signal group-hover:text-deep group-hover:border-signal transition-all duration-300">
+            {ctaLabel}
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+          </span>
         </div>
       </Link>
     </motion.div>
@@ -152,7 +160,8 @@ function BentoPattern({ kind }: { kind: 'grid' | 'circle' | 'bars' }) {
           backgroundImage:
             'linear-gradient(rgba(var(--signal-rgb),0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(var(--signal-rgb),0.6) 1px, transparent 1px)',
           backgroundSize: '24px 24px',
-          maskImage: 'radial-gradient(circle at top right, black 0%, transparent 70%)',
+          maskImage:
+            'radial-gradient(circle at top right, black 0%, transparent 70%)',
         }}
       />
     )
@@ -169,7 +178,6 @@ function BentoPattern({ kind }: { kind: 'grid' | 'circle' | 'bars' }) {
       />
     )
   }
-  // bars
   return (
     <div
       aria-hidden
@@ -189,9 +197,6 @@ function BentoPattern({ kind }: { kind: 'grid' | 'circle' | 'bars' }) {
   )
 }
 
-/**
- * Special CTA card to balance the grid (3-column)
- */
 function CtaCardKontakt() {
   return (
     <motion.div
@@ -225,9 +230,11 @@ function CtaCardKontakt() {
             Telefon, Video oder vor Ort in Wien. Ehrlich, ohne Verkaufsdruck.
           </p>
         </div>
-        <div className="relative z-10 flex items-center gap-2 text-sm text-signal-2 mt-8 font-medium">
-          Termin vereinbaren
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        <div className="relative z-10 mt-8 pt-5 border-t border-signal-2/20">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-signal text-deep rounded-sm text-sm font-medium group-hover:gap-3 transition-all duration-300">
+            Termin vereinbaren
+            <ArrowRight className="w-3.5 h-3.5" />
+          </span>
         </div>
       </Link>
     </motion.div>

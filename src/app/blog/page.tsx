@@ -1,27 +1,30 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { CtaBand } from '@/components/sections/cta-band'
-import { PostCard } from '@/components/blog/post-card'
-import { getAllPosts, getAllTags, slugifyTag } from '@/lib/blog'
+import { BlogFilter, type BlogPost } from '@/components/blog/blog-filter'
+import { getAllPosts } from '@/lib/blog'
 
 export const metadata: Metadata = {
   title: 'Blog',
   description:
-    'Fachbeiträge zu Webentwicklung, SEO, GEO und Performance. 24 Jahre Praxis aus Wien, ehrlich aufgeschrieben.',
+    'Artikel zu Webentwicklung, SEO, Performance und der Werkstatt-Realität als Solo-Webdesigner in Wien. Durchsuchbar, nach Tags filterbar.',
   alternates: { canonical: '/blog' },
-  openGraph: {
-    title: 'Blog · Webdesign Alcor',
-    description: 'Fachbeiträge aus 24 Jahren Webentwicklung in Wien.',
-  },
 }
 
 export const revalidate = 3600 // 1h ISR
 
 export default async function BlogPage() {
   const posts = await getAllPosts()
-  const tags = await getAllTags()
-  const [featured, ...rest] = posts
+
+  // Map to BlogPost type for client component
+  const clientPosts: BlogPost[] = posts.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    description: p.description,
+    date: p.date,
+    tags: p.tags,
+    readingMinutes: p.readingTimeMinutes,
+  }))
 
   return (
     <>
@@ -32,59 +35,29 @@ export default async function BlogPage() {
         ]}
       />
 
-      <section className="container-fluid pt-12 md:pt-16 pb-12">
+      <section className="container-fluid pt-12 pb-12 md:pt-16">
         <div className="max-w-4xl">
-          <p className="text-xs font-semibold tracking-[0.18em] uppercase text-signal-2 mb-6">
-            <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
+          <p className="text-signal-2 mb-6 text-xs font-semibold tracking-[0.18em] uppercase">
+            <span className="bg-signal-2 mr-3 inline-block h-px w-8 align-middle" />
             Blog
           </p>
-          <h1 className="font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] tracking-[-0.02em] text-balance mb-8">
-            Fachbeiträge <em className="text-signal-2 italic">aus der Praxis.</em>
+          <h1 className="mb-8 font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] tracking-[-0.02em] text-balance">
+            Werkstatt. <em className="text-signal-2 italic">Notizen.</em>
           </h1>
-          <p className="font-serif italic text-xl md:text-2xl text-paper-mute max-w-3xl leading-snug">
-            24 Jahre Webentwicklung in Wien. Hier teile ich, was funktioniert
-            – und was nicht.
+          <p className="text-paper-mute max-w-3xl font-serif text-xl leading-snug italic md:text-2xl">
+            Artikel zu Webentwicklung, SEO und der Realität als Solo-Werkstatt. Praktisch,
+            ehrlich, nicht für Klicks optimiert.
           </p>
         </div>
       </section>
 
-      {/* Tags Filter */}
-      {tags.length > 0 && (
-        <section className="container-fluid pb-8">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono text-paper-dim uppercase tracking-wider mr-2">
-              Themen:
-            </span>
-            {tags.map((tag) => (
-              <Link
-                key={tag}
-                href={`/blog/tag/${slugifyTag(tag)}`}
-                className="px-3 py-1.5 text-xs font-medium text-paper-mute bg-deep-2 border border-line rounded-full hover:border-signal-2 hover:text-paper transition-colors"
-              >
-                {tag}
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Posts grid */}
       <section className="container-fluid pb-24">
-        {posts.length === 0 ? (
-          <p className="text-paper-mute italic">Bald folgen die ersten Artikel.</p>
-        ) : (
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-            {featured && <PostCard post={featured} featured />}
-            {rest.map((post) => (
-              <PostCard key={post.slug} post={post} />
-            ))}
-          </div>
-        )}
+        <BlogFilter posts={clientPosts} />
       </section>
 
       <CtaBand
-        title="Konkrete Frage zu Ihrem Projekt?"
-        subtitle="Statt zu warten – im kostenfreien Erstgespräch beantworte ich Ihre Frage in 15 Minuten."
+        title="Etwas konkret besprechen?"
+        subtitle="Theorie ist gut – aber das eigentliche Gespräch über Ihr Projekt findet zwischen uns statt. 15 Minuten reichen meist."
       />
     </>
   )

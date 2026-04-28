@@ -1,86 +1,104 @@
-# Update v4 – Carbon Copper Final + WCAG 2.2 + FAB + Promo
+# Update v12 – Kontraste, Navigation, Termin als Step-Wizard
 
 ## ZIP entpacken im Projektordner
 
-Überschreibt:
-- `src/app/globals.css` – Carbon Copper als fixes Theme
-- `src/app/layout.tsx` – ThemeSwitcher raus, FabStack + PromoModal rein
-- `src/components/layout/header.tsx` – mit sticky "Anfragen"-Button
-- `src/components/layout/mobile-menu.tsx` – theme-aware Glow
-- `src/components/sections/hero.tsx` – Live-Indicator, Shimmer, 3 CTAs
-- `public/favicon.svg` – Carbon Copper Farben
-- `public/logo.svg` – Carbon Copper Farben
-- `public/llms.txt` – erweitert für GEO
+**Geändert:**
+- `src/lib/site.ts` → NAV erweitert um Preise und Termin
+- `src/components/layout/header.tsx` → Schmaleres Gap weil 7 Items
+- `src/components/sections/kontakt-form.tsx` → bessere Kontraste
+- `src/components/booking/calendar.tsx` → bessere Kontraste
+- `src/components/booking/slot-picker.tsx` → bessere Kontraste
+- `src/components/booking/booking-form.tsx` → wird jetzt als Step verwendet (kein eigenes Submit mehr, kein eigenes Form-Element)
+- `src/components/booking/termin-wizard.tsx` → komplett neu als 4-Step Wizard
 
-Neu angelegt:
-- `src/components/layout/fab-stack.tsx` – WhatsApp/Tel/ScrollTop links unten
-- `src/components/layout/promo-modal.tsx` – Foto-Shooting €99 Aktion
-- `src/components/ui/animated-counter.tsx` – Zahlen zählen hoch
-- `src/components/ui/live-indicator.tsx` – Verfügbarkeits-Badge
-
-## Optional zu löschen (ehemals Theme-Switcher)
-
-Falls noch da:
-```powershell
-Remove-Item src\components\layout\theme-switcher.tsx
-Remove-Item src\components\layout\theme-script.tsx
-Remove-Item src\components\layout\scroll-to-top.tsx
-Remove-Item src\lib\themes.ts
-```
-
-Sind nicht mehr referenziert, Build funktioniert auch wenn sie liegen bleiben.
+**Neu:**
+- `src/components/booking/step-indicator.tsx` → Progress-Anzeige oben
+- `src/components/booking/booking-review.tsx` → Step 4 mit allen Daten + Edit-Buttons
 
 ## Dann
 
 ```powershell
-# Strg+C im Dev-Terminal
+# Strg+C
 npm run dev
 ```
 
-## Was zu testen ist
+## Was sich ändert
 
-| Was | Wo |
-|-----|-----|
-| Theme bleibt fix Carbon Copper | jede Seite |
-| Live-Indicator pulsiert | Hero oben |
-| Shimmer-Animation auf "Alle sahen gleich aus" | Hero Headline |
-| Counter zählen hoch beim Scrollen in Stats | Hero unten |
-| Magnetic-Effekt am "Projekt anfragen" | Hero CTA (Desktop, Maus drüber) |
-| WhatsApp-Button links unten pulsiert | jede Seite |
-| Telefon-Button links unten | jede Seite |
-| Tooltips rechts neben FAB-Buttons | Hover über FAB |
-| Header "Anfragen"-Button sticky | beim Scrollen |
-| Header Active-Underline | beim Wechseln zwischen Seiten |
-| Promo-Modal nach 30 Sek ODER Exit-Intent ODER 40% Scroll | egal welche Seite |
-| Promo-Modal nicht nochmal nach Schließen | localStorage merkt sich |
+### Navigation
+Vorher: Leistungen · Referenzen · Über mich · Blog · Kontakt (5 Items)
+Jetzt: **Leistungen · Referenzen · Preise · Über mich · Blog · Termin · Kontakt** (7 Items)
 
-### Promo-Modal manuell triggern (zum Testen)
+Wenn du eine andere Reihenfolge willst, ist das in `src/lib/site.ts` in 30 Sekunden geändert.
 
-In der Browser-Console:
-```js
-localStorage.removeItem('alcor-promo-seen-photo-shoot-v1')
-location.reload()
+### Kontraste
+
+**Eingabefelder waren vorher** auf `bg-deep` (#161618) — fast identisch zur Page-Background, kaum sichtbar.
+
+**Jetzt:** auf `bg-deep-2` (#232327) mit `border-paper-dim/30` — klar abgehoben.
+
+**Labels und Beschreibungen** waren `text-paper-dim` (#998a7c, sehr dunkel auf dunkler Page).
+
+**Jetzt:** `text-paper-mute` (#c8b8a8) — viel besser lesbar.
+
+Gilt für: Kontakt-Form, alle Termin-Steps (Calendar, SlotPicker, Form, Review).
+
+### Termin als 4-Step Wizard
+
+Vorher: alles untereinander auf einer langen Page.
+Jetzt:
+
+```
+[1] Tag      [2] Uhrzeit      [3] Daten      [4] Bestätigen
 ```
 
-Dann 30 Sek warten, oder einfach nach unten scrollen, oder Maus zur Adressleiste bewegen.
+- Step-Indicator oben mit Progress-Linie
+- Bei Tag/Slot-Klick → automatisch nächster Step
+- "Zurück" Button immer verfügbar (außer Step 1)
+- "Weiter" Button auf Step 1-3
+- "Jetzt verbindlich buchen" Button erst auf Step 4
+- Step 4 zeigt alle Daten in einer Review-Liste mit Stift-Symbol pro Zeile zum Bearbeiten
+- Submit erst auf Step 4 → Bestätigung als grüner Erfolgs-Block
 
-## WCAG 2.2 AA Verbesserungen
+Validation pro Step:
+- Step 1: Datum muss gewählt sein
+- Step 2: Slot muss gewählt sein
+- Step 3: Name, Email, Phone, Topic Pflicht (+ Adresse wenn "Außerhalb")
+- Step 4: nichts zu validieren, nur bestätigen
 
-- ✅ Focus-Ring 3px (war 2px)
-- ✅ Touch-Targets min 44x44px (Header-Links, Buttons, FAB)
-- ✅ Spacing zwischen FABs >24px
-- ✅ Tooltips per aria-describedby
-- ✅ Promo-Modal mit role=dialog, aria-modal, aria-labelledby
-- ✅ Live-Indicator mit role=status, aria-live=polite
-- ✅ Skip-Link bleibt drin
+### Konflikt-Handling
 
-## Was als nächstes
+Wenn der gewählte Slot beim Klick auf "Buchen" gerade von jemand anderem geschnappt wurde, zeigt Step 4 unten 3 Alternativ-Slots als Buttons. Klick darauf bringt dich zurück zur Review mit dem neuen Slot.
 
-Erstmal das hier durchklicken und Feedback geben. Was als nächstes Sinn macht:
+## Test-Checkliste
 
-1. **Glossar** (du wolltest später)
-2. **Alle anderen Sektionen polish** (Process, Comparison, Bento bekommen den gleichen Lebendigkeit-Boost)
-3. **Über-mich** überarbeiten mit echtem Foto
-4. **Referenzen** mit echten Screenshots
-5. **OG-Image** generieren (für Social-Cards)
-6. **Vercel-Deploy** wenn alles steht
+```
+[ ] Navigation: Preise + Termin sichtbar
+[ ] Header: passen alle 7 Items in eine Zeile (Desktop)
+[ ] /kontakt: Form-Felder klar erkennbar (heller Hintergrund)
+[ ] /kontakt: Labels gut lesbar
+[ ] /termin: Step-Indicator zeigt 4 Schritte
+[ ] /termin: Tag klicken → springt zu Step 2
+[ ] /termin: Slot klicken → springt zu Step 3
+[ ] /termin: Felder klar erkennbar
+[ ] /termin: Step 3 → "Weiter" → Step 4 zeigt Zusammenfassung
+[ ] /termin: Edit-Buttons (Stift) auf Step 4 funktionieren
+[ ] /termin: "Zurück"-Button funktioniert
+[ ] Mobile (375px): Wizard funktioniert auch
+```
+
+## Was nicht geändert wurde
+
+- Backend (api/booking/*) → unverändert, nimmt die selben Felder wie vorher
+- Mail-Templates → unverändert
+- Booking-Logik in lib/booking.ts → unverändert
+- /referenzen, /leistungen, /preise, /blog → unverändert (Inhalte gleich)
+
+## Mental-Check
+
+- ✅ Kontraste WCAG-tauglich: Input-BG #232327 vs Border `paper-dim/30` (~#998a7c at 30%) klarer Kontrast
+- ✅ Placeholder text-paper-mute/70 (~#c8b8a8 at 70%) auf #232327 → ausreichend
+- ✅ Labels text-paper-mute (#c8b8a8) auf #161618 page-bg → AAA
+- ✅ Keine API-Breaking-Changes
+- ✅ Wizard-Submit-Logic: Submit nur auf Step 4
+- ✅ Mobile: Wizard funktioniert (StepIndicator hat sm:hidden für Labels, nur Zahlen sichtbar)
+- ✅ Auto-Advance bei Tag/Slot-Click → fühlt sich schneller an

@@ -1,6 +1,6 @@
 export const SITE = {
   name: 'Webdesign Alcor',
-  brand: 'Alcor Group',
+  brand: 'ALCOR Group',
   domain: 'webdesign-alcor.at',
   url: 'https://www.webdesign-alcor.at',
   tagline: 'Inhabergeführte Webentwicklung aus Wien',
@@ -43,15 +43,43 @@ export const SITE = {
     premium: 'auf Anfrage',
     currency: 'EUR',
     deliveryDays: 7,
+    hostingYearly: 99,
+    hostingIncluded: 'Hosting, kleinere Updates, Inhaltspflege bis 15 Min/Vorgang',
+    hourlyRate: 85,
+    hourlyRateUnit: '€/h netto',
   },
 } as const
 
+export const SISTER_SITES = [
+  {
+    name: 'website-erstellen.wien',
+    url: 'https://website-erstellen.wien',
+    role: 'SEO-Funnel & Pricing-Vergleich',
+  },
+  {
+    name: 'psychologen-webdesign.wien',
+    url: 'https://psychologen-webdesign.wien',
+    role: 'Niche: Praxis-Websites für Therapeuten',
+  },
+  {
+    name: 'webdesign-liesing.wien',
+    url: 'https://webdesign-liesing.wien',
+    role: 'Niche: 23. Wiener Bezirk',
+  },
+] as const
+
+/**
+ * Hauptnavigation - Reihenfolge folgt User-Journey:
+ * Was tue ich → Beweise → Kosten → Wer bin ich → Inhalte → Aktion → Kontakt
+ */
 export const NAV = {
   main: [
     { label: 'Leistungen', href: '/leistungen' },
     { label: 'Referenzen', href: '/referenzen' },
+    { label: 'Preise', href: '/preise' },
     { label: 'Über mich', href: '/ueber-mich' },
     { label: 'Blog', href: '/blog' },
+    { label: 'Termin', href: '/termin' },
     { label: 'Kontakt', href: '/kontakt' },
   ],
   legal: [

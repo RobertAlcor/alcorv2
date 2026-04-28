@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Calendar, ArrowRight } from 'lucide-react'
 import { SITE } from '@/lib/site'
 
 type CtaBandProps = {
@@ -12,11 +13,11 @@ type CtaBandProps = {
 
 export function CtaBand({
   title = 'Reden wir.',
-  subtitle = 'Kostenfreies Erstgespräch, ehrliche Einschätzung Ihres Projekts. Persönlich in Wien, telefonisch oder per Videocall.',
-  primaryLabel = 'Projekt anfragen',
-  primaryHref = '/kontakt',
-  secondaryLabel = 'Direkt anrufen',
-  secondaryHref = `tel:${SITE.contact.phoneRaw}`,
+  subtitle = '15 Minuten Erstgespräch direkt buchen. Ehrliche Einschätzung, kein Verkaufsdruck. Telefon, Video oder vor Ort in Wien.',
+  primaryLabel = 'Termin vereinbaren',
+  primaryHref = '/termin',
+  secondaryLabel = 'Anfrage formulieren',
+  secondaryHref = '/kontakt',
 }: CtaBandProps) {
   return (
     <section className="container-fluid py-24 md:py-32 border-t border-line relative overflow-hidden">
@@ -44,20 +45,24 @@ export function CtaBand({
         <div className="flex flex-wrap items-center gap-4">
           <Link
             href={primaryHref}
-            className="group inline-flex items-center gap-2 px-7 py-4 bg-signal text-paper font-medium text-sm rounded-sm hover:bg-signal-2 transition-all duration-300 shadow-[0_8px_30px_-8px_rgba(var(--signal-rgb),0.5)]"
+            className="group inline-flex items-center gap-2 min-h-[48px] px-7 py-4 bg-signal text-deep font-medium text-sm rounded-sm hover:bg-signal-2 transition-all duration-300 shadow-[0_8px_30px_-8px_rgba(var(--signal-rgb),0.5)]"
           >
+            <Calendar className="w-4 h-4" strokeWidth={1.75} />
             {primaryLabel}
-            <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
           <Link
             href={secondaryHref}
-            className="inline-flex items-center gap-2 px-7 py-4 text-paper-mute font-medium text-sm border border-line rounded-sm hover:text-paper hover:border-paper-mute transition-all duration-300"
+            className="inline-flex items-center gap-2 min-h-[48px] px-7 py-4 text-paper-mute font-medium text-sm border border-line rounded-sm hover:text-paper hover:border-paper-mute transition-all duration-300"
           >
             {secondaryLabel}
           </Link>
+          <a
+            href={`tel:${SITE.contact.phoneRaw}`}
+            className="inline-flex items-center gap-2 min-h-[48px] px-5 py-4 text-paper-dim font-medium text-sm hover:text-paper transition-colors"
+          >
+            oder direkt anrufen: {SITE.contact.phoneFormatted}
+          </a>
         </div>
       </div>
     </section>
