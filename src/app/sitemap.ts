@@ -4,23 +4,98 @@ import { getAllPosts, getAllTags, slugifyTag } from '@/lib/blog'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
-
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE.url, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
-    { url: `${SITE.url}/leistungen`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${SITE.url}/leistungen/website-erstellung`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${SITE.url}/leistungen/relaunch`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${SITE.url}/leistungen/seo-wien`, lastModified: now, changeFrequency: 'monthly', priority: 0.85 },
-    { url: `${SITE.url}/referenzen`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${SITE.url}/referenzen/schmerzfrei-wien`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${SITE.url}/referenzen/buero-reinigung`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${SITE.url}/referenzen/psychologen-webdesign`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${SITE.url}/ueber-mich`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${SITE.url}/preise`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE.url}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${SITE.url}/kontakt`, lastModified: now, changeFrequency: 'yearly', priority: 0.7 },
-    { url: `${SITE.url}/impressum`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${SITE.url}/datenschutz`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    {
+      url: `${SITE.url}/leistungen`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${SITE.url}/leistungen/website-erstellung`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${SITE.url}/leistungen/relaunch`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${SITE.url}/leistungen/seo-wien`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${SITE.url}/referenzen`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${SITE.url}/referenzen/schmerzfrei-wien`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE.url}/referenzen/buero-reinigung`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE.url}/referenzen/psychologen-webdesign`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE.url}/ueber-mich`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE.url}/preise`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${SITE.url}/blog`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${SITE.url}/termin`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE.url}/kontakt`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE.url}/impressum`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${SITE.url}/datenschutz`,
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ]
 
   // Dynamic blog posts
