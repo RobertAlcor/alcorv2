@@ -1,66 +1,62 @@
-# v17 — Cookie-Banner DSGVO-konform
+# v19 — Impressum + Datenschutzerklärung
 
 ## Schritt 1 — Files entpacken
 
-ZIP entpacken, Inhalt über Projekt-Ordner ziehen, bestehende überschreiben.
+ZIP entpacken, Inhalt über Projekt-Ordner ziehen, bestehende überschreiben (falls vorhanden).
 
-Geänderte / neue Files:
-- `src/lib/consent.ts` (neu)
-- `src/components/consent/*` (neu, 5 Dateien)
-- `src/components/analytics/google-analytics.tsx` (überschreibt aktuelle, jetzt mit Consent-Mode)
+Neue / geänderte Files:
+- `src/app/impressum/page.tsx`
+- `src/app/datenschutz/page.tsx`
+- `src/components/legal/legal-page-layout.tsx`
+- `src/components/legal/legal-typography.tsx`
+- `src/components/legal/cookie-settings-link.tsx`
 
-## Schritt 2 — `src/app/layout.tsx` anpassen
-
-**Import oben ergänzen:**
-```tsx
-import { ConsentMount } from '@/components/consent/consent-mount'
-```
-
-**Im `<body>`-Block:** den bestehenden `<GoogleAnalytics />` Aufruf **innerhalb** von `<ConsentMount>` packen, plus alle weiteren Inhalte. Beispiel:
-
-```tsx
-<body className="...">
-  <ConsentMount>
-    <GoogleAnalytics />
-    {/* alles andere wie Header, children, Footer */}
-    {children}
-  </ConsentMount>
-</body>
-```
-
-Wichtig: `<ConsentMount>` muss um `<GoogleAnalytics />` UND um die Page-Inhalte herum sein, weil GA den `useConsent`-Hook braucht.
-
-## Schritt 3 — Test lokal
+## Schritt 2 — Test lokal
 
 ```powershell
 npm run type-check
 npm run dev
 ```
 
-http://localhost:3000 öffnen:
-- Banner taucht unten auf
-- "Alle akzeptieren" / "Nur notwendige" / "Einstellungen" testen
-- Nach Wahl: Banner verschwindet, Cookie-Button unten links erscheint
-- Klick auf Cookie-Button → Modal mit Toggles
-- Wahl ändern → speichert in localStorage
+Im Browser:
+- http://localhost:3000/impressum
+- http://localhost:3000/datenschutz
+- Auf der Datenschutz-Seite: Klick auf "Cookie-Einstellungen ändern" → Modal öffnet sich
 
-In DevTools → Application → Local Storage:
-- Key `alcor-consent-v1` zeigt deine Wahl
+## Schritt 3 — Inhalte prüfen / anpassen
 
-GA tracked nur wenn:
-1. Production-Build (`npm run build && npm start`)
-2. UND `statistics: true` im Consent
+**Im Impressum (`src/app/impressum/page.tsx`)** Platzhalter ersetzen sobald verfügbar:
+
+- **GISA-Zahl**: aktuell "wird ergänzt" — sobald vorhanden ersetzen
+- **UID-Nummer**: aktuell "Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG" — bleibt so solange du Kleinunternehmer bist; falls du UID bekommst, ersetzen mit "ATU…"
+- **WKO-Mitgliedschaft**: noch nicht eingetragen — sobald Mitglied, ergänzen (z.B. "WKO Wien · Fachgruppe UBIT")
+
+Wenn du z.B. UID bekommst, die Datei `src/app/impressum/page.tsx` öffnen, im Bereich `Rechtsform & Register` den `<DefList>` anpassen.
 
 ## Schritt 4 — Deploy
 
 ```powershell
 git add .
-git commit -m "feat: GDPR cookie consent with Google Consent Mode v2"
+git commit -m "feat: GDPR-compliant impressum and privacy policy"
 git push
 ```
 
-## Hinweise
+## Wichtig — vor Domain-Switch
 
-- **Datenschutzerklärung muss noch überarbeitet werden** mit Hinweis auf Cookie-Banner (Paket 4).
-- Der Banner taucht 1 Jahr nach Wahl wieder auf (auto-Renewal-Reminder).
-- Wenn du das Schema änderst (z.B. neue Kategorie "Marketing" tatsächlich aktiv): in `consent.ts` `CONSENT_VERSION` erhöhen → alle User bekommen Banner nochmal.
+Sobald `webdesign-alcor.at` auf Vercel zeigt:
+
+1. **GISA + UID müssen drin sein** (sonst Abmahn-Risiko)
+2. **WKO-Mitgliedschaft** muss eingetragen sein wenn vorhanden
+3. **Stand-Datum** in beiden Pages aktualisieren (aktuell: 29. April 2026)
+
+## Hinweise zu Tools
+
+Die Datenschutzerklärung deckt aktuell ab:
+- Vercel (Hosting)
+- Supabase (DB Frankfurt EU)
+- Resend (Mails Irland EU)
+- Bunny Fonts (Schriften, GDPR-konform)
+- Google Analytics (mit Consent-Mode)
+- Server-Logs (technisch notwendig)
+
+Wenn du später weitere Tools einbaust (z.B. Newsletter, Chat-Widget, SevDesk-Embed), müssen diese ergänzt werden.

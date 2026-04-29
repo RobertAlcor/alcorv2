@@ -1,170 +1,177 @@
 import type { Metadata } from 'next'
-import { Breadcrumbs } from '@/components/layout/breadcrumbs'
-import { SITE } from '@/lib/site'
+import Link from 'next/link'
+import { LegalPageLayout } from '@/components/legal/legal-page-layout'
+import {
+  Section,
+  P,
+  Strong,
+  DefList,
+  ContactBlock,
+} from '@/components/legal/legal-typography'
 
 export const metadata: Metadata = {
   title: 'Impressum',
   description:
-    'Offenlegung gemäß § 5 ECG und § 24 Mediengesetz für Webdesign Alcor, Robert Alchimowicz, Wien.',
+    'Impressum gemäß §5 ECG und §25 MedienG für Webdesign Alcor (Robert Alchimowicz, Wien).',
   alternates: { canonical: '/impressum' },
   robots: { index: true, follow: true },
 }
 
 export default function ImpressumPage() {
   return (
-    <>
-      <Breadcrumbs
-        items={[
-          { label: 'Start', href: '/' },
-          { label: 'Impressum', href: '/impressum' },
-        ]}
-      />
+    <LegalPageLayout
+      eyebrow="Rechtliches"
+      title="Impressum"
+      subtitle="Angaben gemäß §5 ECG und §25 MedienG"
+      lastUpdated="29. April 2026"
+      breadcrumbs={[
+        { label: 'Start', href: '/' },
+        { label: 'Impressum', href: '/impressum' },
+      ]}
+    >
+      {/* DIENSTANBIETER */}
+      <Section title="Dienstanbieter">
+        <P>
+          Diese Website wird betrieben von:
+        </P>
+        <ContactBlock
+          name="Robert Alchimowicz"
+          address={`Berresgasse 11/3/1\n1220 Wien\nÖsterreich`}
+          email="office@webdesign-alcor.at"
+          phone="+43 664 99 124 999"
+        />
+        <P>
+          Tätig unter der Bezeichnung <Strong>Alcor Group</Strong> bzw.{' '}
+          <Strong>Webdesign Alcor</Strong>.
+        </P>
+      </Section>
 
-      <section className="container-fluid pt-12 md:pt-16 pb-24 max-w-3xl">
-        <p className="text-xs font-semibold tracking-[0.18em] uppercase text-signal-2 mb-6">
-          <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
-          Rechtliches
-        </p>
-        <h1 className="font-serif text-[clamp(2.5rem,6vw,4rem)] leading-[0.95] tracking-[-0.02em] text-balance mb-4">
-          Imp<em className="text-signal-2 italic">res</em>sum
-        </h1>
-        <p className="text-paper-mute mb-12">
-          Offenlegung gemäß § 5 ECG und § 24 Mediengesetz
-        </p>
+      {/* UNTERNEHMENSGEGENSTAND */}
+      <Section title="Unternehmensgegenstand">
+        <P>
+          Webentwicklung, Webdesign, Suchmaschinenoptimierung (SEO) und
+          IT-Beratung.
+        </P>
+      </Section>
 
-        <Section title="Diensteanbieter">
-          <Definitions
-            items={[
-              ['Inhaber', SITE.founder.name],
-              ['Unternehmen', `${SITE.name} (${SITE.brand})`],
-              [
-                'Adresse',
-                `${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city}, ${SITE.address.countryName}`,
-              ],
-              [
-                'Telefon',
-                <a key="tel" href={`tel:${SITE.contact.phoneRaw}`} className="text-signal-2 hover:underline">
-                  {SITE.contact.phone}
-                </a>,
-              ],
-              [
-                'E-Mail',
-                <a key="mail" href={`mailto:${SITE.contact.email}`} className="text-signal-2 hover:underline">
-                  {SITE.contact.email}
-                </a>,
-              ],
-            ]}
-          />
-        </Section>
+      {/* RECHTSFORM & REGISTER */}
+      <Section title="Rechtsform & Register">
+        <DefList
+          items={[
+            { term: 'Rechtsform', def: 'Einzelunternehmen (nicht im Firmenbuch eingetragen)' },
+            {
+              term: 'GISA-Zahl',
+              def: (
+                <span className="text-paper-mute italic">
+                  wird ergänzt
+                </span>
+              ),
+            },
+            {
+              term: 'UID-Nummer',
+              def: (
+                <span className="text-paper-mute italic">
+                  Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG (keine USt)
+                </span>
+              ),
+            },
+          ]}
+        />
+        <P>
+          Hinweis zur Umsatzsteuer: Als Kleinunternehmer im Sinne des § 6 Abs. 1
+          Z 27 UStG wird in Rechnungen keine Umsatzsteuer ausgewiesen.
+        </P>
+      </Section>
 
-        <Section title="Unternehmensgegenstand">
-          <p className="text-paper-mute leading-relaxed">
-            Webentwicklung, Webdesign, Suchmaschinenoptimierung (SEO), digitale
-            Beratung.
-          </p>
-        </Section>
+      {/* AUFSICHTSBEHÖRDE */}
+      <Section title="Aufsichtsbehörde / Gewerbebehörde">
+        <P>Magistratisches Bezirksamt für den 22. Bezirk</P>
+        <P className="text-sm">
+          Schrödingerplatz 1, 1220 Wien
+        </P>
+      </Section>
 
-        <Section title="Gewerbliche Vorschriften">
-          <p className="text-paper-mute leading-relaxed">
-            Gewerbeordnung:{' '}
-            <a
-              href="https://www.ris.bka.gv.at"
-              target="_blank"
-              rel="noopener"
-              className="text-signal-2 hover:underline"
-            >
-              www.ris.bka.gv.at
-            </a>
-          </p>
-        </Section>
+      {/* ANWENDBARE RECHTSVORSCHRIFTEN */}
+      <Section title="Anwendbare Rechtsvorschriften">
+        <P>
+          Gewerbeordnung (GewO), abrufbar unter{' '}
+          <a
+            href="https://www.ris.bka.gv.at"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-signal-2 hover:text-signal underline underline-offset-2"
+          >
+            ris.bka.gv.at
+          </a>
+        </P>
+      </Section>
 
-        <Section title="Aufsichtsbehörde">
-          <p className="text-paper-mute leading-relaxed">
-            Magistrat der Stadt Wien
-          </p>
-        </Section>
+      {/* ONLINE-STREITBEILEGUNG */}
+      <Section title="Online-Streitbeilegung (OS-Plattform)">
+        <P>
+          Die Europäische Kommission stellt eine Plattform zur
+          Online-Streitbeilegung (OS) bereit, die Sie unter{' '}
+          <a
+            href="https://ec.europa.eu/consumers/odr"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-signal-2 hover:text-signal underline underline-offset-2"
+          >
+            ec.europa.eu/consumers/odr
+          </a>{' '}
+          finden. Verbraucher können diese Plattform für die Beilegung von
+          Streitigkeiten nutzen.
+        </P>
+        <P className="text-sm">
+          Hinweis: Ich bin nicht verpflichtet und nicht bereit, an einem
+          Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+          teilzunehmen.
+        </P>
+      </Section>
 
-        <Section title="Berufsbezeichnung">
-          <p className="text-paper-mute leading-relaxed">
-            Dienstleistungen in der automatischen Datenverarbeitung und
-            Informationstechnik (verliehen in Österreich)
-          </p>
-        </Section>
+      {/* HAFTUNG */}
+      <Section title="Haftung für Inhalte">
+        <P>
+          Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für
+          die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann
+          jedoch keine Gewähr übernommen werden. Als Diensteanbieter bin ich
+          gemäß § 7 Abs. 1 ECG für eigene Inhalte auf diesen Seiten nach den
+          allgemeinen Gesetzen verantwortlich.
+        </P>
+      </Section>
 
-        <Section title="Mitglied bei">
-          <p className="text-paper-mute leading-relaxed">
-            Wirtschaftskammer Wien, Fachgruppe UBIT
-          </p>
-        </Section>
+      <Section title="Haftung für Links">
+        <P>
+          Diese Website enthält Links zu externen Websites Dritter, auf deren
+          Inhalte ich keinen Einfluss habe. Für die Inhalte verlinkter Seiten
+          ist stets der jeweilige Anbieter oder Betreiber verantwortlich.
+        </P>
+      </Section>
 
-        <Section title="Online-Streitbeilegung">
-          <p className="text-paper-mute leading-relaxed">
-            Verbraucher haben die Möglichkeit, Beschwerden an die
-            Online-Streitbeilegungsplattform der EU zu richten:{' '}
-            <a
-              href="https://ec.europa.eu/odr"
-              target="_blank"
-              rel="noopener"
-              className="text-signal-2 hover:underline"
-            >
-              ec.europa.eu/odr
-            </a>
-            . Beschwerden können auch an die oben angegebene E-Mail-Adresse
-            gerichtet werden.
-          </p>
-        </Section>
+      {/* URHEBERRECHT */}
+      <Section title="Urheberrecht">
+        <P>
+          Die durch den Seitenbetreiber erstellten Inhalte und Werke unterliegen
+          dem österreichischen Urheberrecht. Vervielfältigung, Bearbeitung,
+          Verbreitung und jede Art der Verwertung außerhalb der Grenzen des
+          Urheberrechts bedürfen der schriftlichen Zustimmung des Verfassers.
+        </P>
+      </Section>
 
-        <Section title="Haftungsausschluss">
-          <p className="text-paper-mute leading-relaxed mb-4">
-            Die auf dieser Website bereitgestellten Inhalte werden mit
-            größtmöglicher Sorgfalt erstellt. {SITE.name} übernimmt jedoch keine
-            Gewähr für die Richtigkeit, Vollständigkeit und Aktualität der
-            bereitgestellten Inhalte.
-          </p>
-          <p className="text-paper-mute leading-relaxed">
-            Die Nutzung der Website-Inhalte erfolgt auf eigene Gefahr des
-            Nutzers. Namentlich gekennzeichnete Beiträge geben die Meinung des
-            jeweiligen Autors und nicht immer die Meinung des Anbieters wieder.
-          </p>
-        </Section>
-
-        <Section title="Urheberrecht">
-          <p className="text-paper-mute leading-relaxed">
-            Sämtliche Inhalte dieser Website (Texte, Bilder, Grafiken, Code) sind
-            urheberrechtlich geschützt. Jede Verwendung außerhalb der gesetzlich
-            erlaubten Fälle bedarf der vorherigen schriftlichen Zustimmung von{' '}
-            {SITE.founder.name}.
-          </p>
-        </Section>
-      </section>
-    </>
-  )
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="mt-12">
-      <h2 className="font-serif italic text-2xl text-signal-2 mb-4">{title}</h2>
-      {children}
-    </div>
-  )
-}
-
-function Definitions({
-  items,
-}: {
-  items: [string, React.ReactNode][]
-}) {
-  return (
-    <dl className="bg-deep-2 border border-line rounded-sm p-6 grid gap-2 sm:grid-cols-[160px_1fr] gap-x-6">
-      {items.map(([term, def], i) => (
-        <div key={i} className="contents">
-          <dt className="text-xs font-semibold tracking-[0.04em] uppercase text-paper-dim self-center">
-            {term}
-          </dt>
-          <dd className="text-paper">{def}</dd>
-        </div>
-      ))}
-    </dl>
+      {/* DATENSCHUTZ-LINK */}
+      <Section title="Datenschutz">
+        <P>
+          Informationen zur Verarbeitung personenbezogener Daten finden Sie in
+          der{' '}
+          <Link
+            href="/datenschutz"
+            className="text-signal-2 hover:text-signal underline underline-offset-2"
+          >
+            Datenschutzerklärung
+          </Link>
+          .
+        </P>
+      </Section>
+    </LegalPageLayout>
   )
 }
