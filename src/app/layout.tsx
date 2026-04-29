@@ -20,15 +20,22 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} – ${SITE.tagline}`,
+    // SEO-optimierter Default-Title mit Hauptkeyword "Webdesign Wien".
+    // Wird genutzt wenn eine Page keinen eigenen Title definiert.
+    default: 'Webdesign Wien | Webagentur ohne WordPress | Webdesign Alcor',
     template: `%s · ${SITE.name}`,
   },
   description:
-    'Handgeschriebene Webentwicklung aus Wien. Ohne WordPress, ohne Plugin-Chaos. Eine Person, über 10 Jahre, voller Code-Besitz. Lieferung in 7 Tagen ab € 599,–.',
+    'Webdesign Wien — handgeschriebene Websites ohne WordPress, ohne Plugin-Chaos. Eine Person, 10+ Jahre Erfahrung, voller Code-Besitz. Lieferung in 7 Tagen ab €599.',
+  keywords: [
+    ...SITE.seo.primaryKeywords,
+    ...SITE.seo.secondaryKeywords,
+  ].join(', '),
   applicationName: SITE.name,
-  authors: [{ name: SITE.founder.name }],
+  authors: [{ name: SITE.founder.name, url: SITE.url }],
   creator: SITE.founder.name,
   publisher: SITE.brand,
+  category: 'Webdesign',
   alternates: {
     canonical: '/',
     languages: {
@@ -41,22 +48,16 @@ export const metadata: Metadata = {
     locale: 'de_AT',
     url: SITE.url,
     siteName: SITE.name,
-    title: `${SITE.name} – ${SITE.tagline}`,
+    title: 'Webdesign Wien | Webagentur ohne WordPress | Webdesign Alcor',
     description:
-      'Handgeschriebene Webentwicklung aus Wien. Ohne WordPress. Eine Person, voller Code-Besitz.',
-    images: [
-      {
-        url: '/og-default.png',
-        width: 1200,
-        height: 630,
-        alt: SITE.name,
-      },
-    ],
+      'Handgeschriebene Websites aus Wien — schnell, sicher, ohne Plugin-Chaos. Eine Person, 10+ Jahre Erfahrung. Lieferung in 7 Tagen ab €599.',
+    // Bilder werden automatisch aus opengraph-image.tsx geladen
   },
   twitter: {
     card: 'summary_large_image',
-    title: SITE.name,
-    description: SITE.tagline,
+    title: 'Webdesign Wien | Webdesign Alcor',
+    description:
+      'Handgeschriebene Websites aus Wien. Ohne WordPress. Lieferung in 7 Tagen ab €599.',
   },
   robots: {
     index: true,
@@ -71,6 +72,13 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+  },
+  // Geo-Tags für lokales SEO
+  other: {
+    'geo.region': 'AT-9',
+    'geo.placename': 'Wien',
+    'geo.position': `${SITE.address.geo.lat};${SITE.address.geo.lng}`,
+    ICBM: `${SITE.address.geo.lat}, ${SITE.address.geo.lng}`,
   },
 }
 

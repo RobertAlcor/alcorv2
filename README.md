@@ -1,62 +1,76 @@
-# v19 — Impressum + Datenschutzerklärung
+# Auto-Update Script: SEO-Metadata anwenden
 
-## Schritt 1 — Files entpacken
+Updated automatisch alle 11 Page-Files mit der zentralen `PAGE_META`-metadata.
 
-ZIP entpacken, Inhalt über Projekt-Ordner ziehen, bestehende überschreiben (falls vorhanden).
+## Vorbedingung
 
-Neue / geänderte Files:
-- `src/app/impressum/page.tsx`
-- `src/app/datenschutz/page.tsx`
-- `src/components/legal/legal-page-layout.tsx`
-- `src/components/legal/legal-typography.tsx`
-- `src/components/legal/cookie-settings-link.tsx`
+Du musst zuerst v20-ZIP entpackt haben — sonst existiert `src/lib/seo-metadata.ts` nicht.
 
-## Schritt 2 — Test lokal
+## Installation
+
+ZIP entpacken, sodass du folgende Datei hast:
+
+```
+scripts/apply-seo-metadata.js
+```
+
+## Anwendung
+
+Im Projekt-Root in PowerShell:
+
+```powershell
+node scripts/apply-seo-metadata.js
+```
+
+Output:
+```
+=== Apply SEO Metadata ===
+
+  ✓ Updated: src/app/page.tsx → PAGE_META.home
+  ✓ Updated: src/app/leistungen/page.tsx → PAGE_META.leistungen
+  ✓ Updated: src/app/leistungen/website-erstellung/page.tsx → PAGE_META.websiteErstellung
+  ...
+  
+11 updated, 0 skipped, 0 not found.
+```
+
+Backups werden als `.bak`-Files neben den Originalen gespeichert.
+
+## Test danach
 
 ```powershell
 npm run type-check
 npm run dev
 ```
 
-Im Browser:
-- http://localhost:3000/impressum
-- http://localhost:3000/datenschutz
-- Auf der Datenschutz-Seite: Klick auf "Cookie-Einstellungen ändern" → Modal öffnet sich
+http://localhost:3000 → Tab-Title sollte „Webdesign Wien | Webagentur ohne WordPress | Webdesign Alcor" sein.
 
-## Schritt 3 — Inhalte prüfen / anpassen
-
-**Im Impressum (`src/app/impressum/page.tsx`)** Platzhalter ersetzen sobald verfügbar:
-
-- **GISA-Zahl**: aktuell "wird ergänzt" — sobald vorhanden ersetzen
-- **UID-Nummer**: aktuell "Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG" — bleibt so solange du Kleinunternehmer bist; falls du UID bekommst, ersetzen mit "ATU…"
-- **WKO-Mitgliedschaft**: noch nicht eingetragen — sobald Mitglied, ergänzen (z.B. "WKO Wien · Fachgruppe UBIT")
-
-Wenn du z.B. UID bekommst, die Datei `src/app/impressum/page.tsx` öffnen, im Bereich `Rechtsform & Register` den `<DefList>` anpassen.
-
-## Schritt 4 — Deploy
+## Backup-Files löschen (wenn alles ok)
 
 ```powershell
-git add .
-git commit -m "feat: GDPR-compliant impressum and privacy policy"
-git push
+Get-ChildItem -Recurse src/app -Filter *.bak | Remove-Item
 ```
 
-## Wichtig — vor Domain-Switch
+## Rollback (falls was schiefgeht)
 
-Sobald `webdesign-alcor.at` auf Vercel zeigt:
+```powershell
+node scripts/apply-seo-metadata.js --rollback
+```
 
-1. **GISA + UID müssen drin sein** (sonst Abmahn-Risiko)
-2. **WKO-Mitgliedschaft** muss eingetragen sein wenn vorhanden
-3. **Stand-Datum** in beiden Pages aktualisieren (aktuell: 29. April 2026)
+Stellt alle Original-Files aus den `.bak`-Backups wieder her.
 
-## Hinweise zu Tools
+## Was das Script kann
 
-Die Datenschutzerklärung deckt aktuell ab:
-- Vercel (Hosting)
-- Supabase (DB Frankfurt EU)
-- Resend (Mails Irland EU)
-- Bunny Fonts (Schriften, GDPR-konform)
-- Google Analytics (mit Consent-Mode)
-- Server-Logs (technisch notwendig)
+- ✅ Bestehende `export const metadata = {...}` Blöcke erkennen und ersetzen (auch multi-line, auch mit verschachtelten Objekten)
+- ✅ Pages OHNE bestehende metadata: einfach Import + Zeile einfügen
+- ✅ Pages mit `generateMetadata()` (z.B. dynamische Blog-Posts): **bleiben unverändert**
+- ✅ Pages die schon updated sind: werden übersprungen (kann mehrmals laufen)
+- ✅ Backup als `.bak` für Rollback
+- ✅ Brace-Counting für korrekte Klammer-Erkennung
 
-Wenn du später weitere Tools einbaust (z.B. Newsletter, Chat-Widget, SevDesk-Embed), müssen diese ergänzt werden.
+## Was das Script nicht macht
+
+- Berührt KEINE Pages außerhalb der definierten Liste
+- Berührt KEIN `src/app/admin/*` (haben noindex)
+- Berührt KEIN `src/app/impressum/page.tsx` oder `datenschutz/page.tsx` (haben eigene v19-metadata)
+- Berührt KEIN `[slug]`-Pages (dynamische Routen)

@@ -7,11 +7,13 @@ import { CASES } from '@/lib/cases'
 import { TOOLS } from '@/lib/tools'
 import { RelatedPages } from '@/components/sections/related-pages'
 import { RELATED_FOR } from '@/lib/related-pages'
-import { PAGE_META } from '@/lib/seo-metadata'
 
-
-
-export const metadata = PAGE_META.referenzen
+export const metadata: Metadata = {
+  title: 'Referenzen',
+  description:
+    'Ausgewählte Kundenprojekte und eigene Tools. Von Praxis-Websites über komplette Backoffice-Plattformen bis zu KI-gestützten Werkzeugen.',
+  alternates: { canonical: '/referenzen' },
+}
 
 export default function ReferenzenPage() {
   return (

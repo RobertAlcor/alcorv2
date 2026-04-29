@@ -4,11 +4,13 @@ import { RelatedPages } from '@/components/sections/related-pages'
 import { SITE } from '@/lib/site'
 import { breadcrumbSchema } from '@/lib/schema'
 import { RELATED_FOR } from '@/lib/related-pages'
-import { PAGE_META } from '@/lib/seo-metadata'
 
-
-
-export const metadata = PAGE_META.kontakt
+export const metadata: Metadata = {
+  title: 'Kontakt',
+  description:
+    'Anfrage für Webentwicklung, Relaunch oder SEO. Antwort binnen 24 Stunden. Auch direkt per Telefon, E-Mail oder WhatsApp.',
+  alternates: { canonical: '/kontakt' },
+}
 
 export default function KontaktPage() {
   return (

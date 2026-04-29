@@ -4,11 +4,13 @@ import { BentoGrid } from '@/components/sections/bento-grid'
 import { CtaBand } from '@/components/sections/cta-band'
 import { RelatedPages } from '@/components/sections/related-pages'
 import { RELATED_FOR } from '@/lib/related-pages'
-import { PAGE_META } from '@/lib/seo-metadata'
 
-
-
-export const metadata = PAGE_META.leistungen
+export const metadata: Metadata = {
+  title: 'Leistungen',
+  description:
+    'Webentwicklung, Relaunch, SEO und GEO aus Wien. Drei klare Wege, mit denen ich Ihnen helfe.',
+  alternates: { canonical: '/leistungen' },
+}
 
 export default function LeistungenPage() {
   return (

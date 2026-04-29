@@ -6,9 +6,13 @@ import { CtaBand } from '@/components/sections/cta-band'
 import { SITE } from '@/lib/site'
 import { RelatedPages } from '@/components/sections/related-pages'
 import { RELATED_FOR } from '@/lib/related-pages'
-import { PAGE_META } from '@/lib/seo-metadata'
 
-
+export const metadata: Metadata = {
+  title: 'Preise',
+  description:
+    'Drei Pakete für drei Situationen. Starter ab 599 Euro. Hosting-Pauschale 99 Euro pro Jahr inkl. kleinerer Updates. Stundensatz 85 Euro netto. Keine versteckten Kosten.',
+  alternates: { canonical: '/preise' },
+}
 
 const PRINZIPIEN = [
   {
@@ -36,8 +40,6 @@ const HOSTING_INKLUSIVE = [
   'Backup und Restore bei technischen Problemen',
   'Monitoring und Verfügbarkeits-Checks',
 ] as const
-
-export const metadata = PAGE_META.preise
 
 export default function PreisePage() {
   return (

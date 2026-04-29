@@ -1,9 +1,16 @@
 import { SITE } from './site'
 
+/**
+ * Haupt-Schema: ProfessionalService + LocalBusiness Hybrid.
+ * Wird im RootLayout eingebaut, gilt für die ganze Site.
+ *
+ * Hinweis: ProfessionalService erbt von LocalBusiness und ist daher
+ * für lokale Suche genauso wirksam wie LocalBusiness selbst.
+ */
 export function organizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
+    '@type': ['ProfessionalService', 'LocalBusiness'],
     '@id': `${SITE.url}/#organization`,
     name: SITE.name,
     alternateName: SITE.brand,
@@ -18,6 +25,7 @@ export function organizationSchema() {
       streetAddress: SITE.address.street,
       addressLocality: SITE.address.city,
       postalCode: SITE.address.postalCode,
+      addressRegion: 'Wien',
       addressCountry: SITE.address.country,
     },
     geo: {
@@ -42,11 +50,35 @@ export function organizationSchema() {
       ],
     },
     foundingDate: String(SITE.founder.foundedIn),
-    areaServed: {
-      '@type': 'City',
-      name: 'Wien',
+    /**
+     * AreaServed mit allen 23 Wiener Bezirken: stärkt das LocalBusiness-Signal
+     * für Suchen wie "webdesign 1010 wien", "webdesign liesing", etc.
+     */
+    areaServed: [
+      { '@type': 'City', name: 'Wien', '@id': 'https://www.wikidata.org/wiki/Q1741' },
+      ...SITE.viennaDistricts.map((d) => ({
+        '@type': 'AdministrativeArea',
+        name: `${d.plz} Wien — ${d.name}`,
+      })),
+    ],
+    serviceArea: {
+      '@type': 'GeoCircle',
+      geoMidpoint: {
+        '@type': 'GeoCoordinates',
+        latitude: SITE.address.geo.lat,
+        longitude: SITE.address.geo.lng,
+      },
+      geoRadius: '25000', // 25km um Berresgasse → ganz Wien + Umland
     },
-    priceRange: '€€',
+    priceRange: `€${SITE.pricing.starter}+`,
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: SITE.openingHours.weekdays.open,
+        closes: SITE.openingHours.weekdays.close,
+      },
+    ],
     contactPoint: [
       {
         '@type': 'ContactPoint',
@@ -56,9 +88,52 @@ export function organizationSchema() {
         availableLanguage: ['German', 'English'],
       },
     ],
+    sameAs: [
+      ...(SITE.social.linkedin ? [SITE.social.linkedin] : []),
+      ...(SITE.social.xing ? [SITE.social.xing] : []),
+    ].filter(Boolean),
+    /**
+     * OfferCatalog: zeigt Google die wichtigsten Leistungen strukturiert.
+     */
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Webdesign-Leistungen',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Website erstellen',
+            url: `${SITE.url}/leistungen/website-erstellung`,
+          },
+          price: SITE.pricing.starter,
+          priceCurrency: SITE.pricing.currency,
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Website Relaunch',
+            url: `${SITE.url}/leistungen/relaunch`,
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'SEO Wien',
+            url: `${SITE.url}/leistungen/seo-wien`,
+          },
+        },
+      ],
+    },
   }
 }
 
+/**
+ * WebSite Schema mit potentialAction (SearchAction).
+ * Damit zeigt Google ggf. die Sitelinks Search Box im Snippet.
+ */
 export function websiteSchema() {
   return {
     '@context': 'https://schema.org',
@@ -68,6 +143,14 @@ export function websiteSchema() {
     name: SITE.name,
     publisher: { '@id': `${SITE.url}/#organization` },
     inLanguage: 'de-AT',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE.url}/blog?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   }
 }
 
@@ -135,13 +218,20 @@ export function serviceSchema(params: {
     description: params.description,
     url: params.url,
     provider: { '@id': `${SITE.url}/#organization` },
-    areaServed: 'Wien',
+    areaServed: [
+      { '@type': 'City', name: 'Wien' },
+      ...SITE.viennaDistricts.map((d) => ({
+        '@type': 'AdministrativeArea',
+        name: `${d.plz} ${d.name}`,
+      })),
+    ],
     ...(params.price && {
       offers: {
         '@type': 'Offer',
         price: params.price,
         priceCurrency: 'EUR',
         availability: 'https://schema.org/InStock',
+        priceValidUntil: `${new Date().getFullYear() + 1}-12-31`,
       },
     }),
   }

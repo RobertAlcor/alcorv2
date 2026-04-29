@@ -7,9 +7,6 @@ import { ComparisonSection } from '@/components/sections/comparison-section'
 import { FaqSection } from '@/components/sections/faq-accordion'
 import { CtaBand } from '@/components/sections/cta-band'
 import { CASES } from '@/lib/cases'
-import { PAGE_META } from '@/lib/seo-metadata'
-
-export const metadata = PAGE_META.home
 
 export default function HomePage() {
   return (

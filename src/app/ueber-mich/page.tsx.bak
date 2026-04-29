@@ -6,9 +6,13 @@ import { personSchema } from '@/lib/schema'
 import { SITE } from '@/lib/site'
 import { RelatedPages } from '@/components/sections/related-pages'
 import { RELATED_FOR } from '@/lib/related-pages'
-import { PAGE_META } from '@/lib/seo-metadata'
 
-
+export const metadata: Metadata = {
+  title: 'Über Robert Alchimowicz',
+  description:
+    'Robert Alchimowicz, Webentwickler aus Wien. Über 10 Jahre Erfahrung, kontinuierliche Weiterbildung, zukunftsorientiertes Arbeiten. Eine Person, voller Code-Besitz.',
+  alternates: { canonical: '/ueber-mich' },
+}
 
 // === EINFACHER FOTO-AUSTAUSCH ===
 const ABOUT_PHOTO = {
@@ -78,8 +82,6 @@ const WERTE = [
       'Eine Website ist kein Klick-Geschäft. Jede Zeile Code wird bewusst gesetzt.',
   },
 ] as const
-
-export const metadata = PAGE_META.uebermich
 
 export default function UeberMichPage() {
   return (

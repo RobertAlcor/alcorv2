@@ -5,13 +5,15 @@ import { BlogFilter, type BlogPost } from '@/components/blog/blog-filter'
 import { getAllPosts } from '@/lib/blog'
 import { RelatedPages } from '@/components/sections/related-pages'
 import { RELATED_FOR } from '@/lib/related-pages'
-import { PAGE_META } from '@/lib/seo-metadata'
 
-
+export const metadata: Metadata = {
+  title: 'Blog',
+  description:
+    'Artikel zu Webentwicklung, SEO, Performance und der Werkstatt-Realität als Solo-Webdesigner in Wien. Durchsuchbar, nach Tags filterbar.',
+  alternates: { canonical: '/blog' },
+}
 
 export const revalidate = 3600 // 1h ISR
-
-export const metadata = PAGE_META.blog
 
 export default async function BlogPage() {
   const posts = await getAllPosts()

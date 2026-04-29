@@ -4,11 +4,13 @@ import { TerminWizard } from '@/components/booking/termin-wizard'
 import { SITE } from '@/lib/site'
 import { RelatedPages } from '@/components/sections/related-pages'
 import { RELATED_FOR } from '@/lib/related-pages'
-import { PAGE_META } from '@/lib/seo-metadata'
 
-
-
-export const metadata = PAGE_META.termin
+export const metadata: Metadata = {
+  title: 'Termin vereinbaren',
+  description:
+    '15 Minuten Erstgespräch direkt online buchen. Telefon, Video oder vor Ort in Wien. Kostenlos, ohne Verkaufsdruck.',
+  alternates: { canonical: '/termin' },
+}
 
 export default function TerminPage() {
   return (
