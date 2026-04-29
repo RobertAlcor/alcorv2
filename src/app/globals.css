@@ -54,6 +54,27 @@
     box-sizing: border-box;
   }
 
+  /* Cursor-Pointer für alle interaktiven Elemente */
+  button:not(:disabled),
+  [role='button']:not(:disabled),
+  [role='tab']:not([aria-disabled='true']),
+  a,
+  label[for],
+  summary,
+  select,
+  input[type='checkbox'],
+  input[type='radio'],
+  input[type='submit'],
+  input[type='button'] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [role='button'][aria-disabled='true'],
+  [aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+
   /*
    * STICKY-FIX: overflow-x: clip statt hidden.
    * `hidden` bricht position:sticky in modernen Browsern weil es einen
@@ -130,8 +151,12 @@
     mix-blend-mode: overlay;
   }
 
-  .text-balance { text-wrap: balance; }
-  .text-pretty { text-wrap: pretty; }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
 
   .sr-only {
     position: absolute;
@@ -188,19 +213,38 @@
   }
 
   @keyframes shimmer {
-    0% { background-position: 200% center; }
-    100% { background-position: -200% center; }
+    0% {
+      background-position: 200% center;
+    }
+    100% {
+      background-position: -200% center;
+    }
   }
 
   @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(0.85); }
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(0.85);
+    }
   }
-  .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+  .pulse-dot {
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
 
   @keyframes pulse-ring {
-    0% { transform: scale(1); opacity: 0.6; }
-    100% { transform: scale(1.8); opacity: 0; }
+    0% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(1.8);
+      opacity: 0;
+    }
   }
   .pulse-ring::before {
     content: '';
@@ -214,16 +258,30 @@
 
   /* Soft Orbs */
   @keyframes orb-soft-1 {
-    0%, 100% { transform: translate3d(0, 0, 0); }
-    50% { transform: translate3d(8vw, 6vh, 0); }
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(8vw, 6vh, 0);
+    }
   }
-  .orb-soft-1 { animation: orb-soft-1 90s ease-in-out infinite; }
+  .orb-soft-1 {
+    animation: orb-soft-1 90s ease-in-out infinite;
+  }
 
   @keyframes orb-soft-2 {
-    0%, 100% { transform: translate3d(0, 0, 0); }
-    50% { transform: translate3d(-10vw, -8vh, 0); }
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(-10vw, -8vh, 0);
+    }
   }
-  .orb-soft-2 { animation: orb-soft-2 120s ease-in-out infinite; }
+  .orb-soft-2 {
+    animation: orb-soft-2 120s ease-in-out infinite;
+  }
 }
 
 /* === BLOG PROSE === */
@@ -232,7 +290,9 @@
   line-height: 1.75;
 }
 
-.prose-blog > *:first-child { margin-top: 0; }
+.prose-blog > *:first-child {
+  margin-top: 0;
+}
 
 .prose-blog .anchor-link {
   color: inherit;
