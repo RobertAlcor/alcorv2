@@ -18,6 +18,7 @@ type FormState = {
   errors: Partial<Record<keyof LeadInput, string>>
   message?: string
   refNumber?: string
+  copyRequested?: boolean
 }
 
 const TOPICS: { value: LeadInput['topic']; label: string }[] = [
@@ -27,7 +28,6 @@ const TOPICS: { value: LeadInput['topic']; label: string }[] = [
   { value: 'other', label: 'Etwas anderes' },
 ]
 
-// === Form-Klassen für konsistente Lesbarkeit ===
 const LABEL_CLASS =
   'block text-xs font-semibold tracking-[0.12em] uppercase text-paper-mute mb-2'
 
@@ -52,9 +52,10 @@ export function KontaktForm() {
     setState({ status: 'submitting', errors: {} })
 
     const formData = new FormData(e.currentTarget)
-    const data = Object.fromEntries(formData.entries())
+    const raw = Object.fromEntries(formData.entries()) as Record<string, string>
+    const copyToCustomer = raw.copyToCustomer === 'on'
 
-    const parsed = leadSchema.safeParse(data)
+    const parsed = leadSchema.safeParse(raw)
     if (!parsed.success) {
       const errors: FormState['errors'] = {}
       for (const [key, msgs] of Object.entries(
@@ -76,6 +77,7 @@ export function KontaktForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...parsed.data,
+          copyToCustomer,
           formLoadTime: formLoadTimeRef.current,
         }),
       })
@@ -99,6 +101,7 @@ export function KontaktForm() {
         status: 'success',
         errors: {},
         refNumber: body?.refNumber as string | undefined,
+        copyRequested: copyToCustomer,
       })
 
       setTimeout(() => {
@@ -116,7 +119,6 @@ export function KontaktForm() {
     }
   }
 
-  // === SUCCESS ===
   if (state.status === 'success') {
     return (
       <motion.div
@@ -147,9 +149,9 @@ export function KontaktForm() {
         </div>
 
         <p className="text-paper-mute leading-relaxed mb-6">
-          Eine Bestätigung mit Ihren Angaben ist gerade an Ihre E-Mail-Adresse
-          unterwegs. Ich melde mich binnen 24 Stunden persönlich bei Ihnen
-          zurück, üblicherweise deutlich schneller.
+          {state.copyRequested
+            ? 'Eine Kopie Ihrer Anfrage ist gerade an Ihre E-Mail-Adresse unterwegs. Ich melde mich binnen 24 Stunden persönlich bei Ihnen zurück.'
+            : 'Ich melde mich binnen 24 Stunden persönlich bei Ihnen zurück, üblicherweise deutlich schneller.'}
         </p>
 
         <div className="border-t border-line pt-6">
@@ -179,7 +181,6 @@ export function KontaktForm() {
     )
   }
 
-  // === FORM ===
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
       <AnimatePresence>
@@ -227,7 +228,6 @@ export function KontaktForm() {
         )}
       </AnimatePresence>
 
-      {/* Honeypot */}
       <div
         className="absolute -left-[9999px] w-px h-px overflow-hidden"
         aria-hidden
@@ -244,7 +244,6 @@ export function KontaktForm() {
 
       <input type="hidden" name="source" value="kontakt-form" />
 
-      {/* Name */}
       <div>
         <label htmlFor="name" className={LABEL_CLASS}>
           Ihr Name <span className="text-signal-2">*</span>
@@ -263,7 +262,6 @@ export function KontaktForm() {
         )}
       </div>
 
-      {/* Email + Phone Row */}
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="email" className={LABEL_CLASS}>
@@ -297,7 +295,6 @@ export function KontaktForm() {
         </div>
       </div>
 
-      {/* Company */}
       <div>
         <label htmlFor="company" className={LABEL_CLASS}>
           Firma{' '}
@@ -312,7 +309,6 @@ export function KontaktForm() {
         />
       </div>
 
-      {/* Topic */}
       <div>
         <label htmlFor="topic" className={LABEL_CLASS}>
           Worum geht es? <span className="text-signal-2">*</span>
@@ -338,7 +334,6 @@ export function KontaktForm() {
         )}
       </div>
 
-      {/* Message */}
       <div>
         <label htmlFor="message" className={LABEL_CLASS}>
           Worum geht es konkret? <span className="text-signal-2">*</span>
@@ -358,7 +353,25 @@ export function KontaktForm() {
         )}
       </div>
 
-      {/* Submit */}
+      {/* Kopie-Checkbox */}
+      <div>
+        <label className="flex items-start gap-3 cursor-pointer group">
+          <input
+            type="checkbox"
+            id="copyToCustomer"
+            name="copyToCustomer"
+            className="mt-0.5 w-5 h-5 rounded-sm border border-paper-dim/40 bg-deep-2 accent-signal cursor-pointer"
+          />
+          <span className="text-sm text-paper-mute leading-relaxed group-hover:text-paper transition-colors">
+            <strong className="text-paper">Kopie der Anfrage an mich senden</strong>
+            <br />
+            <span className="text-xs">
+              Sie erhalten eine E-Mail mit Ihren Angaben als Beleg.
+            </span>
+          </span>
+        </label>
+      </div>
+
       <div className="pt-2">
         <button
           type="submit"

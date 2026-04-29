@@ -46,17 +46,25 @@ export function TerminWizard() {
     channel: 'phone',
     externalAddress: '',
   })
-  const [errors, setErrors] = useState<Partial<Record<keyof BookingStepData, string>>>({})
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof BookingStepData, string>>
+  >({})
   const [submit, setSubmit] = useState<SubmitState>({ status: 'idle' })
   const formLoadTimeRef = useRef<number>(0)
   const wizardTopRef = useRef<HTMLDivElement>(null)
+  const isFirstRenderRef = useRef(true)
 
   useEffect(() => {
     formLoadTimeRef.current = Date.now()
   }, [])
 
-  // Beim Step-Wechsel zum Wizard-Anfang scrollen
+  // Scroll zum Wizard NUR bei Step-Wechsel, nicht beim initialen Mount.
+  // Sonst wird der Hero direkt weggescrollt sobald die Seite lädt.
   useEffect(() => {
+    if (isFirstRenderRef.current) {
+      isFirstRenderRef.current = false
+      return
+    }
     wizardTopRef.current?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
@@ -82,8 +90,10 @@ export function TerminWizard() {
   function validateStep3(): typeof errors {
     const e: typeof errors = {}
     if (formData.name.trim().length < 2) e.name = 'Bitte Namen eingeben'
-    if (!/^\S+@\S+\.\S+$/.test(formData.email)) e.email = 'Bitte gültige E-Mail eingeben'
-    if (formData.phone.trim().length < 5) e.phone = 'Bitte Telefonnummer eingeben'
+    if (!/^\S+@\S+\.\S+$/.test(formData.email))
+      e.email = 'Bitte gültige E-Mail eingeben'
+    if (formData.phone.trim().length < 5)
+      e.phone = 'Bitte Telefonnummer eingeben'
     if (formData.topic.trim().length < 2) e.topic = 'Bitte Anliegen kurz nennen'
     if (
       formData.channel === 'on-site-external' &&
@@ -96,13 +106,11 @@ export function TerminWizard() {
   function handleDateSelect(d: Date) {
     setSelectedDate(d)
     setSelectedSlot(null)
-    // Sofort zu Step 2 weiterspringen für Speed
     setStep(2)
   }
 
   function handleSlotSelect(iso: string) {
     setSelectedSlot(iso)
-    // Sofort zu Step 3
     setStep(3)
   }
 
@@ -113,10 +121,9 @@ export function TerminWizard() {
     setSelectedDate(dayOnly)
     setSelectedSlot(slotIso)
     setSubmit({ status: 'idle' })
-    setStep(4) // direkt zurück zur Review
+    setStep(4)
   }
 
-  // === Submit auf Step 4 ===
   async function handleSubmit() {
     if (!selectedSlot) return
     setSubmit({ status: 'submitting' })
@@ -138,7 +145,7 @@ export function TerminWizard() {
         setSubmit({
           status: 'error',
           message:
-            'Dieser Termin wurde gerade von jemand anderem gebucht. Hier sind die nächsten freien Slots:',
+            'Dieser Termin wurde gerade von jemand anderem angefragt. Hier sind die nächsten freien Slots:',
           alternatives: Array.isArray(body?.alternatives)
             ? (body.alternatives as ConflictAlt[])
             : [],
@@ -163,7 +170,7 @@ export function TerminWizard() {
           status: 'error',
           message:
             body?.error ??
-            'Buchung fehlgeschlagen. Bitte versuchen Sie es noch einmal oder rufen Sie direkt an.',
+            'Anfrage fehlgeschlagen. Bitte versuchen Sie es noch einmal oder rufen Sie direkt an.',
         })
         return
       }
@@ -178,12 +185,12 @@ export function TerminWizard() {
     } catch {
       setSubmit({
         status: 'error',
-        message: 'Es gab ein technisches Problem. Bitte rufen Sie direkt an.',
+        message:
+          'Es gab ein technisches Problem. Bitte rufen Sie direkt an.',
       })
     }
   }
 
-  // === SUCCESS STATE ===
   if (submit.status === 'success') {
     return (
       <SuccessState
@@ -197,10 +204,16 @@ export function TerminWizard() {
 
   return (
     <div ref={wizardTopRef}>
-      <StepIndicator currentStep={step} totalSteps={4} labels={STEP_LABELS} />
+      <StepIndicator
+        currentStep={step}
+        totalSteps={4}
+        labels={STEP_LABELS}
+      />
 
-      {/* Honeypot - global im Wizard */}
-      <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden>
+      <div
+        className="absolute -left-[9999px] w-px h-px overflow-hidden"
+        aria-hidden
+      >
         <label htmlFor="hp-website">Website (leer lassen)</label>
         <input type="text" id="hp-website" name="website" tabIndex={-1} />
       </div>
@@ -230,7 +243,11 @@ export function TerminWizard() {
           )}
 
           {step === 3 && (
-            <BookingFormStep data={formData} onChange={setFormData} errors={errors} />
+            <BookingFormStep
+              data={formData}
+              onChange={setFormData}
+              errors={errors}
+            />
           )}
 
           {step === 4 && selectedSlot && (
@@ -238,9 +255,8 @@ export function TerminWizard() {
               <BookingReview
                 slotStart={selectedSlot}
                 slotEnd={
-                  // 60 Min später
                   new Date(
-                    new Date(selectedSlot).getTime() + 60 * 60 * 1000
+                    new Date(selectedSlot).getTime() + 60 * 60 * 1000,
                   ).toISOString()
                 }
                 data={formData}
@@ -249,34 +265,35 @@ export function TerminWizard() {
                 onEditDetails={() => setStep(3)}
               />
 
-              {/* Submit-Errors */}
               {submit.status === 'error' && (
                 <div
-                  className="bg-deep-2 border-error/40 mt-6 rounded-sm border p-5"
+                  className="mt-6 bg-deep-2 border border-error/40 rounded-sm p-5"
                   role="alert"
                 >
-                  <div className="mb-3 flex items-start gap-3">
+                  <div className="flex items-start gap-3 mb-3">
                     <AlertCircle
-                      className="text-error mt-0.5 h-5 w-5 shrink-0"
+                      className="w-5 h-5 text-error shrink-0 mt-0.5"
                       strokeWidth={1.75}
                     />
-                    <p className="text-paper text-sm leading-relaxed">{submit.message}</p>
+                    <p className="text-sm text-paper leading-relaxed">
+                      {submit.message}
+                    </p>
                   </div>
 
                   {submit.alternatives && submit.alternatives.length > 0 && (
                     <div className="mt-4 ml-8">
-                      <div className="mb-3 grid gap-2 sm:grid-cols-3">
+                      <div className="grid sm:grid-cols-3 gap-2 mb-3">
                         {submit.alternatives.map((alt) => (
                           <button
                             key={alt.isoStart}
                             type="button"
                             onClick={() => handlePickAlternative(alt.isoStart)}
-                            className="bg-deep border-signal-2/40 hover:border-signal-2 hover:bg-signal/10 rounded-sm border p-3 text-left transition-all"
+                            className="p-3 bg-deep border border-signal-2/40 rounded-sm text-left hover:border-signal-2 hover:bg-signal/10 transition-all"
                           >
-                            <div className="text-signal-2 mb-1 font-mono text-[0.65rem] tracking-wider uppercase">
+                            <div className="text-[0.65rem] font-mono uppercase tracking-wider text-signal-2 mb-1">
                               {alt.date}
                             </div>
-                            <div className="text-paper font-mono text-sm">
+                            <div className="font-mono text-sm text-paper">
                               {alt.label}
                             </div>
                           </button>
@@ -291,15 +308,14 @@ export function TerminWizard() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Bar */}
-      <div className="border-line mt-10 flex items-center justify-between gap-4 border-t pt-6">
+      <div className="mt-10 pt-6 border-t border-line flex items-center justify-between gap-4">
         <button
           type="button"
           onClick={goBack}
           disabled={step === 1 || submit.status === 'submitting'}
-          className="text-paper-mute hover:text-paper inline-flex min-h-[44px] items-center gap-2 rounded-sm px-5 py-2.5 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40"
+          className="inline-flex items-center gap-2 min-h-[44px] px-5 py-2.5 text-paper-mute font-medium text-sm rounded-sm hover:text-paper transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          <ArrowLeft className="h-4 w-4" strokeWidth={1.75} />
+          <ArrowLeft className="w-4 h-4" strokeWidth={1.75} />
           Zurück
         </button>
 
@@ -307,11 +323,14 @@ export function TerminWizard() {
           <button
             type="button"
             onClick={goNext}
-            disabled={(step === 1 && !selectedDate) || (step === 2 && !selectedSlot)}
-            className="bg-signal text-deep hover:bg-signal-2 inline-flex min-h-[48px] items-center gap-2 rounded-sm px-7 py-3.5 text-sm font-medium shadow-[0_4px_20px_-8px_rgba(var(--signal-rgb),0.6)] transition-colors disabled:cursor-not-allowed disabled:opacity-40"
+            disabled={
+              (step === 1 && !selectedDate) ||
+              (step === 2 && !selectedSlot)
+            }
+            className="inline-flex items-center gap-2 min-h-[48px] px-7 py-3.5 bg-signal text-deep font-medium text-sm rounded-sm hover:bg-signal-2 transition-colors shadow-[0_4px_20px_-8px_rgba(var(--signal-rgb),0.6)] disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Weiter
-            <ArrowRight className="h-4 w-4" strokeWidth={1.75} />
+            <ArrowRight className="w-4 h-4" strokeWidth={1.75} />
           </button>
         )}
 
@@ -320,32 +339,32 @@ export function TerminWizard() {
             type="button"
             onClick={handleSubmit}
             disabled={submit.status === 'submitting'}
-            className="bg-signal text-deep hover:bg-signal-2 inline-flex min-h-[48px] items-center gap-2 rounded-sm px-7 py-3.5 text-sm font-medium shadow-[0_8px_30px_-8px_rgba(var(--signal-rgb),0.5)] transition-colors disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex items-center gap-2 min-h-[48px] px-7 py-3.5 bg-signal text-deep font-medium text-sm rounded-sm hover:bg-signal-2 transition-colors shadow-[0_8px_30px_-8px_rgba(var(--signal-rgb),0.5)] disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {submit.status === 'submitting' ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin" />
-                Wird gebucht …
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Wird gesendet …
               </>
             ) : (
               <>
-                <CheckCircle2 className="h-4 w-4" strokeWidth={1.75} />
-                Jetzt verbindlich buchen
+                <CheckCircle2 className="w-4 h-4" strokeWidth={1.75} />
+                Termin anfragen
               </>
             )}
           </button>
         )}
       </div>
 
-      {/* Datenschutz-Hinweis nur auf Step 4 */}
       {step === 4 && (
-        <p className="text-paper-mute mt-4 text-xs leading-relaxed">
-          Mit dem Buchen stimmen Sie der Verarbeitung Ihrer Daten gemäß{' '}
+        <p className="mt-4 text-xs text-paper-mute leading-relaxed">
+          Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Daten gemäß{' '}
           <a href="/datenschutz" className="text-signal-2 hover:underline">
             Datenschutzerklärung
           </a>{' '}
-          zu. Sie erhalten eine Bestätigungs-E-Mail mit Kalender-Eintrag und allen Infos
-          zum Stornieren.
+          zu. Sie erhalten eine Bestätigung mit Kalender-Eintrag, sobald
+          Robert Ihren Wunschtermin bestätigt hat (in der Regel binnen 24
+          Stunden).
         </p>
       )}
     </div>

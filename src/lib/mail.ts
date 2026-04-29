@@ -5,6 +5,7 @@ import type { Lead } from './supabase'
 const resendKey = process.env.RESEND_API_KEY
 const fromEmail = process.env.RESEND_FROM_EMAIL ?? `office@${SITE.domain}`
 const notifyEmail = process.env.NOTIFY_EMAIL ?? SITE.contact.email
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? SITE.url
 
 if (!resendKey) {
   throw new Error('Missing RESEND_API_KEY env var')
@@ -27,16 +28,28 @@ const CHANNEL_LABEL = {
 
 type Channel = keyof typeof CHANNEL_LABEL
 
-const COLORS = {
-  bg: '#161618',
-  bg2: '#232327',
-  paper: '#fafaf9',
-  mute: '#c8b8a8',
-  dim: '#998a7c',
-  signal: '#cf8755',
-  signal2: '#e09f6f',
+// ============================================================
+// DESIGN TOKENS — minimal, weiß, eine Schrift
+// ============================================================
+const FONT =
+  "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+
+const C = {
+  bg: '#ffffff',
+  bgSubtle: '#f7f7f5',
+  text: '#1a1a1a',
+  textBody: '#333333',
+  textMute: '#666666',
+  textDim: '#999999',
+  border: '#e5e5e0',
+  borderStrong: '#d0d0c8',
+  accent: '#cf8755',
+  accentDark: '#a86838',
 } as const
 
+// ============================================================
+// REF NUMBER
+// ============================================================
 export function generateRefNumber(): string {
   const d = new Date()
   const date = `${String(d.getFullYear()).slice(2)}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`
@@ -47,7 +60,12 @@ export function generateRefNumber(): string {
   return `${date}-${rand}`
 }
 
-// === LEAD MAILS ===
+// ============================================================
+// PUBLIC SEND FUNCTIONS
+// ============================================================
+
+// LEAD MAILS
+
 export async function sendLeadNotification(lead: Lead, refNumber: string) {
   return resend.emails.send({
     from: `Webdesign Alcor <${fromEmail}>`,
@@ -58,16 +76,17 @@ export async function sendLeadNotification(lead: Lead, refNumber: string) {
   })
 }
 
-export async function sendLeadAutoReply(lead: Lead, refNumber: string) {
+export async function sendLeadCopyToCustomer(lead: Lead, refNumber: string) {
   return resend.emails.send({
     from: `Robert Alchimowicz <${fromEmail}>`,
     to: lead.email,
-    subject: `Ihre Anfrage bei Webdesign Alcor (Ref. #${refNumber})`,
-    html: leadAutoReplyTemplate(lead, refNumber),
+    subject: `Kopie Ihrer Anfrage bei Webdesign Alcor (#${refNumber})`,
+    html: leadCopyTemplate(lead, refNumber),
   })
 }
 
-// === BOOKING MAILS ===
+// BOOKING MAILS
+
 export type BookingMailData = {
   refNumber: string
   name: string
@@ -81,28 +100,18 @@ export type BookingMailData = {
   slotEnd: Date
 }
 
-export async function sendBookingNotification(
-  booking: BookingMailData,
-  ics: string,
-) {
+export async function sendBookingPendingToAdmin(booking: BookingMailData) {
   const slot = formatSlot(booking.slotStart, booking.slotEnd)
-  const whatsappReply = booking.phone
-    ? `https://wa.me/${booking.phone.replace(/\D/g, '')}?text=${encodeURIComponent(`Hallo ${booking.name.split(' ')[0]}, danke für die Buchung des Termins am ${slot.date}, ${slot.time} (Ref. #${booking.refNumber}). `)}`
-    : null
-
   return resend.emails.send({
     from: `Webdesign Alcor <${fromEmail}>`,
     to: notifyEmail,
     replyTo: booking.email,
-    subject: `[#${booking.refNumber}] Neuer Termin: ${slot.date} ${slot.time} – ${booking.name}`,
-    html: bookingNotificationTemplate(booking, slot, whatsappReply),
-    attachments: [
-      { filename: `termin-${booking.refNumber}.ics`, content: ics },
-    ],
+    subject: `[#${booking.refNumber}] Anfrage zu prüfen: ${slot.date} ${slot.time} – ${booking.name}`,
+    html: bookingPendingTemplate(booking, slot),
   })
 }
 
-export async function sendBookingAutoReply(
+export async function sendBookingConfirmedToCustomer(
   booking: BookingMailData,
   ics: string,
 ) {
@@ -110,207 +119,502 @@ export async function sendBookingAutoReply(
   return resend.emails.send({
     from: `Robert Alchimowicz <${fromEmail}>`,
     to: booking.email,
-    subject: `Termin bestätigt: ${slot.date}, ${slot.time} (Ref. #${booking.refNumber})`,
-    html: bookingAutoReplyTemplate(booking, slot),
+    subject: `Termin bestätigt: ${slot.date}, ${slot.time} (#${booking.refNumber})`,
+    html: bookingConfirmedTemplate(booking, slot),
     attachments: [
       { filename: `termin-${booking.refNumber}.ics`, content: ics },
     ],
   })
 }
 
-// === TEMPLATES ===
+export async function sendBookingDeclinedToCustomer(args: {
+  refNumber: string
+  name: string
+  email: string
+  topic: string
+  slotStart: Date
+  slotEnd: Date
+  reason: string
+}) {
+  const slot = formatSlot(args.slotStart, args.slotEnd)
+  return resend.emails.send({
+    from: `Robert Alchimowicz <${fromEmail}>`,
+    to: args.email,
+    subject: `Termin nicht möglich: ${slot.date}, ${slot.time} (#${args.refNumber})`,
+    html: bookingDeclinedTemplate(args, slot),
+  })
+}
+
+// ============================================================
+// SHARED LAYOUT
+// ============================================================
+
+function emailShell(content: string, options?: { preheader?: string }): string {
+  const preheader = options?.preheader
+    ? `<div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:#ffffff;opacity:0">${escape(options.preheader)}</div>`
+    : ''
+
+  return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>Webdesign Alcor</title>
+<!--[if mso]>
+<style type="text/css">table {border-collapse:collapse;border:0;border-spacing:0;margin:0;} div, td {padding:0;} div {margin:0 !important;}</style>
+<![endif]-->
+</head>
+<body style="margin:0;padding:0;background:${C.bgSubtle};font-family:${FONT};color:${C.textBody};line-height:1.6;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;width:100% !important">
+${preheader}
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${C.bgSubtle};margin:0;padding:0">
+  <tr>
+    <td align="center" style="padding:40px 16px">
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px;background:${C.bg};border:1px solid ${C.border};border-radius:8px">
+
+        <!-- HEADER -->
+        <tr>
+          <td style="padding:32px 40px 8px;border-bottom:1px solid ${C.border}">
+            <p style="margin:0;font-family:${FONT};font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:${C.accentDark}">Webdesign Alcor</p>
+          </td>
+        </tr>
+
+        <!-- CONTENT -->
+        <tr>
+          <td style="padding:32px 40px 40px;font-family:${FONT}">
+            ${content}
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td style="padding:24px 40px 32px;border-top:1px solid ${C.border};font-family:${FONT}">
+            <p style="margin:0 0 6px;font-size:12px;color:${C.textMute};line-height:1.6">
+              ${SITE.brand} · ${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city}
+            </p>
+            <p style="margin:0;font-size:12px;color:${C.textMute};line-height:1.6">
+              <a href="mailto:${SITE.contact.email}" style="color:${C.accentDark};text-decoration:none">${SITE.contact.email}</a>
+              &nbsp;·&nbsp;
+              <a href="tel:${SITE.contact.phoneRaw}" style="color:${C.accentDark};text-decoration:none">${SITE.contact.phoneFormatted}</a>
+              &nbsp;·&nbsp;
+              <a href="${siteUrl}" style="color:${C.accentDark};text-decoration:none">${siteUrl.replace(/https?:\/\//, '')}</a>
+            </p>
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
+</table>
+</body>
+</html>`
+}
+
+// ============================================================
+// LAYOUT BUILDING BLOCKS
+// ============================================================
+
+function h1(text: string): string {
+  return `<h1 style="margin:0 0 8px;font-family:${FONT};font-size:24px;font-weight:600;line-height:1.3;color:${C.text}">${text}</h1>`
+}
+
+function refLine(refNumber: string): string {
+  return `<p style="margin:0 0 32px;font-family:${FONT};font-size:13px;color:${C.textMute}">Referenz: <strong style="color:${C.accentDark};font-weight:600;font-family:${FONT}">#${refNumber}</strong></p>`
+}
+
+function paragraph(text: string): string {
+  return `<p style="margin:0 0 16px;font-family:${FONT};font-size:15px;line-height:1.65;color:${C.textBody}">${text}</p>`
+}
+
+function smallParagraph(text: string): string {
+  return `<p style="margin:0 0 16px;font-family:${FONT};font-size:13px;line-height:1.6;color:${C.textMute}">${text}</p>`
+}
+
+function sectionLabel(text: string): string {
+  return `<p style="margin:32px 0 12px;font-family:${FONT};font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:${C.textMute}">${text}</p>`
+}
+
+function divider(): string {
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:24px 0"><tr><td style="border-top:1px solid ${C.border};font-size:0;line-height:0">&nbsp;</td></tr></table>`
+}
+
+/**
+ * Info-Box mit Label-Value-Reihen.
+ * Pro Reihe Border-Top außer beim ersten.
+ */
+function infoBox(rows: { label: string; value: string }[]): string {
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${C.bgSubtle};border:1px solid ${C.border};border-radius:6px;margin:0 0 8px">
+${rows
+  .map(
+    (r, i) => `<tr>
+<td valign="top" style="padding:14px 18px;width:120px;font-family:${FONT};font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${C.textMute};${i > 0 ? `border-top:1px solid ${C.border};` : ''}">${r.label}</td>
+<td valign="top" style="padding:14px 18px;font-family:${FONT};font-size:14px;color:${C.text};line-height:1.5;${i > 0 ? `border-top:1px solid ${C.border};` : ''}">${r.value}</td>
+</tr>`,
+  )
+  .join('')}
+</table>`
+}
+
+/**
+ * Highlight-Box für freie Textinhalte (z.B. Nachricht, Notizen)
+ */
+function quoteBox(text: string): string {
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${C.bgSubtle};border:1px solid ${C.border};border-radius:6px;margin:0 0 8px">
+<tr><td style="padding:18px 20px;font-family:${FONT};font-size:14px;line-height:1.65;color:${C.textBody};white-space:pre-wrap;word-break:break-word">${text}</td></tr>
+</table>`
+}
+
+/**
+ * Termin-Hero-Box: Datum + Uhrzeit prominent
+ */
+function appointmentBox(args: {
+  date: string
+  time: string
+  meta?: string
+}): string {
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:${C.bgSubtle};border:1px solid ${C.border};border-radius:6px;margin:0 0 8px">
+<tr><td style="padding:24px 24px 20px;font-family:${FONT}">
+<p style="margin:0 0 4px;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:${C.accentDark}">Termin</p>
+<p style="margin:0 0 4px;font-family:${FONT};font-size:20px;font-weight:600;line-height:1.3;color:${C.text}">${args.date}</p>
+<p style="margin:0 0 0;font-family:${FONT};font-size:16px;color:${C.textBody}">${args.time}</p>
+${args.meta ? `<p style="margin:12px 0 0;padding-top:12px;border-top:1px solid ${C.border};font-family:${FONT};font-size:13px;color:${C.textMute}">${args.meta}</p>` : ''}
+</td></tr>
+</table>`
+}
+
+/**
+ * Action-Buttons mit echtem TD-bgcolor (Outlook-safe, ohne VML).
+ *
+ * Wie das Styling angepasst werden kann:
+ * - PADDING_V / PADDING_H = Polster innen (Höhe / Breite vom Text-Rand)
+ * - SPACING = Abstand zwischen Buttons
+ * - BORDER_PX = Border-Stärke
+ * - FONT_SIZE / FONT_WEIGHT = Text-Stil
+ * - C.accent / C.accentDark / C.bg = Farben (oben in der Datei änderbar)
+ *
+ * Primary: gefüllt (Akzent-BG, weißer Text).
+ * Secondary: weißer BG, Akzent-Border, Akzent-Text.
+ */
+function buttonRow(
+  buttons: { href: string; label: string; primary?: boolean }[],
+): string {
+  if (buttons.length === 0) return ''
+
+  // Stelschrauben für das Button-Styling:
+  const PADDING_V = '14px'
+  const PADDING_H = '24px'
+  const SPACING = '14px'
+  const BORDER_PX = '2px'
+  const FONT_SIZE = '14px'
+  const FONT_WEIGHT = '600'
+  const RADIUS = '6px'
+
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 8px;border-collapse:separate">
+<tr>
+${buttons
+  .map((b, i) => {
+    const isPrimary = b.primary !== false
+    const bgColor = isPrimary ? C.accent : '#ffffff'
+    const textColor = isPrimary ? '#ffffff' : C.accentDark
+    const padR = i < buttons.length - 1 ? `padding-right:${SPACING};` : ''
+    return `<td style="${padR}font-family:${FONT}" valign="top">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate">
+<tr>
+<td bgcolor="${bgColor}" align="center" style="background-color:${bgColor};border:${BORDER_PX} solid ${C.accent};border-radius:${RADIUS};padding:${PADDING_V} ${PADDING_H};mso-padding-alt:${PADDING_V} ${PADDING_H} ${PADDING_V} ${PADDING_H}">
+<a href="${b.href}" style="display:inline-block;font-family:${FONT};font-size:${FONT_SIZE};font-weight:${FONT_WEIGHT};color:${textColor};text-decoration:none;line-height:1;white-space:nowrap;mso-line-height-rule:exactly">${b.label}</a>
+</td>
+</tr>
+</table>
+</td>`
+  })
+  .join('')}
+</tr>
+</table>`
+}
+
+// ============================================================
+// TEMPLATES
+// ============================================================
 
 function leadNotificationTemplate(lead: Lead, refNumber: string): string {
   const whatsappReply = lead.phone
     ? `https://wa.me/${lead.phone.replace(/\D/g, '')}?text=${encodeURIComponent(`Hallo ${lead.name.split(' ')[0]}, danke für Ihre Anfrage (Ref. #${refNumber}). `)}`
     : null
-  return `<!DOCTYPE html><html><body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:0;background:${COLORS.bg};color:${COLORS.paper}">
-    <div style="padding:32px 28px">
-      <div style="font-family:Georgia,serif;font-size:14px;color:${COLORS.signal2};letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px">Webdesign Alcor</div>
-      <h2 style="font-family:Georgia,serif;color:${COLORS.paper};font-size:28px;font-weight:400;margin:0 0 4px">Neue Anfrage</h2>
-      <div style="font-family:monospace;font-size:13px;color:${COLORS.dim};margin-bottom:24px">Ref. #${refNumber}</div>
-      <table style="width:100%;border-collapse:collapse;background:${COLORS.bg2};border-radius:4px">
-        ${row('Name', escape(lead.name))}
-        ${row('E-Mail', `<a href="mailto:${escape(lead.email)}" style="color:${COLORS.signal2};text-decoration:none">${escape(lead.email)}</a>`)}
-        ${lead.phone ? row('Telefon', `<a href="tel:${escape(lead.phone)}" style="color:${COLORS.signal2};text-decoration:none">${escape(lead.phone)}</a>`) : ''}
-        ${lead.company ? row('Firma', escape(lead.company)) : ''}
-        ${row('Thema', TOPIC_LABEL[lead.topic])}
-        ${row('Quelle', `<span style="font-size:13px;color:${COLORS.dim}">${escape(lead.source)}</span>`)}
-      </table>
-      <div style="background:${COLORS.bg2};border-left:3px solid ${COLORS.signal};padding:18px 22px;margin:24px 0;border-radius:0 4px 4px 0">
-        <div style="font-size:11px;color:${COLORS.signal2};text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px">Nachricht</div>
-        <div style="white-space:pre-wrap;line-height:1.65;color:${COLORS.paper}">${escape(lead.message)}</div>
-      </div>
-      ${
-        whatsappReply
-          ? `<div style="margin-top:28px;padding:18px 22px;background:${COLORS.bg2};border-radius:4px">
-          <div style="font-size:11px;color:${COLORS.signal2};text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px">Schnellaktion</div>
-          <a href="${whatsappReply}" style="display:inline-block;background:${COLORS.signal};color:${COLORS.bg};padding:10px 18px;border-radius:4px;text-decoration:none;font-weight:500;font-size:14px;margin-right:8px">WhatsApp antworten</a>
-          <a href="tel:${escape(lead.phone || '')}" style="display:inline-block;background:transparent;color:${COLORS.signal2};padding:10px 18px;border:1px solid rgba(207,135,85,0.4);border-radius:4px;text-decoration:none;font-weight:500;font-size:14px">Anrufen</a>
-        </div>`
-          : ''
-      }
-      <p style="font-size:12px;color:${COLORS.dim};margin-top:32px">Eingegangen ${new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' })}</p>
-    </div>
-  </body></html>`
+
+  const buttons: { href: string; label: string; primary?: boolean }[] = []
+  if (lead.phone) buttons.push({ href: `tel:${escape(lead.phone)}`, label: 'Anrufen' })
+  buttons.push({
+    href: `mailto:${escape(lead.email)}?subject=${encodeURIComponent(`Re: Ihre Anfrage (#${refNumber})`)}`,
+    label: 'E-Mail antworten',
+    primary: false,
+  })
+  if (whatsappReply)
+    buttons.push({ href: whatsappReply, label: 'WhatsApp', primary: false })
+
+  const eingangText = `Eingegangen am ${new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna', dateStyle: 'medium', timeStyle: 'short' })}`
+
+  const content = `
+${h1('Neue Anfrage')}
+${refLine(refNumber)}
+
+${sectionLabel('Kontakt')}
+${infoBox([
+  { label: 'Name', value: escape(lead.name) },
+  {
+    label: 'E-Mail',
+    value: `<a href="mailto:${escape(lead.email)}" style="color:${C.accentDark};text-decoration:none">${escape(lead.email)}</a>`,
+  },
+  ...(lead.phone
+    ? [
+        {
+          label: 'Telefon',
+          value: `<a href="tel:${escape(lead.phone)}" style="color:${C.accentDark};text-decoration:none">${escape(lead.phone)}</a>`,
+        },
+      ]
+    : []),
+  ...(lead.company
+    ? [{ label: 'Firma', value: escape(lead.company) }]
+    : []),
+  { label: 'Thema', value: TOPIC_LABEL[lead.topic] },
+])}
+
+${sectionLabel('Nachricht')}
+${quoteBox(escape(lead.message))}
+
+${sectionLabel('Schnell antworten')}
+${buttonRow(buttons)}
+
+<p style="margin:32px 0 0;font-family:${FONT};font-size:12px;color:${C.textDim}">${eingangText}</p>
+`
+  return emailShell(content, {
+    preheader: `Neue Anfrage von ${lead.name} – ${TOPIC_LABEL[lead.topic]}`,
+  })
 }
 
-function leadAutoReplyTemplate(lead: Lead, refNumber: string): string {
+function leadCopyTemplate(lead: Lead, refNumber: string): string {
   const firstName = escape(lead.name.split(' ')[0] ?? lead.name)
-  return `<!DOCTYPE html><html><body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:0;background:${COLORS.bg};color:${COLORS.paper};line-height:1.6">
-    <div style="padding:36px 28px">
-      <div style="font-family:Georgia,serif;font-size:14px;color:${COLORS.signal2};letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px">Webdesign Alcor</div>
-      <h2 style="font-family:Georgia,serif;color:${COLORS.paper};font-size:32px;font-weight:400;margin:0 0 4px">Danke, ${firstName}.</h2>
-      <div style="font-family:monospace;font-size:13px;color:${COLORS.dim};margin-bottom:28px">Ihre Referenznummer: <strong style="color:${COLORS.signal2}">#${refNumber}</strong></div>
-      <p style="color:${COLORS.paper};font-size:16px">Ihre Anfrage ist bei mir eingegangen. Ich melde mich <strong style="color:${COLORS.signal2}">binnen 24 Stunden</strong> persönlich bei Ihnen zurück.</p>
-      <div style="background:${COLORS.bg2};padding:18px 22px;border-radius:4px;margin:24px 0;border-left:3px solid ${COLORS.signal}">
-        <div style="font-size:11px;color:${COLORS.signal2};text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px">Ihre Nachricht</div>
-        <div style="white-space:pre-wrap;color:${COLORS.mute}">${escape(lead.message)}</div>
-      </div>
-      <p style="color:${COLORS.paper}">Falls es eilt:</p>
-      <ul style="padding-left:20px;color:${COLORS.mute}">
-        <li>Telefon: <a href="tel:${SITE.contact.phoneRaw}" style="color:${COLORS.signal2};text-decoration:none">${SITE.contact.phoneFormatted}</a></li>
-        <li>WhatsApp: <a href="${SITE.contact.whatsapp}" style="color:${COLORS.signal2};text-decoration:none">direkt schreiben</a></li>
-      </ul>
-      <p style="color:${COLORS.paper};margin-top:32px">Bis bald,<br><strong style="color:${COLORS.paper}">Robert Alchimowicz</strong><br><span style="color:${COLORS.dim};font-size:13px">${SITE.name} · ${SITE.address.city}</span></p>
-      <div style="margin-top:40px;padding-top:24px;border-top:1px solid rgba(207,135,85,0.14)">
-        <div style="font-size:11px;color:${COLORS.signal2};text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px">Übrigens</div>
-        <p style="font-size:13px;color:${COLORS.dim};line-height:1.6;margin:0">
-          Falls Sie jemanden kennen, der ebenfalls eine Website braucht – ich freue mich über jede Empfehlung. Kein Provisions-System, keine Newsletter. Nur, falls es passt.
-        </p>
-      </div>
-    </div>
-  </body></html>`
+  const content = `
+${h1(`Hallo ${firstName},`)}
+${refLine(refNumber)}
+
+${paragraph(`anbei die Kopie Ihrer Anfrage bei Webdesign Alcor. Ich melde mich <strong>binnen 24 Stunden</strong> persönlich bei Ihnen zurück, üblicherweise deutlich schneller.`)}
+
+${sectionLabel('Ihre Angaben')}
+${infoBox([
+  { label: 'Name', value: escape(lead.name) },
+  ...(lead.phone
+    ? [{ label: 'Telefon', value: escape(lead.phone) }]
+    : []),
+  ...(lead.company
+    ? [{ label: 'Firma', value: escape(lead.company) }]
+    : []),
+  { label: 'Thema', value: TOPIC_LABEL[lead.topic] },
+])}
+
+${sectionLabel('Ihre Nachricht')}
+${quoteBox(escape(lead.message))}
+
+${sectionLabel('Falls es eilt')}
+${smallParagraph(`Telefon: <a href="tel:${SITE.contact.phoneRaw}" style="color:${C.accentDark};text-decoration:none">${SITE.contact.phoneFormatted}</a> &nbsp;·&nbsp; WhatsApp: <a href="${SITE.contact.whatsapp}" style="color:${C.accentDark};text-decoration:none">direkt schreiben</a>`)}
+
+${divider()}
+
+<p style="margin:0;font-family:${FONT};font-size:15px;color:${C.textBody}">Bis bald,<br><strong style="color:${C.text}">Robert Alchimowicz</strong></p>
+`
+  return emailShell(content, {
+    preheader: `Kopie Ihrer Anfrage – Ref. #${refNumber}`,
+  })
 }
 
-function bookingNotificationTemplate(
+function bookingPendingTemplate(
   booking: BookingMailData,
   slot: { date: string; time: string },
-  whatsappReply: string | null,
 ): string {
-  return `<!DOCTYPE html><html><body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:0;background:${COLORS.bg};color:${COLORS.paper}">
-    <div style="padding:32px 28px">
-      <div style="font-family:Georgia,serif;font-size:14px;color:${COLORS.signal2};letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px">Webdesign Alcor</div>
-      <h2 style="font-family:Georgia,serif;color:${COLORS.paper};font-size:28px;font-weight:400;margin:0 0 4px">Neuer Termin gebucht</h2>
-      <div style="font-family:monospace;font-size:13px;color:${COLORS.dim};margin-bottom:24px">Ref. #${booking.refNumber}</div>
+  const adminUrl = `${siteUrl}/admin`
+  const whatsappReply = booking.phone
+    ? `https://wa.me/${booking.phone.replace(/\D/g, '')}`
+    : null
 
-      <div style="background:${COLORS.signal};color:${COLORS.bg};padding:20px 24px;border-radius:4px;margin-bottom:24px">
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:6px;opacity:0.7">Termin</div>
-        <div style="font-family:Georgia,serif;font-size:22px;line-height:1.2;margin-bottom:4px">${slot.date}</div>
-        <div style="font-family:monospace;font-size:16px">${slot.time}</div>
-        <div style="font-size:13px;margin-top:10px;opacity:0.85">Ort: ${CHANNEL_LABEL[booking.channel]}</div>
-      </div>
+  const buttons: { href: string; label: string; primary?: boolean }[] = [
+    { href: adminUrl, label: 'Im Admin öffnen' },
+  ]
+  if (booking.phone)
+    buttons.push({
+      href: `tel:${escape(booking.phone)}`,
+      label: 'Anrufen',
+      primary: false,
+    })
+  if (whatsappReply)
+    buttons.push({ href: whatsappReply, label: 'WhatsApp', primary: false })
 
-      <table style="width:100%;border-collapse:collapse;background:${COLORS.bg2};border-radius:4px">
-        ${row('Name', escape(booking.name))}
-        ${row('E-Mail', `<a href="mailto:${escape(booking.email)}" style="color:${COLORS.signal2};text-decoration:none">${escape(booking.email)}</a>`)}
-        ${row('Telefon', `<a href="tel:${escape(booking.phone)}" style="color:${COLORS.signal2};text-decoration:none">${escape(booking.phone)}</a>`)}
-        ${row('Anliegen', escape(booking.topic))}
-        ${booking.channel === 'on-site-external' && booking.externalAddress ? row('Adresse', escape(booking.externalAddress)) : ''}
-      </table>
+  const channelText =
+    booking.channel === 'on-site-external' && booking.externalAddress
+      ? `${CHANNEL_LABEL[booking.channel]} · ${escape(booking.externalAddress)}`
+      : CHANNEL_LABEL[booking.channel]
 
-      ${
-        booking.message
-          ? `<div style="background:${COLORS.bg2};border-left:3px solid ${COLORS.signal};padding:18px 22px;margin:24px 0;border-radius:0 4px 4px 0">
-        <div style="font-size:11px;color:${COLORS.signal2};text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px">Vorab-Notizen</div>
-        <div style="white-space:pre-wrap;line-height:1.65;color:${COLORS.paper}">${escape(booking.message)}</div>
-      </div>`
-          : ''
-      }
+  const content = `
+${h1('Neue Anfrage zu prüfen')}
+${refLine(booking.refNumber)}
 
-      ${
-        whatsappReply
-          ? `<div style="margin-top:28px;padding:18px 22px;background:${COLORS.bg2};border-radius:4px">
-          <div style="font-size:11px;color:${COLORS.signal2};text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px">Schnellaktion</div>
-          <a href="${whatsappReply}" style="display:inline-block;background:${COLORS.signal};color:${COLORS.bg};padding:10px 18px;border-radius:4px;text-decoration:none;font-weight:500;font-size:14px;margin-right:8px">WhatsApp antworten</a>
-          <a href="tel:${escape(booking.phone)}" style="display:inline-block;background:transparent;color:${COLORS.signal2};padding:10px 18px;border:1px solid rgba(207,135,85,0.4);border-radius:4px;text-decoration:none;font-weight:500;font-size:14px">Anrufen</a>
-        </div>`
-          : ''
-      }
+${paragraph(`<strong>Status:</strong> wartet auf Bestätigung. Der Slot ist bis dahin für andere Kunden blockiert.`)}
 
-      <p style="font-size:12px;color:${COLORS.dim};margin-top:32px">ICS-Datei ist im Anhang. Eingegangen ${new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' })}</p>
-    </div>
-  </body></html>`
+${sectionLabel('Wunschtermin')}
+${appointmentBox({ date: slot.date, time: slot.time, meta: channelText })}
+
+${sectionLabel('Kontakt')}
+${infoBox([
+  { label: 'Name', value: escape(booking.name) },
+  {
+    label: 'E-Mail',
+    value: `<a href="mailto:${escape(booking.email)}" style="color:${C.accentDark};text-decoration:none">${escape(booking.email)}</a>`,
+  },
+  {
+    label: 'Telefon',
+    value: `<a href="tel:${escape(booking.phone)}" style="color:${C.accentDark};text-decoration:none">${escape(booking.phone)}</a>`,
+  },
+  { label: 'Anliegen', value: escape(booking.topic) },
+])}
+
+${
+  booking.message
+    ? `${sectionLabel('Vorab-Notizen')}${quoteBox(escape(booking.message))}`
+    : ''
 }
 
-function bookingAutoReplyTemplate(
+${sectionLabel('Aktion')}
+${buttonRow(buttons)}
+${smallParagraph(`Im Admin-Bereich kannst du den Termin bestätigen oder ablehnen. Erst nach deiner Bestätigung erhält der Kunde eine Bestätigungs-Mail mit Kalender-Eintrag.`)}
+
+<p style="margin:24px 0 0;font-family:${FONT};font-size:12px;color:${C.textDim}">Eingegangen am ${new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna', dateStyle: 'medium', timeStyle: 'short' })}</p>
+`
+  return emailShell(content, {
+    preheader: `Anfrage von ${booking.name} – ${slot.date}, ${slot.time}`,
+  })
+}
+
+function bookingConfirmedTemplate(
   booking: BookingMailData,
   slot: { date: string; time: string },
 ): string {
   const firstName = escape(booking.name.split(' ')[0] ?? booking.name)
-  const channelText = CHANNEL_LABEL[booking.channel]
 
   let channelDetail = ''
   if (booking.channel === 'phone') {
-    channelDetail = `Robert ruft Sie zur vereinbarten Zeit unter <strong>${escape(booking.phone)}</strong> an.`
+    channelDetail = paragraph(
+      `Robert ruft Sie zur vereinbarten Zeit unter <strong>${escape(booking.phone)}</strong> an.`,
+    )
   } else if (booking.channel === 'on-site-office') {
-    channelDetail = `Treffpunkt: <strong>${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city}</strong> (${SITE.address.district}).<br><br>Falls Sie sich verspäten: <strong>${SITE.contact.phoneFormatted}</strong>`
+    channelDetail = paragraph(
+      `Treffpunkt: <strong>${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city}</strong> (${SITE.address.district}).`,
+    )
   } else if (booking.channel === 'on-site-external') {
-    channelDetail = `Robert kommt zu Ihnen unter:<br><strong>${escape(booking.externalAddress)}</strong><br><br>Falls etwas dazwischenkommt, erreichen Sie ihn unter <strong>${SITE.contact.phoneFormatted}</strong>.`
+    channelDetail = paragraph(
+      `Robert kommt zu Ihnen unter:<br><strong>${escape(booking.externalAddress)}</strong>`,
+    )
   }
 
-  return `<!DOCTYPE html><html><body style="font-family:system-ui,-apple-system,sans-serif;max-width:600px;margin:0 auto;padding:0;background:${COLORS.bg};color:${COLORS.paper};line-height:1.6">
-    <div style="padding:36px 28px">
-      <div style="font-family:Georgia,serif;font-size:14px;color:${COLORS.signal2};letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px">Webdesign Alcor</div>
-      <h2 style="font-family:Georgia,serif;color:${COLORS.paper};font-size:32px;font-weight:400;margin:0 0 4px">Termin bestätigt, ${firstName}.</h2>
-      <div style="font-family:monospace;font-size:13px;color:${COLORS.dim};margin-bottom:28px">Referenznummer: <strong style="color:${COLORS.signal2}">#${booking.refNumber}</strong></div>
+  const buttons: { href: string; label: string; primary?: boolean }[] = [
+    { href: `tel:${SITE.contact.phoneRaw}`, label: 'Anrufen' },
+    {
+      href: `mailto:${SITE.contact.email}?subject=${encodeURIComponent(`Termin #${booking.refNumber}`)}`,
+      label: 'E-Mail',
+      primary: false,
+    },
+  ]
 
-      <div style="background:${COLORS.signal};color:${COLORS.bg};padding:24px 28px;border-radius:4px;margin-bottom:24px">
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px;opacity:0.7">Ihr Termin</div>
-        <div style="font-family:Georgia,serif;font-size:24px;line-height:1.2;margin-bottom:6px">${slot.date}</div>
-        <div style="font-family:monospace;font-size:18px;margin-bottom:14px">${slot.time}</div>
-        <div style="font-size:14px;border-top:1px solid rgba(0,0,0,0.15);padding-top:12px;margin-top:14px"><strong>${channelText}</strong></div>
-      </div>
+  const content = `
+${h1(`Termin bestätigt, ${firstName}.`)}
+${refLine(booking.refNumber)}
 
-      <p style="color:${COLORS.paper};font-size:16px">${channelDetail}</p>
+${paragraph('Ich habe Ihren Termin in den Kalender eingetragen und freue mich auf das Gespräch.')}
 
-      <p style="color:${COLORS.mute};font-size:14px">Pro Termin reserviere ich eine Stunde. Falls das Gespräch kürzer wird – auch gut. Die Zeit gehört Ihnen.</p>
+${appointmentBox({
+  date: slot.date,
+  time: slot.time,
+  meta: CHANNEL_LABEL[booking.channel],
+})}
 
-      <p style="color:${COLORS.paper}">Im Anhang finden Sie eine Kalender-Datei (.ics), die Sie in Apple Calendar, Outlook, Google Calendar oder Thunderbird importieren können.</p>
+${channelDetail}
 
-      <div style="background:${COLORS.bg2};padding:18px 22px;border-radius:4px;margin:24px 0;border-left:3px solid ${COLORS.signal}">
-        <div style="font-size:11px;color:${COLORS.signal2};text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px">Ihr Anliegen</div>
-        <div style="color:${COLORS.paper};margin-bottom:8px"><strong>${escape(booking.topic)}</strong></div>
-        ${booking.message ? `<div style="white-space:pre-wrap;color:${COLORS.mute};font-size:14px">${escape(booking.message)}</div>` : ''}
-      </div>
+${smallParagraph('Pro Termin reserviere ich eine Stunde. Falls das Gespräch kürzer wird, ist auch alles gut – die Zeit gehört Ihnen.')}
 
-      <!-- ABSAGE / VERSCHIEBEN - klar und einfach -->
-      <div style="margin-top:32px;padding:24px;background:${COLORS.bg2};border-radius:4px">
-        <h3 style="font-family:Georgia,serif;font-size:20px;color:${COLORS.paper};margin:0 0 14px">Sie können nicht kommen?</h3>
-        <p style="color:${COLORS.mute};margin:0 0 14px;font-size:14px">Kein Problem – das passiert. So gehen Sie vor:</p>
+${smallParagraph('Im Anhang finden Sie eine Kalender-Datei (.ics) für Apple Calendar, Outlook, Google Calendar oder Thunderbird.')}
 
-        <div style="margin-bottom:18px">
-          <div style="font-size:12px;color:${COLORS.signal2};text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Termin verschieben</div>
-          <p style="color:${COLORS.mute};margin:0;font-size:14px">Antworten Sie einfach auf diese E-Mail mit zwei oder drei Wunsch-Terminen, oder buchen Sie direkt einen neuen unter <a href="${SITE.url}/termin" style="color:${COLORS.signal2};text-decoration:none">${SITE.url}/termin</a>. Den alten storniere ich dann.</p>
-        </div>
-
-        <div style="margin-bottom:18px">
-          <div style="font-size:12px;color:${COLORS.signal2};text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Termin absagen</div>
-          <p style="color:${COLORS.mute};margin:0;font-size:14px">Kurze Mail oder Anruf reicht – nennen Sie einfach Ihre Referenznummer <strong style="color:${COLORS.paper}">#${booking.refNumber}</strong>. Bitte möglichst <strong style="color:${COLORS.paper}">spätestens 24 Stunden vorher</strong>, damit ich den Slot wieder freigeben kann.</p>
-        </div>
-
-        <div>
-          <div style="font-size:12px;color:${COLORS.signal2};text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">Ich erreiche Sie nicht?</div>
-          <p style="color:${COLORS.mute};margin:0;font-size:14px">Wenn ich am Termintag niemanden unter <strong style="color:${COLORS.paper}">${escape(booking.phone)}</strong> erreichen kann, melde ich mich per E-Mail. Eine Wartezeit von 10 Minuten ist okay – danach buchen wir neu.</p>
-        </div>
-      </div>
-
-      <div style="margin-top:24px;text-align:center">
-        <a href="tel:${SITE.contact.phoneRaw}" style="display:inline-block;background:${COLORS.signal};color:${COLORS.bg};padding:12px 22px;border-radius:4px;text-decoration:none;font-weight:500;font-size:14px;margin-right:8px;margin-bottom:8px">${SITE.contact.phoneFormatted}</a>
-        <a href="mailto:${SITE.contact.email}?subject=Termin%20%23${booking.refNumber}" style="display:inline-block;background:transparent;color:${COLORS.signal2};padding:12px 22px;border:1px solid rgba(207,135,85,0.4);border-radius:4px;text-decoration:none;font-weight:500;font-size:14px;margin-bottom:8px">${SITE.contact.email}</a>
-      </div>
-
-      <p style="color:${COLORS.paper};margin-top:32px">Bis bald,<br><strong style="color:${COLORS.paper}">Robert Alchimowicz</strong><br><span style="color:${COLORS.dim};font-size:13px">${SITE.name} · ${SITE.address.city}</span></p>
-    </div>
-  </body></html>`
+${
+  booking.message
+    ? `${sectionLabel('Ihr Anliegen')}<p style="margin:0 0 8px;font-family:${FONT};font-size:14px;font-weight:500;color:${C.text}">${escape(booking.topic)}</p>${quoteBox(escape(booking.message))}`
+    : ''
 }
 
-function row(label: string, value: string): string {
-  return `<tr>
-    <td style="padding:14px 20px;color:${COLORS.dim};width:120px;font-size:13px;border-bottom:1px solid rgba(207,135,85,0.12);vertical-align:top">${label}</td>
-    <td style="padding:14px 20px;color:${COLORS.paper};font-weight:500;border-bottom:1px solid rgba(207,135,85,0.12)">${value}</td>
-  </tr>`
+${sectionLabel('Sie können nicht kommen?')}
+${smallParagraph(`<strong style="color:${C.text}">Verschieben:</strong> Antworten Sie auf diese E-Mail mit zwei oder drei Wunsch-Terminen, oder buchen Sie direkt einen neuen unter <a href="${siteUrl}/termin" style="color:${C.accentDark};text-decoration:none">${siteUrl.replace(/https?:\/\//, '')}/termin</a>.`)}
+${smallParagraph(`<strong style="color:${C.text}">Absagen:</strong> Kurze Mail oder Anruf reicht – nennen Sie Ihre Referenznummer <strong style="color:${C.text}">#${booking.refNumber}</strong>. Bitte möglichst <strong>spätestens 24 Stunden vorher</strong>.`)}
+
+${sectionLabel('Kontakt')}
+${buttonRow(buttons)}
+
+${divider()}
+
+<p style="margin:0;font-family:${FONT};font-size:15px;color:${C.textBody}">Bis bald,<br><strong style="color:${C.text}">Robert Alchimowicz</strong></p>
+`
+  return emailShell(content, {
+    preheader: `Termin bestätigt: ${slot.date}, ${slot.time}`,
+  })
 }
+
+function bookingDeclinedTemplate(
+  args: {
+    refNumber: string
+    name: string
+    topic: string
+    reason: string
+  },
+  slot: { date: string; time: string },
+): string {
+  const firstName = escape(args.name.split(' ')[0] ?? args.name)
+  const buttons: { href: string; label: string; primary?: boolean }[] = [
+    { href: `${siteUrl}/termin`, label: 'Anderen Termin wählen' },
+    {
+      href: `mailto:${SITE.contact.email}`,
+      label: 'E-Mail schreiben',
+      primary: false,
+    },
+  ]
+
+  const content = `
+${h1(`Hallo ${firstName},`)}
+${refLine(args.refNumber)}
+
+${paragraph(`vielen Dank für Ihre Anfrage. Leider kann ich den Wunschtermin am <strong>${slot.date}, ${slot.time}</strong> nicht annehmen.`)}
+
+${
+  args.reason
+    ? `${sectionLabel('Begründung')}${quoteBox(escape(args.reason))}`
+    : ''
+}
+
+${paragraph('Ich freue mich aber, wenn Sie einen anderen Termin buchen möchten:')}
+
+${buttonRow(buttons)}
+
+${smallParagraph(`Oder direkt: <a href="tel:${SITE.contact.phoneRaw}" style="color:${C.accentDark};text-decoration:none">${SITE.contact.phoneFormatted}</a> &nbsp;·&nbsp; <a href="mailto:${SITE.contact.email}" style="color:${C.accentDark};text-decoration:none">${SITE.contact.email}</a>`)}
+
+${divider()}
+
+<p style="margin:0;font-family:${FONT};font-size:15px;color:${C.textBody}">Beste Grüße,<br><strong style="color:${C.text}">Robert Alchimowicz</strong></p>
+`
+  return emailShell(content, {
+    preheader: `Termin nicht möglich – andere Optionen`,
+  })
+}
+
+// ============================================================
+// HELPERS
+// ============================================================
 
 function formatSlot(start: Date, end: Date): { date: string; time: string } {
   const date = new Intl.DateTimeFormat('de-AT', {
