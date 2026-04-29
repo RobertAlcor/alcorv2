@@ -2,11 +2,19 @@
 
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { LogOut, LayoutDashboard, Calendar, MessageSquare, Search } from 'lucide-react'
+import {
+  LogOut,
+  LayoutDashboard,
+  Calendar,
+  MessageSquare,
+  Search,
+  Settings as SettingsIcon,
+} from 'lucide-react'
 import { OverviewView } from './overview-view'
 import { BookingsView } from './bookings-view'
 import { LeadsView } from './leads-view'
 import { CustomersView } from './customers-view'
+import { SettingsView } from './settings-view'
 import type { AdminBooking } from './booking-row'
 import type { AdminLead } from '@/lib/lead-status'
 
@@ -15,13 +23,14 @@ type Props = {
   leads: AdminLead[]
 }
 
-type Tab = 'overview' | 'bookings' | 'leads' | 'customers'
+type Tab = 'overview' | 'bookings' | 'leads' | 'customers' | 'settings'
 
 const TABS: { id: Tab; label: string; Icon: typeof LayoutDashboard }[] = [
   { id: 'overview', label: 'Übersicht', Icon: LayoutDashboard },
   { id: 'bookings', label: 'Termine', Icon: Calendar },
   { id: 'leads', label: 'Anfragen', Icon: MessageSquare },
   { id: 'customers', label: 'Kunden', Icon: Search },
+  { id: 'settings', label: 'Einstellungen', Icon: SettingsIcon },
 ]
 
 export function AdminShell({ bookings, leads }: Props) {
@@ -124,6 +133,7 @@ export function AdminShell({ bookings, leads }: Props) {
         <LeadsView leads={leads} onChange={() => router.refresh()} />
       )}
       {tab === 'customers' && <CustomersView />}
+      {tab === 'settings' && <SettingsView />}
     </div>
   )
 }

@@ -16,6 +16,7 @@ import {
   getClientIp,
   isSuspiciousSpeed,
 } from '@/lib/spam-protection'
+import { getWorkingHours } from '@/lib/settings'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -86,7 +87,14 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const slotCheck = validateSlot(data.slotStart)
+    // Working-Hours aus DB laden (mit Fallback auf BOOKING_CONFIG)
+    const wh = await getWorkingHours()
+    const slotConfig = {
+      workingHourStart: wh.start,
+      workingHourEnd: wh.end,
+    }
+
+    const slotCheck = validateSlot(data.slotStart, slotConfig)
     if (!slotCheck.valid || !slotCheck.start || !slotCheck.end) {
       return NextResponse.json(
         { ok: false, error: slotCheck.reason ?? 'Ungültiger Slot.' },
@@ -106,7 +114,7 @@ export async function POST(req: NextRequest) {
     if (overlapping && overlapping.length > 0) {
       const alternatives = await findAlternativeSlots(
         slotCheck.start,
-        async (dayStart, dayEnd) => {
+        async (dayStart: Date, dayEnd: Date) => {
           const [bRes, sRes] = await Promise.all([
             supabaseAdmin
               .from('bookings')
@@ -123,6 +131,7 @@ export async function POST(req: NextRequest) {
           return [...(bRes.data ?? []), ...(sRes.data ?? [])]
         },
         3,
+        slotConfig,
       )
       return NextResponse.json(
         { ok: false, error: 'Slot bereits vergeben.', alternatives },

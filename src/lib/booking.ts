@@ -23,6 +23,15 @@ export type Slot = {
 }
 
 /**
+ * Optionaler Config-Override für Working-Hours.
+ * Wenn nicht übergeben werden BOOKING_CONFIG-Defaults verwendet.
+ */
+export type BookingHourConfig = {
+  workingHourStart?: number
+  workingHourEnd?: number
+}
+
+/**
  * Generiert Slots für ein Datum.
  * Slot-Starts im 15-Min-Raster, jeder blockt aber 60 Min.
  * Slot ist nur "available", wenn die ganze Stunde frei ist und noch in Arbeitszeit.
@@ -30,7 +39,13 @@ export type Slot = {
 export function generateSlotsForDate(
   date: Date,
   busySlots: { slot_start: string; slot_end: string }[],
+  config?: BookingHourConfig,
 ): Slot[] {
+  const workingHourStart =
+    config?.workingHourStart ?? BOOKING_CONFIG.workingHourStart
+  const workingHourEnd =
+    config?.workingHourEnd ?? BOOKING_CONFIG.workingHourEnd
+
   const day = date.getDay()
   if (!(BOOKING_CONFIG.workingDays as readonly number[]).includes(day)) {
     return []
@@ -47,9 +62,9 @@ export function generateSlotsForDate(
 
   const slots: Slot[] = []
   const dayStart = new Date(date)
-  dayStart.setHours(BOOKING_CONFIG.workingHourStart, 0, 0, 0)
+  dayStart.setHours(workingHourStart, 0, 0, 0)
   const dayEnd = new Date(date)
-  dayEnd.setHours(BOOKING_CONFIG.workingHourEnd, 0, 0, 0)
+  dayEnd.setHours(workingHourEnd, 0, 0, 0)
 
   // Alle besetzten 15-Min-Sub-Slots ermitteln
   const busyMinutes = new Set<number>()
@@ -122,12 +137,20 @@ export function getBookableDates(): Date[] {
 /**
  * Server-side Slot-Validation.
  */
-export function validateSlot(slotStart: string): {
+export function validateSlot(
+  slotStart: string,
+  config?: BookingHourConfig,
+): {
   valid: boolean
   reason?: string
   start?: Date
   end?: Date
 } {
+  const workingHourStart =
+    config?.workingHourStart ?? BOOKING_CONFIG.workingHourStart
+  const workingHourEnd =
+    config?.workingHourEnd ?? BOOKING_CONFIG.workingHourEnd
+
   const start = new Date(slotStart)
   if (isNaN(start.getTime())) {
     return { valid: false, reason: 'Ungültiges Datum' }
@@ -148,13 +171,13 @@ export function validateSlot(slotStart: string): {
   )
 
   const dayEnd = new Date(start)
-  dayEnd.setHours(BOOKING_CONFIG.workingHourEnd, 0, 0, 0)
+  dayEnd.setHours(workingHourEnd, 0, 0, 0)
   if (end > dayEnd) {
     return { valid: false, reason: 'Termin würde nach Arbeitszeit enden' }
   }
 
   const dayStart = new Date(start)
-  dayStart.setHours(BOOKING_CONFIG.workingHourStart, 0, 0, 0)
+  dayStart.setHours(workingHourStart, 0, 0, 0)
   if (start < dayStart) {
     return { valid: false, reason: 'Termin vor Arbeitszeit' }
   }
@@ -178,7 +201,7 @@ export function validateSlot(slotStart: string): {
 }
 
 /**
- * Findet 3 nächste freie Slots als Ausweich-Vorschläge.
+ * Findet die nächsten freien Slots als Ausweich-Vorschläge.
  */
 export async function findAlternativeSlots(
   preferredStart: Date,
@@ -187,6 +210,7 @@ export async function findAlternativeSlots(
     dayEnd: Date,
   ) => Promise<{ slot_start: string; slot_end: string }[]>,
   limit = 3,
+  config?: BookingHourConfig,
 ): Promise<{ isoStart: string; isoEnd: string; label: string; date: string }[]> {
   const found: {
     isoStart: string
@@ -214,7 +238,7 @@ export async function findAlternativeSlots(
     dayEnd.setHours(23, 59, 59, 999)
 
     const busy = await fetchBusy(dayStart, dayEnd)
-    const slots = generateSlotsForDate(dayCursor, busy)
+    const slots = generateSlotsForDate(dayCursor, busy, config)
 
     for (const slot of slots) {
       if (found.length >= limit) break

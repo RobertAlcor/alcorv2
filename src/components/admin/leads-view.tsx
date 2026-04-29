@@ -1,7 +1,10 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { Plus } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { LeadRow } from './lead-row'
+import { ManualLeadModal } from './manual-lead-modal'
 import {
   type AdminLead,
   type LeadStatus,
@@ -17,7 +20,9 @@ type Props = {
 type Filter = LeadStatus | 'all'
 
 export function LeadsView({ leads, onChange }: Props) {
+  const router = useRouter()
   const [filter, setFilter] = useState<Filter>('all')
+  const [showModal, setShowModal] = useState(false)
 
   const counts = useMemo(() => {
     const c: Record<LeadStatus, number> = {
@@ -38,27 +43,38 @@ export function LeadsView({ leads, onChange }: Props) {
 
   return (
     <div>
-      <nav
-        role="tablist"
-        aria-label="Lead-Status"
-        className="flex flex-wrap gap-1 mb-6"
-      >
-        <FilterChip
-          label="Alle"
-          count={leads.length}
-          active={filter === 'all'}
-          onClick={() => setFilter('all')}
-        />
-        {LEAD_STATUS_ORDER.map((s) => (
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <nav
+          role="tablist"
+          aria-label="Lead-Status"
+          className="flex flex-wrap gap-1"
+        >
           <FilterChip
-            key={s}
-            label={LEAD_STATUS_LABEL[s]}
-            count={counts[s]}
-            active={filter === s}
-            onClick={() => setFilter(s)}
+            label="Alle"
+            count={leads.length}
+            active={filter === 'all'}
+            onClick={() => setFilter('all')}
           />
-        ))}
-      </nav>
+          {LEAD_STATUS_ORDER.map((s) => (
+            <FilterChip
+              key={s}
+              label={LEAD_STATUS_LABEL[s]}
+              count={counts[s]}
+              active={filter === s}
+              onClick={() => setFilter(s)}
+            />
+          ))}
+        </nav>
+
+        <button
+          type="button"
+          onClick={() => setShowModal(true)}
+          className="inline-flex items-center gap-2 min-h-[40px] px-4 py-2 bg-signal/15 text-signal border border-signal/30 text-sm font-medium rounded-sm hover:bg-signal/25 transition-colors"
+        >
+          <Plus className="w-4 h-4" strokeWidth={2} />
+          Anfrage anlegen
+        </button>
+      </div>
 
       {filtered.length === 0 ? (
         <p className="text-paper-mute text-sm py-8 text-center">
@@ -72,6 +88,16 @@ export function LeadsView({ leads, onChange }: Props) {
             </li>
           ))}
         </ul>
+      )}
+
+      {showModal && (
+        <ManualLeadModal
+          onCancel={() => setShowModal(false)}
+          onCreated={() => {
+            setShowModal(false)
+            router.refresh()
+          }}
+        />
       )}
     </div>
   )
