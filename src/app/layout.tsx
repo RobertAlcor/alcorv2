@@ -5,6 +5,8 @@ import { SkipLink } from '@/components/layout/skip-link'
 import { FabStack } from '@/components/layout/fab-stack'
 import { PromoModal } from '@/components/layout/promo-modal'
 import { AnimatedBackground } from '@/components/layout/animated-background'
+import { ConsentMount } from '@/components/consent/consent-mount'
+import { GoogleAnalytics } from '@/components/analytics/google-analytics'
 import { organizationSchema, websiteSchema } from '@/lib/schema'
 import { SITE } from '@/lib/site'
 import './globals.css'
@@ -105,11 +107,14 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <AnimatedBackground />
         <SkipLink />
-        <Header />
-        <main id="main">{children}</main>
-        <Footer />
-        <FabStack />
-        <PromoModal />
+        <ConsentMount>
+          <GoogleAnalytics />
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+          <FabStack />
+          <PromoModal />
+        </ConsentMount>
       </body>
     </html>
   )
