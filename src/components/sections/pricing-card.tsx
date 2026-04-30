@@ -27,7 +27,7 @@ const TIERS: PricingTier[] = [
       'DSGVO-konform',
     ],
     cta: 'Starter anfragen',
-    ctaHref: '/kontakt',
+    ctaHref: '/kontakt?paket=starter&thema=pricing',
   },
   {
     name: 'Business',
@@ -43,7 +43,7 @@ const TIERS: PricingTier[] = [
       'Lieferung 2-3 Wochen',
     ],
     cta: 'Business anfragen',
-    ctaHref: '/kontakt',
+    ctaHref: '/kontakt?paket=business&thema=pricing',
     highlight: true,
   },
   {
@@ -60,7 +60,7 @@ const TIERS: PricingTier[] = [
       'Lieferung nach Vereinbarung',
     ],
     cta: 'Premium anfragen',
-    ctaHref: '/kontakt',
+    ctaHref: '/kontakt?paket=premium&thema=pricing',
   },
 ]
 

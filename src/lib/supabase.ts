@@ -20,8 +20,11 @@ export type Lead = {
   email: string
   phone?: string | null
   company?: string | null
-  topic: 'new-website' | 'relaunch' | 'seo' | 'other'
+  topic: 'general' | 'pricing' | 'new-website' | 'relaunch' | 'seo' | 'other'
   message: string
   source: string
   created_at?: string
+  // Neue Felder (v23):
+  package_interest?: 'starter' | 'business' | 'premium' | 'unsure' | null
+  existing_website?: string | null
 }

@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { Suspense, useEffect, useRef, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'motion/react'
 import {
   CheckCircle2,
@@ -9,8 +10,14 @@ import {
   Phone,
   MessageCircle,
   Mail,
+  Sparkles,
 } from 'lucide-react'
-import { leadSchema, type LeadInput } from '@/lib/validation'
+import {
+  leadSchema,
+  type LeadInput,
+  TOPIC_LABELS,
+  PACKAGE_LABELS,
+} from '@/lib/validation'
 import { SITE } from '@/lib/site'
 
 type FormState = {
@@ -21,11 +28,21 @@ type FormState = {
   copyRequested?: boolean
 }
 
-const TOPICS: { value: LeadInput['topic']; label: string }[] = [
-  { value: 'new-website', label: 'Neue Website erstellen' },
-  { value: 'relaunch', label: 'Bestehende Website überarbeiten' },
-  { value: 'seo', label: 'SEO-Beratung' },
-  { value: 'other', label: 'Etwas anderes' },
+// Topic-Optionen in Robert's Wunsch-Reihenfolge
+const TOPIC_OPTIONS: LeadInput['topic'][] = [
+  'general',
+  'pricing',
+  'relaunch',
+  'new-website',
+  'seo',
+  'other',
+]
+
+const PACKAGE_OPTIONS: NonNullable<LeadInput['package_interest']>[] = [
+  'starter',
+  'business',
+  'premium',
+  'unsure',
 ]
 
 const LABEL_CLASS =
@@ -39,9 +56,49 @@ const TEXTAREA_CLASS =
 
 const HINT_CLASS = 'mt-3 text-xs text-paper-mute leading-relaxed'
 
+/**
+ * Outer wrapper mit Suspense-Boundary.
+ * Nötig weil useSearchParams() in Next.js 15 nicht außerhalb von Suspense
+ * verwendet werden darf.
+ */
 export function KontaktForm() {
-  const [state, setState] = useState<FormState>({ status: 'idle', errors: {} })
+  return (
+    <Suspense fallback={<div className="h-32 animate-pulse bg-deep-2 rounded-sm" />}>
+      <KontaktFormInner />
+    </Suspense>
+  )
+}
+
+function KontaktFormInner() {
+  const searchParams = useSearchParams()
   const formLoadTimeRef = useRef<number>(0)
+
+  // URL-Param-Auswertung
+  const paketParam = searchParams.get('paket')?.toLowerCase()
+  const themaParam = searchParams.get('thema')?.toLowerCase()
+
+  const initialPackage: NonNullable<LeadInput['package_interest']> | '' =
+    paketParam === 'starter' ||
+    paketParam === 'business' ||
+    paketParam === 'premium' ||
+    paketParam === 'unsure'
+      ? paketParam
+      : ''
+
+  const initialTopic: LeadInput['topic'] =
+    initialPackage !== '' || themaParam === 'pricing'
+      ? 'pricing'
+      : themaParam === 'relaunch'
+        ? 'relaunch'
+        : themaParam === 'new-website' || themaParam === 'newwebsite'
+          ? 'new-website'
+          : themaParam === 'seo'
+            ? 'seo'
+            : 'general'
+
+  const [state, setState] = useState<FormState>({ status: 'idle', errors: {} })
+  const [topicValue, setTopicValue] = useState<LeadInput['topic']>(initialTopic)
+  const [packageValue, setPackageValue] = useState<string>(initialPackage)
 
   useEffect(() => {
     formLoadTimeRef.current = Date.now()
@@ -54,6 +111,10 @@ export function KontaktForm() {
     const formData = new FormData(e.currentTarget)
     const raw = Object.fromEntries(formData.entries()) as Record<string, string>
     const copyToCustomer = raw.copyToCustomer === 'on'
+
+    // Leeren existing_website nicht an Validation geben
+    if (raw.existing_website === '') delete raw.existing_website
+    if (raw.package_interest === '') delete raw.package_interest
 
     const parsed = leadSchema.safeParse(raw)
     if (!parsed.success) {
@@ -181,8 +242,34 @@ export function KontaktForm() {
     )
   }
 
+  // Info-Banner wenn Kunde aus /preise mit Paket-Auswahl kommt
+  const showPackageBanner = initialPackage !== ''
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+      {/* Info-Banner: Kunde kommt aus /preise mit Paket-Wunsch */}
+      {showPackageBanner && (
+        <div className="bg-signal/10 border border-signal/30 rounded-sm p-4 flex items-start gap-3">
+          <Sparkles
+            className="w-5 h-5 text-signal-2 shrink-0 mt-0.5"
+            strokeWidth={1.75}
+          />
+          <div className="text-sm">
+            <p className="text-paper font-medium mb-1">
+              Sie interessieren sich für das Paket{' '}
+              <strong className="text-signal-2">
+                {PACKAGE_LABELS[initialPackage as keyof typeof PACKAGE_LABELS]}
+              </strong>
+              .
+            </p>
+            <p className="text-paper-mute">
+              Beschreiben Sie kurz Ihr Vorhaben – ich melde mich mit konkreten
+              Details und einer Festpreis-Einschätzung.
+            </p>
+          </div>
+        </div>
+      )}
+
       <AnimatePresence>
         {state.status === 'error' && state.message && (
           <motion.div
@@ -228,6 +315,7 @@ export function KontaktForm() {
         )}
       </AnimatePresence>
 
+      {/* Honeypot - unverändert */}
       <div
         className="absolute -left-[9999px] w-px h-px overflow-hidden"
         aria-hidden
@@ -309,6 +397,28 @@ export function KontaktForm() {
         />
       </div>
 
+      {/* Bestehende Website (NEU - optional) */}
+      <div>
+        <label htmlFor="existing_website" className={LABEL_CLASS}>
+          Bestehende Website{' '}
+          <span className="text-paper-mute/70 normal-case">(optional)</span>
+        </label>
+        <input
+          type="url"
+          id="existing_website"
+          name="existing_website"
+          placeholder="https://"
+          autoComplete="url"
+          inputMode="url"
+          aria-invalid={Boolean(state.errors.existing_website)}
+          className={INPUT_CLASS}
+        />
+        {state.errors.existing_website && (
+          <p className="mt-2 text-sm text-error">{state.errors.existing_website}</p>
+        )}
+      </div>
+
+      {/* Topic-Dropdown — neu mit 6 Optionen */}
       <div>
         <label htmlFor="topic" className={LABEL_CLASS}>
           Worum geht es? <span className="text-signal-2">*</span>
@@ -317,15 +427,13 @@ export function KontaktForm() {
           id="topic"
           name="topic"
           required
-          defaultValue=""
+          value={topicValue}
+          onChange={(e) => setTopicValue(e.target.value as LeadInput['topic'])}
           className={INPUT_CLASS}
         >
-          <option value="" disabled>
-            Bitte auswählen
-          </option>
-          {TOPICS.map((t) => (
-            <option key={t.value} value={t.value}>
-              {t.label}
+          {TOPIC_OPTIONS.map((value) => (
+            <option key={value} value={value}>
+              {TOPIC_LABELS[value]}
             </option>
           ))}
         </select>
@@ -334,9 +442,31 @@ export function KontaktForm() {
         )}
       </div>
 
+      {/* Paket-Interesse (NEU - optional) */}
+      <div>
+        <label htmlFor="package_interest" className={LABEL_CLASS}>
+          Interessantes Paket{' '}
+          <span className="text-paper-mute/70 normal-case">(optional)</span>
+        </label>
+        <select
+          id="package_interest"
+          name="package_interest"
+          value={packageValue}
+          onChange={(e) => setPackageValue(e.target.value)}
+          className={INPUT_CLASS}
+        >
+          <option value="">— Keine Vorauswahl —</option>
+          {PACKAGE_OPTIONS.map((value) => (
+            <option key={value} value={value}>
+              {PACKAGE_LABELS[value]}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div>
         <label htmlFor="message" className={LABEL_CLASS}>
-          Worum geht es konkret? <span className="text-signal-2">*</span>
+          Ihre Nachricht <span className="text-signal-2">*</span>
         </label>
         <textarea
           id="message"

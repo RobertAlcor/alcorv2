@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { leadSchema, type LeadInput } from '@/lib/validation'
+import { leadSchema } from '@/lib/validation'
 import { supabaseAdmin } from '@/lib/supabase'
 import {
   sendLeadNotification,
@@ -33,14 +33,12 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json()
     const parsed = extendedSchema.safeParse(body)
-
     if (!parsed.success) {
       return NextResponse.json(
         { ok: false, errors: parsed.error.flatten().fieldErrors },
         { status: 400 }
       )
     }
-
     const data = parsed.data
 
     // Honeypot
@@ -55,7 +53,6 @@ export async function POST(req: NextRequest) {
     }
 
     const source = req.headers.get('referer') ?? req.headers.get('origin') ?? 'direct'
-
     const refNumber = generateRefNumber()
 
     // Persist
@@ -67,9 +64,10 @@ export async function POST(req: NextRequest) {
       company: data.company ?? null,
       topic: data.topic,
       message: data.message,
+      package_interest: data.package_interest ?? null,
+      existing_website: data.existing_website ?? null,
       source,
     })
-
     if (dbError) {
       console.error('Supabase insert error:', dbError)
     }
@@ -82,6 +80,8 @@ export async function POST(req: NextRequest) {
       topic: data.topic,
       message: data.message,
       website: data.website,
+      package_interest: data.package_interest,
+      existing_website: data.existing_website,
       source,
     }
 

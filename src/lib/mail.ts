@@ -14,10 +14,19 @@ if (!resendKey) {
 const resend = new Resend(resendKey)
 
 const TOPIC_LABEL: Record<Lead['topic'], string> = {
+  general: 'Allgemeine Anfrage',
+  pricing: 'Preisinformation',
   'new-website': 'Neue Website erstellen',
   relaunch: 'Bestehende Website überarbeiten',
-  seo: 'SEO-Beratung',
-  other: 'Etwas anderes',
+  seo: 'SEO / Sichtbarkeit',
+  other: 'Sonstiges',
+}
+
+const PACKAGE_LABEL: Record<NonNullable<Lead['package_interest']>, string> = {
+  starter: 'Starter',
+  business: 'Business',
+  premium: 'Premium',
+  unsure: 'Weiß noch nicht',
 }
 
 const CHANNEL_LABEL = {
@@ -380,6 +389,17 @@ ${infoBox([
     ? [{ label: 'Firma', value: escape(lead.company) }]
     : []),
   { label: 'Thema', value: TOPIC_LABEL[lead.topic] },
+  ...(lead.package_interest
+    ? [{ label: 'Paket', value: PACKAGE_LABEL[lead.package_interest] }]
+    : []),
+  ...(lead.existing_website
+    ? [
+        {
+          label: 'Website',
+          value: `<a href="${escape(lead.existing_website)}" target="_blank" rel="noopener" style="color:${C.accentDark};text-decoration:none">${escape(lead.existing_website)}</a>`,
+        },
+      ]
+    : []),
 ])}
 
 ${sectionLabel('Nachricht')}
@@ -413,6 +433,12 @@ ${infoBox([
     ? [{ label: 'Firma', value: escape(lead.company) }]
     : []),
   { label: 'Thema', value: TOPIC_LABEL[lead.topic] },
+  ...(lead.package_interest
+    ? [{ label: 'Paket', value: PACKAGE_LABEL[lead.package_interest] }]
+    : []),
+  ...(lead.existing_website
+    ? [{ label: 'Website', value: escape(lead.existing_website) }]
+    : []),
 ])}
 
 ${sectionLabel('Ihre Nachricht')}
