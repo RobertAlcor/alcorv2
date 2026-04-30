@@ -1,34 +1,37 @@
-# v23 — Paket-Vorauswahl + erweitertes Kontaktformular
+# v23b — Admin-CRM Bonus: Paket + Website anzeigen
 
-## Überblick
+## Was sich ändert
 
-3 neue Features im Kontaktformular:
+In der Lead-Liste im Admin-Bereich werden jetzt **2 zusätzliche Infos** angezeigt — sofern der Kunde sie ausgefüllt hat:
 
-1. **Paket-Vorauswahl aus /preise**: Klickt der Kunde auf der Preise-Seite z.B. „Starter anfragen", landet er im Kontaktformular mit vorausgewähltem Paket und „Preisinformation" als Thema.
-2. **Themen-Dropdown** „Worum geht es?" mit 6 Optionen statt bisher 4.
-3. **Bestehende Website** als optionales URL-Feld.
+1. **Paket-Badge** neben dem Topic, z.B. `[Tag] Paket: Business` mit Akzent-Farbe
+2. **Website-Link** bei den Kontakt-Links (Email, Phone, WhatsApp, **Website**)
 
-## Schritt 1 — Supabase-Migration ausführen
+Beides wird **nur eingeblendet wenn vorhanden** — bei Anfragen ohne Paket-Wahl bleibt die Anzeige unverändert.
 
-**Wichtig zuerst:** Im Supabase-Dashboard die SQL-Migration ausführen:
+## Vorbedingung
 
-1. Supabase öffnen → SQL Editor → New Query
-2. Inhalt von `sql/07-package-interest-migration.sql` einfügen
-3. **Run**
+v23 muss installiert sein (SQL-Migration ausgeführt, Form erweitert). Sonst gibt es keine Daten zum Anzeigen.
 
-Das fügt 2 neue Spalten zur `leads`-Tabelle hinzu (`package_interest`, `existing_website`) und einen Index.
+## Schritt 1 — Files entpacken
 
-## Schritt 2 — Files entpacken
+ZIP entpacken und über Projekt-Root ziehen, beide Files überschreiben:
 
-ZIP ins Projekt-Root entpacken, alles überschreiben.
+- `src/lib/lead-status.ts` (Type erweitert + LEAD_PACKAGE_LABEL)
+- `src/components/admin/lead-row.tsx` (Anzeige erweitert)
 
-Geänderte Files:
-- `src/lib/validation.ts` (Topic-Enum erweitert, neue Felder)
-- `src/lib/supabase.ts` (Lead-Type erweitert)
-- `src/lib/mail.ts` (TOPIC_LABEL erweitert, Templates zeigen Paket + Website)
-- `src/app/api/lead/route.ts` (DB-Insert mit neuen Feldern)
-- `src/components/sections/pricing-card.tsx` (Buttons mit ?paket-Links)
-- `src/components/sections/kontakt-form.tsx` (URL-Param-Vorauswahl, neue Felder)
+## Schritt 2 — DB-Query prüfen
+
+Wichtig: Schau dass dein DB-Query der die Leads lädt **die neuen Spalten mitlädt**.
+
+Falls du `select('*')` verwendest, ist alles automatisch dabei — fertig.
+
+Falls du explizit Spalten aufzählst (irgendwo in `src/app/admin/page.tsx` oder einer Server Action), musst du dort `package_interest` und `existing_website` ergänzen:
+
+```typescript
+.from('leads')
+.select('id, ref_number, name, email, phone, company, topic, message, source, status, admin_notes, last_contact_at, created_at, updated_at, package_interest, existing_website')
+```
 
 ## Schritt 3 — Test lokal
 
@@ -37,51 +40,31 @@ npm run type-check
 npm run dev
 ```
 
-**Test-Szenarien:**
-
-1. **Direkter Aufruf**: http://localhost:3000/kontakt
-   - Topic-Dropdown steht auf „Allgemeine Anfrage"
-   - Paket-Dropdown ist leer
-   - Kein Info-Banner
-
-2. **Aus Preise-Seite (Starter)**: http://localhost:3000/preise → Klick auf „Starter anfragen"
-   - Landet auf `/kontakt?paket=starter&thema=pricing`
-   - Info-Banner oben: „Sie interessieren sich für das Paket Starter."
-   - Topic vorausgewählt: „Preisinformation"
-   - Paket vorausgewählt: „Starter"
-
-3. **URL-Validation**: Bei „Bestehende Website" eine ungültige URL eingeben (z.B. „abc") → Fehlermeldung beim Absenden. Mit `https://example.com` → OK.
-
-4. **Mail-Test**: Form ausfüllen + absenden → in der Bestätigungsmail (an dich) sollten Paket und Website-URL erscheinen.
+1. Im Admin-Panel → Tab "Anfragen"
+2. Bestehende Anfragen sollten unverändert aussehen (kein Paket, keine Website-URL)
+3. Neue Test-Anfrage über `/preise → Starter anfragen` einreichen → in der Anfragen-Liste sollte das Paket-Badge erscheinen
+4. Anfrage über `/kontakt` mit ausgefüllter Website-URL einreichen → Website-Link sollte bei den Kontakt-Links auftauchen, klickbar in neuem Tab
 
 ## Schritt 4 — Deploy
 
 ```powershell
 git add .
-git commit -m "feat: package preselect from /preise, topic dropdown, existing website field"
+git commit -m "feat: admin CRM shows package interest and existing website"
 git push
 ```
 
-## Verhalten der URL-Parameter
+## Vorher / Nachher
 
-| URL | Topic vorausgewählt | Paket vorausgewählt |
-|-----|---------------------|---------------------|
-| `/kontakt` | Allgemeine Anfrage | — |
-| `/kontakt?thema=pricing` | Preisinformation | — |
-| `/kontakt?paket=starter` | Preisinformation | Starter |
-| `/kontakt?paket=business` | Preisinformation | Business |
-| `/kontakt?paket=premium` | Preisinformation | Premium |
-| `/kontakt?paket=unsure` | Preisinformation | Weiß noch nicht |
-| `/kontakt?thema=relaunch` | Bestehende Website überarbeiten | — |
-| `/kontakt?thema=new-website` | Neue Website | — |
-| `/kontakt?thema=seo` | SEO / Sichtbarkeit | — |
+**Vorher:**
+```
+Robert Alchimowicz · Webdesign Alcor
+Allgemeine Anfrage
+✉ robert@example.at  ☎ +43 …  💬 WhatsApp
+```
 
-Die Werte sind weiterhin änderbar — User kann z.B. die Paket-Auswahl wieder rausnehmen oder das Thema umstellen.
-
-## Spam-Schutz unverändert
-
-Der Honeypot `website` (versteckt) bleibt unverändert. Das neue Feld heißt `existing_website` damit es nicht kollidiert.
-
-## CRM / Admin-Panel
-
-Falls du im Admin-CRM die neuen Felder anzeigen willst (Paket-Interesse pro Lead), kannst du in deinem Lead-Detail-View einfach `lead.package_interest` und `lead.existing_website` ausgeben. Brauchst du Hilfe damit, schick mir die Admin-Lead-Detail-Component, dann erweitere ich die.
+**Nachher (Anfrage aus Preise-Seite mit ausgefüllter Website):**
+```
+Robert Alchimowicz · Webdesign Alcor
+Preisinformation  [🏷 Paket: Business]
+✉ robert@example.at  ☎ +43 …  💬 WhatsApp  🌐 alte-site.at
+```

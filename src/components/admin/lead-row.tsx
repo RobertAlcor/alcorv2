@@ -10,6 +10,8 @@ import {
   ChevronDown,
   ChevronUp,
   StickyNote,
+  Globe,
+  Tag,
 } from 'lucide-react'
 import { NotesEditor } from './notes-editor'
 import {
@@ -19,6 +21,7 @@ import {
   LEAD_STATUS_ORDER,
   LEAD_STATUS_COLOR,
   LEAD_TOPIC_LABEL,
+  LEAD_PACKAGE_LABEL,
 } from '@/lib/lead-status'
 
 type Props = {
@@ -39,6 +42,11 @@ export function LeadRow({ lead, onChange }: Props) {
 
   const whatsappLink = lead.phone
     ? `https://wa.me/${lead.phone.replace(/\D/g, '')}?text=${encodeURIComponent(`Hallo ${lead.name.split(' ')[0]}, danke für Ihre Anfrage. `)}`
+    : null
+
+  // Bestehende Website hübsch anzeigen (ohne https://)
+  const websiteDisplay = lead.existing_website
+    ? lead.existing_website.replace(/^https?:\/\//, '').replace(/\/$/, '')
     : null
 
   async function handleStatusChange(newStatus: LeadStatus) {
@@ -106,9 +114,21 @@ export function LeadRow({ lead, onChange }: Props) {
           )}
         </div>
 
-        <p className="text-sm text-paper-mute mb-3">
-          <span className="text-paper">{LEAD_TOPIC_LABEL[lead.topic]}</span>
-        </p>
+        {/* Topic + Paket-Interesse */}
+        <div className="flex flex-wrap items-center gap-2 mb-3">
+          <span className="text-sm text-paper">
+            {LEAD_TOPIC_LABEL[lead.topic]}
+          </span>
+          {lead.package_interest && (
+            <span
+              className="inline-flex items-center gap-1 text-[0.65rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-sm bg-signal/15 text-signal-2 border border-signal/30"
+              title="Vom Kunden ausgewähltes Paket-Interesse"
+            >
+              <Tag className="w-3 h-3" strokeWidth={2} />
+              Paket: {LEAD_PACKAGE_LABEL[lead.package_interest]}
+            </span>
+          )}
+        </div>
 
         <div className="flex flex-wrap gap-3 mb-3">
           <a
@@ -136,6 +156,18 @@ export function LeadRow({ lead, onChange }: Props) {
             >
               <MessageCircle className="w-3 h-3" strokeWidth={1.75} />
               WhatsApp
+            </a>
+          )}
+          {lead.existing_website && websiteDisplay && (
+            <a
+              href={lead.existing_website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs text-paper-mute hover:text-signal-2 transition-colors"
+              title={lead.existing_website}
+            >
+              <Globe className="w-3 h-3" strokeWidth={1.75} />
+              {websiteDisplay}
             </a>
           )}
         </div>

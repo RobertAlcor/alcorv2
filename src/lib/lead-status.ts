@@ -47,6 +47,12 @@ export const LEAD_STATUS_COLOR: Record<
   },
 }
 
+export type LeadPackageInterest =
+  | 'starter'
+  | 'business'
+  | 'premium'
+  | 'unsure'
+
 export type AdminLead = {
   id: string
   ref_number: string | null
@@ -54,7 +60,7 @@ export type AdminLead = {
   email: string
   phone: string | null
   company: string | null
-  topic: 'new-website' | 'relaunch' | 'seo' | 'other'
+  topic: 'general' | 'pricing' | 'new-website' | 'relaunch' | 'seo' | 'other'
   message: string
   source: string | null
   status: LeadStatus
@@ -62,11 +68,23 @@ export type AdminLead = {
   last_contact_at: string | null
   created_at: string
   updated_at: string
+  // Felder aus v23-Migration
+  package_interest: LeadPackageInterest | null
+  existing_website: string | null
 }
 
 export const LEAD_TOPIC_LABEL: Record<AdminLead['topic'], string> = {
+  general: 'Allgemeine Anfrage',
+  pricing: 'Preisinformation',
   'new-website': 'Neue Website',
   relaunch: 'Relaunch',
   seo: 'SEO-Beratung',
   other: 'Sonstiges',
+}
+
+export const LEAD_PACKAGE_LABEL: Record<LeadPackageInterest, string> = {
+  starter: 'Starter',
+  business: 'Business',
+  premium: 'Premium',
+  unsure: 'Weiß noch nicht',
 }
