@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { SITE } from '@/lib/site'
 import { getAllPosts, getAllTags, slugifyTag } from '@/lib/blog'
+import { getPublishedBezirke } from '@/lib/bezirke'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
@@ -84,6 +85,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly',
       priority: 0.7,
     },
+    // ─── NEU: Bezirks-Hub ───
+    {
+      url: `${SITE.url}/webdesign`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
     {
       url: `${SITE.url}/impressum`,
       lastModified: now,
@@ -97,6 +105,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.3,
     },
   ]
+
+  // ─── NEU: Bezirks-Pages dynamisch ───
+  const bezirkRoutes: MetadataRoute.Sitemap = getPublishedBezirke().map((b) => ({
+    url: `${SITE.url}/webdesign/${b.slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly' as const,
+    priority: 0.85,
+  }))
 
   // Dynamic blog posts
   const posts = await getAllPosts()
@@ -116,5 +132,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }))
 
-  return [...staticRoutes, ...postRoutes, ...tagRoutes]
+  return [...staticRoutes, ...bezirkRoutes, ...postRoutes, ...tagRoutes]
 }

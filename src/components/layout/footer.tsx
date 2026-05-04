@@ -2,8 +2,11 @@ import Link from 'next/link'
 import { ExternalLink } from 'lucide-react'
 import { SITE, NAV, SISTER_SITES } from '@/lib/site'
 import { APP_VERSION } from '@/lib/version'
+import { getPublishedBezirke } from '@/lib/bezirke'
 
 export function Footer() {
+  const bezirke = getPublishedBezirke().sort((a, b) => a.num - b.num)
+
   return (
     <footer className="border-line bg-deep mt-32 border-t">
       <div className="container-fluid grid gap-12 pt-16 pb-12 md:grid-cols-4">
@@ -83,6 +86,36 @@ export function Footer() {
               <br />
               {SITE.address.district}
             </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* ─── NEU: Bezirks-Navigation für Internal Linking + Local SEO ─── */}
+      <div className="border-line border-t">
+        <div className="container-fluid py-8">
+          <div className="flex flex-wrap items-baseline justify-between gap-4 mb-5">
+            <h3 className="text-signal-2 font-sans text-xs font-semibold tracking-[0.16em] uppercase">
+              Webdesign in jedem Wiener Bezirk
+            </h3>
+            <Link
+              href="/webdesign"
+              className="text-paper-mute hover:text-signal-2 text-xs transition-colors"
+            >
+              Alle 23 Bezirke ansehen →
+            </Link>
+          </div>
+          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-2">
+            {bezirke.map((b) => (
+              <li key={b.slug}>
+                <Link
+                  href={`/webdesign/${b.slug}`}
+                  className="text-paper-mute hover:text-paper text-xs transition-colors"
+                >
+                  <span className="font-mono text-paper-dim">{b.plz}</span>{' '}
+                  {b.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
