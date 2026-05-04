@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'motion/react'
@@ -8,8 +9,14 @@ import { NAV, SITE } from '@/lib/site'
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
   const buttonRef = useRef<HTMLButtonElement | null>(null)
+
+  // Mount-Check für SSR-safe Portal
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Close on route change
   useEffect(() => {
@@ -50,6 +57,184 @@ export function MobileMenu() {
     }
   }, [open])
 
+  // Overlay-Inhalt — wird via Portal direkt in <body> gerendert
+  const overlay = (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Hauptnavigation"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          className="fixed inset-0 z-[200] md:hidden bg-deep/95 backdrop-blur-xl"
+          style={{ height: '100dvh' }}
+        >
+          {/* Atmospheric gradient */}
+          <motion.div
+            aria-hidden
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="absolute -top-1/4 -right-1/4 w-[80vw] h-[80vw] pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(circle, rgba(var(--signal-rgb),0.22) 0%, transparent 60%)',
+              filter: 'blur(60px)',
+            }}
+          />
+
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{
+              type: 'spring',
+              damping: 28,
+              stiffness: 280,
+              mass: 0.8,
+            }}
+            className="relative h-full flex flex-col bg-deep overflow-hidden"
+            style={{ height: '100dvh' }}
+          >
+            {/* Top bar mit echtem Close-Button (X) */}
+            <div className="container-fluid flex items-center justify-between py-5 border-b border-line shrink-0">
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.15 }}
+              >
+                <Link
+                  href="/"
+                  className="group font-serif text-2xl tracking-tight text-paper inline-flex items-baseline"
+                  onClick={() => setOpen(false)}
+                >
+                  <span className="text-signal-2 italic text-[1.7rem] inline-block transition-transform duration-500 group-hover:rotate-[-8deg]">
+                    A
+                  </span>
+                  <span>lcor</span>
+                </Link>
+              </motion.div>
+
+              {/* Echter Close-Button - kein leerer Spacer mehr */}
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                aria-label="Menü schließen"
+                className="w-11 h-11 flex items-center justify-center text-paper hover:text-signal-2 transition-colors -mr-2"
+              >
+                <CloseIcon className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Navigation */}
+            <nav
+              aria-label="Hauptnavigation"
+              className="flex-1 container-fluid flex flex-col justify-center py-6 overflow-y-auto min-h-0"
+            >
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-xs font-semibold tracking-[0.18em] uppercase text-signal-2 mb-6"
+              >
+                <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
+                WEBDESIGN ALCOR · SEIT 2002
+              </motion.p>
+
+              <ul className="space-y-0">
+                {NAV.main.map((item, idx) => {
+                  const isActive =
+                    (item.href as string) === '/'
+                      ? pathname === '/'
+                      : pathname.startsWith(item.href)
+                  return (
+                    <motion.li
+                      key={item.href}
+                      initial={{ opacity: 0, x: 40 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{
+                        type: 'spring',
+                        damping: 22,
+                        stiffness: 200,
+                        delay: 0.25 + idx * 0.05,
+                      }}
+                    >
+                      <Link
+                        href={item.href}
+                        className="group relative flex items-center justify-between py-4 border-b border-line transition-colors hover:border-signal-2"
+                        onClick={() => setOpen(false)}
+                      >
+                        {isActive && (
+                          <motion.span
+                            layoutId="active-mobile"
+                            className="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-8 bg-signal-2 rounded-full"
+                            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                          />
+                        )}
+                        <span className="flex items-center gap-4">
+                          <span className="font-mono text-[0.7rem] text-paper-dim w-6 transition-colors group-hover:text-signal-2">
+                            0{idx + 1}
+                          </span>
+                          <span
+                            className={`font-serif text-[2rem] sm:text-4xl leading-none tracking-tight transition-all duration-300 ${
+                              isActive
+                                ? 'text-signal-2 italic'
+                                : 'text-paper group-hover:text-signal-2 group-hover:translate-x-1'
+                            }`}
+                          >
+                            {item.label}
+                          </span>
+                        </span>
+                        <ArrowIcon className="w-5 h-5 text-paper-dim group-hover:text-signal-2 group-hover:translate-x-1 transition-all duration-300 shrink-0" />
+                      </Link>
+                    </motion.li>
+                  )
+                })}
+              </ul>
+            </nav>
+
+            {/* Quick contacts */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              className="container-fluid border-t border-line py-6 shrink-0"
+            >
+              <p className="text-[0.7rem] font-semibold tracking-[0.16em] uppercase text-paper-dim mb-3">
+                Direkt erreichen
+              </p>
+              <div className="grid grid-cols-3 gap-2">
+                <ContactTile
+                  href={`tel:${SITE.contact.phoneRaw}`}
+                  label="Anruf"
+                  icon={<PhoneIcon className="w-4 h-4" />}
+                  aria="Telefonisch anrufen"
+                />
+                <ContactTile
+                  href={`mailto:${SITE.contact.email}`}
+                  label="E-Mail"
+                  icon={<MailIcon className="w-4 h-4" />}
+                  aria="E-Mail schreiben"
+                />
+                <ContactTile
+                  href={SITE.contact.whatsappPrefilled}
+                  label="WhatsApp"
+                  icon={<WhatsAppIcon className="w-4 h-4" />}
+                  aria="WhatsApp schreiben"
+                  external
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+
   return (
     <>
       <button
@@ -64,174 +249,10 @@ export function MobileMenu() {
         <AnimatedBurger isOpen={open} />
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            id="mobile-menu"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Hauptnavigation"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="fixed inset-0 z-[100] md:hidden bg-deep/95 backdrop-blur-xl"
-            style={{ height: '100dvh' }}
-          >
-            {/* Atmospheric gradient */}
-            <motion.div
-              aria-hidden
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="absolute -top-1/4 -right-1/4 w-[80vw] h-[80vw] pointer-events-none"
-              style={{
-                background:
-                  'radial-gradient(circle, rgba(var(--signal-rgb),0.22) 0%, transparent 60%)',
-                filter: 'blur(60px)',
-              }}
-            />
-
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{
-                type: 'spring',
-                damping: 28,
-                stiffness: 280,
-                mass: 0.8,
-              }}
-              className="relative h-full flex flex-col bg-deep overflow-hidden"
-              style={{ height: '100dvh' }}
-            >
-              {/* Top bar */}
-              <div className="container-fluid flex items-center justify-between py-5 border-b border-line shrink-0">
-                <motion.div
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.15 }}
-                >
-                  <Link
-                    href="/"
-                    className="group font-serif text-2xl tracking-tight text-paper inline-flex items-baseline"
-                    onClick={() => setOpen(false)}
-                  >
-                    <span className="text-signal-2 italic text-[1.7rem] inline-block transition-transform duration-500 group-hover:rotate-[-8deg]">
-                      A
-                    </span>
-                    <span>lcor</span>
-                  </Link>
-                </motion.div>
-
-                {/* Visual placeholder where burger sits - actual button is fixed top-right */}
-                <div className="w-11 h-11" aria-hidden />
-              </div>
-
-              {/* Navigation */}
-              <nav
-                aria-label="Hauptnavigation"
-                className="flex-1 container-fluid flex flex-col justify-center py-6 overflow-y-auto min-h-0"
-              >
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-xs font-semibold tracking-[0.18em] uppercase text-signal-2 mb-6"
-                >
-                  <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
-                  WEBDESIGN ALCOR · SEIT 2002
-                </motion.p>
-
-                <ul className="space-y-0">
-                  {NAV.main.map((item, idx) => {
-                    const isActive =
-                      (item.href as string) === '/'
-                        ? pathname === '/'
-                        : pathname.startsWith(item.href)
-                    return (
-                      <motion.li
-                        key={item.href}
-                        initial={{ opacity: 0, x: 40 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{
-                          type: 'spring',
-                          damping: 22,
-                          stiffness: 200,
-                          delay: 0.25 + idx * 0.05,
-                        }}
-                      >
-                        <Link
-                          href={item.href}
-                          className="group relative flex items-center justify-between py-4 border-b border-line transition-colors hover:border-signal-2"
-                          onClick={() => setOpen(false)}
-                        >
-                          {/* Active indicator line */}
-                          {isActive && (
-                            <motion.span
-                              layoutId="active-mobile"
-                              className="absolute -left-2 top-1/2 -translate-y-1/2 w-1 h-8 bg-signal-2 rounded-full"
-                              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-                            />
-                          )}
-                          <span className="flex items-center gap-4">
-                            <span className="font-mono text-[0.7rem] text-paper-dim w-6 transition-colors group-hover:text-signal-2">
-                              0{idx + 1}
-                            </span>
-                            <span
-                              className={`font-serif text-[2rem] sm:text-4xl leading-none tracking-tight transition-all duration-300 ${
-                                isActive
-                                  ? 'text-signal-2 italic'
-                                  : 'text-paper group-hover:text-signal-2 group-hover:translate-x-1'
-                              }`}
-                            >
-                              {item.label}
-                            </span>
-                          </span>
-                          <ArrowIcon className="w-5 h-5 text-paper-dim group-hover:text-signal-2 group-hover:translate-x-1 transition-all duration-300 shrink-0" />
-                        </Link>
-                      </motion.li>
-                    )
-                  })}
-                </ul>
-              </nav>
-
-              {/* Quick contacts */}
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                className="container-fluid border-t border-line py-6 shrink-0"
-              >
-                <p className="text-[0.7rem] font-semibold tracking-[0.16em] uppercase text-paper-dim mb-3">
-                  Direkt erreichen
-                </p>
-                <div className="grid grid-cols-3 gap-2">
-                  <ContactTile
-                    href={`tel:${SITE.contact.phoneRaw}`}
-                    label="Anruf"
-                    icon={<PhoneIcon className="w-4 h-4" />}
-                    aria="Telefonisch anrufen"
-                  />
-                  <ContactTile
-                    href={`mailto:${SITE.contact.email}`}
-                    label="E-Mail"
-                    icon={<MailIcon className="w-4 h-4" />}
-                    aria="E-Mail schreiben"
-                  />
-                  <ContactTile
-                    href={SITE.contact.whatsappPrefilled}
-                    label="WhatsApp"
-                    icon={<WhatsAppIcon className="w-4 h-4" />}
-                    aria="WhatsApp schreiben"
-                    external
-                  />
-                </div>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Overlay via Portal direkt in <body> rendern.
+          Umgeht den Containing-Block-Bug, der durch backdrop-filter
+          im Header-Vorfahren entsteht. */}
+      {mounted && createPortal(overlay, document.body)}
     </>
   )
 }
@@ -249,7 +270,7 @@ function ContactTile({
   aria: string
   external?: boolean
 }) {
-  const Comp = (
+  return (
     <a
       href={href}
       className="group flex flex-col items-center gap-1.5 py-3 bg-deep-2 border border-line rounded-sm hover:border-signal-2 hover:-translate-y-0.5 transition-all duration-300"
@@ -264,12 +285,10 @@ function ContactTile({
       </span>
     </a>
   )
-  return Comp
 }
 
 /**
  * Animated Burger that morphs to X
- * Uses two lines that rotate and translate to form X
  */
 function AnimatedBurger({ isOpen }: { isOpen: boolean }) {
   return (
@@ -305,6 +324,24 @@ function AnimatedBurger({ isOpen }: { isOpen: boolean }) {
         transition={{ type: 'spring', damping: 22, stiffness: 280 }}
       />
     </span>
+  )
+}
+
+function CloseIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
   )
 }
 
