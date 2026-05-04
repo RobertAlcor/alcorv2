@@ -39,8 +39,7 @@ export const SITE = {
     currency: 'EUR',
     deliveryDays: 7,
     hostingYearly: 99,
-    hostingIncluded:
-      'Hosting, kleinere Updates, Inhaltspflege bis 15 Min/Vorgang',
+    hostingIncluded: 'Hosting, kleinere Updates, Inhaltspflege bis 15 Min/Vorgang',
     hourlyRate: 85,
     hourlyRateUnit: '€/h netto',
   },
@@ -113,8 +112,8 @@ export const SISTER_SITES = [
     role: 'SEO-Funnel & Pricing-Vergleich',
   },
   {
-    name: 'psychologen-webdesign.wien',
-    url: 'https://psychologen-webdesign.wien',
+    name: 'psychologen-webdesign.at',
+    url: 'https://psychologen-webdesign.at',
     role: 'Niche: Praxis-Websites für Therapeuten',
   },
   {

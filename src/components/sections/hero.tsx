@@ -103,7 +103,7 @@ export function Hero() {
         >
           Sie waren heute schon auf 8 Webagentur-Seiten.
           <br />
-          <em className="shimmer font-serif italic not-italic">Alle sahen gleich aus.</em>
+          <em className="shimmer font-serif italic">Alle sahen gleich aus.</em>
         </motion.h1>
 
         {/* Subline */}
@@ -117,7 +117,7 @@ export function Hero() {
           Stockfotos. Lila Gradients. „Wir sind Ihre digitale Familie."
           <br />
           <span className="text-paper">
-            Ich bin keine Familie. Ich bin Robert. Ich schreibe Code. Seit{' '}
+            Ich bin keine Familie. Ich bin Robert. Ich schreibe Code seit{' '}
             {SITE.founder.yearsActive} Jahren.
           </span>
         </motion.p>

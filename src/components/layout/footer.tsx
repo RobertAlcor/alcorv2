@@ -5,31 +5,30 @@ import { APP_VERSION } from '@/lib/version'
 
 export function Footer() {
   return (
-    <footer className="border-t border-line bg-deep mt-32">
-      <div className="container-fluid pt-16 pb-12 grid gap-12 md:grid-cols-4">
+    <footer className="border-line bg-deep mt-32 border-t">
+      <div className="container-fluid grid gap-12 pt-16 pb-12 md:grid-cols-4">
         <div className="md:col-span-2">
-          <Link href="/" className="flex items-baseline gap-1.5 mb-5">
-            <span className="font-serif text-2xl tracking-tight text-paper">
-              <span className="text-signal-2 italic text-[1.7rem]">A</span>
+          <Link href="/" className="mb-5 flex items-baseline gap-1.5">
+            <span className="text-paper font-serif text-2xl tracking-tight">
+              <span className="text-signal-2 text-[1.7rem] italic">A</span>
               LCOR
             </span>
-            <span className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-paper-mute">
+            <span className="text-paper-mute font-mono text-[0.65rem] tracking-[0.18em] uppercase">
               Group
             </span>
           </Link>
-          <p className="text-paper-mute text-sm max-w-md leading-relaxed">
-            {SITE.tagline}. Handgeschriebener Code statt WordPress. Eine Person,
-            voller Code-Besitz.
+          <p className="text-paper-mute max-w-md text-sm leading-relaxed">
+            {SITE.tagline}. Handgeschriebener Code statt WordPress. Eine Person, voller
+            Code-Besitz.
           </p>
-          <p className="text-paper-dim text-xs mt-6 max-w-md leading-relaxed italic">
-            Diese Seite lädt in unter einer Sekunde, hat 0 Tracking-Cookies und
-            wurde von Hand geschrieben. Alles, was ich predige, lebe ich hier
-            vor.
+          <p className="text-paper-dim text-s mt-6 max-w-md leading-relaxed italic">
+            Diese Seite lädt in unter einer Sekunde, hat 0 Tracking-Cookies und wurde von
+            Hand geschrieben. Alles, was ich predige, lebe ich hier vor.
           </p>
         </div>
 
         <div>
-          <h3 className="font-sans text-xs font-semibold tracking-[0.16em] text-paper-dim uppercase mb-4">
+          <h3 className="text-paper-dim mb-4 font-sans text-xs font-semibold tracking-[0.16em] uppercase">
             Navigation
           </h3>
           <ul className="space-y-2.5">
@@ -37,7 +36,7 @@ export function Footer() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-sm text-paper-mute hover:text-paper transition-colors"
+                  className="text-paper-mute hover:text-paper text-sm transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -47,10 +46,10 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-sans text-xs font-semibold tracking-[0.16em] text-paper-dim uppercase mb-4">
+          <h3 className="text-paper-dim mb-4 font-sans text-xs font-semibold tracking-[0.16em] uppercase">
             Kontakt
           </h3>
-          <ul className="space-y-2.5 text-sm text-paper-mute">
+          <ul className="text-paper-mute space-y-2.5 text-sm">
             <li>
               <a
                 href={`tel:${SITE.contact.phoneRaw}`}
@@ -62,7 +61,7 @@ export function Footer() {
             <li>
               <a
                 href={`mailto:${SITE.contact.email}`}
-                className="hover:text-paper transition-colors break-all"
+                className="hover:text-paper break-all transition-colors"
               >
                 {SITE.contact.email}
               </a>
@@ -77,7 +76,7 @@ export function Footer() {
                 WhatsApp
               </a>
             </li>
-            <li className="pt-2 text-paper-dim text-xs">
+            <li className="text-paper-dim pt-2 text-xs">
               {SITE.address.street}
               <br />
               {SITE.address.postalCode} {SITE.address.city}
@@ -89,16 +88,16 @@ export function Footer() {
       </div>
 
       {/* Sister Sites */}
-      <div className="border-t border-line">
+      <div className="border-line border-t">
         <div className="container-fluid py-8">
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+          <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
             <div>
-              <h3 className="font-sans text-xs font-semibold tracking-[0.16em] text-signal-2 uppercase mb-2">
+              <h3 className="text-signal-2 mb-2 font-sans text-xs font-semibold tracking-[0.16em] uppercase">
                 Weitere Sites unter ALCOR Group
               </h3>
-              <p className="text-paper-dim text-xs max-w-lg leading-relaxed">
-                Spezialisierte Marken für unterschiedliche Zielgruppen – alle
-                aus einer Hand.
+              <p className="text-paper-dim max-w-lg text-xs leading-relaxed">
+                Spezialisierte Marken für unterschiedliche Zielgruppen – alle aus einer
+                Hand.
               </p>
             </div>
             <ul className="flex flex-col gap-2 md:items-end">
@@ -108,14 +107,14 @@ export function Footer() {
                     href={site.url}
                     target="_blank"
                     rel="noopener"
-                    className="group inline-flex items-center gap-2 text-sm text-paper-mute hover:text-signal-2 transition-colors"
+                    className="group text-paper-mute hover:text-signal-2 inline-flex items-center gap-2 text-sm transition-colors"
                   >
                     <span>{site.name}</span>
                     <ExternalLink
-                      className="w-3 h-3 opacity-50 group-hover:opacity-100 transition-opacity"
+                      className="h-3 w-3 opacity-50 transition-opacity group-hover:opacity-100"
                       strokeWidth={1.75}
                     />
-                    <span className="text-xs text-paper-dim hidden md:inline">
+                    <span className="text-paper-dim hidden text-xs md:inline">
                       · {site.role}
                     </span>
                   </a>
@@ -126,16 +125,18 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-line">
-        <div className="container-fluid py-6 flex flex-wrap items-center justify-between gap-4 text-xs text-paper-dim">
-          <div className="flex items-center gap-4 flex-wrap">
+      <div className="border-line border-t">
+        <div className="container-fluid text-paper-dim flex flex-wrap items-center justify-between gap-4 py-6 text-xs">
+          <div className="flex flex-wrap items-center gap-4">
             <span>
-              © {SITE.founder.foundedIn}–{new Date().getFullYear()}{' '}
-              {SITE.brand} · {SITE.founder.name}
+              © {SITE.founder.foundedIn}–{new Date().getFullYear()} {SITE.brand} ·{' '}
+              {SITE.founder.name}
             </span>
-            <span aria-hidden className="text-paper-dim/40">·</span>
+            <span aria-hidden className="text-paper-dim/40">
+              ·
+            </span>
             <span
-              className="font-mono text-[0.65rem] tracking-wider text-paper-dim/70"
+              className="text-paper-dim/70 font-mono text-[0.65rem] tracking-wider"
               title="Aktuelle Versionsnummer dieser Website"
             >
               v{APP_VERSION}
