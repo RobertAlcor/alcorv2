@@ -23,7 +23,7 @@ export default function ImpressumPage() {
       eyebrow="Rechtliches"
       title="Impressum"
       subtitle="Angaben gemäß §5 ECG und §25 MedienG"
-      lastUpdated="29. April 2026"
+      lastUpdated="4. Mai 2026"
       breadcrumbs={[
         { label: 'Start', href: '/' },
         { label: 'Impressum', href: '/impressum' },
@@ -49,8 +49,8 @@ export default function ImpressumPage() {
       {/* UNTERNEHMENSGEGENSTAND */}
       <Section title="Unternehmensgegenstand">
         <P>
-          Webentwicklung, Webdesign, Suchmaschinenoptimierung (SEO) und
-          IT-Beratung.
+          Webentwicklung, Webdesign, Werbegrafik, Werbetexterei, Berufsfotografie
+          sowie Suchmaschinenoptimierung (SEO) und IT-Beratung.
         </P>
       </Section>
 
@@ -58,14 +58,9 @@ export default function ImpressumPage() {
       <Section title="Rechtsform & Register">
         <DefList
           items={[
-            { term: 'Rechtsform', def: 'Einzelunternehmen (nicht im Firmenbuch eingetragen)' },
             {
-              term: 'GISA-Zahl',
-              def: (
-                <span className="text-paper-mute italic">
-                  wird ergänzt
-                </span>
-              ),
+              term: 'Rechtsform',
+              def: 'Einzelunternehmen (nicht im Firmenbuch eingetragen)',
             },
             {
               term: 'UID-Nummer',
@@ -83,9 +78,71 @@ export default function ImpressumPage() {
         </P>
       </Section>
 
+      {/* GEWERBE & GISA-ZAHLEN */}
+      <Section title="Gewerbe & GISA-Zahlen">
+        <P>
+          Folgende Gewerbeberechtigungen sind im GISA (Gewerbeinformationssystem
+          Austria) eingetragen:
+        </P>
+        <DefList
+          items={[
+            { term: 'Werbeagentur', def: 'GISA-Zahl 39659996' },
+            { term: 'Berufsfotograf', def: 'GISA-Zahl 39660015' },
+            {
+              term: 'Pressefotografie und Fotodesign',
+              def: 'GISA-Zahl 39660022',
+            },
+            { term: 'Werbegrafik-Designer', def: 'GISA-Zahl 39660053' },
+            { term: 'Werbetexter', def: 'GISA-Zahl 39660046' },
+          ]}
+        />
+        <P className="text-sm">
+          Einsicht in das GISA-Register unter{' '}
+          <a
+            href="https://www.gisa.gv.at"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-signal-2 hover:text-signal underline underline-offset-2"
+          >
+            gisa.gv.at
+          </a>
+          .
+        </P>
+      </Section>
+
+      {/* WKO-MITGLIEDSCHAFT */}
+      <Section title="Mitgliedschaft Wirtschaftskammer">
+        <P>
+          Mitglied der Wirtschaftskammer Wien (WKW) in folgenden Fachgruppen:
+        </P>
+        <DefList
+          items={[
+            {
+              term: 'Sparte Information und Consulting',
+              def: 'Fachgruppe Werbung und Marktkommunikation',
+            },
+            {
+              term: 'Sparte Gewerbe und Handwerk',
+              def: 'Fachgruppe der Berufsfotografen',
+            },
+          ]}
+        />
+        <P className="text-sm">
+          Wirtschaftskammer Wien, Straße der Wiener Wirtschaft 1, 1020 Wien ·{' '}
+          <a
+            href="https://www.wko.at"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-signal-2 hover:text-signal underline underline-offset-2"
+          >
+            wko.at
+          </a>
+        </P>
+      </Section>
+
       {/* AUFSICHTSBEHÖRDE */}
       <Section title="Aufsichtsbehörde / Gewerbebehörde">
-        <P>Magistratisches Bezirksamt für den 22. Bezirk</P>
+        <P>Magistratisches Bezirksamt für den 22. Bezirk (Donaustadt)</P>
         <P className="text-sm">
           Schrödingerplatz 1, 1220 Wien
         </P>
@@ -94,7 +151,7 @@ export default function ImpressumPage() {
       {/* ANWENDBARE RECHTSVORSCHRIFTEN */}
       <Section title="Anwendbare Rechtsvorschriften">
         <P>
-          Gewerbeordnung (GewO), abrufbar unter{' '}
+          Gewerbeordnung (GewO 1994), abrufbar unter{' '}
           <a
             href="https://www.ris.bka.gv.at"
             target="_blank"
@@ -103,6 +160,7 @@ export default function ImpressumPage() {
           >
             ris.bka.gv.at
           </a>
+          .
         </P>
       </Section>
 
