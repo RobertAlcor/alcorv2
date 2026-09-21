@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next'
+import { CASES } from '@/lib/cases'
 import { SITE } from '@/lib/site'
 import { getAllPosts, getAllTags, slugifyTag } from '@/lib/blog'
 import { getPublishedBezirke } from '@/lib/bezirke'
@@ -37,24 +38,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
-    {
-      url: `${SITE.url}/referenzen/schmerzfrei-wien`,
+    // Alle Referenzen automatisch aus cases.ts – neue Projekte landen ohne weiteren Handgriff in der Sitemap
+    ...CASES.map((c) => ({
+      url: `${SITE.url}${c.url}`,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'monthly' as const,
       priority: 0.7,
-    },
-    {
-      url: `${SITE.url}/referenzen/buero-reinigung`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${SITE.url}/referenzen/psychologen-webdesign`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
+    })),
     {
       url: `${SITE.url}/ueber-mich`,
       lastModified: now,

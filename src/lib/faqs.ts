@@ -42,7 +42,7 @@ export const FAQS: FAQ[] = [
   {
     question: 'Was ist, wenn sie mir nicht gefällt?',
     answer:
-      'Die Hauptseite wird zuerst mit Beispielbildern erstellt, die später durch echte ersetzt werden. Sie sehen früh, wohin das Design geht, und können steuern. Ich bin nebenbei auch Fotograf – auf Wunsch übernehme ich die Bildproduktion gleich mit, das nutzen Kunden gerne. Fotografie inklusive Bildbearbeitung kostet extra im Paket, aber sehr fair. Bei einer Erfolgsquote von rund 99 Prozent kommt der Fall, dass ein fertiges Design grundlegend nicht passt, in der Praxis nicht vor.',
+      'Die Hauptseite wird zuerst mit Beispielbildern erstellt, die später durch echte ersetzt werden. Sie sehen früh, wohin das Design geht, und können steuern. Ich bin nebenbei auch Fotograf – auf Wunsch übernehme ich die Bildproduktion gleich mit, das nutzen Kunden gerne. Fotografie inklusive Bildbearbeitung kostet extra im Paket, aber sehr fair. Weil Sie den Stand laufend sehen und früh gegensteuern können, kommt es in der Praxis kaum vor, dass ein fertiges Design grundlegend nicht passt.',
   },
   {
     question: 'Kann ich später selbst Inhalte ändern?',
@@ -52,6 +52,6 @@ export const FAQS: FAQ[] = [
   {
     question: 'Warum sollte ich gerade bei Ihnen mein Webdesign machen lassen?',
     answer:
-      'Weil Sie eine Person bekommen, nicht eine Agentur-Hierarchie. Ich entwickle seit 2002 Websites in Wien. Ich schreibe den Code selbst, ich plane das Design selbst, ich kümmere mich selbst um SEO und Launch. Es gibt keinen Account-Manager dazwischen, keine Übersetzung von Brief zu Briefing. Wenn Sie anrufen, sind Sie bei mir. Das ist nicht für jeden der richtige Weg – aber wenn Sie eine Website wollen, die in fünf Jahren noch funktioniert und für die Sie genau wissen, wer dahintersteht, dann passen wir zusammen.',
+      'Weil Sie eine Person bekommen, nicht eine Agentur-Hierarchie. Ich entwickle seit über zehn Jahren Websites in Wien. Ich schreibe den Code selbst, ich plane das Design selbst, ich kümmere mich selbst um SEO und Launch. Es gibt keinen Account-Manager dazwischen, keine Übersetzung von Brief zu Briefing. Wenn Sie anrufen, sind Sie bei mir. Das ist nicht für jeden der richtige Weg – aber wenn Sie eine Website wollen, die in fünf Jahren noch funktioniert und für die Sie genau wissen, wer dahintersteht, dann passen wir zusammen.',
   },
 ]

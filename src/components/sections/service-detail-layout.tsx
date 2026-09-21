@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { CtaBand } from '@/components/sections/cta-band'
 import type { Service } from '@/lib/services'
-import { serviceSchema } from '@/lib/schema'
+import { serviceSchema, faqSchema } from '@/lib/schema'
 import { SITE } from '@/lib/site'
 
 export function ServiceDetailLayout({ service }: { service: Service }) {
@@ -38,7 +38,7 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
             {service.tagline}
           </p>
           <h1 className="font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] tracking-[-0.02em] text-balance mb-8">
-            {service.title}
+            {service.h1 ?? service.title}
           </h1>
           <p className="font-serif italic text-xl md:text-2xl text-paper-mute max-w-3xl leading-snug">
             {service.intro}
@@ -151,6 +151,41 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
           </div>
         </div>
       </section>
+
+      {/* Häufige Fragen zur Leistung (mit FAQ-Schema) */}
+      {service.faqs && service.faqs.length > 0 && (
+        <section className="container-fluid border-line border-t py-20 md:py-28">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(service.faqs)) }}
+          />
+          <div className="mx-auto max-w-3xl">
+            <p className="text-signal-2 mb-6 text-xs font-semibold tracking-[0.18em] uppercase">
+              <span className="bg-signal-2 mr-3 inline-block h-px w-8 align-middle" />
+              Häufige Fragen
+            </p>
+            <h2 className="mb-10 font-serif text-[clamp(1.75rem,4vw,3rem)] leading-[1.1] tracking-[-0.02em] text-balance">
+              Was Kunden zu {service.shortTitle} wissen wollen.
+            </h2>
+            <div className="border-line border-t">
+              {service.faqs.map((faq) => (
+                <details key={faq.question} className="group border-line border-b">
+                  <summary className="text-paper hover:text-signal-2 flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-6 py-5 font-serif text-xl leading-snug transition-colors [&::-webkit-details-marker]:hidden">
+                    <span>{faq.question}</span>
+                    <span
+                      aria-hidden
+                      className="text-signal-2 text-2xl leading-none transition-transform duration-300 group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="text-paper-mute max-w-2xl pr-8 pb-6 leading-relaxed">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <CtaBand
         title={`Interesse an ${service.shortTitle}?`}

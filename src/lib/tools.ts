@@ -51,32 +51,4 @@ export const TOOLS: Tool[] = [
     brandColorAccent: '#9CA3AF',
   },
 
-  {
-    slug: 'leadgen-tool',
-    name: 'Lead-Generator (Wien)',
-    category: 'B2B · Datenakquise',
-    shortDescription:
-      'Filtert nach Bezirk in Wien automatisch potenzielle Geschäftskunden heraus und exportiert die Kontaktdaten als CSV. Ausschließlich für eigene Akquise.',
-    description:
-      'Ein Werkzeug zur eigenen Akquise: Auswahl eines Wiener Bezirks und einer Branche, das Tool sammelt öffentlich verfügbare Geschäftsdaten (Firmenname, Adresse, Telefon, Mobilnummer, Website, Geschäftsführer, etc.) und exportiert sie als CSV mit fortlaufender ID. Nutzung ausschließlich für die eigene Geschäftsentwicklung – die Daten werden nicht weiterverkauft oder geteilt.',
-    features: [
-      'Bezirks-Filter: alle 23 Wiener Bezirke einzeln oder in Kombination',
-      'Branchen-Filter: präzise Auswahl der Zielgruppe',
-      'Strukturierte CSV-Ausgabe: ID, Name, Adresse, Telefon, Mobil, Website, weitere Felder',
-      'Deduplizierung: keine doppelten Einträge im Output',
-      'DSGVO-konforme Verarbeitung: nur öffentlich zugängliche Daten, kein Tracking, lokale Verarbeitung',
-    ],
-    techStack: [
-      'Python 3 (Backend)',
-      'Pandas (CSV-Verarbeitung)',
-      'Public-Data APIs',
-      'Streamlit (lokales UI)',
-    ],
-    status: 'Privat',
-    visibility: 'private',
-    visibilityNote:
-      'Strikt für eigene Akquise. Wird nicht verkauft, nicht lizenziert, nicht weitergegeben. Listed hier nur als Demonstration meiner Fähigkeit, eigene Tools zu bauen, die Geschäftsprozesse beschleunigen.',
-    brandColor: '#0F172A',
-    brandColorAccent: '#64748B',
-  },
 ]

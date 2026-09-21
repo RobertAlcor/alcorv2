@@ -147,7 +147,7 @@ export default function PreisePage() {
                   €{SITE.pricing.hostingYearly}
                 </span>
                 <span className="font-mono text-xs text-paper-mute uppercase tracking-wider">
-                  / Jahr · netto
+                  / Jahr · keine USt.
                 </span>
               </div>
               <p className="text-sm text-paper-mute mt-2">
@@ -207,7 +207,7 @@ export default function PreisePage() {
                   €{SITE.pricing.hourlyRate}
                 </span>
                 <span className="font-mono text-xs text-paper-mute uppercase tracking-wider">
-                  / h · netto
+                  / h · keine USt.
                 </span>
               </div>
               <p className="text-sm text-paper-mute mt-2">

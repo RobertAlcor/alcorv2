@@ -35,8 +35,8 @@ export default function ReferenzenPage() {
             <em className="text-signal-2 italic">Ausführlich.</em>
           </h1>
           <p className="font-serif italic text-xl md:text-2xl text-paper-mute max-w-3xl leading-snug">
-            Echte Projekte, echte Zahlen, echte Probleme. Keine Mockups, keine
-            Stockfotos. Was hier steht, läuft live.
+            Echte Projekte, die live laufen. Zu jedem gibt es Aufgabe, Vorgehen und
+            Technik – und den Link zur Live-Seite, damit Sie selbst nachsehen können.
           </p>
         </div>
       </section>
@@ -49,13 +49,12 @@ export default function ReferenzenPage() {
             Kundenprojekte
           </p>
           <h2 className="font-serif text-3xl md:text-4xl text-paper text-balance mb-4">
-            Drei Projekte, jedes anders.
+            Praxis, Umzug, eigene Software – jedes Projekt anders.
           </h2>
           <p className="text-paper-mute leading-relaxed">
-            Eine Praxis-Website mit Online-Booking, eine komplette
-            Backoffice-Plattform für eine Reinigungsfirma, eine spezialisierte
-            Niche-Marke für Therapeut:innen. Klicken Sie auf eine Karte für die
-            ausführliche Case Study.
+            Praxis-Websites, ein Umzugsunternehmen mit Online-Angebot, dazu eigene
+            Software und Marken. Klicken Sie auf eine Karte für die ausführliche
+            Case Study – und auf „Live ansehen“, um selbst nachzusehen.
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
@@ -76,10 +75,9 @@ export default function ReferenzenPage() {
             Was ich für mich selbst gebaut habe.
           </h2>
           <p className="text-paper-mute leading-relaxed">
-            Diese Werkzeuge nutze ich täglich für die eigene Arbeit. Sie sind
-            keine Kundenprojekte – sondern ein Beweis, dass ich Probleme
-            erkenne, eigene Lösungen baue und damit auch meinen Geschäftsalltag
-            beschleunige. Ein Hinweis auf die Denkweise hinter meiner Arbeit.
+            Werkzeuge für die eigene Arbeit – keine Kundenprojekte, sondern ein
+            Hinweis auf die Denkweise dahinter: Wenn mich etwas Zeit kostet, baue
+            ich eine Lösung.
           </p>
         </div>
         <ToolsGrid tools={TOOLS} />

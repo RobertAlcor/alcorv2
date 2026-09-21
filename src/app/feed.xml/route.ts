@@ -36,7 +36,7 @@ export async function GET() {
   <channel>
     <title>${SITE.name} – Blog</title>
     <link>${SITE.url}/blog</link>
-    <description>${escapeXml(SITE.tagline)}. Fachbeiträge aus 24 Jahren Webentwicklung in Wien.</description>
+    <description>${escapeXml(SITE.tagline)}. Fachbeiträge aus über zehn Jahren Webentwicklung in Wien.</description>
     <language>de-AT</language>
     <lastBuildDate>${new Date(updated).toUTCString()}</lastBuildDate>
     <atom:link href="${SITE.url}/feed.xml" rel="self" type="application/rss+xml" />

@@ -16,7 +16,7 @@ export const RELATED_FOR = {
     {
       href: '/referenzen',
       label: 'Referenzen',
-      description: 'Drei reale Projekte, ausführlich dokumentiert.',
+      description: 'Kundenprojekte und eigene Produkte, ausführlich dokumentiert.',
     },
     {
       href: '/preise',
@@ -86,7 +86,7 @@ export const RELATED_FOR = {
     {
       href: '/referenzen',
       label: 'Beispiele in dieser Preisklasse',
-      description: 'Drei reale Projekte als Orientierung.',
+      description: 'Reale Projekte als Orientierung.',
     },
     {
       href: '/termin',
@@ -100,7 +100,7 @@ export const RELATED_FOR = {
     {
       href: '/referenzen',
       label: 'Was ich gebaut habe',
-      description: 'Drei Projekte mit Vorher/Nachher und Tech-Stack.',
+      description: 'Projekte mit Aufgabe, Vorgehen und Tech-Stack.',
     },
     {
       href: '/leistungen',

@@ -12,11 +12,41 @@ export type Service = {
   process: { step: string; description: string }[]
   forWhom: string[]
   notForWhom: string[]
+  /** Überschrift der Detailseite mit Suchbegriff; fehlt sie, wird title verwendet */
+  h1?: string
+  faqs?: { question: string; answer: string }[]
 }
 
 export const SERVICES: Service[] = [
   {
     slug: 'website-erstellung',
+    h1: "Website erstellen lassen in Wien",
+    faqs: [
+      {
+        "question": "Was kostet es, eine Website in Wien erstellen zu lassen?",
+        "answer": "Das Starter-Paket kostet € 599 einmalig und umfasst bis zu fünf Seiten, Kontaktformular, technisches SEO und die Live-Schaltung. Größere Websites mit Blog, Mini-CMS oder eigenen Funktionen bekommen nach dem Erstgespräch einen schriftlichen Festpreis. Alle Preise sind Endpreise, es kommt keine Umsatzsteuer dazu. Hosting ist optional und kostet bei mir € 99 pro Jahr."
+      },
+      {
+        "question": "Wie lange dauert die Erstellung?",
+        "answer": "Eine Starter-Website ist sieben Tage nach dem Kickoff online – vorausgesetzt, Texte und Bilder liegen vor oder wir haben vereinbart, dass ich sie erstelle. Umfangreichere Projekte dauern meist zwei bis drei Wochen. Den Termin halte ich schriftlich fest."
+      },
+      {
+        "question": "Was muss ich vor dem Start liefern?",
+        "answer": "Im Idealfall Logo, Texte und Fotos. Fehlt etwas davon, ist das kein Hindernis: Bei Texten helfe ich mit Struktur und Formulierung, und als Berufsfotograf kann ich die Bilder für Ihre Website auf Wunsch selbst aufnehmen."
+      },
+      {
+        "question": "Kann ich Inhalte später selbst ändern?",
+        "answer": "Ja, wenn Sie das möchten. Auf Wunsch baue ich ein schlankes Mini-CMS ein, mit dem Sie Texte und Bilder ohne Programmierkenntnisse pflegen. Wer nur selten etwas ändert, schickt mir die Änderung einfach – abgerechnet wird nach tatsächlichem Aufwand, ohne Wartungsvertrag."
+      },
+      {
+        "question": "Gehört die Website nach der Fertigstellung wirklich mir?",
+        "answer": "Ja. Sie erhalten den vollständigen Quellcode und alle Zugangsdaten zu Domain und Hosting. Es gibt keine Lizenzgebühren und keine technische Bindung an mich – jede:r Webentwickler:in kann mit dem Code weiterarbeiten."
+      },
+      {
+        "question": "Wie steht es um DSGVO und Barrierefreiheit?",
+        "answer": "Schriften werden DSGVO-konform eingebunden, es gibt kein Tracking ohne Einwilligung, und Formulardaten werden mit klarer Löschfrist gespeichert. Gebaut wird nach WCAG 2.2 AA: Tastaturbedienung, ausreichende Kontraste, saubere Überschriftenstruktur. Die Inhalte von Impressum und Datenschutzerklärung stimmen wir gemeinsam ab; rechtlich verantwortlich bleibt der Betreiber der Website."
+      }
+    ],
     title: 'Website-Erstellung',
     shortTitle: 'Neue Website',
     tagline: 'Handgeschrieben in 7 Tagen',
@@ -34,7 +64,7 @@ export const SERVICES: Service[] = [
     metaDescription:
       'Handgeschriebene Website-Erstellung aus Wien. Ohne WordPress, ohne Plugin-Chaos. Lieferung in 7 Tagen ab 599 Euro.',
     intro:
-      'Sie brauchen eine neue Website. Schnell, sicher, ohne Wartungsalbtraum. Genau das mache ich seit 2002 – und ich mache es selbst, von der ersten Strategie-Skizze bis zum letzten Deploy.',
+      'Sie brauchen eine neue Website. Schnell, sicher, ohne Wartungsalbtraum. Genau das mache ich seit über zehn Jahren – und ich mache es selbst, von der ersten Strategie-Skizze bis zum letzten Deploy.',
     process: [
       {
         step: 'Erstgespräch',
@@ -71,6 +101,29 @@ export const SERVICES: Service[] = [
   },
   {
     slug: 'relaunch',
+    h1: "Website-Relaunch in Wien",
+    faqs: [
+      {
+        "question": "Verliere ich durch einen Relaunch meine Google-Rankings?",
+        "answer": "Nicht, wenn der Relaunch sauber geplant ist. Vor dem Start erfasse ich alle bestehenden Adressen, übernehme die Inhalte, die bereits gut ranken, und leite jede alte Adresse per 301-Weiterleitung auf die passende neue Seite. Nach der Umschaltung kontrolliere ich in der Google Search Console, ob alles korrekt indexiert wird. Kurzfristige Schwankungen sind normal, dauerhafte Verluste entstehen fast immer durch fehlende Weiterleitungen."
+      },
+      {
+        "question": "Kann ich von WordPress zu handgeschriebenem Code wechseln?",
+        "answer": "Ja, das ist der häufigste Fall. Texte, Bilder und Blogartikel werden aus WordPress übernommen, die Seitenstruktur bleibt – wo sinnvoll – erhalten. Danach entfallen Plugin-Updates, Theme-Lizenzen und die meisten Sicherheitsrisiken. Die alte WordPress-Installation schalte ich nach der Umstellung ab."
+      },
+      {
+        "question": "Ist meine Website während des Relaunchs offline?",
+        "answer": "Nein. Die neue Website entsteht auf einer Testadresse, Ihre bestehende läuft unverändert weiter. Die Umschaltung selbst dauert wenige Minuten und findet zu einem vereinbarten Zeitpunkt statt."
+      },
+      {
+        "question": "Was kostet ein Relaunch?",
+        "answer": "Das hängt von Seitenzahl und Funktionen ab. Ein kompakter Auftritt mit bis zu fünf Seiten liegt im Bereich des Starter-Pakets ab € 599. Für größere Websites erhalten Sie nach dem kostenlosen Audit einen schriftlichen Festpreis – inklusive Migration und Weiterleitungen."
+      },
+      {
+        "question": "Woran erkenne ich, dass ein Relaunch fällig ist?",
+        "answer": "Typische Zeichen: Die Seite lädt am Handy länger als zwei, drei Sekunden, das Design ist älter als fünf Jahre, Änderungen sind mühsam, es kommen kaum Anfragen, oder Plugin-Updates verursachen regelmäßig Probleme. Im Audit bekommen Sie dazu einen ehrlichen Befund – auch wenn das Ergebnis lautet, dass gezielte Korrekturen reichen."
+      }
+    ],
     title: 'Website-Relaunch',
     shortTitle: 'Relaunch',
     tagline: 'Raus aus WordPress',
@@ -124,6 +177,29 @@ export const SERVICES: Service[] = [
   },
   {
     slug: 'seo-wien',
+    h1: "SEO Wien – auf Google und in der KI-Suche gefunden werden",
+    faqs: [
+      {
+        "question": "Wie lange dauert es, bis SEO wirkt?",
+        "answer": "Technische Korrekturen – Ladezeit, Indexierung, strukturierte Daten – zeigen oft innerhalb weniger Wochen Wirkung. Bessere Platzierungen für umkämpfte Suchbegriffe wie „Webdesign Wien“ oder „Installateur 1100“ brauchen in der Regel drei bis sechs Monate, weil Google Vertrauen erst aufbauen muss."
+      },
+      {
+        "question": "Was gehört zu lokaler SEO für Wiener Unternehmen?",
+        "answer": "Ein vollständig gepflegtes Google-Unternehmensprofil, einheitliche Firmendaten (Name, Adresse, Telefon) im gesamten Web, Bewertungen echter Kund:innen, Inhalte zu Ihrem Bezirk und Ihrer Leistung sowie strukturierte Daten, die Google Standort und Angebot eindeutig mitteilen."
+      },
+      {
+        "question": "Garantieren Sie Platz 1 bei Google?",
+        "answer": "Nein – und niemand kann das seriös. Google entscheidet die Reihenfolge selbst, und sie ändert sich laufend. Was ich zusage: eine nachvollziehbare Maßnahmenliste, saubere Umsetzung und monatliche Zahlen, an denen Sie den Fortschritt ablesen."
+      },
+      {
+        "question": "Was ist GEO und brauche ich das?",
+        "answer": "GEO steht für Generative Engine Optimization: Inhalte so aufzubereiten, dass KI-Assistenten wie ChatGPT, Perplexity oder die KI-Übersichten von Google sie verstehen und als Quelle nennen. Dazu gehören klare Antworten auf konkrete Fragen, strukturierte Daten und eine maschinenlesbare Zusammenfassung Ihres Angebots. Wer Dienstleistungen anbietet, nach denen Menschen Assistenten fragen, profitiert davon."
+      },
+      {
+        "question": "Funktioniert SEO auch mit meiner bestehenden WordPress-Seite?",
+        "answer": "Grundsätzlich ja. Inhalte, Google-Unternehmensprofil und strukturierte Daten lassen sich auf jeder Website verbessern. Grenzen setzt die Technik: Wenn Themes und Plugins die Ladezeit dauerhaft drücken, ist ein Relaunch oft der günstigere Weg als monatelange Detailarbeit."
+      }
+    ],
     title: 'SEO und GEO',
     shortTitle: 'SEO + GEO',
     tagline: 'Gefunden werden – auf Google und in ChatGPT',

@@ -96,7 +96,7 @@ const config: NextConfig = {
       },
       {
         source: '/blog/handprogrammierte-webseiten-vs-wordpress.php',
-        destination: '/blog/handprogrammierte-webseiten-vs-wordpress',
+        destination: '/blog/wordpress-oder-handcodiert-2026',
         permanent: true,
       },
       {
@@ -106,14 +106,23 @@ const config: NextConfig = {
       },
       {
         source: '/blog/webdesign-firma.php',
-        destination: '/blog/webdesign-firma',
+        destination: '/leistungen',
         permanent: true,
       },
       {
         source: '/blog/kostenlose-werbung-webdesign-agentur.php',
-        destination: '/blog/kostenlose-werbung-webdesign-agentur',
+        destination: '/blog',
         permanent: true,
       },
+
+      // Zwischenziele der alten Weiterleitungen, die nie existiert haben (bei Google als 404 bekannt)
+      {
+        source: '/blog/handprogrammierte-webseiten-vs-wordpress',
+        destination: '/blog/wordpress-oder-handcodiert-2026',
+        permanent: true,
+      },
+      { source: '/blog/webdesign-firma', destination: '/leistungen', permanent: true },
+      { source: '/blog/kostenlose-werbung-webdesign-agentur', destination: '/blog', permanent: true },
     ]
   },
 }

@@ -39,16 +39,25 @@ Webdesign Alcor ist die Webentwicklungs-Agentur von Robert Alchimowicz, gegründ
 - **Telefon:** +43 664 99 124 999
 - **E-Mail:** office@webdesign-alcor.at
 - **WhatsApp:** https://wa.me/4366499124999
-- **Website:** https://www.webdesign-alcor.at
+- **Website:** https://webdesign-alcor.at
 
 ## Wichtige Seiten
 
-- [Leistungen](https://www.webdesign-alcor.at/leistungen): Übersicht aller Services
-- [Referenzen](https://www.webdesign-alcor.at/referenzen): Ausgewählte Projekte
-- [Über mich](https://www.webdesign-alcor.at/ueber-mich): Robert Alchimowicz
-- [Preise](https://www.webdesign-alcor.at/preise): Pakete und Konditionen
-- [Blog](https://www.webdesign-alcor.at/blog): Fachbeiträge zu Webentwicklung und SEO
-- [Kontakt](https://www.webdesign-alcor.at/kontakt): Anfrage stellen
+- [Leistungen](https://webdesign-alcor.at/leistungen): Übersicht aller Services
+- [Referenzen](https://webdesign-alcor.at/referenzen): Ausgewählte Projekte
+- [Über mich](https://webdesign-alcor.at/ueber-mich): Robert Alchimowicz
+- [Preise](https://webdesign-alcor.at/preise): Pakete und Konditionen
+- [Blog](https://webdesign-alcor.at/blog): Fachbeiträge zu Webentwicklung und SEO
+- [Kontakt](https://webdesign-alcor.at/kontakt): Anfrage stellen
+
+## Referenzen
+
+- [Psychotherapie Hrdlicka, Mödling](https://webdesign-alcor.at/referenzen/psychotherapie-hrdlicka): Praxis-Website
+- [Umzugsmeister, Wien](https://webdesign-alcor.at/referenzen/umzugsmeister): Website mit Online-Umzugsangebot
+- [schmerzfrei.wien](https://webdesign-alcor.at/referenzen/schmerzfrei-wien): Praxis-Website mit eigener Terminbuchung
+- [Takt – Software für Reinigungsbetriebe](https://webdesign-alcor.at/referenzen/buero-reinigung): eigenes Produkt
+- [AlcorLeads](https://webdesign-alcor.at/referenzen/alcorleads): eigene Web-Anwendung
+- [psychologen-webdesign.at](https://webdesign-alcor.at/referenzen/psychologen-webdesign): eigene Marke für Praxis-Websites
 
 ## Häufig gestellte Fragen (für AI-Assistants)
 

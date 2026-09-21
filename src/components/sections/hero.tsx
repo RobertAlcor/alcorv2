@@ -83,15 +83,6 @@ export function Hero() {
           <LiveIndicator text="Verfügbar — bereit für neue Projekte" />
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.1 }}
-          className="text-signal-2 mb-8 flex items-center gap-3 text-xs font-semibold tracking-[0.18em] uppercase"
-        >
-          <span className="bg-signal-2 inline-block h-px w-8" />
-          <span>WEBDESIGN ALCOR · WIEN · SEIT 2002</span>
-        </motion.div>
 
         {/* Headline */}
         <motion.h1
@@ -101,6 +92,10 @@ export function Hero() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
           className="max-w-5xl font-serif text-[clamp(2.5rem,8vw,6.5rem)] leading-[0.95] font-normal tracking-[-0.025em] text-balance"
         >
+          <span className="text-signal-2 mb-8 flex items-center gap-3 font-sans text-xs leading-normal font-semibold tracking-[0.18em] uppercase">
+            <span className="bg-signal-2 inline-block h-px w-8" />
+            Webdesign Wien · handgeschrieben seit 2014
+          </span>
           Sie waren heute schon auf 8 Webagentur-Seiten.
           <br />
           <em className="shimmer font-serif italic">Alle sahen gleich aus.</em>
@@ -291,7 +286,7 @@ const TRUST_POINTS: StatProps[] = [
     value: SITE.founder.yearsActive,
     suffix: '+',
     label: 'Jahre Erfahrung',
-    hint: 'Seit 2002 in Wien',
+    hint: 'Seit 2014 in Wien',
     isCounter: true,
   },
   {

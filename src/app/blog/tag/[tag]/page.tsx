@@ -22,7 +22,7 @@ export async function generateMetadata({
 
   return {
     title: `Beiträge zum Thema ${displayTag}`,
-    description: `Alle Blog-Artikel zum Thema ${displayTag}. Aus 24 Jahren Webentwicklung in Wien.`,
+    description: `Alle Blog-Artikel zum Thema ${displayTag}. Aus über zehn Jahren Webentwicklung in Wien.`,
     alternates: { canonical: `/blog/tag/${tag}` },
   }
 }

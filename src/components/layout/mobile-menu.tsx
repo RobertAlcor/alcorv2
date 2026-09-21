@@ -142,7 +142,7 @@ export function MobileMenu() {
                 className="text-xs font-semibold tracking-[0.18em] uppercase text-signal-2 mb-6"
               >
                 <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
-                WEBDESIGN ALCOR · SEIT 2002
+                WEBDESIGN ALCOR · SEIT 2014
               </motion.p>
 
               <ul className="space-y-0">

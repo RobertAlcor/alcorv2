@@ -309,7 +309,7 @@ export const BEZIRKE: Bezirk[] = [
     status: 'full',
     metaTitle: 'Webdesign 1230 Wien | Webagentur Liesing | Alcor',
     metaDescription:
-      'Webdesign für Liesing — handgeschriebene Websites für KMU im 23. Bezirk. Spezialisierte Niche-Site verfügbar: webdesign-liesing.wien.',
+      'Webdesign für Liesing — handgeschriebene Websites für KMU im 23. Bezirk, von Atzgersdorf über Mauer bis Siebenhirten. Ab €599, Lieferung in 7 Tagen.',
     keywords: [
       'Webdesign 1230 Wien',
       'Webdesign Liesing',
@@ -317,7 +317,7 @@ export const BEZIRKE: Bezirk[] = [
       'Webdesigner Liesing',
     ],
     h1: 'Webdesign in Liesing — vom Stadtrand bis ins Industriegebiet.',
-    lead: 'Liesing hat einen eigenen Charakter zwischen Wienerwald und Wiener Becken. Für den 23. Bezirk gibt es bei ALCOR Group eine spezialisierte Niche-Site mit lokalem Tiefenwissen.',
+    lead: 'Liesing hat einen eigenen Charakter zwischen Wienerwald und Wiener Becken. Wer hier gefunden werden will, braucht eine Website, die auf den Bezirk und seine Ortsteile abgestimmt ist.',
     localContext:
       'Liesing ist Wiens südlichster Bezirk und vereint mehrere Welten: das alte Ortszentrum in Mauer mit Heurigen-Tradition, die lebhafte Geschäftsstraße in Atzgersdorf, die großen Industriegebiete in Inzersdorf, Familienunternehmen in Rodaun und Kalksburg sowie Wohnviertel rund um Erlaa und Siebenhirten. 100.000 Einwohner und ein hoher Anteil an Klein- und Mittelbetrieben prägen den Bezirk.',
     industriesParagraph:
@@ -328,14 +328,8 @@ export const BEZIRKE: Bezirk[] = [
       'Heurige in Mauer haben oft schöne Visitenkarten-Sites, aber keine SEO — Spontanbesucher landen daher beim Mitbewerber.',
     ],
     positioningParagraph:
-      'Für den 23. Bezirk betreibe ich unter ALCOR Group eine eigene spezialisierte Site: webdesign-liesing.wien. Dort finden Sie ausführliches lokales Wissen zu jedem Bezirksteil — von Atzgersdorf über Mauer bis Siebenhirten — und bezirksspezifische SEO-Strategien. Wenn Sie konkret in Liesing aktiv sind, ist die Niche-Site die bessere Adresse. Hier auf alcor.at finden Sie die übergeordnete Wien-Strategie und alle Leistungen im Überblick.',
+      'Für Betriebe in Liesing baue ich Websites, die auf die lokale Suche im 23. Bezirk ausgerichtet sind: mit den Ortsteilen, in denen Sie tatsächlich arbeiten — von Atzgersdorf, Erlaa und Inzersdorf über Mauer, Rodaun und Kalksburg bis Siebenhirten — sauber ausgezeichneten Standortdaten und Inhalten, die zu den Suchanfragen Ihrer Kundschaft passen. Handgeschrieben, ohne WordPress, mit Festpreis und einem einzigen Ansprechpartner.',
     faqs: [
-      {
-        question:
-          'Warum gibt es eine eigene Site für Liesing und gleichzeitig diese Bezirks-Page auf alcor.at?',
-        answer:
-          'webdesign-liesing.wien ist eine spezialisierte Niche-Site mit Tiefenwissen zu jedem Bezirksteil und SEO-Fokus auf den 23. Bezirk. Diese Page hier dient der Übersicht und verlinkt auf die Niche-Site. Beide Sites werden von mir betreut, das Angebot ist identisch — nur der Schwerpunkt unterscheidet sich.',
-      },
       {
         question: 'Sie sind im 22. Bezirk — sind persönliche Termine in Liesing möglich?',
         answer:
@@ -343,12 +337,6 @@ export const BEZIRKE: Bezirk[] = [
       },
     ],
     nearbyDistricts: ['hietzing', 'meidling', 'favoriten'],
-    nicheSiteHint: {
-      url: 'https://webdesign-liesing.wien',
-      label: 'webdesign-liesing.wien — die spezialisierte Niche-Site',
-      reason:
-        'Tiefenwissen zu allen 8 Bezirksteilen (Atzgersdorf, Erlaa, Inzersdorf, Kalksburg, Mauer, Rodaun, Siebenhirten, Liesing-Mitte) plus eigener Blog mit Liesing-Fokus.',
-    },
   },
 
   // ────────────────────────────────────────────────────────────

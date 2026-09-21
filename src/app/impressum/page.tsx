@@ -23,7 +23,7 @@ export default function ImpressumPage() {
       eyebrow="Rechtliches"
       title="Impressum"
       subtitle="Angaben gemäß §5 ECG und §25 MedienG"
-      lastUpdated="4. Mai 2026"
+      lastUpdated="21. September 2026"
       breadcrumbs={[
         { label: 'Start', href: '/' },
         { label: 'Impressum', href: '/impressum' },
@@ -150,25 +150,25 @@ export default function ImpressumPage() {
         </P>
       </Section>
 
-      {/* ONLINE-STREITBEILEGUNG */}
-      <Section title="Online-Streitbeilegung (OS-Plattform)">
+      {/* OFFENLEGUNG MEDIENGESETZ */}
+      <Section title="Offenlegung gemäß § 25 MedienG">
         <P>
-          Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS)
-          bereit, die Sie unter{' '}
-          <a
-            href="https://ec.europa.eu/consumers/odr"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-signal-2 hover:text-signal underline underline-offset-2"
-          >
-            ec.europa.eu/consumers/odr
-          </a>{' '}
-          finden. Verbraucher können diese Plattform für die Beilegung von Streitigkeiten
-          nutzen.
+          <Strong>Medieninhaber und Herausgeber:</Strong> Robert Alchimowicz, 1220 Wien
+          (Anschrift wie oben).
         </P>
-        <P className="text-sm">
-          Hinweis: Ich bin nicht verpflichtet und nicht bereit, an einem
-          Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+        <P>
+          <Strong>Grundlegende Richtung:</Strong> Diese Website informiert über die
+          Leistungen des Unternehmens in den Bereichen Webentwicklung, Webdesign und
+          Suchmaschinenoptimierung und veröffentlicht Fachbeiträge zu diesen Themen.
+        </P>
+      </Section>
+
+      {/* VERBRAUCHERSTREITBEILEGUNG */}
+      <Section title="Verbraucherstreitbeilegung">
+        <P>
+          Ich bin nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor
+          einer Verbraucherschlichtungsstelle teilzunehmen. Bei Anliegen wenden Sie sich
+          bitte direkt an mich.
         </P>
       </Section>
 

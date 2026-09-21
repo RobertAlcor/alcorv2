@@ -25,7 +25,7 @@ export default function DatenschutzPage() {
       eyebrow="Rechtliches"
       title="Datenschutzerklärung"
       subtitle="Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO"
-      lastUpdated="29. April 2026"
+      lastUpdated="21. September 2026"
       breadcrumbs={[
         { label: 'Start', href: '/' },
         { label: 'Datenschutz', href: '/datenschutz' },
@@ -42,7 +42,7 @@ export default function DatenschutzPage() {
         <P>
           Rechtsgrundlage ist die Datenschutz-Grundverordnung (DSGVO), das
           österreichische Datenschutzgesetz (DSG) sowie das
-          Telekommunikationsgesetz (TKG 2003, §165).
+          Telekommunikationsgesetz (TKG 2021, § 165).
         </P>
       </Section>
 
@@ -398,7 +398,7 @@ export default function DatenschutzPage() {
           Ich passe diese Datenschutzerklärung an, sobald Änderungen an der
           Verarbeitung dies erforderlich machen. Die jeweils aktuelle Version
           finden Sie hier auf dieser Seite. Stand der Erklärung:{' '}
-          <Strong>29. April 2026</Strong>.
+          <Strong>21. September 2026</Strong>.
         </P>
       </Section>
 

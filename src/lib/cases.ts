@@ -15,6 +15,8 @@ export type Case = {
   year: number
   brandColor: string
   brandColorAccent: string
+  /** Optionaler Screenshot unter /public (1200×750). Fehlt er, wird das Farb-Mockup gezeigt. */
+  screenshot?: string
 
   // Card / Übersicht
   shortDescription: string
@@ -38,285 +40,459 @@ export type Case = {
 }
 
 export const CASES: Case[] = [
-  // === SCHMERZFREI.WIEN ===
   {
-    slug: 'schmerzfrei-wien',
-    client: 'schmerzfrei.wien',
-    initials: 'SW',
-    industry: 'Gesundheit · Heilmassage · Schmerztherapie',
-    url: '/referenzen/schmerzfrei-wien',
-    liveUrl: 'https://schmerzfrei.wien',
-    year: 2026,
-    brandColor: '#0F766E',
-    brandColorAccent: '#5EEAD4',
-
-    shortDescription:
-      'Komplette Neuentwicklung der Praxis-Website für Heilmasseurin Monika Bestereimer in Wien Brigittenau. Von langsamer WordPress-Site zu Lighthouse 100 in unter 7 Tagen.',
-    tags: ['Next.js 15', 'TypeScript', 'Supabase', 'Tailwind 4'],
-
-    challenge:
-      'Die bestehende WordPress-Site war langsam, sah aus wie tausend andere Therapie-Sites und brachte praktisch keine Anfragen. Monika wollte eine Website, die ihrer fachlichen Kompetenz und ihrer ruhigen, persönlichen Arbeitsweise gerecht wird – und Patienten direkt zur Terminbuchung führt.',
-
-    approach: [
-      'Tiefgreifendes Erstgespräch zur Positionierung: Was unterscheidet Monikas Arbeit von Standard-Massagen?',
-      'Komplette Inhaltsneuerstellung mit Fokus auf die drei Kernbehandlungen: Heilmassage, Liebscher & Bracht, Sculptural Facelift',
-      'Eigene Booking-Logik mit Verfügbarkeits-Prüfung und automatischer E-Mail-Bestätigung',
-      'Ruhiges, vertrauensbildendes Design – Cremeweiß auf Tannengrün, klare Typografie, viel Atemraum',
-      'Vollständige WCAG 2.2 AA Konformität – wichtig für Patienten mit eingeschränkter Mobilität',
+    "slug": "psychotherapie-hrdlicka",
+    "client": "Psychotherapie Hrdlicka",
+    "initials": "GH",
+    "industry": "Gesundheit · Psychotherapie · Mödling",
+    "url": "/referenzen/psychotherapie-hrdlicka",
+    "liveUrl": "https://psychotherapie-hrdlicka.at",
+    "year": 2026,
+    "brandColor": "#1F3A4D",
+    "brandColorAccent": "#9DB4C0",
+    "screenshot": "/referenzen/psychotherapie-hrdlicka.webp",
+    "shortDescription": "Praxis-Website für Psychotherapeut Mag. Gerald Hrdlicka in Mödling: zehn ruhig gestaltete Seiten zu Psychotherapie, Lebensberatung, Supervision und Mediation – handgeschrieben, ohne CMS-Ballast.",
+    "tags": [
+      "PHP",
+      "Semantisches HTML",
+      "Schema.org",
+      "Bunny Fonts"
     ],
-
-    highlights: [
-      {
-        label: 'Eigene Booking-Engine',
-        description:
-          'Statt eines fertigen Plugins habe ich eine schlanke Booking-Logik in Next.js gebaut: Verfügbarkeit, Zeitfenster, Bestätigungsmail – alles in eigenem Code, kein externes Tool nötig.',
-      },
-      {
-        label: 'Lighthouse 100/100/100/100',
-        description:
-          'Performance, Accessibility, Best Practices, SEO – alle vier Kategorien voll. Gemessen auf Mobile mit 4G-Throttling.',
-      },
-      {
-        label: 'Strukturierte Daten für Google',
-        description:
-          'Schema.org MedicalBusiness, Service, FAQPage – damit Google die Praxis als lokales Gesundheitsangebot korrekt indexiert und in lokalen Suchen prominent anzeigt.',
-      },
-      {
-        label: 'WhatsApp-Quick-Contact',
-        description:
-          'Für Patienten, die schnell eine Frage haben, ohne Termin zu buchen – ein vorausgefüllter WhatsApp-Link auf jeder Seite.',
-      },
+    "challenge": "Eine Praxis mit vier Angeboten – Psychotherapie, Lebensberatung, Supervision und Mediation – für Kinder, Jugendliche und Erwachsene. Wer eine solche Seite besucht, ist oft in einer belastenden Situation. Die Website darf deshalb nicht überfordern: Sie muss in wenigen Klicks beantworten, ob das Angebot passt, wie eine Therapie abläuft, was sie kostet und wie man zu einem Termin kommt.",
+    "approach": [
+      "Seitenstruktur entlang der Fragen von Klient:innen: Angebot, Methode, Ablauf und Kosten, Praxis und Anfahrt, Kontakt",
+      "Eigene Seite zur Integrativen Gestalttherapie – verständlich erklärt statt Fachjargon",
+      "Ruhige Bildsprache und eine gut lesbare Serifenschrift für Überschriften, klare Groteskschrift für Fließtext",
+      "Bereich „Interviews“ für Presse- und Medienbeiträge",
+      "Hinweis auf Online-Termine per Zoom und Telefon direkt beim Angebot",
+      "Terminanfrage als durchgängiger Hauptweg auf jeder Seite"
     ],
-
-    techStack: [
-      'Next.js 15 (App Router)',
-      'React 19',
-      'TypeScript 5 (strict)',
-      'Tailwind CSS 4',
-      'Supabase (Datenbank für Termine)',
-      'Resend (Bestätigungsmails)',
-      'Vercel (Hosting, Region Frankfurt)',
-      'Plausible (DSGVO-konforme Analytics)',
+    "highlights": [
+      {
+        "label": "Strukturierte Daten für die lokale Suche",
+        "description": "Schema.org-Auszeichnung als MedicalBusiness mit Adresse, Geodaten und Einzugsgebiet – damit Google die Praxis als lokales Gesundheitsangebot in Mödling einordnen kann."
+      },
+      {
+        "label": "Keine externen Skripte",
+        "description": "Die Startseite lädt ein einziges, eigenes JavaScript. Kein Tag-Manager, kein Baukasten-Framework, keine Plugin-Bibliotheken."
+      },
+      {
+        "label": "Schriften DSGVO-konform",
+        "description": "Newsreader und Source Sans 3 kommen über Bunny Fonts aus der EU – ohne Übermittlung an Google."
+      },
+      {
+        "label": "Sprechende URLs",
+        "description": "Kurze, lesbare Adressen wie /ablauf-und-kosten und /praxis-und-anfahrt, dazu Sitemap und Canonical-Tags auf jeder Seite."
+      }
     ],
-
-    results: [
-      {
-        label: 'Lighthouse Score',
-        value: '100/100/100/100',
-        hint: 'Performance · A11y · BP · SEO',
-      },
-      { label: 'Ladezeit', value: '< 0.8s', hint: 'LCP auf Mobile 4G' },
-      {
-        label: 'Lieferzeit',
-        value: '6 Tage',
-        hint: 'Vom Briefing zum Live-Gang',
-      },
-      {
-        label: 'Anfragen-Steigerung',
-        value: '+340 %',
-        hint: 'Vergleich erste 30 Tage zur alten Site',
-      },
+    "techStack": [
+      "PHP",
+      "Semantisches HTML5",
+      "CSS (ohne Framework)",
+      "Vanilla JavaScript",
+      "Bunny Fonts",
+      "Schema.org MedicalBusiness",
+      "Apache mit HSTS"
     ],
-
-    before: {
-      description:
-        'Vorher lief die Site auf WordPress mit einem gekauften Theme. Die Ladezeit lag bei über 4 Sekunden, das Design wirkte austauschbar, und es gab keine direkte Buchungsmöglichkeit – Patienten mussten anrufen oder ein Standard-Kontaktformular nutzen.',
-      problems: [
-        'Ladezeit über 4 Sekunden auf Mobile',
-        'Kein Online-Booking, nur Anruf möglich',
-        'Generisches Theme-Design ohne Wiedererkennung',
-        '14 aktive Plugins mit wöchentlichen Update-Zyklen',
-        'Keine strukturierten Daten für Google',
-      ],
+    "results": [
+      {
+        "label": "Umfang",
+        "value": "10 Seiten",
+        "hint": "inkl. Impressum und Datenschutz"
+      },
+      {
+        "label": "Angebote",
+        "value": "4",
+        "hint": "Psychotherapie, Lebensberatung, Supervision, Mediation"
+      },
+      {
+        "label": "Externe Skripte",
+        "value": "0",
+        "hint": "auf der Startseite"
+      },
+      {
+        "label": "Standort",
+        "value": "Mödling",
+        "hint": "Niederösterreich"
+      }
+    ],
+    "metaTitle": "Referenz: Praxis-Website Psychotherapie Hrdlicka, Mödling",
+    "metaDescription": "Handgeschriebene Praxis-Website für einen Psychotherapeuten in Mödling: zehn Seiten, strukturierte Daten, keine externen Skripte, DSGVO-konforme Schriften."
+  },
+  {
+    "slug": "umzugsmeister",
+    "client": "Umzugsmeister",
+    "initials": "UM",
+    "industry": "Umzug · Entrümpelung · Wien",
+    "url": "/referenzen/umzugsmeister",
+    "liveUrl": "https://www.umzugsmeister.at",
+    "year": 2026,
+    "brandColor": "#232327",
+    "brandColorAccent": "#CF8755",
+    "shortDescription": "Website für ein Wiener Umzugsunternehmen mit Online-Umzugsangebot in wenigen Minuten: neun Leistungsarten, Foto-Upload, transparente Stundensätze und eigene Seiten für Bezirke und EU-Umzüge.",
+    "tags": [
+      "PHP",
+      "Anfrage-Assistent",
+      "Local SEO",
+      "Ratgeber"
+    ],
+    "challenge": "Wer einen Umzug plant, vergleicht mehrere Anbieter und will vor allem eines wissen: Was kostet das – und kommen am Ende Zuschläge dazu? Die Website muss diese Frage offen beantworten und den Weg zur Anfrage so kurz machen, dass er auch am Handy zwischen zwei Terminen funktioniert.",
+    "approach": [
+      "Online-Umzugsangebot als zentraler Weg: Leistungsart wählen, Eckdaten erfassen, Fotos hochladen, absenden",
+      "Neun Einstiege in denselben Assistenten – von Privatumzug über Firmenumzug und Entrümpelung bis Klaviertransport und Verlassenschaft",
+      "Preistransparenz als eigener Abschnitt: Stundensätze für 2, 3 und 4 Mann mit LKW, inklusive USt., mit klarer Aussage zu Zuschlägen",
+      "Eigene Seiten für Leistungen, Wiener Bezirke und EU-Umzüge für die lokale Suche",
+      "Ratgeber-Bereich für Suchanfragen wie „Was kostet ein Umzug in Wien?“",
+      "Telefon und Angebot als fixe Leiste am Handy – ein Tipp zum Anrufen, ein Tipp zur Anfrage"
+    ],
+    "highlights": [
+      {
+        "label": "Anfrage-Assistent mit Foto-Upload",
+        "description": "Statt eines leeren Textfelds führt ein Assistent durch die Anfrage. Fotos der Wohnung ersetzen in vielen Fällen die Besichtigung – das spart beiden Seiten einen Termin."
+      },
+      {
+        "label": "Vergleich „bei anderen / bei uns“",
+        "description": "Kilometer-, Wochenend-, Nacht-, Sprit- und Parkzuschlag stehen nebeneinander. Die wichtigste Kaufentscheidung wird auf einen Blick beantwortet."
+      },
+      {
+        "label": "Rechtstexte vollständig",
+        "description": "Impressum, Datenschutzerklärung und AGB als eigene Seiten – bei Verbrauchergeschäften keine Kür, sondern Pflicht."
+      },
+      {
+        "label": "Klick-zu-Anruf überall",
+        "description": "Festnetz, Mobil, WhatsApp und E-Mail sind auf jeder Seite erreichbar, mit korrekt ausgezeichneten tel:-Links."
+      }
+    ],
+    "techStack": [
+      "PHP",
+      "Semantisches HTML5",
+      "CSS",
+      "Vanilla JavaScript",
+      "XML-Sitemap",
+      "Open Graph"
+    ],
+    "results": [
+      {
+        "label": "Leistungsarten",
+        "value": "9",
+        "hint": "im Online-Umzugsangebot"
+      },
+      {
+        "label": "Anfrage",
+        "value": "ca. 5 Min",
+        "hint": "laut Assistent auf der Website"
+      },
+      {
+        "label": "Einzugsgebiet",
+        "value": "Wien + EU",
+        "hint": "mit eigenen Landingpages"
+      },
+      {
+        "label": "Rechtstexte",
+        "value": "3",
+        "hint": "Impressum, Datenschutz, AGB"
+      }
+    ],
+    "metaTitle": "Referenz: Umzugsmeister Wien – Website mit Online-Umzugsangebot",
+    "metaDescription": "Website für ein Wiener Umzugsunternehmen: Anfrage-Assistent mit Foto-Upload, transparente Stundensätze, Bezirks- und EU-Seiten, Ratgeber für die lokale Suche."
+  },
+  {
+    "slug": "schmerzfrei-wien",
+    "client": "schmerzfrei.wien",
+    "initials": "SW",
+    "industry": "Gesundheit · Heilmassage · Schmerztherapie",
+    "url": "/referenzen/schmerzfrei-wien",
+    "liveUrl": "https://schmerzfrei.wien",
+    "year": 2026,
+    "brandColor": "#0F766E",
+    "brandColorAccent": "#5EEAD4",
+    "screenshot": "/referenzen/schmerzfrei-wien.webp",
+    "shortDescription": "Komplette Neuentwicklung der Praxis-Website für Heilmasseurin Monika Bestereimer in Wien Brigittenau – mit eigener Terminbuchung statt Baukasten-Plugin.",
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "Terminbuchung"
+    ],
+    "challenge": "Die bestehende WordPress-Site war langsam, sah aus wie viele andere Therapie-Sites und bot keine direkte Buchungsmöglichkeit. Gefragt war eine Website, die der fachlichen Kompetenz und der ruhigen, persönlichen Arbeitsweise gerecht wird – und Patient:innen direkt zur Terminbuchung führt.",
+    "approach": [
+      "Erstgespräch zur Positionierung: Was unterscheidet die Arbeit der Praxis von Standard-Massagen?",
+      "Inhalte neu erstellt mit Fokus auf die drei Kernbehandlungen: Heilmassage, Liebscher & Bracht, Sculptural Facelift",
+      "Eigene Buchungslogik mit Verfügbarkeitsprüfung und automatischer E-Mail-Bestätigung",
+      "Ruhiges, vertrauensbildendes Design mit klarer Typografie und viel Weißraum",
+      "Barrierefreiheit nach WCAG 2.2 AA – wichtig für Patient:innen mit eingeschränkter Mobilität"
+    ],
+    "highlights": [
+      {
+        "label": "Eigene Terminbuchung",
+        "description": "Statt eines fertigen Plugins eine schlanke Buchungslogik: Verfügbarkeit, Zeitfenster, Bestätigungsmail – alles in eigenem Code, kein externes Buchungstool."
+      },
+      {
+        "label": "Strukturierte Daten für Google",
+        "description": "Schema.org-Auszeichnung für Praxis, Leistungen und häufige Fragen – damit Google die Praxis als lokales Gesundheitsangebot korrekt einordnet."
+      },
+      {
+        "label": "WhatsApp-Schnellkontakt",
+        "description": "Für Patient:innen mit einer kurzen Frage: ein vorausgefüllter WhatsApp-Link auf jeder Seite."
+      }
+    ],
+    "techStack": [
+      "Next.js (App Router)",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Datenbank für Termine",
+      "Transaktions-E-Mails"
+    ],
+    "results": [
+      {
+        "label": "Kernbehandlungen",
+        "value": "3",
+        "hint": "Heilmassage, Liebscher & Bracht, Sculptural Facelift"
+      },
+      {
+        "label": "Terminbuchung",
+        "value": "Eigenbau",
+        "hint": "ohne externes Buchungstool"
+      },
+      {
+        "label": "Barrierefreiheit",
+        "value": "WCAG 2.2 AA",
+        "hint": "als Projektziel"
+      },
+      {
+        "label": "Standort",
+        "value": "1200 Wien",
+        "hint": "Brigittenau"
+      }
+    ],
+    "before": {
+      "description": "Vorher lief die Site auf WordPress mit einem gekauften Theme. Patient:innen mussten anrufen oder ein Standard-Kontaktformular nutzen.",
+      "problems": [
+        "Lange Ladezeit am Handy",
+        "Kein Online-Booking, nur Anruf möglich",
+        "Theme-Design ohne Wiedererkennung",
+        "Viele Plugins mit laufenden Update-Zyklen",
+        "Keine strukturierten Daten für Google"
+      ]
     },
-
-    testimonial: {
+    "testimonial": {
       quote:
         'Robert hat innerhalb von einer Woche etwas geliefert, was meine alte Agentur in vier Monaten nicht geschafft hat. Die Site sieht aus, wie ich mich fühle – ruhig, professionell, ohne Schnickschnack. Und die Anfragen kommen.',
       author: 'Monika Bestereimer',
       role: 'Diplomierte Heilmasseurin',
       verified: true,
     },
-
-    metaTitle:
-      'Case Study: schmerzfrei.wien – Praxis-Website mit Online-Booking',
-    metaDescription:
-      'Wie ich aus einer langsamen WordPress-Site eine performante Next.js-Praxis-Website mit eigener Booking-Logik gebaut habe. Lighthouse 100 in 6 Tagen.',
+    "metaTitle": "Referenz: schmerzfrei.wien – Praxis-Website mit Online-Booking",
+    "metaDescription": "Von der WordPress-Site zur eigenständigen Praxis-Website mit selbst entwickelter Terminbuchung – für eine Heilmasseurin in Wien Brigittenau."
   },
-
-  // === BÜRO-REINIGUNG ===
   {
-    slug: 'buero-reinigung',
-    client: 'Büroreinigung Wien',
-    initials: 'BR',
-    industry: 'Gewerbliche Reinigung · Plattform',
-    url: '/referenzen/buero-reinigung',
-    liveUrl: 'https://reinigung.webdesign-alcor.at',
-    year: 2025,
-    brandColor: '#1E40AF',
-    brandColorAccent: '#60A5FA',
-
-    shortDescription:
-      'Komplettes digitales Backoffice für eine Reinigungsfirma: CRM, Personalplanung, Tablet-PWA für Vor-Ort-Besichtigungen, Mitarbeiter-Check-in mit GPS. Verwaltungsaufwand um 65 % reduziert.',
-    tags: ['PHP', 'MySQL', 'PWA', 'CRM', 'Custom-System'],
-
-    challenge:
-      'Die Reinigungsfirma verwaltete Kunden, Mitarbeiter, Touren, Angebote und Stundenabrechnungen mit Excel-Listen, WhatsApp-Nachrichten und händischen Notizen. Angebotserstellung dauerte zwei Stunden pro Kunde. Das Wachstum war durch die Verwaltung gebremst – nicht durch fehlende Aufträge.',
-
-    approach: [
-      'Drei separate, aber verbundene Anwendungen entwickelt: Admin-Dashboard, Besichtigungs-App (Tablet-PWA), Mitarbeiter-App',
-      'Komplette Datenbank-Struktur: Kunden, Standorte, Mitarbeiter, Touren, Angebote, Stunden, Rechnungen',
-      'Live-Pricing-Engine im Besichtigungs-Wizard: Kunde sieht den Preis sofort vor Ort',
-      'Offline-Sync für Tablet-App: funktioniert auch in Kellern und Tiefgaragen ohne Empfang',
-      'Austrian Kollektivvertrag-Compliance bei Lohnberechnungen',
+    "slug": "buero-reinigung",
+    "client": "Takt – Software für Reinigungsbetriebe",
+    "initials": "T",
+    "industry": "Eigenes Produkt · Branchensoftware",
+    "url": "/referenzen/buero-reinigung",
+    "liveUrl": "https://reinigung.webdesign-alcor.at",
+    "year": 2025,
+    "brandColor": "#1E40AF",
+    "brandColorAccent": "#60A5FA",
+    "screenshot": "/referenzen/buero-reinigung.webp",
+    "shortDescription": "Branchensoftware für Reinigungsbetriebe mit 5 bis 50 Kräften: Dienstplan, Zeiterfassung per QR-Code am Objekt, Mitarbeiter-App, Kundenportal mit Fotonachweis und Monatsrechnung – in einem System.",
+    "tags": [
+      "PHP",
+      "MySQL",
+      "Web-App",
+      "Eigenes Produkt"
     ],
-
-    highlights: [
-      {
-        label: '6-Schritt Besichtigungs-Wizard',
-        description:
-          'Tablet-PWA für Vor-Ort-Termine: Räume vermessen, Foto aufnehmen, Reinigungsfrequenz festlegen, Sonderwünsche erfassen, Live-Preis berechnen, Angebot direkt vor Ort als PDF mailen.',
-      },
-      {
-        label: 'GPS-Check-in für Mitarbeiter',
-        description:
-          'Mitarbeiter checken am Einsatzort ein und aus. Stundenerfassung automatisch, DSGVO-konform mit individueller Einwilligung nach § 10 AVRAG.',
-      },
-      {
-        label: 'Custom-Pricing nach Kunden-Vereinbarung',
-        description:
-          'Jeder Kunde kann individuelle Stundensätze, Pauschalen oder Frequenz-Rabatte haben. Die Engine berechnet alles korrekt und konsistent.',
-      },
-      {
-        label: 'SevDesk-Integration',
-        description:
-          'Erstellte Angebote landen direkt in SevDesk – kein doppeltes Abtippen. Buchhaltung und Operations sind synchron.',
-      },
+    "challenge": "In vielen Reinigungsbetrieben laufen Dienstplan, Stunden und Reklamationen über Zettel, WhatsApp-Gruppen und Anrufe beim Vorarbeiter. Gleichzeitig verlangt § 26 AZG lückenlose Arbeitszeitaufzeichnungen, und Kunden wollen einen Nachweis, dass gereinigt wurde. Die meisten Programme am Markt kommen aus Deutschland oder den USA und sind auf österreichische Vorschriften nur angepasst.",
+    "approach": [
+      "Fünf Bausteine, ein Login: Büro, Mitarbeiter-App, Kundenportal, Besichtigung und Angebot, Rechnungen",
+      "Durchgängiger Datenfluss: Aus der Besichtigung wird das Angebot, aus dem Angebot das Objekt, aus dem Objekt der Dienstplan, aus dem Dienstplan die Rechnung",
+      "Anwesenheit ausschließlich über den QR-Code am Objekt – bewusst ohne Ortung",
+      "Mitarbeiter-App als Link am Handy, ohne App-Store und ohne Installation",
+      "Rechtliche Anforderungen von Anfang an eingebaut statt nachträglich angepasst"
     ],
-
-    techStack: [
-      'PHP 8.2',
-      'MySQL 5.7',
-      'Vanilla JS (PWA-Architektur)',
-      'IndexedDB (Offline-Sync)',
-      'Geolocation API',
-      'PDF-Generation (TCPDF)',
-      'SevDesk API',
-      'Service Worker',
-    ],
-
-    results: [
-      { label: 'Verwaltungsaufwand', value: '−65 %' },
+    "highlights": [
       {
-        label: 'Angebotserstellung',
-        value: '15 Min',
-        hint: 'vorher 2 Stunden',
+        "label": "Sechs-Schritte-Besichtigung am Tablet",
+        "description": "Räume zählen, Sanitär, Zustand, Rhythmus – die Kalkulation läuft mit. Am Ende steht das Angebot als PDF mit fortlaufender Nummer. Wird es angenommen, ist das Objekt mit einem Klick angelegt."
       },
       {
-        label: 'Mitarbeiterzahl',
-        value: '2 → 8',
-        hint: 'Wachstum nach Einführung',
+        "label": "Arbeitszeitaufzeichnung entsteht automatisch",
+        "description": "Aus Check-in und Check-out am QR-Schild entsteht die Aufzeichnung nach § 26 AZG – mit Monatsauswertung zur Unterschrift und Export fürs Lohnbüro."
       },
-      { label: 'Plattform-Größe', value: '3 Apps + DB' },
+      {
+        "label": "Funktioniert ohne Empfang",
+        "description": "Die Mitarbeiter-App arbeitet auch im Keller weiter und überträgt später nach."
+      },
+      {
+        "label": "Datenschutz als Konstruktionsprinzip",
+        "description": "Keine Ortung (§ 10 AVRAG), Krankmeldung ohne Angabe eines Grundes (Art. 9 DSGVO), Auftragsverarbeitungsvertrag beim ersten Login (Art. 28 DSGVO)."
+      },
+      {
+        "label": "Rechnungen nach § 11 UStG",
+        "description": "Fortlaufend nummeriert, nach Ausstellung unveränderbar, Korrektur nur per Gutschrift, Aufbewahrung nach § 132 BAO."
+      }
     ],
-
-    before: {
-      description:
-        'Vorher lief alles über Excel, WhatsApp und Zettel. Angebote brauchten Stunden, Stundenerfassung war fehleranfällig, Mitarbeiterplanung war nur im Kopf des Inhabers.',
-      problems: [
-        'Angebotserstellung manuell pro Kunde, durchschnittlich 2 Stunden',
-        'Stundenabrechnungen über handschriftliche Zettel',
-        'Keine zentrale Übersicht über laufende Aufträge',
-        'Doppelte Datenpflege in Excel und Buchhaltungs-Tool',
-      ],
-    },
-
-    businessNote:
-      'Das System ist als Plattform konzipiert und kann von anderen Reinigungsfirmen lizenziert werden. Drei Modelle möglich: Kauf mit einmaliger Lizenzgebühr, monatliche Miete, oder vollständig auf den Kunden zugeschnittene Custom-Variante. Anfragen über das Kontaktformular.',
-
-    metaTitle:
-      'Case Study: Büroreinigung Wien – Komplette Custom-Plattform',
-    metaDescription:
-      'Wie ich eine Reinigungsfirma von Excel auf eine eigene Plattform mit CRM, PWA und GPS-Tracking gebracht habe. Verwaltungsaufwand um 65 % reduziert.',
+    "techStack": [
+      "PHP",
+      "MySQL",
+      "Vanilla JavaScript",
+      "Web-App ohne App-Store",
+      "Offline-Zwischenspeicher",
+      "PDF-Erzeugung",
+      "QR-Codes"
+    ],
+    "results": [
+      {
+        "label": "Bausteine",
+        "value": "5",
+        "hint": "ein Login, ein System"
+      },
+      {
+        "label": "Zielgruppe",
+        "value": "5–50 Kräfte",
+        "hint": "Reinigungsbetriebe in Österreich"
+      },
+      {
+        "label": "Ortung",
+        "value": "Keine",
+        "hint": "Anwesenheit nur per QR-Code"
+      },
+      {
+        "label": "Installation",
+        "value": "Keine",
+        "hint": "läuft im Browser"
+      }
+    ],
+    "businessNote": "Takt ist ein eigenes Produkt der ALCOR Group. Es zeigt, was über eine klassische Website hinaus möglich ist: Wenn Ihr Betrieb einen Ablauf hat, der in keine Standardsoftware passt, baue ich die passende Web-Anwendung.",
+    "metaTitle": "Referenz: Takt – Software für Reinigungsbetriebe",
+    "metaDescription": "Eigenes Produkt der ALCOR Group: Dienstplan, Zeiterfassung per QR-Code, Mitarbeiter-App, Kundenportal und Rechnungen für österreichische Reinigungsbetriebe."
   },
-
-  // === PSYCHOLOGEN-WEBDESIGN ===
   {
-    slug: 'psychologen-webdesign',
-    client: 'psychologen-webdesign.at',
-    initials: 'PW',
-    industry: 'Niche-Marketing · Eigene Marke',
-    url: '/referenzen/psychologen-webdesign',
-    liveUrl: 'https://psychologen-webdesign.at',
-    year: 2026,
-    brandColor: '#7C3AED',
-    brandColorAccent: '#C4B5FD',
-
-    shortDescription:
-      'Spezialisierte Landing-Page für Psychologen und Psychotherapeuten in Wien. Eigenes Niche-Projekt von ALCOR Group mit klarem Starter-Paket € 599,–.',
-    tags: ['Next.js 15', 'Niche-SEO', 'Lead-Generation', 'Vienna-Local'],
-
-    challenge:
-      'Psychotherapeuten haben spezielle Anforderungen an ihre Website: hohe Vertraulichkeit, ruhige Bildsprache, klare Termin-Strukturen, Krankenkassen-Hinweise. Generische Webdesign-Anbieter kennen diese Besonderheiten nicht. Es brauchte eine spezialisierte Marke, die sich genau an diese Zielgruppe richtet.',
-
-    approach: [
-      'Niche-Recherche: Was suchen Psychologen wirklich, wenn sie eine Website wollen?',
-      'Eigene Best-of-Kombination der Texte aus mehreren AI-gestützten Drafts',
-      'Therapeutische Sage/Cream-Farbpalette – beruhigend, vertrauensbildend',
-      'Footer mit allen 23 Wiener Bezirken für Local SEO',
-      'Lead-Storage in Supabase, Bestätigungsmails über Resend',
-      'Klares €599 Starter-Paket als Einstieg, persönliches Erstgespräch als Conversion-Punkt',
+    "slug": "alcorleads",
+    "client": "AlcorLeads",
+    "initials": "AL",
+    "industry": "Eigenes Produkt · Web-Anwendung",
+    "url": "/referenzen/alcorleads",
+    "liveUrl": "https://alcorleads.com",
+    "year": 2026,
+    "brandColor": "#3A2A1E",
+    "brandColorAccent": "#CF8755",
+    "screenshot": "/referenzen/alcorleads.webp",
+    "shortDescription": "Eigene Web-Anwendung für die Verwaltung von Leads, zugänglich nur mit Login. Handgeschrieben in PHP, betrieben auf klassischem Webhosting in Österreich.",
+    "tags": [
+      "PHP",
+      "Web-App",
+      "Login-Bereich"
     ],
-
-    highlights: [
+    "challenge": "Akquise besteht aus vielen kleinen Schritten: Kontakte erfassen, Status nachhalten, nichts vergessen. Tabellen werden dabei schnell unübersichtlich, große CRM-Systeme sind für ein Ein-Personen-Unternehmen zu schwer. AlcorLeads ist das Werkzeug dazwischen.",
+    "approach": [
+      "Geschützter Bereich mit Anmeldung und „Passwort vergessen“-Funktion",
+      "Bewusst ohne Framework und ohne externe Dienste gebaut – läuft auf jedem üblichen PHP-Hosting",
+      "Oberfläche im eigenen Erscheinungsbild statt Standard-Admin-Theme"
+    ],
+    "highlights": [
       {
-        label: 'CSS-only Browser-Mockups',
-        description:
-          'Die Portfolio-Sektion zeigt fiktive Psychologen-Websites in Browser-Frames – komplett mit CSS gebaut, keine Bilder. Lädt sofort und sieht trotzdem hochwertig aus.',
+        "label": "Eigener Login statt Fremddienst",
+        "description": "Die Anmeldung ist Teil der Anwendung – kein externer Login-Anbieter, über den Zugangsdaten laufen."
       },
       {
-        label: 'Lokales SEO mit allen Bezirken',
-        description:
-          'Footer-Liste aller 23 Wiener Bezirke verlinkt – wenn jemand "Psychologe Webdesign Hietzing" sucht, taucht die Site auf.',
+        "label": "Auch für Kundenprojekte",
+        "description": "Wenn Ihr Betrieb eine interne Web-Anwendung mit Login braucht, baue ich sie nach demselben Prinzip: handgeschrieben, ohne Framework-Abhängigkeit, auf Ihrem Hosting."
+      }
+    ],
+    "techStack": [
+      "PHP",
+      "HTML und CSS ohne Framework",
+      "Login mit Passwort-Reset"
+    ],
+    "results": [
+      {
+        "label": "Zugang",
+        "value": "Nur mit Login",
+        "hint": "kein öffentlicher Bereich"
       },
       {
-        label: 'Branchenspezifische FAQs',
-        description:
-          'FAQ-Sektion adressiert Therapeuten-spezifische Sorgen: Datenschutz für Klienten, Krankenkassen-Hinweise, Online-Termin-Scheu. Spricht die Zielgruppe direkt an.',
+        "label": "Hosting",
+        "value": "Österreich",
+        "hint": "klassisches Webhosting"
       },
       {
-        label: 'Schema.org Service-Markup',
-        description:
-          'Strukturierte Daten als „WebDesignService für Therapeuten in Wien" – Google versteht die Niche und zeigt die Site bei spezifischen Anfragen.',
-      },
+        "label": "Framework",
+        "value": "Keines",
+        "hint": "handgeschrieben"
+      }
     ],
-
-    techStack: [
-      'Next.js 15 (App Router)',
-      'React 19',
-      'TypeScript 5 (strict, noUncheckedIndexedAccess)',
-      'Tailwind CSS 4 mit Custom Theme',
-      'Supabase (Lead-Storage)',
-      'Resend (Lead-Notifications)',
-      'Zod (Form-Validation)',
-      'Plausible Analytics',
-    ],
-
-    results: [
-      { label: 'Lighthouse Score', value: '100/100/100/100' },
-      { label: 'Ladezeit', value: '< 0.7s' },
-      { label: 'JS Bundle (initial)', value: '< 80 KB' },
-      { label: 'Vienna-District-Pages', value: '23' },
-    ],
-
-    businessNote:
-      'Die Marke psychologen-webdesign.at ist Teil der ALCOR Group und richtet sich gezielt an Therapeut:innen mit eigener Praxis. Das Starter-Paket (€ 599,–) ist auf die typischen Anforderungen abgestimmt – Therapie-Spektrum, Termine, Anfahrt, Krankenkassen-Info.',
-
-    metaTitle:
-      'Case Study: psychologen-webdesign.at – Niche-Marke für Therapeuten',
-    metaDescription:
-      'Spezialisierte Landing-Page für Psychologen in Wien. Eigenes ALCOR-Group-Projekt mit klarer Positionierung und €599 Starter-Paket.',
+    "metaTitle": "Referenz: AlcorLeads – eigene Web-Anwendung für Leads",
+    "metaDescription": "AlcorLeads ist eine eigene, handgeschriebene Web-Anwendung der ALCOR Group zur Lead-Verwaltung – in PHP, ohne Framework, gehostet in Österreich."
   },
+  {
+    "slug": "psychologen-webdesign",
+    "client": "psychologen-webdesign.at",
+    "initials": "PW",
+    "industry": "Eigene Marke · Praxis-Websites",
+    "url": "/referenzen/psychologen-webdesign",
+    "liveUrl": "https://psychologen-webdesign.at",
+    "year": 2026,
+    "brandColor": "#7C3AED",
+    "brandColorAccent": "#C4B5FD",
+    "screenshot": "/referenzen/psychologen-webdesign.webp",
+    "shortDescription": "Spezialisierte Landing-Page für Psycholog:innen und Psychotherapeut:innen in Wien. Eigene Marke der ALCOR Group mit klarem Starter-Paket um € 599,–.",
+    "tags": [
+      "Eigene Marke",
+      "Local SEO",
+      "Lead-Generierung"
+    ],
+    "challenge": "Psychotherapeut:innen haben besondere Anforderungen an ihre Website: hohe Vertraulichkeit, ruhige Bildsprache, klare Termin-Strukturen, Hinweise zur Kostenübernahme. Allgemeine Webdesign-Anbieter kennen diese Besonderheiten oft nicht. Es brauchte eine spezialisierte Marke, die sich genau an diese Zielgruppe richtet.",
+    "approach": [
+      "Recherche: Wonach suchen Psycholog:innen wirklich, wenn sie eine Website wollen?",
+      "Beruhigende, vertrauensbildende Farbpalette in Salbei- und Cremetönen",
+      "Footer mit allen 23 Wiener Bezirken für die lokale Suche",
+      "Klares Starter-Paket als Einstieg, persönliches Erstgespräch als nächster Schritt"
+    ],
+    "highlights": [
+      {
+        "label": "Browser-Mockups nur mit CSS",
+        "description": "Die Portfolio-Sektion zeigt Beispiel-Praxisseiten in Browser-Rahmen – komplett mit CSS gebaut, ohne Bilddateien. Lädt sofort und wirkt trotzdem hochwertig."
+      },
+      {
+        "label": "Branchenspezifische FAQ",
+        "description": "Die Fragen greifen die Sorgen der Zielgruppe auf: Datenschutz für Klient:innen, Hinweise zur Kostenübernahme, Scheu vor Online-Terminen."
+      },
+      {
+        "label": "Schema.org Service-Markup",
+        "description": "Strukturierte Daten beschreiben das Angebot als Webdesign-Leistung für Therapeut:innen in Wien."
+      }
+    ],
+    "techStack": [
+      "Next.js (App Router)",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Formular mit Validierung",
+      "Bunny Fonts"
+    ],
+    "results": [
+      {
+        "label": "Zielgruppe",
+        "value": "Praxen in Wien",
+        "hint": "Psychologie und Psychotherapie"
+      },
+      {
+        "label": "Einstiegspaket",
+        "value": "€ 599,–",
+        "hint": "Starter"
+      },
+      {
+        "label": "Bezirke im Footer",
+        "value": "23",
+        "hint": "für die lokale Suche"
+      }
+    ],
+    "businessNote": "Die Marke psychologen-webdesign.at ist Teil der ALCOR Group und richtet sich gezielt an Therapeut:innen mit eigener Praxis. Das Starter-Paket ist auf die typischen Anforderungen abgestimmt – Therapie-Spektrum, Termine, Anfahrt, Hinweise zur Kostenübernahme.",
+    "metaTitle": "Referenz: psychologen-webdesign.at – Marke für Praxis-Websites",
+    "metaDescription": "Spezialisierte Landing-Page für Psycholog:innen und Psychotherapeut:innen in Wien. Eigene Marke der ALCOR Group mit Starter-Paket um € 599,–."
+  }
 ]
 
 export function getCaseBySlug(slug: string): Case | undefined {

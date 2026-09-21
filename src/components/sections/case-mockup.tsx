@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { Case } from '@/lib/cases'
 
 export function CaseMockup({ caseData, large = false }: { caseData: Case; large?: boolean }) {
@@ -19,8 +20,23 @@ export function CaseMockup({ caseData, large = false }: { caseData: Case; large?
         </div>
       </div>
 
-      {/* Mockup content with brand color */}
+      {/* Echter Screenshot, falls vorhanden */}
+      {caseData.screenshot && (
+        <div className="absolute inset-x-0 top-7 bottom-0 overflow-hidden md:top-8">
+          <Image
+            src={caseData.screenshot}
+            alt={large ? `Startseite von ${caseData.liveUrl.replace('https://', '')}` : ''}
+            fill
+            sizes={large ? '(max-width: 1024px) 100vw, 640px' : '(max-width: 768px) 100vw, 420px'}
+            className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+            priority={large}
+          />
+        </div>
+      )}
+
+      {/* Mockup content with brand color (nur ohne Screenshot) */}
       <div
+        hidden={Boolean(caseData.screenshot)}
         className="absolute inset-x-0 top-7 md:top-8 bottom-0 flex items-center justify-center overflow-hidden"
         style={{
           background: `linear-gradient(135deg, ${caseData.brandColor} 0%, ${caseData.brandColorAccent} 100%)`,

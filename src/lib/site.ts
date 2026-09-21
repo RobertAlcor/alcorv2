@@ -41,7 +41,7 @@ export const SITE = {
     hostingYearly: 99,
     hostingIncluded: 'Hosting, kleinere Updates, Inhaltspflege bis 15 Min/Vorgang',
     hourlyRate: 85,
-    hourlyRateUnit: '€/h netto',
+    hourlyRateUnit: '€/h',
   },
   /**
    * Öffnungszeiten (für LocalBusiness Schema und Mikrodaten).
@@ -107,19 +107,9 @@ export const SITE = {
 
 export const SISTER_SITES = [
   {
-    name: 'website-erstellen.wien',
-    url: 'https://website-erstellen.wien',
-    role: 'SEO-Funnel & Pricing-Vergleich',
-  },
-  {
     name: 'psychologen-webdesign.at',
     url: 'https://psychologen-webdesign.at',
     role: 'Niche: Praxis-Websites für Therapeuten',
-  },
-  {
-    name: 'webdesign-liesing.wien',
-    url: 'https://webdesign-liesing.wien',
-    role: 'Niche: 23. Wiener Bezirk',
   },
 ] as const
 
