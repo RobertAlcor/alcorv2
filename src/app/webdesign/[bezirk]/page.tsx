@@ -36,7 +36,6 @@ export async function generateMetadata({
   return {
     title: bezirk.metaTitle,
     description: bezirk.metaDescription,
-    keywords: [...SITE.seo.primaryKeywords, ...bezirk.keywords].join(', '),
     alternates: {
       canonical: `/webdesign/${bezirk.slug}`,
     },
