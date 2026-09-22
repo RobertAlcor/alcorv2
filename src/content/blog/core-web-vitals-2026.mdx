@@ -1,0 +1,200 @@
+---
+title: Core Web Vitals 2026: LCP, INP und CLS verständlich erklärt
+description: Was LCP, INP und CLS messen, welche Zielwerte Google nennt und wie Unternehmen echte Performance-Probleme ihrer Website erkennen.
+date: 2026-09-22
+author: Robert Alchimowicz
+category: Performance
+tags: [Performance, SEO, Technik, Core Web Vitals]
+---
+
+Core Web Vitals klingen technischer, als sie im Alltag sind. Im Grunde beantworten sie drei Fragen:
+
+1. **Wie schnell erscheint der wichtigste Inhalt?**
+2. **Wie schnell reagiert die Seite auf Eingaben?**
+3. **Springt das Layout während des Ladens herum?**
+
+Google verwendet dafür die Kennzahlen **LCP, INP und CLS**. Sie sind kein alleiniger Rankingfaktor und ein perfekter Messwert garantiert keine Top-Position. Trotzdem sind sie sinnvoll, weil sie reale Nutzerprobleme sichtbar machen.
+
+## LCP: Wann ist der Hauptinhalt da?
+
+**Largest Contentful Paint** misst, wann das größte relevante sichtbare Element im ersten Bildschirmbereich gerendert ist. Das kann ein großes Bild, eine Überschrift oder ein Inhaltsblock sein.
+
+Google nennt als guten Zielwert:
+
+**LCP innerhalb von 2,5 Sekunden.**
+
+Typische Ursachen für schlechte LCP-Werte:
+
+- zu große Hero-Bilder,
+- langsame Serverantwort,
+- unnötige Webfonts,
+- blockierendes JavaScript,
+- Bilder ohne Priorisierung,
+- externe Skripte, die früh geladen werden.
+
+### Was ich zuerst prüfe
+
+Bei einer langsamen Startseite schaue ich nicht als Erstes auf hundert kleine Dateien, sondern auf den größten Engpass.
+
+Häufig ist das:
+
+- das Hero-Bild,
+- eine externe Schrift,
+- ein schweres Slider- oder Page-Builder-Skript,
+- ein unnötig clientseitig gerenderter Bereich.
+
+Ein einzelnes großes Problem zu beseitigen bringt oft mehr als zehn Mikro-Optimierungen.
+
+## INP: Reagiert die Website sofort?
+
+**Interaction to Next Paint** misst die Reaktionsfähigkeit nach Nutzerinteraktionen. Also beispielsweise:
+
+- Klick auf einen Button,
+- Öffnen eines Menüs,
+- Auswahl in einem Formular,
+- Interaktion mit einem Filter.
+
+Google nennt als guten Zielwert:
+
+**INP unter 200 Millisekunden.**
+
+Ein schlechter INP entsteht häufig, wenn der Browser nach einer Interaktion lange JavaScript-Aufgaben abarbeiten muss.
+
+Typische Ursachen:
+
+- große JavaScript-Bundles,
+- aufwendige Animationen,
+- unnötige Client Components,
+- komplexe Third-Party-Skripte,
+- schlecht optimierte Event-Handler.
+
+Das ist einer der Gründe, warum ich bei Unternehmenswebsites versuche, möglichst viel Inhalt serverseitig oder statisch auszuliefern und Client-JavaScript nur dort einzusetzen, wo es tatsächlich gebraucht wird.
+
+## CLS: Bleibt das Layout stabil?
+
+**Cumulative Layout Shift** bewertet unerwartete Layout-Verschiebungen.
+
+Google nennt als guten Zielwert:
+
+**CLS unter 0,1.**
+
+Jeder kennt das Problem: Man möchte auf einen Link klicken, plötzlich lädt darüber ein Bild oder Banner und der Link springt weg.
+
+Typische Ursachen sind:
+
+- Bilder ohne definierte Abmessungen,
+- nachträglich eingeblendete Banner,
+- Webfonts mit stark abweichenden Metriken,
+- dynamische Inhalte ohne reservierten Platz,
+- Werbeelemente oder Widgets.
+
+Bei Bildern hilft beispielsweise eine feste Größeninformation. Bei dynamischen Komponenten sollte der benötigte Raum möglichst früh feststehen.
+
+## Lighthouse und echte Nutzerdaten sind nicht dasselbe
+
+Ein häufiger Fehler ist, nur Lighthouse zu betrachten.
+
+Lighthouse ist ein **Labortest**. Er simuliert definierte Bedingungen und eignet sich hervorragend zum Debuggen.
+
+Google Search Console und der Chrome User Experience Report arbeiten dagegen mit **Felddaten** realer Nutzer, sofern genug Daten vorhanden sind.
+
+Beide Perspektiven sind wichtig:
+
+**Labordaten beantworten:**  
+„Was kann ich technisch verbessern?“
+
+**Felddaten beantworten:**  
+„Wie erleben echte Besucher meine Website?“
+
+Deshalb ist ein einzelner Screenshot mit „Performance 100“ kein Beweis dafür, dass jede reale Sitzung perfekt läuft.
+
+## Warum Page Builder oft Probleme bekommen
+
+WordPress ist nicht automatisch langsam und individuell programmierter Code nicht automatisch schnell.
+
+Problematisch wird es, wenn sich viele Ebenen stapeln:
+
+- Theme,
+- Page Builder,
+- mehrere Plugin-Pakete,
+- Tracking,
+- Cookie-System,
+- Chat-Widget,
+- externe Fonts,
+- Animationen,
+- Slider.
+
+Jede Komponente kann zusätzliche CSS-, JavaScript- oder Netzwerklast verursachen.
+
+Ein schlankes WordPress kann schnell sein. Ein schlecht gebautes Next.js-Projekt kann langsam sein. Entscheidend ist die Umsetzung.
+
+## Bilder richtig behandeln
+
+Bilder sind auf vielen Unternehmensseiten der größte Datenblock.
+
+Wichtig sind:
+
+- passende Abmessungen,
+- moderne Formate wie WebP oder AVIF,
+- responsive Varianten,
+- Lazy Loading unterhalb des sichtbaren Bereichs,
+- Priorisierung des wichtigen Hero-Bildes,
+- keine 6000-Pixel-Fotodatei für eine 600-Pixel-Kachel.
+
+Ein gutes Bild darf hochwertig aussehen. Es muss dafür nicht mehrere Megabyte groß sein.
+
+## Fonts und externe Ressourcen
+
+Jede externe Ressource erzeugt zusätzliche Verbindungen und Abhängigkeiten.
+
+Das betrifft:
+
+- Fonts,
+- Analytics,
+- Karten,
+- Videos,
+- Chat-Systeme,
+- Buchungswidgets.
+
+Die Lösung ist nicht, alles zu verbieten. Die Frage lautet: **Brauche ich es auf dieser Seite und muss es sofort laden?**
+
+Ein Video kann beispielsweise erst nach Nutzerinteraktion geladen werden. Analytics kann an Consent gekoppelt werden. Karten können durch einen normalen Link ersetzt werden, wenn keine eingebettete Karte nötig ist.
+
+## Animationen: schön, aber kontrolliert
+
+Animationen können eine Website hochwertiger wirken lassen. Sie können aber auch Main-Thread-Zeit kosten oder Menschen stören, die reduzierte Bewegung bevorzugen.
+
+Eine saubere Lösung berücksichtigt die Systemeinstellung für reduzierte Bewegung und reduziert nicht notwendige Effekte entsprechend.
+
+Das ist Performance und Accessibility gleichzeitig.
+
+## Die richtige Reihenfolge beim Optimieren
+
+Ich arbeite meistens in dieser Reihenfolge:
+
+1. Serverantwort prüfen.
+2. LCP-Element identifizieren.
+3. Bilder optimieren.
+4. unnötiges JavaScript reduzieren.
+5. externe Skripte prüfen.
+6. Layout-Verschiebungen beseitigen.
+7. Interaktionen testen.
+8. Felddaten beobachten.
+
+Nicht jede Website braucht komplizierte Performance-Architektur. Sie braucht nur keine unnötigen Bremsen.
+
+## Core Web Vitals und SEO
+
+Google empfiehlt ausdrücklich gute Core Web Vitals, weist aber ebenso darauf hin, dass sie nicht allein über Rankings entscheiden.
+
+Relevanter Content bleibt relevant. Eine schnelle irrelevante Seite wird nicht automatisch besser ranken als eine langsamere Seite, die die Suchanfrage wesentlich besser beantwortet.
+
+Die vernünftige Strategie lautet deshalb:
+
+**Relevanter Inhalt + technisch gute Nutzererfahrung.**
+
+Wenn Ihre Website technisch überholt werden muss, finden Sie mehr unter [Website Relaunch](/leistungen/relaunch). Für neue Projekte: [Website erstellen lassen in Wien](/leistungen/website-erstellung).
+
+### Quelle
+
+- [Google Search Central: Core Web Vitals und Google-Suchergebnisse](https://developers.google.com/search/docs/appearance/core-web-vitals)
