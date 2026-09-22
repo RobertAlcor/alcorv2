@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
 import { Camera, X, Check, MapPin } from 'lucide-react'
@@ -12,6 +12,8 @@ const SCROLL_THRESHOLD = 0.4 // 40% gescrollt
 export function PromoModal() {
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const modalRef = useRef<HTMLDivElement | null>(null)
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -68,17 +70,48 @@ export function PromoModal() {
     }
   }, [])
 
-  // Escape-Key
   useEffect(() => {
     if (!open) return
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
-    }
-    window.addEventListener('keydown', onKey)
-    // Body scroll lock
+
     const original = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+
+    const frame = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus()
+    })
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        setOpen(false)
+        return
+      }
+
+      if (e.key !== 'Tab') return
+      const modal = modalRef.current
+      if (!modal) return
+
+      const focusable = Array.from(
+        modal.querySelectorAll<HTMLElement>(
+          'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',
+        ),
+      )
+      const first = focusable[0]
+      const last = focusable.at(-1)
+      if (!first || !last) return
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
+    window.addEventListener('keydown', onKey)
     return () => {
+      window.cancelAnimationFrame(frame)
       window.removeEventListener('keydown', onKey)
       document.body.style.overflow = original
     }
@@ -103,6 +136,7 @@ export function PromoModal() {
 
           {/* Modal - Center on Desktop, Bottom-Sheet on Mobile */}
           <motion.div
+            ref={modalRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="promo-title"
@@ -138,6 +172,7 @@ export function PromoModal() {
                 Aktion · Werbung
               </div>
               <button
+                ref={closeButtonRef}
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Aktion schließen"
