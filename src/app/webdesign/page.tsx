@@ -9,12 +9,6 @@ export const metadata: Metadata = {
   title: 'Webdesign Wien · Alle 23 Bezirke | Webdesign Alcor',
   description:
     'Webdesign in jedem Wiener Bezirk — handgeschriebene Websites ohne WordPress, ab €599 in 7 Tagen. Lokale SEO-Optimierung auf Ihren Bezirk.',
-  keywords: [
-    'Webdesign Wien Bezirke',
-    'Webagentur jeder Bezirk Wien',
-    'Lokales Webdesign Wien',
-    ...SITE.seo.primaryKeywords,
-  ].join(', '),
   alternates: { canonical: '/webdesign' },
   openGraph: {
     type: 'website',
@@ -71,12 +65,11 @@ export default function WebdesignHubPage() {
           </div>
           <div className="space-y-6 text-paper-mute leading-relaxed text-lg">
             <p>
-              Wer in Wien nach einer Dienstleistung sucht, sucht meist bezirksspezifisch:
-              „Friseur Favoriten", „Anwalt 1010", „Praxis Döbling". Wer auf
-              „Webdesign Wien" oder „Webdesigner Wien" optimiert, kämpft gegen Hunderte
-              etablierte Agenturen — und verliert oft. Wer auf „Webdesign 1100 Wien" oder
-              „Webagentur Donaustadt" optimiert, hat oft konkurrenzfreie Top-Rankings bei
-              Kunden mit hoher Kaufabsicht.
+              Lokale Suchanfragen enthalten häufig einen Bezirk oder eine konkrete Lage,
+              zum Beispiel „Friseur Favoriten", „Anwalt 1010" oder „Praxis Döbling".
+              Deshalb lohnt es sich, relevante Standortinformationen dort abzubilden, wo
+              sie für echte Kundinnen und Kunden nützlich sind — ohne identische Seiten
+              nur für Suchmaschinen zu vervielfachen.
             </p>
             <p>
               Genau deshalb gibt es für jeden Bezirk eine eigene Seite — mit lokalem
