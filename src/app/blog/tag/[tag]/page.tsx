@@ -24,6 +24,10 @@ export async function generateMetadata({
     title: `Beiträge zum Thema ${displayTag}`,
     description: `Alle Blog-Artikel zum Thema ${displayTag}. Aus über zehn Jahren Webentwicklung in Wien.`,
     alternates: { canonical: `/blog/tag/${tag}` },
+    robots:
+      posts.length >= 2
+        ? { index: true, follow: true }
+        : { index: false, follow: true },
   }
 }
 
