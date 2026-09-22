@@ -65,8 +65,9 @@ export function TerminWizard() {
       isFirstRenderRef.current = false
       return
     }
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     wizardTopRef.current?.scrollIntoView({
-      behavior: 'smooth',
+      behavior: reduceMotion ? 'auto' : 'smooth',
       block: 'start',
     })
   }, [step, submit.status])
