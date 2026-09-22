@@ -243,28 +243,26 @@ export default function UeberMichPage() {
         </ol>
       </section>
 
-      {/* Kontext: Standort + Familie */}
+      {/* Standort + Arbeitsweise */}
       <section className="container-fluid py-20 md:py-24 border-t border-line">
         <div className="max-w-3xl">
           <p className="text-xs font-semibold tracking-[0.16em] uppercase text-signal-2 mb-6">
             <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
-            Privat
+            Standort & Arbeitsweise
           </p>
           <p className="font-serif italic text-2xl md:text-3xl text-paper text-balance leading-snug mb-8">
-            Ich lebe und arbeite im 22. Wiener Bezirk. Mit meiner Lebensgefährtin
-            und unserem Sohn. Nebenbei fotografiere ich – das hilft, wenn Kunden
-            für ihre Website auch echte Bilder brauchen.
+            Ich arbeite in Wien und begleite Projekte persönlich – von der ersten
+            Struktur bis zum Launch.
           </p>
           <p className="text-paper-mute leading-relaxed text-pretty mb-4">
-            Familie ist für mich der Anker, der alles in Perspektive setzt. Wenn
-            mein Sohn am Abend vom Kindergarten erzählt, ist mir egal, wie viele
-            Tabs gerade offen sind. Diese Trennung tut auch der Arbeit gut –
-            ich komme klarer wieder rein, wenn ich auch wirklich abschalte.
+            Neben Webentwicklung und SEO beschäftige ich mich auch mit Fotografie.
+            Das ist praktisch, wenn für eine Website echte Bilder statt austauschbarer
+            Stockfotos gebraucht werden.
           </p>
           <p className="text-paper-mute leading-relaxed text-pretty">
             Geschäftssitz: {SITE.address.street}, {SITE.address.postalCode}{' '}
-            {SITE.address.city}. Termine vor Ort sind möglich – meist reichen
-            aber Telefonate oder Videocalls. Effizienter für alle Seiten.
+            {SITE.address.city}. Termine vor Ort sind möglich; viele Abstimmungen
+            funktionieren ebenso effizient telefonisch oder per Videocall.
           </p>
         </div>
       </section>
