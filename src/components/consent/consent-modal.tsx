@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { X, Check } from 'lucide-react'
 import { useConsent } from './consent-provider'
 import {
@@ -14,20 +14,55 @@ const CATEGORY_ORDER: ConsentCategory[] = ['necessary', 'statistics', 'marketing
 export function ConsentModal() {
   const { isModalOpen, closeSettings, consent, setConsent } = useConsent()
   const [draft, setDraft] = useState<ConsentState>(consent)
+  const modalRef = useRef<HTMLDivElement | null>(null)
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null)
 
   // Wenn Modal aufgeht: aktuellen Stand als Draft setzen
   useEffect(() => {
     if (isModalOpen) setDraft(consent)
   }, [isModalOpen, consent])
 
-  // ESC-Key zum Schließen
   useEffect(() => {
     if (!isModalOpen) return
-    function onEsc(e: KeyboardEvent) {
-      if (e.key === 'Escape') closeSettings()
+
+    const frame = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus()
+    })
+
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        closeSettings()
+        return
+      }
+
+      if (e.key !== 'Tab') return
+      const modal = modalRef.current
+      if (!modal) return
+
+      const focusable = Array.from(
+        modal.querySelectorAll<HTMLElement>(
+          'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',
+        ),
+      )
+      const first = focusable[0]
+      const last = focusable.at(-1)
+      if (!first || !last) return
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
     }
-    window.addEventListener('keydown', onEsc)
-    return () => window.removeEventListener('keydown', onEsc)
+
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener('keydown', onKey)
+    }
   }, [isModalOpen, closeSettings])
 
   if (!isModalOpen) return null
@@ -64,8 +99,12 @@ export function ConsentModal() {
         onClick={closeSettings}
         aria-hidden
       />
-      <div className="relative w-full max-w-2xl bg-deep-2 border border-line rounded-sm p-6 md:p-8 shadow-2xl">
+      <div
+        ref={modalRef}
+        className="relative w-full max-w-2xl bg-deep-2 border border-line rounded-sm p-6 md:p-8 shadow-2xl"
+      >
         <button
+          ref={closeButtonRef}
           type="button"
           onClick={closeSettings}
           className="absolute top-3 right-3 w-9 h-9 inline-flex items-center justify-center text-paper-mute hover:text-paper rounded-sm hover:bg-deep transition-colors"
