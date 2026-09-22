@@ -121,14 +121,16 @@ export function BookingFormStep({ data, onChange, errors }: Props) {
               maxLength={200}
               placeholder="Straße, Hausnummer, PLZ, Ort"
               autoComplete="street-address"
+              aria-invalid={Boolean(errors?.externalAddress)}
+              aria-describedby={errors?.externalAddress ? 'bk-address-error' : 'bk-address-hint'}
               className={INPUT_CLASS}
             />
             {errors?.externalAddress && (
-              <p className="mt-2 text-sm text-error">
+              <p id="bk-address-error" className="mt-2 text-sm text-error">
                 {errors.externalAddress}
               </p>
             )}
-            <p className="text-xs text-paper-mute mt-2 leading-relaxed">
+            <p id="bk-address-hint" className="text-xs text-paper-mute mt-2 leading-relaxed">
               Außerhalb Wiens fällt eine Anfahrtspauschale an – wird vorab
               transparent geklärt.
             </p>
@@ -147,10 +149,12 @@ export function BookingFormStep({ data, onChange, errors }: Props) {
           value={data.name}
           onChange={(e) => update('name', e.target.value)}
           autoComplete="name"
+          aria-invalid={Boolean(errors?.name)}
+          aria-describedby={errors?.name ? 'bk-name-error' : undefined}
           className={INPUT_CLASS}
         />
         {errors?.name && (
-          <p className="mt-2 text-sm text-error">{errors.name}</p>
+          <p id="bk-name-error" className="mt-2 text-sm text-error">{errors.name}</p>
         )}
       </div>
 
@@ -166,10 +170,12 @@ export function BookingFormStep({ data, onChange, errors }: Props) {
             value={data.email}
             onChange={(e) => update('email', e.target.value)}
             autoComplete="email"
+            aria-invalid={Boolean(errors?.email)}
+            aria-describedby={errors?.email ? 'bk-email-error' : undefined}
             className={INPUT_CLASS}
           />
           {errors?.email && (
-            <p className="mt-2 text-sm text-error">{errors.email}</p>
+            <p id="bk-email-error" className="mt-2 text-sm text-error">{errors.email}</p>
           )}
         </div>
         <div>
@@ -184,10 +190,12 @@ export function BookingFormStep({ data, onChange, errors }: Props) {
             onChange={(e) => update('phone', e.target.value)}
             autoComplete="tel"
             placeholder="z. B. 0664 123 4567"
+            aria-invalid={Boolean(errors?.phone)}
+            aria-describedby={errors?.phone ? 'bk-phone-error' : undefined}
             className={INPUT_CLASS}
           />
           {errors?.phone && (
-            <p className="mt-2 text-sm text-error">{errors.phone}</p>
+            <p id="bk-phone-error" className="mt-2 text-sm text-error">{errors.phone}</p>
           )}
         </div>
       </div>
@@ -204,10 +212,12 @@ export function BookingFormStep({ data, onChange, errors }: Props) {
           onChange={(e) => update('topic', e.target.value)}
           maxLength={120}
           placeholder="z. B. Neue Praxis-Website mit Online-Booking"
+          aria-invalid={Boolean(errors?.topic)}
+          aria-describedby={errors?.topic ? 'bk-topic-error' : undefined}
           className={INPUT_CLASS}
         />
         {errors?.topic && (
-          <p className="mt-2 text-sm text-error">{errors.topic}</p>
+          <p id="bk-topic-error" className="mt-2 text-sm text-error">{errors.topic}</p>
         )}
       </div>
 
