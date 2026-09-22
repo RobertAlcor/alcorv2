@@ -1,0 +1,205 @@
+---
+title: Barrierefreie Website 2026: WCAG 2.2 verständlich erklärt
+description: Was barrierefreies Webdesign praktisch bedeutet: Tastatur, Fokus, Kontrast, Formulare, Touch-Ziele und reduzierte Bewegung nach WCAG 2.2.
+date: 2026-09-22
+author: Robert Alchimowicz
+category: Webdesign
+tags: [Accessibility, Webdesign, Technik, WCAG]
+---
+
+Barrierefreiheit wird bei Websites oft als Zusatzfunktion behandelt. Technisch betrachtet ist sie aber näher an guter Grundqualität: Eine Website sollte auch dann funktionieren, wenn jemand keine Maus benutzt, schlecht sieht, vergrößert, einen Screenreader verwendet oder Bewegungseffekte reduziert.
+
+Als aktueller W3C-Standard ist **WCAG 2.2** eine sinnvolle technische Orientierung. Für Unternehmensseiten ist **Level AA** in vielen Projekten ein realistisches Qualitätsziel.
+
+Dieser Artikel ist keine Rechtsberatung. Es geht um die praktische Umsetzung.
+
+## Tastatur: funktioniert alles ohne Maus?
+
+Der schnellste manuelle Test kostet zwei Minuten:
+
+1. Maus weglegen.
+2. Mit Tab durch die Seite gehen.
+3. Mit Shift + Tab zurückgehen.
+4. Menüs, Formulare und Dialoge bedienen.
+5. Mit Enter, Leertaste und Escape testen.
+
+Dabei sollten Sie jederzeit erkennen, **wo sich der Fokus befindet**.
+
+Problematisch sind beispielsweise:
+
+- unsichtbarer Fokus,
+- Links, die nur per Maus reagieren,
+- Modals, aus denen man mit Tab herauswandern kann,
+- Menüs, die sich nicht mit Escape schließen,
+- Elemente, die visuell wie Buttons aussehen, technisch aber keine Buttons sind.
+
+## Fokus muss sichtbar bleiben
+
+WCAG 2.2 hat das Thema Fokus weiter konkretisiert.
+
+Für Tastaturnutzer ist der Fokus praktisch der Mauszeiger. Wenn er hinter einem Sticky Header, einem Cookie-Banner oder einem Modal verschwindet, ist die Seite schwer bedienbar.
+
+Darum prüfe ich bei Navigation und Dialogen:
+
+- Ist der Fokus sichtbar?
+- Wird er von Overlays verdeckt?
+- landet er beim Öffnen eines Dialogs an einer sinnvollen Stelle?
+- kehrt er nach dem Schließen zum auslösenden Element zurück?
+
+Gerade Cookie-Einstellungen, mobile Menüs und Popup-Dialoge werden dabei oft übersehen.
+
+## Modale Dialoge brauchen Fokusmanagement
+
+Ein Modal sollte sich auch technisch wie ein Modal verhalten.
+
+Dazu gehören:
+
+- eine Dialog-Rolle,
+- aria-modal,
+- verständliche Beschriftung,
+- Fokus beim Öffnen in den Dialog setzen,
+- Tabulator innerhalb des Dialogs halten,
+- Escape zum Schließen,
+- Fokus danach zurück zum Auslöser.
+
+Nur ein halbtransparentes Overlay über die Seite zu legen reicht nicht.
+
+## Formulare: Fehlermeldungen müssen verbunden sein
+
+Ein roter Rahmen ist für Screenreader keine ausreichende Fehlermeldung.
+
+Ein gutes Formular verbindet das Feld programmatisch mit dem Fehlertext, beispielsweise über:
+
+- aria-invalid,
+- aria-describedby,
+- eindeutige IDs,
+- verständliche Fehlermeldungen.
+
+Statt:
+
+„Ungültig“
+
+ist besser:
+
+„Bitte eine gültige E-Mail-Adresse eingeben.“
+
+Formulare sollten außerdem sinnvolle Autocomplete-Attribute verwenden. Das hilft nicht nur Menschen mit Assistenztechnologien, sondern allen Nutzern.
+
+## Touch-Ziele dürfen nicht winzig sein
+
+WCAG 2.2 definiert für Level AA eine Mindestgröße beziehungsweise ausreichenden Abstand für Pointer-Ziele.
+
+In der Praxis sind 44 bis 48 Pixel hohe Buttons eine komfortable Orientierung, auch wenn die formale AA-Anforderung unter bestimmten Bedingungen kleiner sein kann.
+
+Besonders kritisch sind:
+
+- kleine X-Symbole,
+- Pagination,
+- winzige Checkboxen,
+- eng stehende Icon-Buttons,
+- mobile Navigationspunkte.
+
+Was am Desktop elegant aussieht, kann am Smartphone unnötig schwer zu treffen sein.
+
+## Kontrast ist mehr als heller Text auf dunklem Hintergrund
+
+Kontrast betrifft:
+
+- normalen Text,
+- große Schrift,
+- Buttons,
+- Formularränder,
+- Fokusindikatoren,
+- Icons mit Bedeutung,
+- Fehlermeldungen.
+
+Ein häufiges Problem bei modernen Dark Designs: Haupttext ist ausreichend kontrastreich, aber sekundärer Text wird so stark gedimmt, dass er schwer lesbar wird.
+
+Design darf subtil sein. Information darf dabei nicht verschwinden.
+
+## Überschriften brauchen eine logische Struktur
+
+Eine Seite sollte nicht nach Schriftgröße strukturiert werden, sondern semantisch.
+
+Typisch:
+
+- eine Hauptüberschrift H1,
+- wichtige Bereiche H2,
+- Unterpunkte H3.
+
+Man sollte keine tiefere Überschrift verwenden, nur weil sie optisch gerade passt.
+
+Eine saubere Struktur hilft:
+
+- Screenreadern,
+- Suchmaschinen,
+- Nutzern beim Scannen,
+- späterer Pflege.
+
+## Bilder brauchen sinnvolle Alternativtexte
+
+Nicht jedes Bild braucht einen langen Alt-Text.
+
+Faustregel:
+
+**Informativ:** beschreiben, was für den Inhalt relevant ist.  
+**Dekorativ:** leeres Alt-Attribut.  
+**Link-Bild:** Zweck des Links beschreiben.
+
+Schlecht:
+
+„Bild“
+
+Besser:
+
+„Startseite der Praxis-Website auf Smartphone und Laptop“
+
+Bei Screenshots sollte beschrieben werden, was der Screenshot im Kontext beweist.
+
+## Bewegung respektieren
+
+Manche Menschen reagieren empfindlich auf Animationen. Betriebssysteme bieten deshalb die Einstellung „Bewegung reduzieren“.
+
+Websites können diese Präferenz erkennen und nicht notwendige Animationen reduzieren oder deaktivieren.
+
+Das betrifft besonders:
+
+- große Parallax-Effekte,
+- animierte Hintergründe,
+- automatische Slider,
+- Scroll-Animationen,
+- aggressive Transitions.
+
+## Zoom und mobile Breite testen
+
+Eine Seite sollte auch bei starkem Zoom bedienbar bleiben.
+
+Ein einfacher Test:
+
+- Browser auf 200 % zoomen,
+- kleines Browserfenster verwenden,
+- Navigation öffnen,
+- Formular ausfüllen,
+- Text lesen.
+
+Horizontales Scrollen wegen eines einzelnen Elements ist ein typischer Fehler.
+
+## Barrierefreiheit verbessert oft die gesamte UX
+
+Viele Accessibility-Maßnahmen wirken sich direkt auf alle Nutzer aus:
+
+- größere Buttons,
+- klarere Formulare,
+- bessere Fehlermeldungen,
+- sichtbarer Fokus,
+- verständliche Navigation,
+- weniger störende Popups,
+- stabilere Layouts.
+
+Deshalb behandle ich Accessibility nicht als spätes Add-on, sondern als Teil von sauberem Frontend-Handwerk.
+
+Wenn Sie eine bestehende Website modernisieren möchten, finden Sie dazu mehr unter [Website Relaunch](/leistungen/relaunch). Für ein neues Projekt: [Website-Erstellung](/leistungen/website-erstellung).
+
+### Quelle
+
+- [W3C: Web Content Accessibility Guidelines (WCAG) 2.2](https://www.w3.org/TR/wcag/)
