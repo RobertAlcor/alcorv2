@@ -7,23 +7,31 @@ import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'motion/react'
 import { NAV, SITE } from '@/lib/site'
 
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(',')
+
 export function MobileMenu() {
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
   const buttonRef = useRef<HTMLButtonElement | null>(null)
+  const dialogRef = useRef<HTMLDivElement | null>(null)
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null)
 
-  // Mount-Check für SSR-safe Portal
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  // Close on route change
   useEffect(() => {
     setOpen(false)
   }, [pathname])
 
-  // Body scroll lock + Escape + Focus management
   useEffect(() => {
     if (!open) return
 
@@ -40,28 +48,63 @@ export function MobileMenu() {
     document.body.style.top = `-${scrollY}px`
     document.body.style.width = '100%'
 
+    const focusFrame = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus()
+    })
+
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        setOpen(false)
+        return
+      }
+
+      if (e.key !== 'Tab') return
+
+      const dialog = dialogRef.current
+      if (!dialog) return
+
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+      ).filter((element) => !element.hasAttribute('disabled') && element.tabIndex !== -1)
+
+      if (focusable.length === 0) {
+        e.preventDefault()
+        return
+      }
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      const active = document.activeElement
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault()
+        first.focus()
+      }
     }
+
     window.addEventListener('keydown', handleKey)
 
     return () => {
+      window.cancelAnimationFrame(focusFrame)
       document.body.style.overflow = originalStyle.overflow
       document.body.style.position = originalStyle.position
       document.body.style.top = originalStyle.top
       document.body.style.width = originalStyle.width
       window.scrollTo(0, scrollY)
       window.removeEventListener('keydown', handleKey)
-      // Return focus to trigger button
       buttonRef.current?.focus()
     }
   }, [open])
 
-  // Overlay-Inhalt — wird via Portal direkt in <body> gerendert
   const overlay = (
     <AnimatePresence>
       {open && (
         <motion.div
+          ref={dialogRef}
           id="mobile-menu"
           role="dialog"
           aria-modal="true"
@@ -73,7 +116,6 @@ export function MobileMenu() {
           className="fixed inset-0 z-[200] md:hidden bg-deep/95 backdrop-blur-xl"
           style={{ height: '100dvh' }}
         >
-          {/* Atmospheric gradient */}
           <motion.div
             aria-hidden
             initial={{ opacity: 0 }}
@@ -100,7 +142,6 @@ export function MobileMenu() {
             className="relative h-full flex flex-col bg-deep overflow-hidden"
             style={{ height: '100dvh' }}
           >
-            {/* Top bar mit echtem Close-Button (X) */}
             <div className="container-fluid flex items-center justify-between py-5 border-b border-line shrink-0">
               <motion.div
                 initial={{ opacity: 0, y: -8 }}
@@ -119,8 +160,8 @@ export function MobileMenu() {
                 </Link>
               </motion.div>
 
-              {/* Echter Close-Button - kein leerer Spacer mehr */}
               <button
+                ref={closeButtonRef}
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Menü schließen"
@@ -130,7 +171,6 @@ export function MobileMenu() {
               </button>
             </div>
 
-            {/* Navigation */}
             <nav
               aria-label="Hauptnavigation"
               className="flex-1 container-fluid flex flex-col justify-center py-6 overflow-y-auto min-h-0"
@@ -197,7 +237,6 @@ export function MobileMenu() {
               </ul>
             </nav>
 
-            {/* Quick contacts */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -249,9 +288,6 @@ export function MobileMenu() {
         <AnimatedBurger isOpen={open} />
       </button>
 
-      {/* Overlay via Portal direkt in <body> rendern.
-          Umgeht den Containing-Block-Bug, der durch backdrop-filter
-          im Header-Vorfahren entsteht. */}
       {mounted && createPortal(overlay, document.body)}
     </>
   )
@@ -287,12 +323,9 @@ function ContactTile({
   )
 }
 
-/**
- * Animated Burger that morphs to X
- */
 function AnimatedBurger({ isOpen }: { isOpen: boolean }) {
   return (
-    <span className="relative w-6 h-6 inline-block">
+    <span aria-hidden="true" className="relative w-6 h-6 inline-block">
       <motion.span
         className="absolute left-0 right-0 h-px bg-current"
         initial={false}

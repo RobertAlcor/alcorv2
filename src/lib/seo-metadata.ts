@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import { SITE } from './site'
 
 /**
- * Helper um konsistente Metadata pro Page zu erzeugen.
- * Wird in jeder page.tsx als `export const metadata = pageMetadata({...})` genutzt.
+ * Helper für konsistente Metadata pro Seite.
+ * `keywords` bleibt als internes Feld erhalten, wird aber bewusst nicht als
+ * Meta-Keywords-Tag ausgegeben, weil Google dieses Signal nicht verwendet.
  */
 export function pageMetadata(args: {
   title: string
@@ -13,12 +14,10 @@ export function pageMetadata(args: {
   ogImage?: string
 }): Metadata {
   const fullUrl = `${SITE.url}${args.path}`
-  const keywords = args.keywords ?? []
 
   return {
     title: args.title,
     description: args.description,
-    keywords: [...SITE.seo.primaryKeywords, ...keywords].join(', '),
     alternates: {
       canonical: args.path,
     },
@@ -41,21 +40,11 @@ export function pageMetadata(args: {
   }
 }
 
-/**
- * Vordefinierte SEO-optimierte Metadata für jede Page.
- * Import in page.tsx:
- *
- *   import { PAGE_META } from '@/lib/seo-metadata'
- *   export const metadata = PAGE_META.home
- *
- * Title-Konvention: <Hauptkeyword> | <USP/Subtitle> | <Brand>
- * 50-60 Zeichen optimal. Description 140-160 Zeichen.
- */
 export const PAGE_META = {
   home: pageMetadata({
-    title: 'Webdesign Wien | Webagentur ohne WordPress | Webdesign Alcor',
+    title: 'Webdesign Wien | Websites & SEO | Webdesign Alcor',
     description:
-      'Handgeschriebene Websites aus Wien — schnell, sicher, ohne Plugin-Chaos. Eine Person, 10+ Jahre Erfahrung. Lieferung in 7 Tagen ab €599.',
+      'Individuell programmierte Websites für Unternehmen in Wien: Webdesign, Relaunch und technische SEO. Persönlich, schnell und ohne WordPress. Ab €599.',
     path: '/',
     keywords: ['Webdesign 1220', 'Webdesigner Wien', 'Webagentur Wien'],
   }),
@@ -110,9 +99,9 @@ export const PAGE_META = {
   }),
 
   referenzen: pageMetadata({
-    title: 'Webdesign Referenzen Wien | Praxen, Reinigung, Therapeuten',
+    title: 'Webdesign Referenzen Wien | Praxen, Unternehmen & Projekte',
     description:
-      'Echte Wiener Projekte: Reinigungsfirma, Schmerztherapie, Psychotherapie. Vor/Nach-Ergebnisse, Performance-Werte, Kundenstimmen.',
+      'Ausgewählte Webdesign-Projekte aus Wien und Umgebung mit Aufgabe, Vorgehen, Technik und Live-Link. Echte Websites statt Demo-Mockups.',
     path: '/referenzen',
     keywords: ['Webdesign Referenzen', 'Webdesign Beispiele Wien', 'Webagentur Portfolio'],
   }),

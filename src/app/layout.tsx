@@ -20,17 +20,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    // SEO-optimierter Default-Title mit Hauptkeyword "Webdesign Wien".
-    // Wird genutzt wenn eine Page keinen eigenen Title definiert.
-    default: 'Webdesign Wien | Webagentur ohne WordPress | Webdesign Alcor',
+    default: 'Webdesign Wien | Websites & SEO | Webdesign Alcor',
     template: `%s · ${SITE.name}`,
   },
   description:
-    'Webdesign Wien — handgeschriebene Websites ohne WordPress, ohne Plugin-Chaos. Eine Person, 10+ Jahre Erfahrung, voller Code-Besitz. Lieferung in 7 Tagen ab €599.',
-  keywords: [
-    ...SITE.seo.primaryKeywords,
-    ...SITE.seo.secondaryKeywords,
-  ].join(', '),
+    'Individuell programmierte Websites für Unternehmen in Wien: Webdesign, Relaunch und technische SEO. Persönlich, schnell und ohne WordPress. Ab €599.',
   applicationName: SITE.name,
   authors: [{ name: SITE.founder.name, url: SITE.url }],
   creator: SITE.founder.name,
@@ -48,16 +42,15 @@ export const metadata: Metadata = {
     locale: 'de_AT',
     url: SITE.url,
     siteName: SITE.name,
-    title: 'Webdesign Wien | Webagentur ohne WordPress | Webdesign Alcor',
+    title: 'Webdesign Wien | Websites & SEO | Webdesign Alcor',
     description:
-      'Handgeschriebene Websites aus Wien — schnell, sicher, ohne Plugin-Chaos. Eine Person, 10+ Jahre Erfahrung. Lieferung in 7 Tagen ab €599.',
-    // Bilder werden automatisch aus opengraph-image.tsx geladen
+      'Individuell programmierte Websites aus Wien: Webdesign, Relaunch und technische SEO. Persönlich, schnell und ohne WordPress.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Webdesign Wien | Webdesign Alcor',
+    title: 'Webdesign Wien | Websites & SEO | Webdesign Alcor',
     description:
-      'Handgeschriebene Websites aus Wien. Ohne WordPress. Lieferung in 7 Tagen ab €599.',
+      'Individuell programmierte Websites aus Wien: Webdesign, Relaunch und technische SEO. Persönlich und ohne WordPress.',
   },
   robots: {
     index: true,
@@ -73,7 +66,6 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
   },
-  // Geo-Tags für lokales SEO
   other: {
     'geo.region': 'AT-9',
     'geo.placename': 'Wien',

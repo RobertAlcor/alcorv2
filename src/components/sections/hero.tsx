@@ -47,7 +47,6 @@ export function Hero() {
 
   return (
     <section className="grain relative overflow-hidden pt-16 pb-24 md:pt-24 md:pb-32">
-      {/* Static atmospheric gradient */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-1/4 -right-1/4 h-[60vw] w-[60vw]"
@@ -58,7 +57,6 @@ export function Hero() {
         }}
       />
 
-      {/* Cursor-following glow (desktop) */}
       <div
         aria-hidden
         ref={glowRef}
@@ -73,7 +71,6 @@ export function Hero() {
       <FloatingAccent />
 
       <div className="container-fluid relative z-10">
-        {/* Live Indicator + Eyebrow */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -83,8 +80,6 @@ export function Hero() {
           <LiveIndicator text="Verfügbar — bereit für neue Projekte" />
         </motion.div>
 
-
-        {/* Headline */}
         <motion.h1
           initial="hidden"
           animate="visible"
@@ -101,7 +96,6 @@ export function Hero() {
           <em className="shimmer font-serif italic">Alle sahen gleich aus.</em>
         </motion.h1>
 
-        {/* Subline */}
         <motion.p
           initial="hidden"
           animate="visible"
@@ -109,15 +103,15 @@ export function Hero() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
           className="text-paper-mute mt-10 max-w-3xl font-serif text-[clamp(1.25rem,2.4vw,1.75rem)] leading-snug text-pretty italic"
         >
-          Stockfotos. Lila Gradients. „Wir sind Ihre digitale Familie."
+          Individuell programmierte Websites für Unternehmen und Selbstständige in Wien —
+          mit Webdesign, Relaunch und technischer SEO aus einer Hand.
           <br />
           <span className="text-paper">
-            Ich bin keine Familie. Ich bin Robert. Ich schreibe Code seit{' '}
-            {SITE.founder.yearsActive} Jahren.
+            Ich bin Robert. Ich schreibe Code seit {SITE.founder.yearsActive} Jahren und
+            begleite Projekte persönlich von der Planung bis zum Launch.
           </span>
         </motion.p>
 
-        {/* CTAs */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -148,7 +142,6 @@ export function Hero() {
           </Link>
         </motion.div>
 
-        {/* Trust strip */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -293,19 +286,20 @@ const TRUST_POINTS: StatProps[] = [
     icon: <Clock className="h-5 w-5" strokeWidth={1.5} />,
     value: SITE.pricing.deliveryDays,
     label: 'Tage zur Live-Schaltung',
-    hint: 'Statt 4–8 Wochen Wartezeit',
+    hint: 'Starter-Projekte typischerweise in 7 Werktagen',
     isCounter: true,
   },
   {
     icon: <Zap className="h-5 w-5" strokeWidth={1.5} />,
-    value: '<1s',
-    label: 'Ladezeit',
-    hint: 'Statt 2–5 Sekunden bei WordPress',
+    value: 'CWV',
+    label: 'Performance',
+    hint: 'Auf schnelle Ladezeiten und Core Web Vitals optimiert',
   },
   {
     icon: <Shield className="h-5 w-5" strokeWidth={1.5} />,
-    value: '€0',
-    label: 'Wartungskosten / Monat',
-    hint: 'Keine Plugin-Gebühren, keine Abos',
+    value: '0',
+    suffix: ' WP',
+    label: 'WordPress-Plugins',
+    hint: 'Weniger Drittanbieter-Abhängigkeiten im Projekt',
   },
 ]

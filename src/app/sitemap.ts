@@ -5,106 +5,46 @@ import { getAllPosts, getAllTags, slugifyTag } from '@/lib/blog'
 import { getPublishedBezirke } from '@/lib/bezirke'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date()
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: SITE.url, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
-    {
-      url: `${SITE.url}/leistungen`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
+    { url: SITE.url, changeFrequency: 'weekly', priority: 1.0 },
+    { url: `${SITE.url}/leistungen`, changeFrequency: 'monthly', priority: 0.9 },
     {
       url: `${SITE.url}/leistungen/website-erstellung`,
-      lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.85,
     },
     {
       url: `${SITE.url}/leistungen/relaunch`,
-      lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.85,
     },
     {
       url: `${SITE.url}/leistungen/seo-wien`,
-      lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.85,
     },
-    {
-      url: `${SITE.url}/referenzen`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    // Alle Referenzen automatisch aus cases.ts – neue Projekte landen ohne weiteren Handgriff in der Sitemap
+    { url: `${SITE.url}/referenzen`, changeFrequency: 'monthly', priority: 0.9 },
     ...CASES.map((c) => ({
       url: `${SITE.url}${c.url}`,
-      lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),
-    {
-      url: `${SITE.url}/ueber-mich`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${SITE.url}/preise`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${SITE.url}/blog`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${SITE.url}/termin`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${SITE.url}/kontakt`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.7,
-    },
-    // ─── NEU: Bezirks-Hub ───
-    {
-      url: `${SITE.url}/webdesign`,
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE.url}/impressum`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${SITE.url}/datenschutz`,
-      lastModified: now,
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
+    { url: `${SITE.url}/ueber-mich`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE.url}/preise`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE.url}/blog`, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${SITE.url}/termin`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE.url}/kontakt`, changeFrequency: 'yearly', priority: 0.7 },
+    { url: `${SITE.url}/webdesign`, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${SITE.url}/impressum`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${SITE.url}/datenschutz`, changeFrequency: 'yearly', priority: 0.3 },
   ]
 
-  // ─── NEU: Bezirks-Pages dynamisch ───
   const bezirkRoutes: MetadataRoute.Sitemap = getPublishedBezirke().map((b) => ({
     url: `${SITE.url}/webdesign/${b.slug}`,
-    lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: 0.85,
   }))
 
-  // Dynamic blog posts
   const posts = await getAllPosts()
   const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${SITE.url}/blog/${post.slug}`,
@@ -113,11 +53,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }))
 
-  // Dynamic tag pages
   const tags = await getAllTags()
   const tagRoutes: MetadataRoute.Sitemap = tags.map((tag) => ({
     url: `${SITE.url}/blog/tag/${slugifyTag(tag)}`,
-    lastModified: now,
     changeFrequency: 'monthly' as const,
     priority: 0.5,
   }))

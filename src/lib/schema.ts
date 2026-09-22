@@ -1,12 +1,5 @@
 import { SITE } from './site'
 
-/**
- * Haupt-Schema: ProfessionalService + LocalBusiness Hybrid.
- * Wird im RootLayout eingebaut, gilt für die ganze Site.
- *
- * Hinweis: ProfessionalService erbt von LocalBusiness und ist daher
- * für lokale Suche genauso wirksam wie LocalBusiness selbst.
- */
 export function organizationSchema() {
   return {
     '@context': 'https://schema.org',
@@ -50,10 +43,6 @@ export function organizationSchema() {
       ],
     },
     foundingDate: String(SITE.founder.foundedIn),
-    /**
-     * AreaServed mit allen 23 Wiener Bezirken: stärkt das LocalBusiness-Signal
-     * für Suchen wie "webdesign 1010 wien", "webdesign liesing", etc.
-     */
     areaServed: [
       { '@type': 'City', name: 'Wien', '@id': 'https://www.wikidata.org/wiki/Q1741' },
       ...SITE.viennaDistricts.map((d) => ({
@@ -68,7 +57,7 @@ export function organizationSchema() {
         latitude: SITE.address.geo.lat,
         longitude: SITE.address.geo.lng,
       },
-      geoRadius: '25000', // 25km um Berresgasse → ganz Wien + Umland
+      geoRadius: '25000',
     },
     priceRange: `€${SITE.pricing.starter}+`,
     openingHoursSpecification: [
@@ -92,9 +81,6 @@ export function organizationSchema() {
       ...(SITE.social.linkedin ? [SITE.social.linkedin] : []),
       ...(SITE.social.xing ? [SITE.social.xing] : []),
     ].filter(Boolean),
-    /**
-     * OfferCatalog: zeigt Google die wichtigsten Leistungen strukturiert.
-     */
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Webdesign-Leistungen',
@@ -131,8 +117,9 @@ export function organizationSchema() {
 }
 
 /**
- * WebSite Schema mit potentialAction (SearchAction).
- * Damit zeigt Google ggf. die Sitelinks Search Box im Snippet.
+ * WebSite Schema für Site-Name und Publisher.
+ * Die frühere SearchAction wurde entfernt, weil Google das Sitelinks-Suchfeld
+ * seit November 2024 nicht mehr in den Suchergebnissen unterstützt.
  */
 export function websiteSchema() {
   return {
@@ -143,14 +130,6 @@ export function websiteSchema() {
     name: SITE.name,
     publisher: { '@id': `${SITE.url}/#organization` },
     inLanguage: 'de-AT',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${SITE.url}/blog?q={search_term_string}`,
-      },
-      'query-input': 'required name=search_term_string',
-    },
   }
 }
 
@@ -162,13 +141,7 @@ export function personSchema() {
     name: SITE.founder.name,
     jobTitle: SITE.founder.role,
     worksFor: { '@id': `${SITE.url}/#organization` },
-    knowsAbout: [
-      'Webentwicklung',
-      'SEO',
-      'Next.js',
-      'TypeScript',
-      'GEO Optimization',
-    ],
+    knowsAbout: ['Webentwicklung', 'SEO', 'Next.js', 'TypeScript', 'GEO Optimization'],
     address: {
       '@type': 'PostalAddress',
       addressLocality: SITE.address.city,

@@ -7,7 +7,7 @@ export const FAQS: FAQ[] = [
   {
     question: 'Warum nicht WordPress?',
     answer:
-      'WordPress ist für 90 Prozent der KMU-Sites zu viel Maschine. Plugins müssen wöchentlich aktualisiert werden, jedes Update kann etwas brechen, jeder Plugin-Konflikt produziert Bugs, jede Sicherheitslücke wird zur Einladung für Hacker. Handgeschriebener Code hat keine Plugins. Es gibt nichts zu aktualisieren, nichts kann brechen, und es gibt keine Lücken die sich ein Hacker zunutze machen kann. Die Site läuft, fertig.',
+      'WordPress ist ein leistungsfähiges CMS und für viele Projekte sinnvoll. Für kleinere Unternehmensseiten ist es aber oft komplexer als nötig: Core, Theme und Plugins müssen gepflegt und miteinander kompatibel gehalten werden. Ich setze deshalb bei passenden Projekten auf individuell entwickelten Code mit möglichst wenigen Abhängigkeiten. Das reduziert Plugin- und Theme-Risiken, ersetzt aber nicht die laufende Pflege von Frameworks, Hosting und Sicherheitsupdates.',
   },
   {
     question: 'Was kostet eine Website?',
@@ -17,7 +17,7 @@ export const FAQS: FAQ[] = [
   {
     question: 'Was sind die zukünftigen Kosten? Muss ich später noch was zahlen?',
     answer:
-      'Nein. Handgeschriebener Code braucht keine Wartung – es gibt keine Plugins, die Updates verlangen, keine Lizenzen, die jährlich gezahlt werden müssen. Fehler korrigiere ich umgehend, ohne Aufpreis. Sollten Sie später Änderungen oder Erweiterungen wünschen, rechne ich nach tatsächlichem Aufwand stundenweise ab und stelle das monatlich in Rechnung. Sie zahlen also nur, wenn Sie wirklich etwas brauchen.',
+      'Es gibt kein verpflichtendes WordPress-Plugin-Abo oder Wartungspaket. Laufende Kosten entstehen vor allem für Hosting und Domain; Änderungen oder Erweiterungen werden nur dann verrechnet, wenn Sie sie beauftragen. Technische Abhängigkeiten und Serverkomponenten werden bei Bedarf aktualisiert, damit die Website langfristig stabil und sicher bleibt.',
   },
   {
     question: 'Ich habe nicht so viel Geld – was ist möglich?',
@@ -42,16 +42,16 @@ export const FAQS: FAQ[] = [
   {
     question: 'Was ist, wenn sie mir nicht gefällt?',
     answer:
-      'Die Hauptseite wird zuerst mit Beispielbildern erstellt, die später durch echte ersetzt werden. Sie sehen früh, wohin das Design geht, und können steuern. Ich bin nebenbei auch Fotograf – auf Wunsch übernehme ich die Bildproduktion gleich mit, das nutzen Kunden gerne. Fotografie inklusive Bildbearbeitung kostet extra im Paket, aber sehr fair. Weil Sie den Stand laufend sehen und früh gegensteuern können, kommt es in der Praxis kaum vor, dass ein fertiges Design grundlegend nicht passt.',
+      'Die Hauptseite wird zuerst mit Beispielbildern erstellt, die später durch echte ersetzt werden. Sie sehen früh, wohin das Design geht, und können steuern. Ich bin nebenbei auch Fotograf – auf Wunsch übernehme ich die Bildproduktion gleich mit. Weil Sie den Stand laufend sehen und früh gegensteuern können, lassen sich grundlegende Abweichungen meist vermeiden.',
   },
   {
     question: 'Kann ich später selbst Inhalte ändern?',
     answer:
-      'Auf Wunsch baue ich ein schlankes Mini-CMS in Ihre Seite ein – ohne WordPress, ohne Plugin-Abhängigkeit. Sie können Texte und Bilder selbst ändern, ohne Sicherheits- oder Performance-Nachteile. Wenn Sie den Aufwand lieber an mich auslagern wollen, übernehme ich Änderungen stundenweise.',
+      'Auf Wunsch baue ich ein schlankes Mini-CMS in Ihre Seite ein. Texte und Bilder lassen sich damit selbst pflegen, ohne ein vollständiges WordPress-System betreiben zu müssen. Das CMS wird auf das Projekt zugeschnitten und so schlank wie möglich gehalten. Wenn Sie Änderungen lieber auslagern wollen, übernehme ich sie stundenweise.',
   },
   {
     question: 'Warum sollte ich gerade bei Ihnen mein Webdesign machen lassen?',
     answer:
-      'Weil Sie eine Person bekommen, nicht eine Agentur-Hierarchie. Ich entwickle seit über zehn Jahren Websites in Wien. Ich schreibe den Code selbst, ich plane das Design selbst, ich kümmere mich selbst um SEO und Launch. Es gibt keinen Account-Manager dazwischen, keine Übersetzung von Brief zu Briefing. Wenn Sie anrufen, sind Sie bei mir. Das ist nicht für jeden der richtige Weg – aber wenn Sie eine Website wollen, die in fünf Jahren noch funktioniert und für die Sie genau wissen, wer dahintersteht, dann passen wir zusammen.',
+      'Sie arbeiten direkt mit der Person, die Ihre Website plant und entwickelt. Ich entwickle seit über zehn Jahren Websites in Wien, schreibe den Code selbst und kümmere mich auch um technische SEO und den Launch. Dadurch bleiben Abstimmungen kurz und Entscheidungen nachvollziehbar. Ob dieser direkte Ansatz zu Ihrem Projekt passt, klären wir im kostenlosen Erstgespräch.',
   },
 ]
