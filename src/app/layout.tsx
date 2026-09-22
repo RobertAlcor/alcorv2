@@ -30,13 +30,6 @@ export const metadata: Metadata = {
   creator: SITE.founder.name,
   publisher: SITE.brand,
   category: 'Webdesign',
-  alternates: {
-    canonical: '/',
-    languages: {
-      'de-AT': '/',
-      'x-default': '/',
-    },
-  },
   openGraph: {
     type: 'website',
     locale: 'de_AT',
