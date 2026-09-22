@@ -24,9 +24,10 @@ export function Footer() {
             {SITE.tagline}. Handgeschriebener Code statt WordPress. Eine Person, voller
             Code-Besitz.
           </p>
-          <p className="text-paper-dim text-s mt-6 max-w-md leading-relaxed italic">
-            Diese Seite lädt in unter einer Sekunde, hat 0 Tracking-Cookies und wurde von
-            Hand geschrieben. Alles, was ich predige, lebe ich hier vor.
+          <p className="text-paper-dim text-sm mt-6 max-w-md leading-relaxed italic">
+            Diese Website ist auf schnelle Ladezeiten, gute Core Web Vitals und
+            datensparsame Technik ausgelegt. Statistik wird erst nach Ihrer Einwilligung
+            geladen.
           </p>
         </div>
 
