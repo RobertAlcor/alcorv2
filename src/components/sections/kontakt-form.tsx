@@ -246,7 +246,12 @@ function KontaktFormInner() {
   const showPackageBanner = initialPackage !== ''
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6"
+      noValidate
+      aria-busy={state.status === 'submitting'}
+    >
       {/* Info-Banner: Kunde kommt aus /preise mit Paket-Wunsch */}
       {showPackageBanner && (
         <div className="bg-signal/10 border border-signal/30 rounded-sm p-4 flex items-start gap-3">
@@ -343,10 +348,11 @@ function KontaktFormInner() {
           required
           autoComplete="name"
           aria-invalid={Boolean(state.errors.name)}
+          aria-describedby={state.errors.name ? 'name-error' : undefined}
           className={INPUT_CLASS}
         />
         {state.errors.name && (
-          <p className="mt-2 text-sm text-error">{state.errors.name}</p>
+          <p id="name-error" className="mt-2 text-sm text-error">{state.errors.name}</p>
         )}
       </div>
 
@@ -362,10 +368,11 @@ function KontaktFormInner() {
             required
             autoComplete="email"
             aria-invalid={Boolean(state.errors.email)}
+            aria-describedby={state.errors.email ? 'email-error' : undefined}
             className={INPUT_CLASS}
           />
           {state.errors.email && (
-            <p className="mt-2 text-sm text-error">{state.errors.email}</p>
+            <p id="email-error" className="mt-2 text-sm text-error">{state.errors.email}</p>
           )}
         </div>
         <div>
@@ -411,10 +418,11 @@ function KontaktFormInner() {
           autoComplete="url"
           inputMode="url"
           aria-invalid={Boolean(state.errors.existing_website)}
+          aria-describedby={state.errors.existing_website ? 'existing-website-error' : undefined}
           className={INPUT_CLASS}
         />
         {state.errors.existing_website && (
-          <p className="mt-2 text-sm text-error">{state.errors.existing_website}</p>
+          <p id="existing-website-error" className="mt-2 text-sm text-error">{state.errors.existing_website}</p>
         )}
       </div>
 
@@ -429,6 +437,8 @@ function KontaktFormInner() {
           required
           value={topicValue}
           onChange={(e) => setTopicValue(e.target.value as LeadInput['topic'])}
+          aria-invalid={Boolean(state.errors.topic)}
+          aria-describedby={state.errors.topic ? 'topic-error' : undefined}
           className={INPUT_CLASS}
         >
           {TOPIC_OPTIONS.map((value) => (
@@ -438,7 +448,7 @@ function KontaktFormInner() {
           ))}
         </select>
         {state.errors.topic && (
-          <p className="mt-2 text-sm text-error">{state.errors.topic}</p>
+          <p id="topic-error" className="mt-2 text-sm text-error">{state.errors.topic}</p>
         )}
       </div>
 
@@ -476,10 +486,12 @@ function KontaktFormInner() {
           minLength={10}
           maxLength={2000}
           placeholder="Beschreiben Sie kurz, was Sie vorhaben oder welches Problem Sie lösen möchten."
+          aria-invalid={Boolean(state.errors.message)}
+          aria-describedby={state.errors.message ? 'message-error' : undefined}
           className={TEXTAREA_CLASS}
         />
         {state.errors.message && (
-          <p className="mt-2 text-sm text-error">{state.errors.message}</p>
+          <p id="message-error" className="mt-2 text-sm text-error">{state.errors.message}</p>
         )}
       </div>
 
