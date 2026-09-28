@@ -3,6 +3,7 @@ import { Hero } from '@/components/sections/hero'
 import { BentoGrid } from '@/components/sections/bento-grid'
 import { CaseCard } from '@/components/sections/case-card'
 import { ProcessSection } from '@/components/sections/process-section'
+import { VisualProofSection } from '@/components/sections/visual-proof-section'
 import { ComparisonSection } from '@/components/sections/comparison-section'
 import { FaqSection } from '@/components/sections/faq-accordion'
 import { CtaBand } from '@/components/sections/cta-band'
@@ -48,6 +49,8 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      <VisualProofSection />
 
       <ProcessSection />
 
