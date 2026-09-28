@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'motion/react'
 import { Calendar, Clock, Zap, Shield, ArrowRight } from 'lucide-react'
 import { SITE } from '@/lib/site'
@@ -140,6 +141,65 @@ export function Hero() {
           >
             Was ich baue →
           </Link>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.68 }}
+          className="mt-16"
+        >
+          <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="text-signal-2 font-mono text-[0.68rem] font-medium tracking-[0.16em] uppercase">
+                Kein Stockfoto. Echte Projekte.
+              </p>
+              <p className="text-paper-mute mt-2 max-w-2xl text-sm leading-relaxed">
+                Ein Ausschnitt aus Websites und Web-Anwendungen, die ich konzipiert und umgesetzt habe.
+              </p>
+            </div>
+            <Link
+              href="/referenzen"
+              className="text-paper-mute hover:text-signal-2 inline-flex items-center gap-2 text-sm transition-colors"
+            >
+              Projekte im Detail <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid max-w-6xl gap-4 md:grid-cols-12">
+            {PROJECT_PREVIEWS.map((project, index) => (
+              <Link
+                key={project.src}
+                href={project.href}
+                className={`group border-line bg-deep-2 hover:border-signal-2/50 relative overflow-hidden rounded-sm border ${
+                  index === 0 ? 'md:col-span-6' : 'md:col-span-3'
+                }`}
+              >
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <Image
+                    src={project.src}
+                    alt={project.alt}
+                    fill
+                    sizes={index === 0 ? '(min-width: 768px) 50vw, 100vw' : '(min-width: 768px) 25vw, 100vw'}
+                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                    priority={index === 0}
+                  />
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 bg-gradient-to-t from-deep/70 via-transparent to-transparent opacity-70"
+                  />
+                </div>
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
+                  <div>
+                    <span className="text-paper block text-sm font-medium">{project.name}</span>
+                    <span className="text-paper-mute mt-0.5 block text-[0.68rem]">{project.type}</span>
+                  </div>
+                  <ArrowRight className="text-signal-2 h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            ))}
+          </div>
         </motion.div>
 
         <motion.div
@@ -303,3 +363,28 @@ const TRUST_POINTS: StatProps[] = [
     hint: 'Weniger Drittanbieter-Abhängigkeiten im Projekt',
   },
 ]
+
+
+const PROJECT_PREVIEWS = [
+  {
+    src: '/referenzen/psychotherapie-hrdlicka.webp',
+    alt: 'Website-Referenz Psychotherapie Hrdlicka in Mödling',
+    name: 'Psychotherapie Hrdlicka',
+    type: 'Praxis-Website · Mödling',
+    href: '/referenzen/psychotherapie-hrdlicka',
+  },
+  {
+    src: '/referenzen/schmerzfrei-wien.webp',
+    alt: 'Website-Referenz schmerzfrei.wien',
+    name: 'schmerzfrei.wien',
+    type: 'Praxis + Booking · Wien',
+    href: '/referenzen/schmerzfrei-wien',
+  },
+  {
+    src: '/referenzen/alcorleads.webp',
+    alt: 'Web-Anwendung AlcorLeads',
+    name: 'AlcorLeads',
+    type: 'Web-Anwendung · Eigenentwicklung',
+    href: '/referenzen/alcorleads',
+  },
+] as const
