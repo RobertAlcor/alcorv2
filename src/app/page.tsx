@@ -1,67 +1,15 @@
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 import { Hero } from '@/components/sections/hero'
+import { SelectedProjects } from '@/components/sections/selected-projects'
 import { BentoGrid } from '@/components/sections/bento-grid'
-import { CaseCard } from '@/components/sections/case-card'
+import { SelectionSection } from '@/components/sections/selection-section'
 import { ProcessSection } from '@/components/sections/process-section'
-import { VisualProofSection } from '@/components/sections/visual-proof-section'
-import { WebsiteCheckSection } from '@/components/sections/website-check-section'
-import { ComparisonSection } from '@/components/sections/comparison-section'
+import { PricingCards } from '@/components/sections/pricing-card'
 import { FaqSection } from '@/components/sections/faq-accordion'
 import { CtaBand } from '@/components/sections/cta-band'
-import { CASES } from '@/lib/cases'
-import { PAGE_META } from '@/lib/seo-metadata'
-
-export const metadata = PAGE_META.home
-
-export default function HomePage() {
-  return (
-    <>
-      <Hero />
-
-      <BentoGrid />
-
-      {/* Featured Cases */}
-      <section className="container-fluid py-24 md:py-32 border-t border-line">
-        <div className="flex items-end justify-between flex-wrap gap-6 mb-12 md:mb-16">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold tracking-[0.18em] uppercase text-signal-2 mb-6">
-              <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
-              Referenzen
-            </p>
-            <h2 className="font-serif text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] tracking-[-0.02em] text-balance">
-              Was ich zuletzt gebaut habe.
-            </h2>
-          </div>
-          <Link
-            href="/referenzen"
-            className="group inline-flex items-center gap-2 text-sm text-paper-mute hover:text-signal-2 transition-colors"
-          >
-            Alle Projekte ansehen
-            <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <line x1="5" y1="12" x2="19" y2="12" />
-              <polyline points="12 5 19 12 12 19" />
-            </svg>
-          </Link>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-          {CASES.map((caseData) => (
-            <CaseCard key={caseData.slug} caseData={caseData} />
-          ))}
-        </div>
-      </section>
-
-      <VisualProofSection />
-
-      <WebsiteCheckSection />
-
-      <ProcessSection />
-
-      <ComparisonSection />
-
-      <FaqSection />
-
-      <CtaBand />
-    </>
-  )
-}
+import { PostCard } from '@/components/blog/post-card'
+import { getAllPosts } from '@/lib/blog'
+import { pageMetadata } from '@/lib/seo-metadata'
+export const metadata=pageMetadata({title:'Webdesign Wien für ausgewählte Projekte | ALCOR',description:'Individuelle Websites aus Wien. Persönliche Entwicklung für ausgewählte Projekte. Basis-Homepage 599 €, Business und Premium nach Vereinbarung. Projekt bewerben.',path:'/'})
+export default async function HomePage(){const posts=(await getAllPosts()).slice(0,3);return <><Hero/><SelectedProjects/><BentoGrid/><SelectionSection/><CtaBand/><ProcessSection/><section className="alcor-surface"><div className="container-fluid alcor-section"><div className="alcor-section-head"><div><p className="alcor-eyebrow">Drei Ausgangspunkte</p><h2>Einfach starten.<br />Oder größer denken.</h2></div><p>599 € sind die einfache Basis-Homepage — nicht das individuelle Komplettpaket. Welcher Umfang zu Ihnen passt, klären wir persönlich.</p></div><PricingCards/></div></section>{posts.length>0&&<section className="container-fluid alcor-section"><div className="alcor-section-head"><div><p className="alcor-eyebrow">ALCOR Journal</p><h2>Gedanken für Ihren<br />nächsten Auftritt.</h2></div><Link href="/blog" className="alcor-text-link">Alle Beiträge <ArrowRight aria-hidden="true" size={20}/></Link></div><div className="alcor-journal-grid">{posts.map(p=><PostCard post={p} key={p.slug}/>)}</div></section>}<FaqSection/><CtaBand title="Ihr Projekt verdient ein persönliches Gespräch."/></>}

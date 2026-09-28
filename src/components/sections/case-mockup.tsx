@@ -1,73 +1,10 @@
 import Image from 'next/image'
 import type { Case } from '@/lib/cases'
-
-export function CaseMockup({ caseData, large = false }: { caseData: Case; large?: boolean }) {
-  return (
-    <div
-      className={`relative w-full overflow-hidden rounded-sm border border-line bg-deep ${
-        large ? 'aspect-[16/10]' : 'aspect-[4/3]'
-      }`}
-    >
-      {/* Browser chrome */}
-      <div className="absolute top-0 left-0 right-0 h-7 md:h-8 bg-deep-2 border-b border-line flex items-center gap-1.5 px-3">
-        <span className="w-2 h-2 rounded-full bg-paper-dim/40" />
-        <span className="w-2 h-2 rounded-full bg-paper-dim/40" />
-        <span className="w-2 h-2 rounded-full bg-paper-dim/40" />
-        <div className="ml-2 md:ml-4 flex-1 h-3 md:h-4 bg-deep rounded-sm flex items-center px-2">
-          <span className="text-[0.55rem] md:text-[0.6rem] text-paper-dim font-mono truncate">
-            {caseData.liveUrl.replace('https://', '')}
-          </span>
-        </div>
-      </div>
-
-      {/* Echter Screenshot, falls vorhanden */}
-      {caseData.screenshot && (
-        <div className="absolute inset-x-0 top-7 bottom-0 overflow-hidden md:top-8">
-          <Image
-            src={caseData.screenshot}
-            alt={large ? `Startseite von ${caseData.liveUrl.replace('https://', '')}` : ''}
-            fill
-            sizes={large ? '(max-width: 1024px) 100vw, 640px' : '(max-width: 768px) 100vw, 420px'}
-            className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-            priority={large}
-          />
-        </div>
-      )}
-
-      {/* Mockup content with brand color (nur ohne Screenshot) */}
-      <div
-        hidden={Boolean(caseData.screenshot)}
-        className="absolute inset-x-0 top-7 md:top-8 bottom-0 flex items-center justify-center overflow-hidden"
-        style={{
-          background: `linear-gradient(135deg, ${caseData.brandColor} 0%, ${caseData.brandColorAccent} 100%)`,
-        }}
-      >
-        {/* Decorative grid */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-
-        {/* Initials */}
-        <div className="relative font-serif text-white text-[20vw] md:text-[clamp(4rem,12vw,9rem)] leading-none italic font-normal opacity-95 select-none">
-          {caseData.initials}
-        </div>
-
-        {/* Bottom badge */}
-        <div className="absolute bottom-3 md:bottom-4 left-3 md:left-4 right-3 md:right-4 flex items-end justify-between gap-2">
-          <div className="font-mono text-[0.6rem] md:text-[0.65rem] text-white/80 uppercase tracking-wider">
-            {caseData.industry}
-          </div>
-          <div className="font-mono text-[0.6rem] md:text-[0.65rem] text-white/80">
-            {caseData.year}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+import { projectScreenshot } from '@/lib/project-media'
+export function CaseMockup({caseData,large=false}:{caseData:Case;large?:boolean}){
+ const src=projectScreenshot(caseData)
+ return <div className={`relative w-full overflow-hidden rounded-lg border border-line bg-deep ${large?'aspect-[16/10]':'aspect-[4/3]'}`}>
+  <div aria-hidden="true" className="absolute inset-x-0 top-0 flex h-9 items-center gap-2 border-b border-line bg-deep-2 px-3"><span className="text-xs tracking-widest text-paper-dim">● ● ●</span><span className="ml-3 truncate font-mono text-[11px] text-paper-mute">{caseData.liveUrl.replace('https://','')}</span></div>
+  <div className="absolute inset-x-0 bottom-0 top-9 overflow-hidden">{src?<Image src={src} alt={`Website-Ansicht von ${caseData.client}`} fill sizes={large?'(min-width:1200px) 1100px,95vw':'(min-width:1280px) 31vw,(min-width:768px) 47vw,95vw'} priority={large} className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transform-none"/>:<div className="flex h-full items-center justify-center text-7xl font-semibold text-white" style={{background:caseData.brandColor}}><span aria-label={caseData.client}>{caseData.initials}</span></div>}</div>
+ </div>
 }
