@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Calendar, ArrowRight } from 'lucide-react'
 import { SITE } from '@/lib/site'
 
@@ -30,7 +31,8 @@ export function CtaBand({
         }}
       />
 
-      <div className="relative max-w-3xl">
+      <div className="relative grid gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+        <div>
         <p className="text-xs font-semibold tracking-[0.18em] uppercase text-signal-2 mb-6">
           <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
           Nächster Schritt
@@ -63,6 +65,26 @@ export function CtaBand({
           >
             oder direkt anrufen: {SITE.contact.phoneFormatted}
           </a>
+        </div>
+
+        <div className="hidden lg:block">
+          <div className="border-line bg-deep-2 relative overflow-hidden rounded-sm border p-3 shadow-2xl">
+            <div className="border-line mb-3 flex items-center gap-1.5 border-b pb-3">
+              <span className="bg-paper-dim/40 h-2 w-2 rounded-full" />
+              <span className="bg-paper-dim/40 h-2 w-2 rounded-full" />
+              <span className="bg-paper-dim/40 h-2 w-2 rounded-full" />
+              <span className="text-paper-dim ml-3 font-mono text-[0.6rem]">echtes ALCOR Projekt</span>
+            </div>
+            <div className="relative aspect-[16/10] overflow-hidden rounded-sm">
+              <Image
+                src="/referenzen/schmerzfrei-wien.webp"
+                alt="ALCOR Referenzprojekt schmerzfrei.wien"
+                fill
+                sizes="40vw"
+                className="object-cover object-top"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
