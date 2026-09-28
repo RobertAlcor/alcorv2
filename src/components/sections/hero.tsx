@@ -124,7 +124,7 @@ export function Hero() {
             href="/kontakt"
             className="group bg-signal text-deep hover:bg-signal-2 inline-flex min-h-[48px] items-center gap-2 rounded-sm px-7 py-4 text-sm font-medium shadow-[0_8px_30px_-8px_rgba(var(--signal-rgb),0.5)] transition-all duration-300"
           >
-            Projekt anfragen
+            Kostenloses Erstgespräch
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </MagneticLink>
 
@@ -132,7 +132,7 @@ export function Hero() {
             href="/preise"
             className="text-paper-mute border-line hover:text-paper hover:border-paper-mute inline-flex min-h-[48px] items-center gap-2 rounded-sm border px-7 py-4 text-sm font-medium transition-all duration-300"
           >
-            Preise ansehen
+            Pakete & Preise
           </Link>
 
           <Link
