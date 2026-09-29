@@ -50,7 +50,7 @@ jobs:
               '/preise':['599','Kein Kontaktformular','60 %','40 %','Kleinunternehmerregelung'],
               '/leistungen/website-erstellung':['599','Kein Kontaktformular','Basis'],
               '/termin':['15 Minuten.','Passen wir zusammen?'],
-              '/bewerbung':['Projektbewerbung','unverbindlich'],
+              '/bewerbung':['Erzählen Sie mir','unverbindlich'],
               '/referenzen/alcorleads':['AlcorLeads'],
               '/blog':['Journal'],
               '/admin/login':['Anmelden'],
@@ -59,6 +59,7 @@ jobs:
               _, content, _=page(route+'?verify=66ad97f')
               for phrase in phrases: assert phrase.casefold() in content.casefold(), (route,'missing phrase',phrase)
               report['routes'][route]='PASS'
+              print('PAGE PASS:',route)
           css=''
           for url in parser.styles:
               data, _, status=get(url); assert status==200
