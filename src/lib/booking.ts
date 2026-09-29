@@ -1,12 +1,11 @@
 /**
- * Booking-Logik - feste Dauer 60 Min pro Termin.
- * Egal ob das Gespräch nur 15 Min dauert: der Slot ist mit 1h reserviert.
- * Macht es für den Kunden simpel und gibt Robert Puffer.
+ * Booking-Logik: 15 Minuten für neue Kennenlerntermine.
+ * Bestehende Buchungen behalten ihre gespeicherten Start- und Endzeiten.
  */
 
 export const BOOKING_CONFIG = {
   slotMinutes: 15, // Raster für Slot-Starts
-  durationMinutes: 60, // Termin blockt immer 1h
+  durationMinutes: 15, // Öffentlich angebotenes Kennenlernen
   workingDays: [1, 2, 3, 4, 5], // Mo-Fr
   workingHourStart: 9, // 09:00
   workingHourEnd: 18, // Termin muss bis 18:00 zu Ende sein
@@ -33,8 +32,8 @@ export type BookingHourConfig = {
 
 /**
  * Generiert Slots für ein Datum.
- * Slot-Starts im 15-Min-Raster, jeder blockt aber 60 Min.
- * Slot ist nur "available", wenn die ganze Stunde frei ist und noch in Arbeitszeit.
+ * Slot-Starts und Kennenlerntermine im 15-Minuten-Raster.
+ * Nur freie Zeiträume innerhalb der Arbeitszeit werden angeboten.
  */
 export function generateSlotsForDate(
   date: Date,
@@ -84,9 +83,9 @@ export function generateSlotsForDate(
       cursor.getTime() + BOOKING_CONFIG.durationMinutes * 60 * 1000,
     )
 
-    if (slotEnd > dayEnd) break // letzter 60-Min Slot startet 17:00
+    if (slotEnd > dayEnd) break // Keine Buchung über das Ende der Arbeitszeit hinaus
 
-    // Prüfe ob alle 15-Min-Sub-Slots im Stunden-Range frei sind
+    // Den vollständigen Buchungszeitraum prüfen
     let allFree = true
     let subCursor = cursor.getTime()
     while (subCursor < slotEnd.getTime()) {

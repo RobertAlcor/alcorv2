@@ -23,7 +23,7 @@ const TOPIC_LABEL: Record<Lead['topic'], string> = {
 }
 
 const PACKAGE_LABEL: Record<NonNullable<Lead['package_interest']>, string> = {
-  starter: 'Starter',
+  starter: 'Basis – einfache Homepage',
   business: 'Business',
   premium: 'Premium',
   unsure: 'Weiß noch nicht',
@@ -566,7 +566,7 @@ ${appointmentBox({
 
 ${channelDetail}
 
-${smallParagraph('Pro Termin reserviere ich eine Stunde. Falls das Gespräch kürzer wird, ist auch alles gut – die Zeit gehört Ihnen.')}
+${smallParagraph(`Für diesen Termin sind ${Math.round((booking.slotEnd.getTime() - booking.slotStart.getTime()) / 60000)} Minuten reserviert. Das erste Kennenlernen dauert üblicherweise 15 Minuten.`)}
 
 ${smallParagraph('Im Anhang finden Sie eine Kalender-Datei (.ics) für Apple Calendar, Outlook, Google Calendar oder Thunderbird.')}
 

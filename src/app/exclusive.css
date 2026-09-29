@@ -1,0 +1,170 @@
+:root { --container-max:1920px; --color-paper-dim:#b4a79b; --alcor-border:rgba(210,169,135,.22); --alcor-radius:12px; --font-serif:'Manrope',-apple-system,BlinkMacSystemFont,sans-serif; }
+@layer base {
+ html { scroll-padding-top:110px; }
+ body { font-size:18px; line-height:1.7; }
+ h1,h2,h3 { font-family:var(--font-sans); font-weight:650; }
+ h1 em,h2 em,h3 em { font-style:normal; }
+ p { overflow-wrap:break-word; }
+ img { max-width:100%; }
+ a[href],button:not(:disabled),summary,select,label[for],[role='button']:not([aria-disabled='true']),[role='tab']:not([aria-disabled='true']),input[type='checkbox'],input[type='radio'] { cursor:pointer; }
+ input:not([type='checkbox']):not([type='radio']),textarea { cursor:text; }
+ [disabled],[aria-disabled='true'] { cursor:not-allowed; }
+}
+.container-fluid { max-width:1920px; padding-inline:clamp(22px,4.2vw,84px); }
+.alcor-header { position:sticky;top:0;z-index:50;background:rgba(22,22,24,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--alcor-border); }
+.alcor-header-inner { display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:94px; }
+.alcor-brand { display:flex;flex-direction:column;gap:6px;color:var(--color-paper);text-decoration:none;flex-shrink:0; }
+.alcor-brand>span { font-size:30px;font-weight:700;line-height:1;letter-spacing:.28em; }
+.alcor-brand b { color:var(--color-signal-2); }
+.alcor-brand small { font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--color-paper-mute); }
+.alcor-navigation { display:flex;gap:clamp(22px,2.2vw,42px); }
+.alcor-navigation a { font-size:16px;color:var(--color-paper-mute);padding-block:18px;white-space:nowrap;transition:color .2s; }
+.alcor-navigation a:hover,.alcor-navigation a[aria-current='page'] { color:var(--color-signal-2); }
+.alcor-header-actions { display:flex;align-items:center;gap:16px; }
+.alcor-button { display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:56px;padding:15px 24px;border:1px solid transparent;border-radius:6px;font-size:16px;font-weight:650;line-height:1.5;text-decoration:none;background:var(--color-signal);color:#161618;cursor:pointer;transition:background .2s,color .2s,border-color .2s,box-shadow .2s; }
+.alcor-button:hover { background:var(--color-signal-2);box-shadow:0 6px 24px rgba(207,135,85,.12); }
+.alcor-button svg { flex-shrink:0; }
+.alcor-button-outline { background:transparent;border-color:var(--alcor-border);color:var(--color-paper); }
+.alcor-button-outline:hover { background:rgba(207,135,85,.07);color:var(--color-paper);border-color:var(--color-signal-2); }
+.alcor-actions { display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:34px; }
+.alcor-eyebrow { display:flex;align-items:center;gap:10px;color:var(--color-signal-2);font-size:12px;font-weight:650;text-transform:uppercase;letter-spacing:.16em;line-height:1.6;margin-bottom:24px; }
+.alcor-dot { height:6px;width:6px;border-radius:50%;background:var(--color-signal-2);flex-shrink:0; }
+.alcor-intro { font-size:clamp(18px,1.35vw,23px);line-height:1.75;color:var(--color-paper-mute);max-width:44rem;margin-top:28px; }
+.alcor-note { margin-top:20px;color:var(--color-paper-dim);font-size:14px;line-height:1.7;max-width:40rem; }
+.alcor-text-link { display:inline-flex;align-items:center;gap:12px;min-height:44px;color:var(--color-signal-2);font-size:16px;text-decoration:none; }
+.alcor-text-link:hover { color:var(--color-paper); }
+.alcor-text-link svg { flex-shrink:0; }
+.alcor-hero { position:relative;overflow:hidden;isolation:isolate;--glow-x:50%;--glow-y:30%; }
+.alcor-hero-glow { position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(310px circle at var(--glow-x) var(--glow-y),rgba(207,135,85,.09),transparent 75%); }
+.alcor-hero-grid { display:grid;grid-template-columns:1fr 1.08fr;gap:clamp(38px,4vw,80px);align-items:center;padding-block:clamp(62px,5.6vw,108px) 64px; }
+.alcor-hero-copy { min-width:0; }
+.alcor-hero h1 { font-size:clamp(44px,4.25vw,79px);letter-spacing:-.06em;font-weight:650;line-height:1.07;max-width:860px; }
+.alcor-hero h1 span { color:#edb589; }
+.alcor-hero-copy .alcor-intro { max-width:650px; }
+.alcor-hero-footer { border-top:1px solid var(--alcor-border);margin-top:36px;padding-top:22px;display:flex;flex-direction:column;gap:12px;font-size:14px;color:var(--color-paper-mute); }
+.alcor-hero-footer a { display:flex;align-items:center;gap:12px;color:var(--color-signal-2);min-height:36px; }
+.alcor-hero-art { position:relative;min-width:0;border:1px solid var(--alcor-border);border-radius:var(--alcor-radius);padding:30px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:30px;aspect-ratio:1.08;background:#262322;isolation:isolate; }
+.alcor-art-backdrop { object-fit:cover;opacity:.22;filter:blur(2px);z-index:-2; }
+.alcor-hero-art::after { content:'';position:absolute;inset:0;background:linear-gradient(0deg,#171719 0%,transparent 65%);z-index:-1; }
+.alcor-device { overflow:hidden;border:1px solid rgba(255,255,255,.3);border-radius:10px;box-shadow:0 35px 55px rgba(0,0,0,.6);transform:perspective(1100px) rotateY(-7deg) rotateZ(-3deg);transition:transform .5s ease; }
+.alcor-hero-art:hover .alcor-device { transform:perspective(1100px) rotateY(-3deg) rotateZ(-1deg); }
+.alcor-device img { display:block;width:100%;height:auto; }
+.alcor-device-bar { display:flex;align-items:center;justify-content:space-between;background:#222226;padding:10px 14px;font-size:10px;color:#beb9b4; }
+.alcor-device-bar>span:first-child { letter-spacing:4px;color:#777; }
+.alcor-art-caption { display:flex;align-items:flex-end;justify-content:space-between;gap:20px; }
+.alcor-art-caption>div>span { text-transform:uppercase;letter-spacing:.1em;color:var(--color-paper-dim);font-size:12px; }
+.alcor-art-caption p { font-size:22px;line-height:1.4;margin-top:5px;color:var(--color-paper); }
+.alcor-circle { display:flex;align-items:center;justify-content:center;flex-shrink:0;width:48px;height:48px;border:1px solid rgba(255,255,255,.22);border-radius:50%;background:rgba(22,22,24,.7);color:var(--color-paper); }
+.alcor-trust { border-block:1px solid var(--alcor-border); }
+.alcor-trust>.container-fluid { display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-block:24px; }
+.alcor-trust>.container-fluid>div { display:flex;align-items:center;gap:15px;font-size:14px;color:var(--color-paper-mute); }
+.alcor-trust span { color:var(--color-signal-2);font-family:var(--font-mono);font-size:11px; }
+.alcor-section { padding-block:clamp(68px,7vw,132px); }
+.alcor-section h2,.alcor-cta h2 { font-size:clamp(30px,3.1vw,58px);font-weight:650;line-height:1.14;letter-spacing:-.045em; }
+.alcor-page-title { font-size:clamp(38px,4.5vw,78px);line-height:1.12;letter-spacing:-.055em;font-weight:650; }
+.alcor-section-head { display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:52px; }
+.alcor-section-head>div:first-child { max-width:820px; }
+.alcor-section-head>p,.alcor-section-head>div:nth-child(2) { max-width:500px;color:var(--color-paper-mute);font-size:18px; }
+.alcor-section-head .alcor-text-link { margin-top:18px; }
+.alcor-surface { background:#1c1c20;border-block:1px solid var(--alcor-border); }
+.alcor-project-grid { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px; }
+.alcor-project { min-width:0; }
+.alcor-project-image { position:relative;display:block;aspect-ratio:1.3;overflow:hidden;border:1px solid var(--alcor-border);border-radius:10px;background:var(--color-deep-2); }
+.alcor-project-image img { transition:transform .45s ease; }
+.alcor-project-image:hover img { transform:scale(1.03); }
+.alcor-project-image .alcor-circle { position:absolute;bottom:16px;right:16px;width:42px;height:42px; }
+.alcor-project-number { position:absolute;top:14px;left:14px;font-size:12px;padding:4px 9px;background:rgba(22,22,24,.8);border-radius:4px;color:white; }
+.alcor-project h3 { font-size:23px;line-height:1.35;margin-block:8px 10px; }
+.alcor-project h3 a:hover { color:var(--color-signal-2); }
+.alcor-project>p { color:var(--color-paper-mute);font-size:16px; }
+.alcor-project>p.alcor-project-type { margin-top:24px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-signal-2); }
+.alcor-service-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px; }
+.alcor-service-card { border:1px solid var(--alcor-border);border-radius:12px;overflow:hidden;background:#161618;transition:border-color .2s; }
+.alcor-service-card:hover { border-color:var(--color-signal-2); }
+.alcor-service-image { position:relative;aspect-ratio:1.8;background:#202025;overflow:hidden; }
+.alcor-service-image img { object-fit:cover; }
+.alcor-service-body { padding:32px; }
+.alcor-service-body h3 { font-size:26px;line-height:1.3;letter-spacing:-.025em;margin-bottom:18px; }
+.alcor-service-body p:not(.alcor-eyebrow) { font-size:17px;color:var(--color-paper-mute); }
+.alcor-service-body .alcor-text-link { margin-top:26px; }
+.alcor-selection { display:grid;grid-template-columns:.95fr 1fr;gap:clamp(36px,6vw,110px);align-items:center; }
+.alcor-selection-image { position:relative;aspect-ratio:1.1;background:#222226;border-radius:12px;overflow:hidden;border:1px solid var(--alcor-border); }
+.alcor-selection-image img { object-fit:cover; }
+.alcor-image-label { position:absolute;bottom:24px;left:24px;padding:10px 16px;background:rgba(22,22,24,.8);border:1px solid var(--alcor-border);font-size:14px;border-radius:6px; }
+.alcor-selection-points { display:flex;flex-direction:column;gap:16px;padding:0;margin:30px 0;list-style:none; }
+.alcor-selection-points li { display:flex;align-items:flex-start;gap:14px;color:var(--color-paper-mute);font-size:17px; }
+.alcor-selection-points svg { flex-shrink:0;color:var(--color-signal-2);margin-top:5px; }
+.alcor-cta-section { padding-block:28px; }
+.alcor-cta { display:grid;grid-template-columns:1.5fr .65fr;align-items:center;gap:clamp(28px,5vw,90px);padding:clamp(28px,4.5vw,82px);border-radius:16px;border:1px solid rgba(207,135,85,.4);background:radial-gradient(ellipse at 10% 0%,rgba(207,135,85,.16),transparent 70%),#1c1b1d; }
+.alcor-cta h2 { max-width:920px; }
+.alcor-cta .alcor-text-link { margin-top:24px; }
+.alcor-person-card { border-left:1px solid var(--alcor-border);padding-left:clamp(28px,3.5vw,58px); }
+.alcor-monogram { font-size:clamp(90px,9vw,170px);font-weight:500;letter-spacing:-.09em;line-height:1; }
+.alcor-monogram span { color:var(--color-signal-2); }
+.alcor-person-card>div:last-child { margin-top:32px; }
+.alcor-person-card span { color:var(--color-paper-mute);font-size:13px; }
+.alcor-person-card h3 { font-size:22px;line-height:1.4;margin:10px 0; }
+.alcor-person-card p { color:var(--color-paper-mute);font-size:16px; }
+.alcor-person-card img { border-radius:10px; }
+.alcor-process { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;list-style:none;padding:0; }
+.alcor-process li { border-top:1px solid var(--alcor-border);padding-top:28px; }
+.alcor-process-number { font-size:42px;line-height:1;font-weight:500;letter-spacing:-.05em;color:var(--color-signal-2); }
+.alcor-process h3 { font-size:23px;line-height:1.3;margin:26px 0 15px; }
+.alcor-process p { font-size:17px;color:var(--color-paper-mute); }
+.alcor-process-note { margin-top:36px;display:flex;justify-content:space-between;gap:30px;align-items:center;border-top:1px solid var(--alcor-border);padding-top:28px; }
+.alcor-process-note p { max-width:820px;font-size:15px;color:var(--color-paper-dim); }
+.alcor-pricing-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch; }
+.alcor-pricing-card { display:flex;flex-direction:column;align-items:flex-start;padding:clamp(24px,2.4vw,44px);border-radius:12px;border:1px solid var(--alcor-border);background:#18181c; }
+.alcor-pricing-featured { border-color:var(--color-signal-2);background:linear-gradient(160deg,rgba(207,135,85,.09),transparent 40%),#18181c; }
+.alcor-pricing-card h3 { font-size:28px;margin-bottom:24px; }
+.alcor-price { font-size:clamp(32px,3vw,50px);font-weight:600;letter-spacing:-.05em;line-height:1.25;color:var(--color-paper); }
+.alcor-price-once { font-size:13px!important;color:var(--color-signal-2)!important;margin-block:10px 24px; }
+.alcor-pricing-card>p:not(.alcor-eyebrow) { color:var(--color-paper-mute);font-size:16px; }
+.alcor-pricing-card ul { list-style:none;padding:26px 0 0;margin-top:26px;border-top:1px solid var(--alcor-border);width:100%; }
+.alcor-pricing-card li { display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;font-size:16px;color:var(--color-paper-mute); }
+.alcor-pricing-card li svg { flex-shrink:0;margin-top:4px;color:var(--color-signal-2); }
+.alcor-pricing-card .alcor-excluded { margin-top:0;border:0;padding-top:4px; }
+.alcor-pricing-card .alcor-excluded li { font-size:14px; }
+.alcor-pricing-card .alcor-note { font-size:13px!important;padding-bottom:28px; }
+.alcor-pricing-card .alcor-button { margin-top:auto;align-self:stretch; }
+.alcor-tax-note { margin-top:28px;color:var(--color-paper-mute);font-size:14px;line-height:1.7; }
+.alcor-contract-list { list-style:none;padding:0;margin-top:28px; }
+.alcor-contract-list li { display:flex;gap:24px;align-items:flex-start;border-top:1px solid var(--alcor-border);padding:20px 0; }
+.alcor-contract-list strong { min-width:90px;font-size:30px;font-weight:500;color:var(--color-signal-2); }
+.alcor-contract-list span { font-size:17px;color:var(--color-paper-mute); }
+.alcor-notes-grid { display:grid;grid-template-columns:1fr 1fr;gap:50px;margin-top:36px; }
+.alcor-notes-grid h3 { font-size:24px;margin-bottom:16px; }
+.alcor-notes-grid p { color:var(--color-paper-mute);font-size:17px;max-width:740px; }
+.alcor-journal-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px; }
+.alcor-post-card { overflow:hidden;border:1px solid var(--alcor-border);border-radius:12px;background:var(--color-deep-2); }
+.alcor-post-card>a { display:flex;flex-direction:column;height:100%; }
+.alcor-post-card>a:hover h2,.alcor-post-card>a:hover h3 { color:var(--color-signal-2); }
+.alcor-post-cover { position:relative;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--alcor-border); }
+.alcor-post-cover img { object-fit:cover; }
+.alcor-post-body { display:flex;flex-direction:column;flex:1;padding:28px; }
+.alcor-post-body h2,.alcor-post-body h3 { font-size:25px;line-height:1.35;letter-spacing:-.025em;margin:16px 0; }
+.alcor-post-body p { color:var(--color-paper-mute);font-size:16px; }
+.alcor-post-meta { display:flex;gap:12px;justify-content:space-between;font-size:12px;color:var(--color-signal-2); }
+.alcor-post-footer { margin-top:auto;padding-top:25px;display:flex;gap:15px;justify-content:space-between;font-size:13px;color:var(--color-paper-mute); }
+.alcor-article-image { width:100%;max-width:1100px;position:relative;aspect-ratio:16/10;margin-block:28px 54px;overflow:hidden;border-radius:12px;border:1px solid var(--alcor-border); }
+.alcor-article-image img { object-fit:cover; }
+.prose-blog { font-size:19px;line-height:1.85; }
+.prose-blog p { max-width:75ch; }
+.prose-blog img { max-width:100%;height:auto; }
+.alcor-application { display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,7vw,120px);align-items:start; }
+.alcor-application-note { padding:26px;border:1px solid var(--alcor-border);border-radius:10px;margin:32px 0; }
+.alcor-application-note h2 { font-size:23px;margin-bottom:14px; }
+.alcor-application-note p { font-size:17px;color:var(--color-paper-mute); }
+.alcor-form-panel { padding:clamp(24px,3vw,44px);border:1px solid var(--alcor-border);background:var(--color-deep-2);border-radius:12px; }
+.alcor-case-gallery { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px; }
+.alcor-case-gallery figure { border:1px solid var(--alcor-border);border-radius:12px;overflow:hidden;background:var(--color-deep-2); }
+.alcor-case-gallery figure:first-child { grid-column:1 / -1; }
+.alcor-case-gallery img { width:100%;height:auto; }
+.alcor-case-gallery figcaption { padding:20px 24px;font-size:16px;color:var(--color-paper-mute); }
+@media (min-width:1800px) { body { font-size:19px; } }
+@media (max-width:1499px) { .alcor-project-grid { grid-template-columns:repeat(2,minmax(0,1fr));gap:38px 28px; } .alcor-project-image{aspect-ratio:1.65;} .alcor-hero-art{aspect-ratio:.95;} .alcor-hero h1{font-size:clamp(42px,4.4vw,65px);} }
+@media (max-width:1279px) { .alcor-navigation{display:none;} .alcor-process{grid-template-columns:repeat(2,minmax(0,1fr));gap:38px;} .alcor-hero-grid{gap:35px;} .alcor-hero-art{padding:22px;} .alcor-hero h1{font-size:clamp(40px,4.3vw,55px);} .alcor-hero .alcor-actions{gap:10px;} .alcor-hero .alcor-button{font-size:14px;padding:13px 18px;} }
+@media (max-width:999px) { .alcor-hero-grid,.alcor-selection,.alcor-application{grid-template-columns:1fr;} .alcor-hero-copy{max-width:790px;} .alcor-hero h1{font-size:clamp(44px,7.4vw,75px);} .alcor-hero-art{aspect-ratio:1.4;max-width:900px;min-height:480px;margin-top:18px;gap:28px;} .alcor-device{max-width:90%;align-self:center;} .alcor-section-head{align-items:flex-start;flex-direction:column;gap:24px;} .alcor-section-head>p,.alcor-section-head>div:nth-child(2){max-width:680px;} .alcor-service-grid,.alcor-pricing-grid{grid-template-columns:1fr;} .alcor-service-card{display:grid;grid-template-columns:.9fr 1fr;} .alcor-service-image{aspect-ratio:auto;min-height:290px;} .alcor-pricing-card{max-width:100%;} .alcor-pricing-card ul{display:grid;grid-template-columns:1fr 1fr;gap:0 25px;} .alcor-pricing-card .alcor-button{align-self:flex-start;} .alcor-selection-image{max-height:560px;aspect-ratio:1.6;} .alcor-cta{grid-template-columns:1fr .55fr;gap:30px;padding:32px;} .alcor-person-card{padding-left:25px;} .alcor-journal-grid{grid-template-columns:repeat(2,minmax(0,1fr));} .alcor-journal-grid>article:last-child{grid-column:1 / -1;} }
+@media (max-width:699px) { body{font-size:17px;} .alcor-header-inner{min-height:78px;gap:12px;} .alcor-brand>span{font-size:26px;} .alcor-brand small{font-size:8px;} .alcor-header-actions>.alcor-button{display:none;} .alcor-hero-grid{padding-top:52px;padding-bottom:42px;gap:26px;} .alcor-hero h1{font-size:clamp(35px,8.7vw,59px);letter-spacing:-.06em;} .alcor-hero .alcor-eyebrow{font-size:10px;letter-spacing:.12em;} .alcor-intro{font-size:18px;line-height:1.7;margin-top:24px;} .alcor-actions{align-items:stretch;margin-top:27px;} .alcor-actions>.alcor-button{width:100%;} .alcor-hero .alcor-button{font-size:15px;} .alcor-note{font-size:13px;} .alcor-hero-footer{margin-top:26px;} .alcor-hero-art{aspect-ratio:1;min-height:340px;padding:20px;gap:28px;} .alcor-device{max-width:100%;} .alcor-art-top{font-size:9px;} .alcor-art-caption p{font-size:19px;} .alcor-art-caption>div>span{font-size:10px;} .alcor-trust>.container-fluid{grid-template-columns:1fr 1fr;gap:20px 14px;padding-block:22px;} .alcor-trust>.container-fluid>div{font-size:12px;gap:9px;align-items:flex-start;} .alcor-section{padding-block:64px;} .alcor-section-head{margin-bottom:32px;} .alcor-section h2,.alcor-cta h2{font-size:32px;} .alcor-eyebrow{font-size:11px;margin-bottom:20px;} .alcor-project-grid,.alcor-notes-grid,.alcor-journal-grid,.alcor-process,.alcor-case-gallery{grid-template-columns:1fr;} .alcor-project-image{aspect-ratio:1.5;} .alcor-project-grid{gap:34px;} .alcor-project h3{font-size:23px;} .alcor-service-card{display:block;} .alcor-service-image{aspect-ratio:1.75;min-height:0;} .alcor-service-body{padding:26px;} .alcor-selection{gap:32px;} .alcor-selection-image{aspect-ratio:1.3;} .alcor-cta{grid-template-columns:1fr;padding:28px;gap:34px;} .alcor-cta-section{padding-block:8px;} .alcor-person-card{border-left:0;border-top:1px solid var(--alcor-border);padding:28px 0 0;display:flex;align-items:center;gap:28px;} .alcor-person-card>div:last-child{margin-top:0;} .alcor-monogram{font-size:88px;} .alcor-person-card h3{font-size:20px;} .alcor-person-card p{font-size:14px;} .alcor-process{gap:30px;} .alcor-process h3{margin-top:18px;} .alcor-process-note{flex-direction:column;align-items:flex-start;gap:12px;} .alcor-pricing-card{padding:28px;} .alcor-pricing-card ul{display:block;} .alcor-pricing-card .alcor-button{align-self:stretch;} .alcor-price{font-size:42px;} .alcor-contract-list strong{min-width:75px;font-size:27px;} .alcor-contract-list span{font-size:16px;} .alcor-form-panel{padding:22px;} .alcor-post-body{padding:24px;} .alcor-post-body h2,.alcor-post-body h3{font-size:23px;} .alcor-article-image{margin-bottom:35px;} .prose-blog{font-size:18px;} }
+@media (prefers-reduced-motion:reduce) { .alcor-hero-glow{display:none;} .alcor-device,.alcor-project-image img{transition:none;transform:none!important;} }
+@media (hover:none) { .alcor-hero-glow{display:none;} }

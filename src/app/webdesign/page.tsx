@@ -8,7 +8,7 @@ import { SITE } from '@/lib/site'
 export const metadata: Metadata = {
   title: 'Webdesign Wien · Alle 23 Bezirke | Webdesign Alcor',
   description:
-    'Webdesign in jedem Wiener Bezirk — handgeschriebene Websites ohne WordPress, ab €599 in 7 Tagen. Lokale SEO-Optimierung auf Ihren Bezirk.',
+    'Webdesign in jedem Wiener Bezirk — handgeschriebene Websites ohne WordPress, einfache Basis-Homepage für 599 €, Business und Premium nach Vereinbarung. Lokale SEO-Optimierung auf Ihren Bezirk.',
   alternates: { canonical: '/webdesign' },
   openGraph: {
     type: 'website',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: 'Webdesign Wien · Alle 23 Bezirke | Webdesign Alcor',
     description:
-      'Webdesign in jedem Wiener Bezirk — handgeschriebene Websites, ab €599 in 7 Tagen.',
+      'Webdesign in jedem Wiener Bezirk — handgeschriebene Websites, einfache Basis-Homepage für 599 €, Business und Premium nach Vereinbarung.',
   },
 }
 

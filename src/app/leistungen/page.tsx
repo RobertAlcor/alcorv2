@@ -1,49 +1,7 @@
-import type { Metadata } from 'next'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { BentoGrid } from '@/components/sections/bento-grid'
+import { ProcessSection } from '@/components/sections/process-section'
 import { CtaBand } from '@/components/sections/cta-band'
-import { RelatedPages } from '@/components/sections/related-pages'
-import { RELATED_FOR } from '@/lib/related-pages'
 import { PAGE_META } from '@/lib/seo-metadata'
-
-
-
-export const metadata = PAGE_META.leistungen
-
-export default function LeistungenPage() {
-  return (
-    <>
-      <Breadcrumbs
-        items={[
-          { label: 'Start', href: '/' },
-          { label: 'Leistungen', href: '/leistungen' },
-        ]}
-      />
-
-      <section className="container-fluid pt-12 md:pt-16 pb-8">
-        <div className="max-w-4xl">
-          <p className="text-xs font-semibold tracking-[0.18em] uppercase text-signal-2 mb-6">
-            <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
-            Leistungen
-          </p>
-          <h1 className="font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] tracking-[-0.02em] text-balance mb-8">
-            Was ich für Sie baue.
-          </h1>
-          <p className="font-serif italic text-xl md:text-2xl text-paper-mute max-w-3xl leading-snug">
-            Drei klare Pakete für drei klare Situationen. Wenn Sie unsicher sind,
-            welches passt – fragen Sie einfach.
-          </p>
-        </div>
-      </section>
-
-      <BentoGrid />
-
-      <CtaBand
-        title="Welche Leistung passt zu Ihnen?"
-        subtitle="Wenn Sie sich nicht sicher sind, welches Paket richtig ist, klären wir das im kostenfreien Erstgespräch in 15 Minuten."
-      />
-      <RelatedPages pages={RELATED_FOR.leistungen} />
-
-    </>
-  )
-}
+export const metadata=PAGE_META.leistungen
+export default function LeistungenPage(){return <><Breadcrumbs items={[{label:'Start',href:'/'},{label:'Leistungen',href:'/leistungen'}]}/><section className="container-fluid alcor-section"><p className="alcor-eyebrow">Konzept · Design · Entwicklung</p><h1 className="alcor-page-title">Eine klare Aufgabe.<br/><span className="text-signal-2">Eine passende Lösung.</span></h1><p className="alcor-intro">Vom einfachen Basis-Auftritt bis zum individuell entwickelten Web-Projekt. Ich begleite ausgewählte Vorhaben persönlich und halte Umfang, Zeitrahmen und Preis vorab schriftlich fest.</p></section><BentoGrid/><ProcessSection/><CtaBand/></>}

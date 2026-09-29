@@ -1,390 +1,46 @@
 'use client'
-
-import { useEffect, useRef } from 'react'
-import Link from 'next/link'
+import { useRef } from 'react'
 import Image from 'next/image'
-import { motion } from 'motion/react'
-import { Calendar, Clock, Zap, Shield, ArrowRight } from 'lucide-react'
-import { SITE } from '@/lib/site'
-import { AnimatedCounter } from '@/components/ui/animated-counter'
-import { LiveIndicator } from '@/components/ui/live-indicator'
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0 },
-}
+import Link from 'next/link'
+import { ArrowUpRight, ArrowRight, Clock3 } from 'lucide-react'
+import { POSITIONING } from '@/lib/positioning'
 
 export function Hero() {
-  const glowRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduceMotion) return
-    const isTouch = window.matchMedia('(hover: none)').matches
-    if (isTouch) return
-
-    const glow = glowRef.current
-    if (!glow) return
-
-    let raf = 0
-    const onMove = (e: MouseEvent) => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(() => {
-        const rect = glow.parentElement?.getBoundingClientRect()
-        if (!rect) return
-        const x = e.clientX - rect.left
-        const y = e.clientY - rect.top
-        glow.style.transform = `translate3d(${x - rect.width / 2}px, ${y - rect.height / 2}px, 0)`
-      })
-    }
-
-    window.addEventListener('mousemove', onMove)
-    return () => {
-      window.removeEventListener('mousemove', onMove)
-      cancelAnimationFrame(raf)
-    }
-  }, [])
-
+  const section = useRef<HTMLElement>(null)
+  function move(event: React.PointerEvent<HTMLElement>) {
+    if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const el = section.current
+    if (!el) return
+    const box = el.getBoundingClientRect()
+    el.style.setProperty('--glow-x', `${event.clientX - box.left}px`)
+    el.style.setProperty('--glow-y', `${event.clientY - box.top}px`)
+  }
   return (
-    <section className="grain relative overflow-hidden pt-16 pb-24 md:pt-24 md:pb-32">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-1/4 -right-1/4 h-[60vw] w-[60vw]"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(var(--signal-rgb),0.18) 0%, transparent 60%)',
-          filter: 'blur(60px)',
-        }}
-      />
-
-      <div
-        aria-hidden
-        ref={glowRef}
-        className="pointer-events-none absolute top-1/2 left-1/2 hidden h-[40vw] w-[40vw] transition-transform duration-300 ease-out will-change-transform md:block"
-        style={{
-          background:
-            'radial-gradient(circle, rgba(var(--signal-rgb),0.08) 0%, transparent 50%)',
-          filter: 'blur(40px)',
-        }}
-      />
-
-      <FloatingAccent />
-
-      <div className="container-fluid relative z-10">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.05 }}
-          className="mb-6 flex flex-wrap items-center gap-3"
-        >
-          <LiveIndicator text="Verfügbar — bereit für neue Projekte" />
-        </motion.div>
-
-        <motion.h1
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-          className="max-w-5xl font-serif text-[clamp(2.5rem,8vw,6.5rem)] leading-[0.95] font-normal tracking-[-0.025em] text-balance"
-        >
-          <span className="text-signal-2 mb-8 flex items-center gap-3 font-sans text-xs leading-normal font-semibold tracking-[0.18em] uppercase">
-            <span className="bg-signal-2 inline-block h-px w-8" />
-            Webdesign Wien · handgeschrieben seit 2014
-          </span>
-          Sie waren heute schon auf 8 Webagentur-Seiten.
-          <br />
-          <em className="shimmer font-serif italic">Alle sahen gleich aus.</em>
-        </motion.h1>
-
-        <motion.p
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
-          className="text-paper-mute mt-10 max-w-3xl font-serif text-[clamp(1.25rem,2.4vw,1.75rem)] leading-snug text-pretty italic"
-        >
-          Individuell programmierte Websites für Unternehmen und Selbstständige in Wien —
-          mit Webdesign, Relaunch und technischer SEO aus einer Hand.
-          <br />
-          <span className="text-paper">
-            Ich bin Robert. Ich schreibe Code seit {SITE.founder.yearsActive} Jahren und
-            begleite Projekte persönlich von der Planung bis zum Launch.
-          </span>
-        </motion.p>
-
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
-          className="mt-12 flex flex-wrap items-center gap-4"
-        >
-          <MagneticLink
-            href="/kontakt"
-            className="group bg-signal text-deep hover:bg-signal-2 inline-flex min-h-[48px] items-center gap-2 rounded-sm px-7 py-4 text-sm font-medium shadow-[0_8px_30px_-8px_rgba(var(--signal-rgb),0.5)] transition-all duration-300"
-          >
-            Kostenloses Erstgespräch
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </MagneticLink>
-
-          <Link
-            href="/preise"
-            className="text-paper-mute border-line hover:text-paper hover:border-paper-mute inline-flex min-h-[48px] items-center gap-2 rounded-sm border px-7 py-4 text-sm font-medium transition-all duration-300"
-          >
-            Pakete & Preise
-          </Link>
-
-          <Link
-            href="/referenzen"
-            className="text-paper-mute hover:text-paper inline-flex min-h-[48px] items-center gap-2 px-7 py-4 text-sm font-medium transition-colors"
-          >
-            Was ich baue →
-          </Link>
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.68 }}
-          className="mt-16"
-        >
-          <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
-            <div>
-              <p className="text-signal-2 font-mono text-[0.68rem] font-medium tracking-[0.16em] uppercase">
-                Kein Stockfoto. Echte Projekte.
-              </p>
-              <p className="text-paper-mute mt-2 max-w-2xl text-sm leading-relaxed">
-                Ein Ausschnitt aus Websites und Web-Anwendungen, die ich konzipiert und umgesetzt habe.
-              </p>
-            </div>
-            <Link
-              href="/referenzen"
-              className="text-paper-mute hover:text-signal-2 inline-flex items-center gap-2 text-sm transition-colors"
-            >
-              Projekte im Detail <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+    <section ref={section} className="alcor-hero" onPointerMove={move}>
+      <div className="alcor-hero-glow" aria-hidden="true" />
+      <div className="container-fluid alcor-hero-grid">
+        <div className="alcor-hero-copy">
+          <p className="alcor-eyebrow"><span className="alcor-dot" /> Unabhängige Webentwicklung · Wien</p>
+          <h1>Ausgewählte Projekte.<br /><span>Außergewöhnliche Websites.</span></h1>
+          <p className="alcor-intro">Für Unternehmen, die nicht aussehen wollen wie alle anderen. Individuell gestaltet, persönlich entwickelt — von mir, Robert Alchimowicz.</p>
+          <div className="alcor-actions">
+            <Link className="alcor-button" href={POSITIONING.applicationHref}>Projekt bewerben <ArrowUpRight size={20} aria-hidden="true" /></Link>
+            <Link className="alcor-button alcor-button-outline" href={POSITIONING.callHref}><Clock3 size={20} aria-hidden="true" />15 Minuten kennenlernen</Link>
           </div>
-
-          <div className="grid max-w-6xl gap-4 md:grid-cols-12">
-            {PROJECT_PREVIEWS.map((project, index) => (
-              <Link
-                key={project.src}
-                href={project.href}
-                className={`group border-line bg-deep-2 hover:border-signal-2/50 relative overflow-hidden rounded-sm border ${
-                  index === 0 ? 'md:col-span-6' : 'md:col-span-3'
-                }`}
-              >
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <Image
-                    src={project.src}
-                    alt={project.alt}
-                    fill
-                    sizes={index === 0 ? '(min-width: 768px) 50vw, 100vw' : '(min-width: 768px) 25vw, 100vw'}
-                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.035]"
-                    priority={index === 0}
-                  />
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-deep/70 via-transparent to-transparent opacity-70"
-                  />
-                </div>
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
-                  <div>
-                    <span className="text-paper block text-sm font-medium">{project.name}</span>
-                    <span className="text-paper-mute mt-0.5 block text-[0.68rem]">{project.type}</span>
-                  </div>
-                  <ArrowRight className="text-signal-2 h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1" />
-                </div>
-              </Link>
-            ))}
+          <p className="alcor-note">Ich wähle Projekte bewusst aus. Entscheidend ist, ob Anspruch, Aufgabe und Zusammenarbeit passen.</p>
+          <div className="alcor-hero-footer"><span>Persönlich. Vom Konzept bis zum Launch.</span><Link href="/preise">Pakete & einmalige Preise <ArrowRight size={17} aria-hidden="true" /></Link></div>
+        </div>
+        <Link href="/referenzen/umzugsmeister" className="alcor-hero-art" aria-label="Projekt Umzugsmeister ansehen">
+          <Image src="/media/studio.webp" alt="" fill sizes="(min-width: 1100px) 50vw, 100vw" className="alcor-art-backdrop" />
+          <div className="alcor-art-top"><span>Ausgewählte Arbeit / 03</span><span>ALCOR</span></div>
+          <div className="alcor-device">
+            <div className="alcor-device-bar" aria-hidden="true"><span>● ● ●</span><span>umzugsmeister.at</span><ArrowUpRight size={15} /></div>
+            <Image src="/media/umzugsmeister.webp" alt="Startseite des Projekts Umzugsmeister mit Online-Umzugsangebot" width={1280} height={735} sizes="(min-width: 1100px) 45vw, 90vw" priority />
           </div>
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.75 }}
-          className="mt-20"
-        >
-          <div className="bg-line grid max-w-5xl grid-cols-2 gap-px md:grid-cols-4">
-            {TRUST_POINTS.map((item) => (
-              <TrustStat key={item.label} {...item} />
-            ))}
-          </div>
-        </motion.div>
+          <div className="alcor-art-caption"><div><span>Konzept. Design. Entwicklung.</span><p>Keine Vorlage für<br />Ihr Unternehmen.</p></div><span className="alcor-circle"><ArrowUpRight aria-hidden="true" /></span></div>
+        </Link>
       </div>
+      <div className="alcor-trust"><div className="container-fluid">{['Direkter Ansprechpartner', 'Live-Einblick ins Projekt', 'Klarer Vertrag vor dem Start', 'Ihr Projekt. Ihr Quellcode.'].map((item,i)=><div key={item}><span>0{i+1}</span>{item}</div>)}</div></div>
     </section>
   )
 }
-
-function MagneticLink({
-  href,
-  children,
-  className,
-}: {
-  href: string
-  children: React.ReactNode
-  className?: string
-}) {
-  const ref = useRef<HTMLAnchorElement | null>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    if (window.matchMedia('(hover: none)').matches) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    const onMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect()
-      const x = e.clientX - rect.left - rect.width / 2
-      const y = e.clientY - rect.top - rect.height / 2
-      el.style.transform = `translate(${x * 0.15}px, ${y * 0.2}px)`
-    }
-    const onLeave = () => {
-      el.style.transform = ''
-    }
-    el.addEventListener('mousemove', onMove)
-    el.addEventListener('mouseleave', onLeave)
-    return () => {
-      el.removeEventListener('mousemove', onMove)
-      el.removeEventListener('mouseleave', onLeave)
-    }
-  }, [])
-
-  return (
-    <Link
-      ref={ref}
-      href={href}
-      className={className}
-      style={{
-        transition: 'transform 0.3s cubic-bezier(0.16,1,0.3,1), background-color 0.3s',
-      }}
-    >
-      {children}
-    </Link>
-  )
-}
-
-function FloatingAccent() {
-  return (
-    <motion.div
-      aria-hidden
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 2, delay: 0.5 }}
-      className="pointer-events-none absolute top-[20%] right-[5%] hidden h-32 w-32 lg:block"
-    >
-      <motion.div
-        className="border-signal-2/20 absolute inset-0 rounded-full border"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-      />
-      <motion.div
-        className="border-signal-2/10 absolute inset-4 rounded-full border"
-        animate={{ rotate: -360 }}
-        transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
-      />
-      <motion.div
-        className="bg-signal-2/5 absolute inset-8 rounded-full"
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-      />
-    </motion.div>
-  )
-}
-
-type StatProps = {
-  icon: React.ReactNode
-  value: number | string
-  suffix?: string
-  label: string
-  hint: string
-  isCounter?: boolean
-}
-
-function TrustStat({ icon, value, suffix, label, hint, isCounter }: StatProps) {
-  return (
-    <div className="group bg-deep hover:bg-deep-2/40 relative p-5 transition-colors duration-500 md:p-6">
-      <span
-        aria-hidden
-        className="bg-signal-2 absolute top-0 left-0 h-px w-0 transition-all duration-500 group-hover:w-full"
-      />
-      <div className="text-signal-2 mb-3 origin-left transition-transform duration-500 group-hover:scale-110">
-        {icon}
-      </div>
-      <div className="mb-2 flex items-baseline gap-1">
-        <span className="text-paper font-sans text-4xl leading-none font-light tracking-tight md:text-5xl">
-          {isCounter && typeof value === 'number' ? (
-            <AnimatedCounter value={value} suffix={suffix} />
-          ) : (
-            <>
-              {value}
-              {suffix}
-            </>
-          )}
-        </span>
-      </div>
-      <span className="text-paper mb-1 block text-sm font-medium">{label}</span>
-      <span className="text-paper-mute block text-xs leading-snug">{hint}</span>
-    </div>
-  )
-}
-
-const TRUST_POINTS: StatProps[] = [
-  {
-    icon: <Calendar className="h-5 w-5" strokeWidth={1.5} />,
-    value: SITE.founder.yearsActive,
-    suffix: '+',
-    label: 'Jahre Erfahrung',
-    hint: 'Seit 2014 in Wien',
-    isCounter: true,
-  },
-  {
-    icon: <Clock className="h-5 w-5" strokeWidth={1.5} />,
-    value: SITE.pricing.deliveryDays,
-    label: 'Tage zur Live-Schaltung',
-    hint: 'Starter-Projekte typischerweise in 7 Werktagen',
-    isCounter: true,
-  },
-  {
-    icon: <Zap className="h-5 w-5" strokeWidth={1.5} />,
-    value: 'CWV',
-    label: 'Performance',
-    hint: 'Auf schnelle Ladezeiten und Core Web Vitals optimiert',
-  },
-  {
-    icon: <Shield className="h-5 w-5" strokeWidth={1.5} />,
-    value: '0',
-    suffix: ' WP',
-    label: 'WordPress-Plugins',
-    hint: 'Weniger Drittanbieter-Abhängigkeiten im Projekt',
-  },
-]
-
-
-const PROJECT_PREVIEWS = [
-  {
-    src: '/referenzen/psychotherapie-hrdlicka.webp',
-    alt: 'Website-Referenz Psychotherapie Hrdlicka in Mödling',
-    name: 'Psychotherapie Hrdlicka',
-    type: 'Praxis-Website · Mödling',
-    href: '/referenzen/psychotherapie-hrdlicka',
-  },
-  {
-    src: '/referenzen/schmerzfrei-wien.webp',
-    alt: 'Website-Referenz schmerzfrei.wien',
-    name: 'schmerzfrei.wien',
-    type: 'Praxis + Booking · Wien',
-    href: '/referenzen/schmerzfrei-wien',
-  },
-  {
-    src: '/referenzen/alcorleads.webp',
-    alt: 'Web-Anwendung AlcorLeads',
-    name: 'AlcorLeads',
-    type: 'Web-Anwendung · Eigenentwicklung',
-    href: '/referenzen/alcorleads',
-  },
-] as const

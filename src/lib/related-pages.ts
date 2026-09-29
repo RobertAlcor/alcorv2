@@ -42,7 +42,7 @@ export const RELATED_FOR = {
       href: '/preise',
       label: 'Preise & Pakete',
       description:
-        'Ab € 599 für eine kompakte Website. Hosting € 99/Jahr.',
+        'Basis: einfache Homepage für 599 €. Business/Premium nach Vereinbarung. Hosting separat.',
     },
     {
       href: '/ueber-mich',
@@ -52,7 +52,7 @@ export const RELATED_FOR = {
     {
       href: '/termin',
       label: 'Termin vereinbaren',
-      description: '15 bis 60 Minuten Erstgespräch, kostenlos.',
+      description: '15 Minuten Kennenlernen, kostenlos.',
     },
   ] as RelatedPage[],
 
@@ -110,7 +110,7 @@ export const RELATED_FOR = {
     {
       href: '/blog',
       label: 'Wie ich denke',
-      description: 'Artikel zu Architektur, SEO und Wartungsfreiheit.',
+      description: 'Artikel zu Architektur, SEO und technischer Pflege.',
     },
   ] as RelatedPage[],
 
@@ -157,7 +157,7 @@ export const RELATED_FOR = {
     {
       href: '/termin',
       label: 'Direkt Termin buchen',
-      description: '15 bis 60 Minuten Erstgespräch online vereinbaren.',
+      description: '15 Minuten Kennenlernen online vereinbaren.',
     },
     {
       href: '/leistungen',
