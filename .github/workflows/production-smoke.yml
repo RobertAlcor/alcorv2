@@ -1,0 +1,84 @@
+name: Verify ALCOR production publication
+on:
+  push:
+    branches: [alcor-production-check-20260929]
+permissions:
+  contents: read
+jobs:
+  production:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read-only production verification
+        run: |
+          python3 - <<'PY'
+          import json, re, time, os
+          from pathlib import Path
+          from html.parser import HTMLParser
+          from urllib.request import Request, urlopen
+          from urllib.parse import urljoin, quote
+          BASE = 'https://webdesign-alcor.at'
+          class TextParser(HTMLParser):
+              def __init__(self):
+                  super().__init__(); self.parts=[]; self.styles=[]
+              def handle_data(self, data): self.parts.append(data)
+              def handle_starttag(self, tag, attrs):
+                  a=dict(attrs)
+                  if tag=='link' and a.get('rel')=='stylesheet': self.styles.append(a.get('href',''))
+          def get(path):
+              url = urljoin(BASE+'/', path)
+              request=Request(url, headers={'User-Agent':'ALCOR-Deployment-Verification/1.0','Cache-Control':'no-cache'})
+              with urlopen(request, timeout=25) as response:
+                  return response.read(), response.headers.get('Content-Type',''), response.status
+          def page(path):
+              raw, content_type, status=get(path)
+              assert status==200, (path,status)
+              assert 'text/html' in content_type, (path,content_type)
+              html=raw.decode('utf-8'); parser=TextParser(); parser.feed(html)
+              return html, re.sub(r'\s+',' ',' '.join(parser.parts)), parser
+          for attempt in range(8):
+              homepage, text, parser=page('/?verify=66ad97f')
+              if 'Ausgewählte Projekte.' in text and 'Außergewöhnliche Websites.' in text: break
+              if attempt==7: raise AssertionError('Production still serves a different homepage')
+              time.sleep(15)
+          for name in ['Psychotherapie Hrdlicka','schmerzfrei.wien','Umzugsmeister','TAKT']:
+              assert name in text, 'Missing featured project: '+name
+          assert '/bewerbung' in homepage
+          report={'productionCommit':'66ad97fc28b2958cffa3a68c7fe949d93caa330f','domain':BASE,'homepage':'PASS','fourFeaturedProjects':'PASS','routes':{},'rasterImages':0,'blogCoverImages':0,'css1920px':False,'adminCredentialTest':'NOT PERFORMED','emailDeliveryTest':'NOT PERFORMED'}
+          checks={
+              '/preise':['599','Kein Kontaktformular','60 %','40 %','Kleinunternehmerregelung'],
+              '/leistungen/website-erstellung':['599','Kein Kontaktformular','Basis'],
+              '/termin':['15 Minuten.','Passen wir zusammen?'],
+              '/bewerbung':['Projektbewerbung','unverbindlich'],
+              '/referenzen/alcorleads':['AlcorLeads'],
+              '/blog':['Journal'],
+              '/admin/login':['Anmelden'],
+          }
+          for route, phrases in checks.items():
+              _, content, _=page(route+'?verify=66ad97f')
+              for phrase in phrases: assert phrase.casefold() in content.casefold(), (route,'missing phrase',phrase)
+              report['routes'][route]='PASS'
+          css=''
+          for url in parser.styles:
+              data, _, status=get(url); assert status==200
+              css+=data.decode('utf-8')
+          assert '1920px' in css and 'alcor-hero' in css, 'New stylesheet missing'
+          report['css1920px']=True
+          for directory in ['media','referenzen']:
+              for file in sorted(Path('public',directory).glob('*.webp')):
+                  data, kind, status=get('/'+directory+'/'+quote(file.name))
+                  assert status==200 and data[:4]==b'RIFF' and data[8:12]==b'WEBP', str(file)
+                  report['rasterImages']+=1
+          for post in sorted(Path('src/content/blog').glob('*.mdx')):
+              data, kind, status=get('/media/blog/'+quote(post.stem))
+              assert status==200 and data.startswith(b'\x89PNG\r\n\x1a\n'), post.stem
+              report['blogCoverImages']+=1
+          for kind in ['design','strategy','technology']:
+              data, _, status=get('/media/visual/'+kind)
+              assert status==200 and data.startswith(b'\x89PNG\r\n\x1a\n'), kind
+          report['contentIllustrations']=3
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as summary:
+              summary.write('## ALCOR production verified\n\n```json\n'+json.dumps(report,ensure_ascii=False,indent=2)+'\n```\n')
+          PY
