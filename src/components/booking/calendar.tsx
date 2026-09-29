@@ -20,7 +20,7 @@ export function Calendar({ dates, selectedDate, onSelect }: Props) {
         </h3>
       </div>
       <p className="text-sm text-paper-mute mb-6 leading-relaxed">
-        Mo – Fr, 9 bis 18 Uhr · pro Termin reserviere ich eine Stunde.
+        Wählen Sie einen angebotenen Tag für Ihr 15-Minuten-Kennenlernen.
       </p>
 
       <div className="space-y-6">

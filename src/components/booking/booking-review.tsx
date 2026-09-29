@@ -36,7 +36,7 @@ export function BookingReview({
           Bitte prüfen
         </h3>
         <p className="text-sm text-paper-mute leading-relaxed">
-          Stimmt alles? Dann unten verbindlich buchen. Sie können jeden Punkt
+          Stimmt alles? Dann unten Ihren Wunschtermin anfragen. Sie können jeden Punkt
           mit dem Stift-Symbol noch bearbeiten.
         </p>
       </div>
@@ -52,7 +52,7 @@ export function BookingReview({
       <ReviewItem
         icon={<Clock className="w-4 h-4" strokeWidth={1.75} />}
         label="Uhrzeit"
-        value={`${formatted.time} (60 Min reserviert)`}
+        value={`${formatted.time} (${Math.round((new Date(slotEnd).getTime() - new Date(slotStart).getTime()) / 60000)} Min reserviert)`}
         onEdit={onEditSlot}
       />
 

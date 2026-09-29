@@ -20,238 +20,78 @@ export type Service = {
 export const SERVICES: Service[] = [
   {
     slug: 'website-erstellung',
-    h1: "Website erstellen lassen in Wien",
-    faqs: [
-      {
-        "question": "Was kostet es, eine Website in Wien erstellen zu lassen?",
-        "answer": "Das Starter-Paket kostet € 599 einmalig und umfasst bis zu fünf Seiten, Kontaktformular, technisches SEO und die Live-Schaltung. Größere Websites mit Blog, Mini-CMS oder eigenen Funktionen bekommen nach dem Erstgespräch einen schriftlichen Festpreis. Alle Preise sind Endpreise, es kommt keine Umsatzsteuer dazu. Hosting ist optional und kostet bei mir € 99 pro Jahr."
-      },
-      {
-        "question": "Wie lange dauert die Erstellung?",
-        "answer": "Eine Starter-Website ist sieben Tage nach dem Kickoff online – vorausgesetzt, Texte und Bilder liegen vor oder wir haben vereinbart, dass ich sie erstelle. Umfangreichere Projekte dauern meist zwei bis drei Wochen. Den Termin halte ich schriftlich fest."
-      },
-      {
-        "question": "Was muss ich vor dem Start liefern?",
-        "answer": "Im Idealfall Logo, Texte und Fotos. Fehlt etwas davon, ist das kein Hindernis: Bei Texten helfe ich mit Struktur und Formulierung, und als Berufsfotograf kann ich die Bilder für Ihre Website auf Wunsch selbst aufnehmen."
-      },
-      {
-        "question": "Kann ich Inhalte später selbst ändern?",
-        "answer": "Ja, wenn Sie das möchten. Auf Wunsch baue ich ein schlankes Mini-CMS ein, mit dem Sie Texte und Bilder ohne Programmierkenntnisse pflegen. Wer nur selten etwas ändert, schickt mir die Änderung einfach – abgerechnet wird nach tatsächlichem Aufwand, ohne Wartungsvertrag."
-      },
-      {
-        "question": "Gehört die Website nach der Fertigstellung wirklich mir?",
-        "answer": "Ja. Sie erhalten den vollständigen Quellcode und alle Zugangsdaten zu Domain und Hosting. Es gibt keine Lizenzgebühren und keine technische Bindung an mich – jede:r Webentwickler:in kann mit dem Code weiterarbeiten."
-      },
-      {
-        "question": "Wie steht es um DSGVO und Barrierefreiheit?",
-        "answer": "Schriften werden DSGVO-konform eingebunden, es gibt kein Tracking ohne Einwilligung, und Formulardaten werden mit klarer Löschfrist gespeichert. Gebaut wird nach WCAG 2.2 AA: Tastaturbedienung, ausreichende Kontraste, saubere Überschriftenstruktur. Die Inhalte von Impressum und Datenschutzerklärung stimmen wir gemeinsam ab; rechtlich verantwortlich bleibt der Betreiber der Website."
-      }
-    ],
-    title: 'Website-Erstellung',
-    shortTitle: 'Neue Website',
-    tagline: 'Handgeschrieben in 7 Tagen',
-    description:
-      'Eine neue Website von Grund auf. Strategie, Design, handgeschriebener Code. Lieferung in einer Woche, ab 599 Euro.',
+    title: 'Website-Erstellung', shortTitle: 'Neue Website',
+    h1: 'Website erstellen lassen in Wien',
+    tagline: 'Basis, Business oder Premium',
+    description: 'Die einfache Basis-Homepage kostet 599 € einmalig. Individuelles Design, weitere Seiten und Funktionen werden im Business- oder Premium-Projekt vereinbart.',
     href: '/leistungen/website-erstellung',
-    features: [
-      'Bis zu 5 Seiten im Starter-Paket',
-      'Mobile zuerst, Desktop perfekt',
-      'Technisches SEO inkludiert',
-      'DSGVO-konform out of the box',
-      'Lieferung in 7 Tagen',
-    ],
-    metaTitle: 'Website erstellen lassen in Wien',
-    metaDescription:
-      'Handgeschriebene Website-Erstellung aus Wien. Ohne WordPress, ohne Plugin-Chaos. Lieferung in 7 Tagen ab 599 Euro.',
-    intro:
-      'Sie brauchen eine neue Website. Schnell, sicher, ohne Wartungsalbtraum. Genau das mache ich seit über zehn Jahren – und ich mache es selbst, von der ersten Strategie-Skizze bis zum letzten Deploy.',
+    features: ['Basis: eine einfache Homepage auf einer Seite', 'Responsive Darstellung und Basis-SEO', 'Business: individuelles Design und Kontaktformular', 'Premium: umfassender vereinbarter Leistungsumfang', 'Schriftlicher Vertrag und Live-Vorschau'],
+    metaTitle: 'Website erstellen lassen | Basis 599 €, Business & Premium | ALCOR',
+    metaDescription: 'Einfache Basis-Homepage für 599 € ohne Kontaktformular oder Animationen. Business und Premium nach Vereinbarung. Einmalig, ohne Umsatzsteuer.',
+    intro: 'Ich entwickle Websites für ausgewählte Projekte. Ihre Ziele und der vereinbarte Umfang bestimmen, ob eine einfache Basis oder ein individueller Unternehmensauftritt passt.',
     process: [
-      {
-        step: 'Erstgespräch',
-        description:
-          'Wir besprechen, was Sie brauchen. Ziele, Budget, Inhalte. Kostenlos und unverbindlich.',
-      },
-      {
-        step: 'Konzept und Angebot',
-        description:
-          'Sie bekommen einen schriftlichen Vorschlag mit Seitenstruktur, Design-Richtung und Festpreis.',
-      },
-      {
-        step: 'Bau und Abstimmung',
-        description:
-          'Ich baue. Sie sehen den Live-Stand jederzeit. Anpassungen klären wir direkt.',
-      },
-      {
-        step: 'Launch und Übergabe',
-        description:
-          'Live-Schaltung, Suchmaschinen-Anmeldung, Übergabe aller Zugänge. Code gehört Ihnen.',
-      },
+      { step: 'Kennenlernen', description: 'In 15 Minuten besprechen wir Ihre Aufgabe und klären, ob eine Zusammenarbeit passt.' },
+      { step: 'Vertrag', description: 'Leistungen, Dauer, Preis und bis zu fünf vereinbarte Korrekturrunden stehen vor dem Start fest. 60 % Anzahlung bei Auftragserteilung.' },
+      { step: 'Entwicklung', description: 'Sie verfolgen die Umsetzung in einer Live-Vorschau. Feedback erfolgt innerhalb des vereinbarten Konzepts.' },
+      { step: 'Abnahme', description: 'Nach erfolgreicher Abnahme werden 40 % Restzahlung fällig. Veröffentlichung und Übergabe erfolgen wie vereinbart.' },
     ],
-    forWhom: [
-      'Wiener KMU mit klarer Vorstellung',
-      'Selbständige, die professionell auftreten wollen',
-      'Praxen, Kanzleien, Handwerk',
-      'Wer eine Website will, die in 5 Jahren noch funktioniert',
-    ],
-    notForWhom: [
-      'E-Commerce mit 1000+ Produkten',
-      'Wer einen WordPress-Adminbereich erwartet',
-      'Wer mit dem billigsten Angebot vergleicht',
+    forWhom: ['Unternehmen mit klarer Aufgabe', 'Praxen und Dienstleistungsbetriebe', 'Direkte Zusammenarbeit mit dem Entwickler'],
+    notForWhom: ['Unbegrenzte Funktionen zum Basispreis', 'Beliebig viele Redesigns ohne neue Vereinbarung'],
+    faqs: [
+      { question: 'Was umfasst die Homepage für 599 €?', answer: 'Eine einfache Basis-Homepage auf einer Seite mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein Kontaktformular, keine Animationen, keine Erstellung von Datenschutzerklärung oder anderen Rechtstexten. Erforderliche Inhalte stellt der Auftraggeber bereit. Der Preis ist einmalig; aufgrund der Kleinunternehmerregelung wird keine Umsatzsteuer verrechnet.' },
+      { question: 'Was ist in Business und Premium enthalten?', answer: 'Business bietet individuelles Design, vereinbarte Unterseiten und Kontaktformular. Premium umfasst das individuell vereinbarte Gesamtprojekt einschließlich zusätzlicher Funktionen. Den konkreten Umfang und den einmaligen Preis halten wir vorab schriftlich fest.' },
+      { question: 'Wie lange dauert die Umsetzung?', answer: 'Den Zeitplan vereinbaren wir anhand des Umfangs und der Bereitstellung Ihrer Inhalte. Es gibt keine pauschale Sieben-Tage-Zusage für sämtliche Projekte.' },
+      { question: 'Wie funktionieren Zahlung und Korrekturen?', answer: '60 % sofort bei Auftragserteilung, 40 % nach erfolgreicher Abnahme. Im Vertrag stehen bis zu fünf vereinbarte Korrekturrunden. Ein vollständiges Redesign oder zusätzliche Funktionen werden separat vereinbart.' },
+      { question: 'Kann ich die Website live verfolgen?', answer: 'Ja. Sie erhalten während der Entwicklung eine Vorschau. So stimmen wir Gestaltung und Inhalte früh ab.' },
     ],
   },
   {
-    slug: 'relaunch',
-    h1: "Website-Relaunch in Wien",
-    faqs: [
-      {
-        "question": "Verliere ich durch einen Relaunch meine Google-Rankings?",
-        "answer": "Nicht, wenn der Relaunch sauber geplant ist. Vor dem Start erfasse ich alle bestehenden Adressen, übernehme die Inhalte, die bereits gut ranken, und leite jede alte Adresse per 301-Weiterleitung auf die passende neue Seite. Nach der Umschaltung kontrolliere ich in der Google Search Console, ob alles korrekt indexiert wird. Kurzfristige Schwankungen sind normal, dauerhafte Verluste entstehen fast immer durch fehlende Weiterleitungen."
-      },
-      {
-        "question": "Kann ich von WordPress zu handgeschriebenem Code wechseln?",
-        "answer": "Ja, das ist der häufigste Fall. Texte, Bilder und Blogartikel werden aus WordPress übernommen, die Seitenstruktur bleibt – wo sinnvoll – erhalten. Danach entfallen Plugin-Updates, Theme-Lizenzen und die meisten Sicherheitsrisiken. Die alte WordPress-Installation schalte ich nach der Umstellung ab."
-      },
-      {
-        "question": "Ist meine Website während des Relaunchs offline?",
-        "answer": "Nein. Die neue Website entsteht auf einer Testadresse, Ihre bestehende läuft unverändert weiter. Die Umschaltung selbst dauert wenige Minuten und findet zu einem vereinbarten Zeitpunkt statt."
-      },
-      {
-        "question": "Was kostet ein Relaunch?",
-        "answer": "Das hängt von Seitenzahl und Funktionen ab. Ein kompakter Auftritt mit bis zu fünf Seiten liegt im Bereich des Starter-Pakets ab € 599. Für größere Websites erhalten Sie nach dem kostenlosen Audit einen schriftlichen Festpreis – inklusive Migration und Weiterleitungen."
-      },
-      {
-        "question": "Woran erkenne ich, dass ein Relaunch fällig ist?",
-        "answer": "Typische Zeichen: Die Seite lädt am Handy länger als zwei, drei Sekunden, das Design ist älter als fünf Jahre, Änderungen sind mühsam, es kommen kaum Anfragen, oder Plugin-Updates verursachen regelmäßig Probleme. Im Audit bekommen Sie dazu einen ehrlichen Befund – auch wenn das Ergebnis lautet, dass gezielte Korrekturen reichen."
-      }
-    ],
-    title: 'Website-Relaunch',
-    shortTitle: 'Relaunch',
-    tagline: 'Raus aus WordPress',
-    description:
-      'Ihre bestehende Website neu aufgebaut. Schneller, sicherer, ohne Plugin-Wartung. Inkl. Migration und 301-Redirects.',
+    slug: 'relaunch', title: 'Website-Relaunch', shortTitle: 'Relaunch',
+    h1: 'Website-Relaunch in Wien', tagline: 'Ein neuer Auftritt mit klarer Richtung',
+    description: 'Inhalte, Struktur und Gestaltung Ihrer Website überarbeiten. Bestehende Adressen und vereinbarte Weiterleitungen berücksichtige ich im Projekt.',
     href: '/leistungen/relaunch',
-    features: [
-      'Komplette Neuentwicklung',
-      'Migration aller Inhalte',
-      'SEO-Rankings bleiben erhalten',
-      '301-Redirects sauber gesetzt',
-      'WordPress-Abschaltung inkludiert',
-    ],
-    metaTitle: 'Website-Relaunch Wien',
-    metaDescription:
-      'Relaunch Ihrer bestehenden Website. Migration von WordPress zu handgeschriebenem Code. SEO-Rankings bleiben erhalten.',
-    intro:
-      'Ihre Website ist langsam, unsicher oder einfach in die Jahre gekommen. Ein Relaunch macht sie schneller, sicherer und befreit Sie von monatlicher Plugin-Wartung – ohne dass Sie Ihre Google-Rankings verlieren.',
+    features: ['Bestandsaufnahme', 'Abgestimmtes Konzept', 'Vereinbarte Inhalte und Funktionen', 'URL- und Weiterleitungsplanung', 'Live-Vorschau und Abnahme'],
+    metaTitle: 'Website-Relaunch Wien | ALCOR',
+    metaDescription: 'Website-Relaunch mit individuell vereinbartem Umfang, Preis und Zeitplan. Direkte Zusammenarbeit und Live-Vorschau.',
+    intro: 'Ein Relaunch ist kein pauschales Basis-Paket. Welche Seiten, Inhalte und Funktionen überarbeitet werden, halten wir gemeinsam fest.',
     process: [
-      {
-        step: 'Audit',
-        description:
-          'Ich analysiere Ihre aktuelle Seite: Performance, SEO, Sicherheit, Inhalte. Sie bekommen einen ehrlichen Befund.',
-      },
-      {
-        step: 'Migrations-Plan',
-        description:
-          'Welche Inhalte bleiben, was wird neu? URL-Struktur und Redirect-Map werden vorab geplant.',
-      },
-      {
-        step: 'Parallel-Bau',
-        description:
-          'Neue Seite wird auf einer Subdomain gebaut. Ihre alte Seite läuft währenddessen weiter.',
-      },
-      {
-        step: 'Cutover',
-        description:
-          'An einem Tag wird die neue Seite scharfgeschaltet. 301-Redirects greifen sofort, Rankings bleiben.',
-      },
+      { step: 'Bestandsaufnahme', description: 'Wir prüfen Ziele, Inhalte und technische Voraussetzungen.' },
+      { step: 'Vereinbarung', description: 'Konzept, Migration, Weiterleitungen, Zeitplan und Preis werden schriftlich festgelegt.' },
+      { step: 'Live-Vorschau', description: 'Die neue Website wird parallel entwickelt und in vereinbarten Feedbackrunden abgestimmt.' },
+      { step: 'Veröffentlichung', description: 'Nach der Abnahme folgen die vereinbarte Umschaltung und technische Kontrollen.' },
     ],
-    forWhom: [
-      'Bestehende WordPress-Sites mit Performance-Problemen',
-      'Wer monatliche Wartungskosten loswerden will',
-      'Wer eine modernere, schnellere Website braucht',
-      'Wer Google-Rankings nicht verlieren darf',
-    ],
-    notForWhom: [
-      'Wer einfach nur ein neues Theme will',
-      'Wer am bestehenden CMS festhalten muss',
+    forWhom: ['Bestehende Websites mit Änderungsbedarf', 'Unternehmen mit neuer Positionierung', 'Vereinbarte Migration von Inhalten und Funktionen'],
+    notForWhom: ['Garantien für unveränderte Rankings', 'Unbegrenzte Migration zum Basispreis'],
+    faqs: [
+      { question: 'Was kostet ein Relaunch?', answer: 'Der einmalige Preis wird anhand der bestehenden Website und des gewünschten Umfangs schriftlich vereinbart. Die einfache Basis-Homepage für 599 € ist kein mehrseitiger Komplett-Relaunch.' },
+      { question: 'Bleibt meine Website währenddessen online?', answer: 'Die neue Version wird zunächst getrennt entwickelt. Zeitpunkt und Ablauf der Umschaltung stimmen wir ab.' },
+      { question: 'Bleiben meine Rankings erhalten?', answer: 'Bestehende Inhalte, URLs und erforderliche Weiterleitungen werden berücksichtigt. Unveränderte Rankings oder vollständige Sichtbarkeitserhaltung können nicht garantiert werden.' },
     ],
   },
   {
-    slug: 'seo-wien',
-    h1: "SEO Wien – auf Google und in der KI-Suche gefunden werden",
-    faqs: [
-      {
-        "question": "Wie lange dauert es, bis SEO wirkt?",
-        "answer": "Technische Korrekturen – Ladezeit, Indexierung, strukturierte Daten – zeigen oft innerhalb weniger Wochen Wirkung. Bessere Platzierungen für umkämpfte Suchbegriffe wie „Webdesign Wien“ oder „Installateur 1100“ brauchen in der Regel drei bis sechs Monate, weil Google Vertrauen erst aufbauen muss."
-      },
-      {
-        "question": "Was gehört zu lokaler SEO für Wiener Unternehmen?",
-        "answer": "Ein vollständig gepflegtes Google-Unternehmensprofil, einheitliche Firmendaten (Name, Adresse, Telefon) im gesamten Web, Bewertungen echter Kund:innen, Inhalte zu Ihrem Bezirk und Ihrer Leistung sowie strukturierte Daten, die Google Standort und Angebot eindeutig mitteilen."
-      },
-      {
-        "question": "Garantieren Sie Platz 1 bei Google?",
-        "answer": "Nein – und niemand kann das seriös. Google entscheidet die Reihenfolge selbst, und sie ändert sich laufend. Was ich zusage: eine nachvollziehbare Maßnahmenliste, saubere Umsetzung und monatliche Zahlen, an denen Sie den Fortschritt ablesen."
-      },
-      {
-        "question": "Was ist GEO und brauche ich das?",
-        "answer": "GEO steht für Generative Engine Optimization: Inhalte so aufzubereiten, dass KI-Assistenten wie ChatGPT, Perplexity oder die KI-Übersichten von Google sie verstehen und als Quelle nennen. Dazu gehören klare Antworten auf konkrete Fragen, strukturierte Daten und eine maschinenlesbare Zusammenfassung Ihres Angebots. Wer Dienstleistungen anbietet, nach denen Menschen Assistenten fragen, profitiert davon."
-      },
-      {
-        "question": "Funktioniert SEO auch mit meiner bestehenden WordPress-Seite?",
-        "answer": "Grundsätzlich ja. Inhalte, Google-Unternehmensprofil und strukturierte Daten lassen sich auf jeder Website verbessern. Grenzen setzt die Technik: Wenn Themes und Plugins die Ladezeit dauerhaft drücken, ist ein Relaunch oft der günstigere Weg als monatelange Detailarbeit."
-      }
-    ],
-    title: 'SEO und GEO',
-    shortTitle: 'SEO + GEO',
-    tagline: 'Gefunden werden – auf Google und in ChatGPT',
-    description:
-      'Klassisches SEO plus Optimierung für AI-Suchmaschinen wie ChatGPT, Perplexity und Google AI Overviews.',
+    slug: 'seo-wien', title: 'Technische SEO', shortTitle: 'SEO',
+    h1: 'Technische SEO in Wien', tagline: 'Verstanden werden. Gefunden werden.',
+    description: 'Nachvollziehbare technische Grundlagen und klare Inhalte. Maßnahmen werden nach Relevanz und vereinbartem Umfang umgesetzt.',
     href: '/leistungen/seo-wien',
-    features: [
-      'Technisches SEO',
-      'Lokales SEO Wien',
-      'GEO – Generative Engine Optimization',
-      'Schema.org strukturierte Daten',
-      'Performance-Optimierung',
-    ],
-    metaTitle: 'SEO Wien – plus GEO für ChatGPT',
-    metaDescription:
-      'SEO aus Wien für KMU. Klassisches SEO plus GEO-Optimierung für ChatGPT, Perplexity und Google AI Overviews. Mit messbaren Ergebnissen.',
-    intro:
-      'Suchmaschinen sind 2026 nicht mehr nur Google. Ihre Kunden fragen ChatGPT, Perplexity, Claude und Google AI Overviews. SEO funktioniert anders. Ich optimiere für beide Welten.',
+    features: ['Indexierbarkeit prüfen', 'Metadaten und Überschriften', 'Interne Verlinkung', 'Strukturierte Daten nach Bedarf', 'Bildauslieferung und Performance'],
+    metaTitle: 'Technische SEO Wien | ALCOR',
+    metaDescription: 'Technische SEO und klare Website-Inhalte aus Wien. Nachvollziehbare Maßnahmen, ohne Ranking-Garantie.',
+    intro: 'Ich optimiere die technische Basis und die vereinbarten Inhalte. Suchmaschinen entscheiden selbst, ob und wo eine Seite erscheint.',
     process: [
-      {
-        step: 'Audit',
-        description:
-          'Status-Quo-Analyse: Rankings, technische Mängel, Content-Lücken. Inkl. AI-Sichtbarkeits-Test.',
-      },
-      {
-        step: 'Strategie',
-        description:
-          'Konkrete Maßnahmenliste mit Aufwand, Priorität und erwarteter Wirkung.',
-      },
-      {
-        step: 'Umsetzung',
-        description:
-          'Technische SEO-Fixes, Content-Optimierung, Schema.org, GEO-Maßnahmen.',
-      },
-      {
-        step: 'Messung',
-        description:
-          'Monatliche Reports zu Rankings, Traffic und AI-Erwähnungen. Keine Vertragsbindung.',
-      },
+      { step: 'Prüfung', description: 'Wir erfassen die relevanten technischen und inhaltlichen Voraussetzungen.' },
+      { step: 'Prioritäten', description: 'Sie erhalten den vereinbarten Maßnahmenplan mit Aufwand und Reihenfolge.' },
+      { step: 'Umsetzung', description: 'Die beauftragten Anpassungen werden nachvollziehbar umgesetzt.' },
+      { step: 'Kontrolle', description: 'Technische Ergebnisse werden geprüft. Laufende Betreuung ist eine gesonderte Vereinbarung.' },
     ],
-    forWhom: [
-      'Wiener KMU mit eigener Website',
-      'Wer in Google + ChatGPT sichtbar sein will',
-      'Wer messbare Ergebnisse erwartet',
-    ],
-    notForWhom: [
-      'Wer Garantien für Platz 1 verlangt (gibt es nicht)',
-      'Wer ohne saubere Website-Basis SEO will',
+    forWhom: ['Unternehmen mit bestehender Website', 'Neue Business- und Premium-Projekte', 'Klare Ziele und realistische Erwartungen'],
+    notForWhom: ['Garantierte Platzierungen', 'Garantierte Neukundenzahlen'],
+    faqs: [
+      { question: 'Ist umfassende SEO im Basispreis enthalten?', answer: 'Die Basis-Homepage für 599 € enthält Basis-SEO wie Seitentitel, Beschreibung und eine saubere Struktur. Umfangreiche Analysen, zusätzliche Inhalte und laufende Betreuung sind nicht enthalten.' },
+      { question: 'Garantieren Sie Platz 1?', answer: 'Nein. Ich vereinbare konkrete Leistungen, keine Suchmaschinenplatzierungen oder Anzahl von Anfragen.' },
     ],
   },
 ]
 
 export function getServiceBySlug(slug: string): Service | undefined {
-  return SERVICES.find((s) => s.slug === slug)
+  return SERVICES.find((service) => service.slug === slug)
 }

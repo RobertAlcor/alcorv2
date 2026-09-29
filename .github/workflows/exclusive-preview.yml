@@ -1,7 +1,7 @@
 name: ALCOR preview quality check
 on:
   push:
-    branches: [alcor-exclusive-preview-20260929]
+    branches: [alcor-exclusive-preview-20260929, main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -21,6 +21,8 @@ jobs:
         with:
           node-version: '22'
           cache: npm
+      - name: Verify corrected release files
+        run: node scripts/verify-release.cjs
       - run: npm ci --no-audit --no-fund
       - name: Validate website image files
         run: |
@@ -28,15 +30,19 @@ jobs:
           const fs = require('fs');
           const sharp = require('sharp');
           (async () => {
-            for (const name of fs.readdirSync('public/media')) {
-              if (!name.endsWith('.webp')) continue;
-              const p = `public/media/${name}`;
-              const meta = await sharp(p).metadata();
-              await sharp(p).raw().toBuffer();
-              console.log(name, meta.width, meta.height);
+            for (const directory of ['public/media', 'public/referenzen']) {
+              for (const name of fs.readdirSync(directory)) {
+                if (!name.endsWith('.webp')) continue;
+                const p = `${directory}/${name}`;
+                const meta = await sharp(p).metadata();
+                await sharp(p).raw().toBuffer();
+                console.log(p, meta.width, meta.height);
+              }
             }
           })().catch(e => { console.error(e); process.exit(1); });
           NODE
+      - name: Verify packages, booking, authentication and all blog covers
+        run: node scripts/audit-preview.cjs
       - run: npm run build
       - name: Package source without credentials or dependencies
         if: always()

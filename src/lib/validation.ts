@@ -72,7 +72,7 @@ export const TOPIC_LABELS: Record<LeadInput['topic'], string> = {
  * Paket-Labels für UI.
  */
 export const PACKAGE_LABELS: Record<NonNullable<LeadInput['package_interest']>, string> = {
-  starter: 'Starter',
+  starter: 'Basis – 599 € (einfache Homepage)',
   business: 'Business',
   premium: 'Premium',
   unsure: 'Weiß noch nicht',

@@ -1,0 +1,12 @@
+/* Lesbare Standardgrößen auch in übernommenen Unterseiten. */
+@theme {
+  --text-xs: 0.875rem;
+  --text-sm: 1rem;
+  --text-base: 1.125rem;
+}
+.alcor-art-top { display:flex; justify-content:space-between; gap:16px; color:var(--color-paper-mute); font-size:12px; }
+:where(a[href],button:not(:disabled),summary,[role='button']:not([aria-disabled='true'])) { cursor:pointer; }
+:where(a[href],button:not(:disabled),summary,[role='button']:not([aria-disabled='true'])) :where(svg,span,path) { cursor:inherit; }
+@media (hover:hover) {
+ :where(a[href],button:not(:disabled),summary):hover { text-decoration-thickness:2px; }
+}

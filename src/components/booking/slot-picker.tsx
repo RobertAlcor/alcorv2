@@ -54,8 +54,8 @@ export function SlotPicker({ date, selectedSlot, onSelect }: Props) {
         </h3>
       </div>
       <p className="text-sm text-paper-mute mb-6 leading-relaxed">
-        Pro Termin reserviere ich eine Stunde. Falls das Gespräch kürzer wird,
-        ist auch alles gut – die Zeit gehört Ihnen.
+        15 Minuten für Ihr unverbindliches Kennenlernen. Wir klären Ihre Idee,
+        den gewünschten Rahmen und ob eine Zusammenarbeit passt.
       </p>
 
       {loading && (

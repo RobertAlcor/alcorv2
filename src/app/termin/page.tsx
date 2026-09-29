@@ -26,14 +26,12 @@ export default function TerminPage() {
             <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
             Erstgespräch
           </p>
-          <h1 className="font-serif text-[clamp(2.5rem,7vw,5rem)] leading-[0.95] tracking-[-0.02em] text-balance mb-8">
-            15 Minuten,{' '}
-            <em className="text-signal-2 italic">die klären</em>, ob wir
-            zusammenpassen.
+          <h1 className="alcor-page-title mb-8">
+            15 Minuten.<br /><span className="text-signal-2">Passen wir zusammen?</span>
           </h1>
-          <p className="font-serif italic text-xl md:text-2xl text-paper-mute max-w-3xl leading-snug">
-            Direkt online buchen. Telefon, Video oder vor Ort in Wien.
-            Kostenlos, ohne Verkaufsdruck.
+          <p className="alcor-intro">
+            Kostenlos und unverbindlich kennenlernen. Beschreiben Sie Ihre Idee und
+            wählen Sie einen angebotenen Termin. Ein Auftrag entsteht erst durch eine gesonderte Vereinbarung.
           </p>
         </div>
       </section>

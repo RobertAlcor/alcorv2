@@ -100,7 +100,7 @@ export const BEZIRKE: Bezirk[] = [
     status: 'full',
     metaTitle: 'Webdesign 1010 Wien | Webagentur Innere Stadt | Alcor',
     metaDescription:
-      'Webdesign für die Innere Stadt — handgeschriebene Websites für Anwälte, Notare, Berater und Hotels im 1. Bezirk. Festpreis ab €599, Lieferung in 7 Tagen.',
+      'Webdesign für die Innere Stadt — handgeschriebene Websites für Anwälte, Notare, Berater und Hotels im 1. Bezirk. Einfache Basis-Homepage 599 €. Business und Premium nach Vereinbarung.',
     keywords: [
       'Webdesign 1010 Wien',
       'Webdesign Innere Stadt',
@@ -152,7 +152,7 @@ export const BEZIRKE: Bezirk[] = [
     status: 'full',
     metaTitle: 'Webdesign 1100 Wien | Webagentur Favoriten | Alcor',
     metaDescription:
-      'Webdesign für Favoriten — Websites für KMU, Gastronomie, Handwerk und Praxen im 10. Bezirk. Handgeschrieben, ohne WordPress, ab €599 in 7 Tagen.',
+      'Webdesign für Favoriten — Websites für KMU, Gastronomie, Handwerk und Praxen im 10. Bezirk. Handgeschrieben, ohne WordPress, Basis-Homepage 599 €, weitere Pakete nach Vereinbarung.',
     keywords: [
       'Webdesign 1100 Wien',
       'Webdesign Favoriten',
@@ -173,23 +173,23 @@ export const BEZIRKE: Bezirk[] = [
       'Online-Terminbuchung fehlt — gerade Praxen verlieren so täglich Anfragen außerhalb der Öffnungszeiten.',
     ],
     positioningParagraph:
-      'Mein Starter-Paket ab €599 ist genau für diese Realität gemacht: Sie bekommen eine vollständige, mobil-perfekte Website mit lokaler SEO-Optimierung auf Ihren Bereich des 10. Bezirks, optionaler Online-Terminbuchung, DSGVO-konformem Impressum und Datenschutz — in sieben Werktagen. Keine monatlichen Wartungskosten. Wenn Sie zusätzlich ein Google-My-Business-Profil aufsetzen oder optimieren wollen, mache ich das im Paket mit. Persönliche Termine vor Ort sind problemlos möglich — ich bin im 22. Bezirk und mit der U1 in 25 Minuten am Reumannplatz.',
+      'Ich arbeite persönlich an ausgewählten Website-Projekten. Die einfache Basis-Homepage für 599 € umfasst eine Seite mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein Kontaktformular, keine Animationen und keine Erstellung von Rechtstexten. Business und Premium werden individuell vereinbart. Preise sind einmalig und ohne Umsatzsteuer; Hosting und Zusatzleistungen werden separat ausgewiesen. Umfang, Zeitplan, 60 % Anzahlung, 40 % nach Abnahme und bis zu fünf Korrekturrunden werden schriftlich festgelegt.',
     faqs: [
       {
         question: 'Ich habe noch gar keine Website. Wo fange ich an?',
         answer:
-          'Mit einem 15-minütigen Erstgespräch — telefonisch oder bei Ihnen vor Ort. Ich frage Sie, was Sie anbieten, wer Ihre typischen Kunden sind und was die Website leisten soll (Erstkontakt? Terminbuchung? Reservierungen?). Daraus entsteht ein Festpreis-Vorschlag mit Seitenstruktur. Wenn Sie zustimmen, ist die Website in sieben Werktagen online.',
+          'Mit einem 15-minütigen Erstgespräch — telefonisch oder bei Ihnen vor Ort. Ich frage Sie, was Sie anbieten, wer Ihre typischen Kunden sind und was die Website leisten soll (Erstkontakt? Terminbuchung? Reservierungen?). Daraus entsteht ein Festpreis-Vorschlag mit Seitenstruktur. Leistungsumfang und Zeitplan stehen im Vertrag; die Umsetzung beginnt nach Auftragserteilung und vereinbarter Anzahlung.',
       },
       {
         question:
           'Lohnt sich eine eigene Website, wenn ich auch auf willhaben.at oder herold.at gelistet bin?',
         answer:
-          'Ja — und zwar deutlich. Listings auf Plattformen ranken bei Google oft schlechter als eine eigene Website mit lokaler Optimierung. Außerdem zahlen Sie auf den Plattformen für Sichtbarkeit, während eine eigene Website nach dem Launch keine laufenden Kosten verursacht. Plattform-Listings ergänzen eine eigene Website, ersetzen sie aber nicht.',
+          'Ja — und zwar deutlich. Listings auf Plattformen ranken bei Google oft schlechter als eine eigene Website mit lokaler Optimierung. Außerdem zahlen Sie auf den Plattformen für Sichtbarkeit, während Domain, Hosting und gegebenenfalls beauftragte Pflege der eigenen Website separat kalkulierbar sind. Plattform-Listings ergänzen eine eigene Website, ersetzen sie aber nicht.',
       },
       {
         question: 'Bauen Sie auch Websites auf Türkisch oder Bosnisch/Kroatisch/Serbisch?',
         answer:
-          'Ja. Mehrsprachigkeit ist Teil des Standardangebots, ohne Aufpreis im Starter-Paket bei zwei Sprachen. Übersetzungen organisiere ich auf Wunsch über professionelle Übersetzer — oder Sie liefern die Texte selbst.',
+          'Mehrsprachigkeit und Übersetzungen werden im Business- oder Premium-Projekt separat vereinbart. Die einfache Basis-Homepage enthält keine kostenlose Mehrsprachigkeit.',
       },
     ],
     nearbyDistricts: ['simmering', 'meidling', 'wieden', 'landstrasse', 'liesing'],
@@ -203,7 +203,7 @@ export const BEZIRKE: Bezirk[] = [
     status: 'full',
     metaTitle: 'Webdesign 1190 Wien | Webagentur Döbling | Alcor',
     metaDescription:
-      'Webdesign für Döbling — Websites für Ärzte, Anwälte, Steuerberater und Heurige im 19. Bezirk. Handgeschrieben, hochwertig, ab €599 in 7 Tagen.',
+      'Webdesign für Döbling — Websites für Ärzte, Anwälte, Steuerberater und Heurige im 19. Bezirk. Handgeschrieben, hochwertig, Basis-Homepage 599 €, weitere Pakete nach Vereinbarung.',
     keywords: [
       'Webdesign 1190 Wien',
       'Webdesign Döbling',
@@ -278,7 +278,7 @@ export const BEZIRKE: Bezirk[] = [
       'Praxen entlang der U1 (Kagran, Kagraner Platz, Aderklaaer Straße) verlieren Patient:innen, weil Online-Terminbuchung fehlt.',
     ],
     positioningParagraph:
-      'Ich bin Ihr Nachbar — physisch in der Berresgasse, fünf Minuten von Hirschstetten, zehn Minuten von Kagran, fünfzehn Minuten von Aspern. Persönliche Termine vor Ort sind kein Aufwand, sondern Standard. Ich kenne die typischen Wege durch den Bezirk, die Stoßzeiten an der U1, die Realität von Gewerbegebieten am Stadtrand. Mein Starter-Paket ab €599 liefert in sieben Werktagen eine Website, die mobil schnell ist, lokal optimiert auf "Handwerker 1220 Wien", "Praxis Kagran" oder "Beratung Aspern" — und keine monatliche Wartung kostet.',
+      'Ich arbeite persönlich an ausgewählten Website-Projekten. Die einfache Basis-Homepage für 599 € umfasst eine Seite mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein Kontaktformular, keine Animationen und keine Erstellung von Rechtstexten. Business und Premium werden individuell vereinbart. Preise sind einmalig und ohne Umsatzsteuer; Hosting und Zusatzleistungen werden separat ausgewiesen. Umfang, Zeitplan, 60 % Anzahlung, 40 % nach Abnahme und bis zu fünf Korrekturrunden werden schriftlich festgelegt.',
     faqs: [
       {
         question:
@@ -295,7 +295,7 @@ export const BEZIRKE: Bezirk[] = [
       {
         question: 'Bauen Sie auch komplexere B2B-Sites mit Kundenportal oder CRM-Anbindung?',
         answer:
-          'Ja. Ich habe für eine Reinigungsfirma im 22. Bezirk eine komplette Plattform mit CRM, Personalplanung, Tablet-PWA und Mitarbeiter-Check-in entwickelt — siehe Referenz "Büroreinigung Wien". Solche Projekte gehen über das Starter-Paket hinaus und werden individuell kalkuliert, mit Festpreis vor Projektstart.',
+          'Ja. Ich habe für eine Reinigungsfirma im 22. Bezirk eine komplette Plattform mit CRM, Personalplanung, Tablet-PWA und Mitarbeiter-Check-in entwickelt — siehe Referenz "Büroreinigung Wien". Solche Projekte gehen über die einfache Basis-Homepage hinaus und werden individuell kalkuliert, mit Festpreis vor Projektstart.',
       },
     ],
     nearbyDistricts: ['floridsdorf', 'leopoldstadt', 'landstrasse'],
@@ -309,7 +309,7 @@ export const BEZIRKE: Bezirk[] = [
     status: 'full',
     metaTitle: 'Webdesign 1230 Wien | Webagentur Liesing | Alcor',
     metaDescription:
-      'Webdesign für Liesing — handgeschriebene Websites für KMU im 23. Bezirk, von Atzgersdorf über Mauer bis Siebenhirten. Ab €599, Lieferung in 7 Tagen.',
+      'Webdesign für Liesing — handgeschriebene Websites für KMU im 23. Bezirk, von Atzgersdorf über Mauer bis Siebenhirten. Basis-Homepage 599 €, Zeitplan nach Vereinbarung.',
     keywords: [
       'Webdesign 1230 Wien',
       'Webdesign Liesing',
@@ -382,7 +382,7 @@ function createScaffolds(
     plz: b.plz,
     status: 'scaffold' as const,
     metaTitle: `Webdesign ${b.plz} Wien | Webagentur ${b.name} | Alcor`,
-    metaDescription: `Webdesign für den ${b.num}. Bezirk Wien (${b.name}). Handgeschriebene Websites ohne WordPress, ab €599 in 7 Tagen.`,
+    metaDescription: `Webdesign für den ${b.num}. Bezirk Wien (${b.name}). Handgeschriebene Websites ohne WordPress, Basis-Homepage 599 €, weitere Pakete nach Vereinbarung.`,
     keywords: [
       `Webdesign ${b.plz} Wien`,
       `Webdesign ${b.name}`,
