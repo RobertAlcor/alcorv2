@@ -1,0 +1,42 @@
+name: ALCOR website service preview
+on:
+  push:
+    branches: [alcor-website-service-20260930]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      NEXT_PUBLIC_SITE_URL: https://webdesign-alcor.at
+      NEXT_PUBLIC_SUPABASE_URL: https://ci-placeholder.invalid
+      SUPABASE_SERVICE_ROLE_KEY: ci-build-placeholder-not-a-real-key
+      RESEND_API_KEY: re_ci_placeholder_not_a_real_key
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: node scripts/verify-release.cjs
+      - run: node scripts/check-website-service.cjs
+      - run: npm run build
+      - name: Check service pages without sending mail
+        run: |
+          npm run start -- --port 3100 > /tmp/alcor-service-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/check-website-service.cjs --http
+      - name: Package source without credentials or dependencies
+        if: always()
+        run: git archive --format=zip --output=alcor-website-service-source.zip HEAD
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: alcor-website-service-source
+          path: alcor-website-service-source.zip
+          retention-days: 7
