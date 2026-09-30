@@ -1,0 +1,196 @@
+name: ALCOR website service preview
+on:
+  push:
+    branches: [alcor-website-service-20260930]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      NEXT_PUBLIC_SITE_URL: https://webdesign-alcor.at
+      NEXT_PUBLIC_SUPABASE_URL: https://ci-placeholder.invalid
+      SUPABASE_SERVICE_ROLE_KEY: ci-build-placeholder-not-a-real-key
+      RESEND_API_KEY: re_ci_placeholder_not_a_real_key
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Ensure existing mail and production configuration are unchanged
+        run: |
+          git diff --exit-code 66ad97fc28b2958cffa3a68c7fe949d93caa330f HEAD -- src/app/api src/lib/mail.ts src/lib/validation.ts src/lib/spam-protection.ts src/lib/supabase.ts src/lib/site.ts .env.example package.json package-lock.json next.config.ts vercel.json
+          echo "PASS: existing email delivery and production configuration unchanged"
+      - run: npm ci --no-audit --no-fund
+      - run: node scripts/verify-release.cjs
+      - run: node scripts/check-website-service.cjs
+      - run: npm run build
+      - name: Install isolated browser verification tool
+        run: |
+          npm install --prefix "$RUNNER_TEMP/alcor-browser-tools" --no-audit --no-fund agent-browser@0.38.1
+          echo "$RUNNER_TEMP/alcor-browser-tools/node_modules/.bin" >> "$GITHUB_PATH"
+          if command -v google-chrome >/dev/null; then
+            echo "AGENT_BROWSER_EXECUTABLE_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          else
+            "$RUNNER_TEMP/alcor-browser-tools/node_modules/.bin/agent-browser" install --with-deps
+          fi
+      - name: Check pages, mobile navigation and forms without sending mail
+        env:
+          AGENT_BROWSER_NO_WEBMCP: '1'
+        run: |
+          npm run start -- --port 3100 > /tmp/alcor-service-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/check-website-service.cjs --http
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          base = 'http://127.0.0.1:3100'
+          shots = pathlib.Path('browser-results')
+          shots.mkdir(exist_ok=True)
+          checks = []
+
+          def run(*args):
+              proc = subprocess.run(['agent-browser', '--session', 'alcor-service-check', '--json', *args], text=True, capture_output=True, timeout=75)
+              if proc.returncode:
+                  raise RuntimeError(f'{args[:2]}: {proc.stdout}\n{proc.stderr}')
+              result = json.loads(proc.stdout)
+              if not result.get('success'):
+                  raise RuntimeError(str(result))
+              return result.get('data', {})
+
+          def check(expression, label):
+              run('eval', '(() => { if (!(' + expression + ')) throw new Error(' + json.dumps(label) + '); return true; })()')
+              checks.append(label)
+              print('PASS:', label, flush=True)
+
+          def ready():
+              run('wait', '--load', 'networkidle')
+              run('wait', 'main h1')
+
+          def layout(label):
+              check('document.querySelectorAll("main h1").length === 1', label + ': one H1')
+              check('document.documentElement.scrollWidth <= innerWidth + 1', label + ': no horizontal overflow')
+              errors = run('errors')
+              if 'errors' not in errors or errors['errors']:
+                  raise AssertionError(f'Browser errors on {label}: {errors}')
+
+          try:
+              run('open')
+              run('network', 'route', '**/api/lead', '--abort')
+              run('set', 'viewport', '390', '844')
+              run('open', base + '/website-service')
+              ready()
+              run('find', 'role', 'button', 'click', '--name', 'Nur notwendige', '--exact')
+              for width in (1440, 768, 390, 360):
+                  run('set', 'viewport', str(width), '900' if width > 768 else '844')
+                  for route in ('/website-service', '/website-soforthilfe', '/website-betreuung'):
+                      run('open', base + route)
+                      ready()
+                      layout(f'{width}px {route}')
+                      if width in (1440, 390):
+                          run('screenshot', str(shots / f'{route[1:]}-{width}.png'), '--full')
+              run('set', 'viewport', '390', '844')
+              run('open', base + '/')
+              ready()
+              run('snapshot', '-i')
+              run('click', '[aria-label="Navigation öffnen"]')
+              run('wait', '--fn', 'document.querySelector("#alcor-mobile-menu").open')
+              run('screenshot', str(shots / 'mobile-menu.png'))
+              run('press', 'Escape')
+              run('wait', '--fn', '!document.querySelector("#alcor-mobile-menu").open')
+              check('document.activeElement.getAttribute("aria-label") === "Navigation öffnen"', 'Mobile menu restores focus')
+              run('click', '[aria-label="Navigation öffnen"]')
+              run('click', '#alcor-mobile-menu a[href="/website-service"]')
+              run('wait', '--fn', 'location.pathname === "/website-service" && !document.querySelector("#alcor-mobile-menu").open')
+              cases = [
+                  ('soforthilfe', '/website-soforthilfe', 'Website-Soforthilfe', 'relaunch', False, None),
+                  ('betreuung', '/website-betreuung', 'Website-Betreuung', 'other', True, None),
+                  ('standard', '/kontakt?thema=pricing&paket=premium', None, 'pricing', False, 'premium'),
+                  ('application', '/bewerbung?service=soforthilfe&paket=business', None, 'new-website', True, 'business'),
+              ]
+              for key, route, title, topic, copy, package in cases:
+                  run('open', base + route)
+                  ready()
+                  if title:
+                      run('find', 'first', f'a[href="/kontakt?thema={topic}&service={key}"]', 'click')
+                      ready()
+                  run('wait', '#contact-name')
+                  layout(f'390px {key} form')
+                  check(f'document.querySelector("#contact-topic").value === {json.dumps(topic)}', key + ': correct topic')
+                  check('!document.querySelector("[name=copyToCustomer]").checked', key + ': copy remains opt-in')
+                  if title:
+                      check('!document.querySelector("#contact-package")', key + ': no new-website package')
+                  else:
+                      check(f'document.querySelector("#contact-package").value === {json.dumps(package)}', key + ': original package retained')
+                  run('eval', '''(() => {
+                    window.__alcorRequests = [];
+                    const original = window.fetch.bind(window);
+                    window.fetch = async (input, init) => {
+                      const url = new URL(typeof input === 'string' ? input : input.url, location.origin);
+                      if (url.pathname !== '/api/lead') return original(input, init);
+                      window.__alcorRequests.push(JSON.parse(init.body));
+                      return new Response(JSON.stringify({ok:true,refNumber:'ALCOR-CI-NO-MAIL'}), {status:200,headers:{'Content-Type':'application/json'}});
+                    };
+                    return true;
+                  })()''')
+                  if key == 'soforthilfe':
+                      run('click', 'form button[type=submit]')
+                      run('wait', '--fn', 'document.activeElement.id === "contact-name"')
+                      check('window.__alcorRequests.length === 0', 'Invalid form never submitted')
+                  run('fill', '#contact-name', 'ALCOR interner Formular-Test')
+                  run('fill', '#contact-email', 'alcor-ci@example.invalid')
+                  run('fill', '#contact-website', 'https://example.invalid')
+                  prefix = f'[Angebot: {title}]\n\n' if title else ''
+                  text = 'x' * (4000 - len(prefix)) if key == 'soforthilfe' else 'Interner Formular-Test. Kein echter E-Mail-Versand.'
+                  run('fill', '#contact-message', text)
+                  run('check', '[name=privacy]')
+                  if copy:
+                      run('check', '[name=copyToCustomer]')
+                  run('screenshot', str(shots / f'form-{key}.png'), '--full')
+                  run('click', 'form button[type=submit]')
+                  run('wait', '--fn', 'document.body.innerText.includes("ALCOR-CI-NO-MAIL")')
+                  check('window.__alcorRequests.length === 1', key + ': one mock submission')
+                  check(f'window.__alcorRequests[0].copyToCustomer === {str(copy).lower()}', key + ': copy flag unchanged')
+                  check(f'window.__alcorRequests[0].topic === {json.dumps(topic)}', key + ': topic transmitted')
+                  check(f'window.__alcorRequests[0].message === {json.dumps(prefix + text)}', key + ': correct message')
+                  check('window.__alcorRequests[0].formLoadTime > 0', key + ': spam timestamp retained')
+                  check('window.__alcorRequests[0].message.length <= 4000', key + ': message limit retained')
+                  if package:
+                      check(f'window.__alcorRequests[0].package_interest === {json.dumps(package)}', key + ': package transmitted')
+              run('open', base + '/kontakt?service=__proto__')
+              ready()
+              check('!!document.querySelector("#contact-package")', 'Invalid service falls back to original form')
+              print('PASS: no real mail sent; /api/lead blocked and browser responses mocked', flush=True)
+          finally:
+              (shots / 'report.json').write_text(json.dumps({'passed': checks, 'liveMail': 'NOT SENT', 'backendChanges': 'NONE'}, ensure_ascii=False, indent=2))
+              try:
+                  run('screenshot', str(shots / 'last-state.png'))
+                  print('BROWSER_CONSOLE', json.dumps(run('console'), ensure_ascii=False), flush=True)
+                  run('close')
+              except Exception as exc:
+                  print('Browser cleanup:', str(exc), flush=True)
+          PY
+      - name: Package source without credentials or dependencies
+        if: always()
+        run: git archive --format=zip --output=alcor-website-service-source.zip HEAD
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: alcor-website-service-source
+          path: alcor-website-service-source.zip
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: alcor-service-browser-results
+          path: browser-results/
+          retention-days: 7

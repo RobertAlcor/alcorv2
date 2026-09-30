@@ -1,0 +1,54 @@
+.section { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
+.eyebrow { color: var(--color-signal-2); font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; }
+.title { max-width: 19ch; font-family: var(--font-sans); font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 500; line-height: 1.13; letter-spacing: -.035em; text-wrap: balance; }
+.heading { display: flex; justify-content: space-between; align-items: end; flex-wrap: wrap; gap: 1.5rem 3rem; margin-bottom: 2.5rem; }
+.intro { color: var(--color-paper-mute); font-size: clamp(1.05rem, 1.3vw, 1.2rem); line-height: 1.75; max-width: 64ch; }
+.heading .intro { max-width: 38ch; }
+.grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.card { min-width: 0; display: flex; flex-direction: column; align-items: start; padding: clamp(1.5rem, 3vw, 2.75rem); border: 1px solid var(--color-line); border-radius: 1rem; background: var(--color-deep-2); }
+.cardTitle { margin-bottom: 1rem; font-size: clamp(1.4rem, 2.2vw, 1.85rem); font-weight: 500; line-height: 1.3; }
+.card .intro { flex-grow: 1; }
+.price { display: block; margin-top: 1.5rem; font-size: clamp(2.1rem, 4vw, 3rem); font-weight: 500; line-height: 1.2; letter-spacing: -.04em; }
+.unit { display: block; color: var(--color-paper-mute); font-size: .95rem; margin-block: .5rem 1.5rem; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 1.5rem; }
+.actions a { min-height: 48px; max-width: 100%; }
+.note { color: var(--color-paper-mute); font-size: .95rem; line-height: 1.8; margin-top: 1.5rem; max-width: 85ch; }
+.hero { padding-block: clamp(2.5rem, 6vw, 5rem) clamp(3rem, 6vw, 5rem); }
+.breadcrumb { margin-bottom: 2.5rem; color: var(--color-paper-mute); font-size: .95rem; }
+.breadcrumb ol { display: flex; flex-wrap: wrap; gap: .6rem; list-style: none; padding: 0; margin: 0; }
+.breadcrumb li + li::before { content: '/'; margin-right: .6rem; }
+.breadcrumb a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: .2em; }
+.breadcrumb li { display: flex; align-items: center; }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(16rem, 1fr); align-items: start; gap: clamp(2rem, 5vw, 5rem); }
+.heroTitle { margin-bottom: 1.5rem; font-family: var(--font-sans); font-size: clamp(2.6rem, 5.5vw, 5rem); font-weight: 500; letter-spacing: -.045em; line-height: 1.08; text-wrap: balance; overflow-wrap: break-word; }
+.heroTitle span { color: var(--color-signal-2); }
+.summary { padding: 2rem; border: 1px solid var(--color-line); border-radius: 1rem; background: var(--color-deep-2); }
+.summary .price { margin-top: 0; }
+.summaryTitle { font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 500; }
+.rule { border-top: 1px solid var(--color-line); }
+.scope { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); }
+.list { padding-left: 1.2rem; color: var(--color-paper-mute); font-size: 1.075rem; line-height: 1.8; }
+.list li + li { margin-top: 1rem; }
+.list li::marker { color: var(--color-signal-2); }
+.examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; margin-top: 2.5rem; }
+.example h3 { font-size: 1.15rem; margin-bottom: .65rem; font-weight: 600; }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; list-style: none; padding: 0; margin-top: 2.5rem; }
+.stepNumber { display: block; color: var(--color-signal-2); font-size: .9rem; margin-bottom: 1rem; }
+.steps h3 { font-size: 1.2rem; margin-bottom: .75rem; font-weight: 600; }
+.faq { margin-top: 2rem; max-width: 60rem; }
+.faq details { border-bottom: 1px solid var(--color-line); }
+.faq summary { padding: 1.3rem 0; font-size: 1.1rem; font-weight: 500; min-height: 48px; cursor: pointer; }
+.faq details p { margin-bottom: 1.5rem; padding-right: 1rem; }
+.request { padding: clamp(1.5rem, 4vw, 3.5rem); border: 1px solid var(--color-line); border-radius: 1rem; background: var(--color-deep-2); }
+.request .intro { margin-top: 1.5rem; }
+@media (max-width: 767px) {
+  .grid, .heroGrid, .scope, .steps, .examples { grid-template-columns: minmax(0, 1fr); }
+  .heroTitle { font-size: clamp(2.3rem, 9vw, 3.5rem); }
+  .heading { align-items: start; }
+  .summary { padding: 1.5rem; }
+  .actions { align-items: stretch; }
+  .actions a { justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section *, .hero * { scroll-behavior: auto; transition: none; animation: none; }
+}
