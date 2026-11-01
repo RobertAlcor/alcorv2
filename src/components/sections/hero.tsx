@@ -22,7 +22,7 @@ export function Hero() {
         <div className="alcor-hero-copy">
           <p className="alcor-eyebrow"><span className="alcor-dot" /> Unabhängige Webentwicklung · Wien</p>
           <h1>Ausgewählte Projekte.<br /><span>Außergewöhnliche Websites.</span></h1>
-          <p className="alcor-intro">Für Unternehmen, die nicht aussehen wollen wie alle anderen. Individuell gestaltet, persönlich entwickelt — von mir, Robert Alchimowicz.</p>
+          <p className="alcor-intro">Individuelles Webdesign und Website-Entwicklung aus Wien für Unternehmen, die nicht aussehen wollen wie alle anderen. Persönlich geplant und umgesetzt — von mir, Robert Alchimowicz.</p>
           <div className="alcor-actions">
             <Link className="alcor-button" href={POSITIONING.applicationHref}>Projekt bewerben <ArrowUpRight size={20} aria-hidden="true" /></Link>
             <Link className="alcor-button alcor-button-outline" href={POSITIONING.callHref}><Clock3 size={20} aria-hidden="true" />15 Minuten kennenlernen</Link>
