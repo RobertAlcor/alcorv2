@@ -6,9 +6,9 @@ import { getAllBezirke, getPublishedBezirke } from '@/lib/bezirke'
 import { SITE } from '@/lib/site'
 
 export const metadata: Metadata = {
-  title: 'Webdesign Wien · Alle 23 Bezirke | Webdesign Alcor',
+  title: 'Webdesign in Wien: Bezirke 1010–1230 | ALCOR',
   description:
-    'Webdesign in jedem Wiener Bezirk — handgeschriebene Websites ohne WordPress, einfache Basis-Homepage für 599 €, Business und Premium nach Vereinbarung. Lokale SEO-Optimierung auf Ihren Bezirk.',
+    'Webdesign in Wien nach Bezirken: finden Sie lokale Informationen zu Donaustadt, Liesing und weiteren Bezirken. Persönliche Website-Erstellung von ALCOR.',
   alternates: { canonical: '/webdesign' },
   openGraph: {
     type: 'website',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: 'Webdesign Wien · Alle 23 Bezirke | Webdesign Alcor',
     description:
-      'Webdesign in jedem Wiener Bezirk — handgeschriebene Websites, einfache Basis-Homepage für 599 €, Business und Premium nach Vereinbarung.',
+      'Webdesign aus Wien: bezirksbezogene Informationen und individuelle Websites von ALCOR.',
   },
 }
 
@@ -72,7 +72,7 @@ export default function WebdesignHubPage() {
               nur für Suchmaschinen zu vervielfachen.
             </p>
             <p>
-              Genau deshalb gibt es für jeden Bezirk eine eigene Seite — mit lokalem
+              Für eine neue Firmenwebsite finden Sie auf der <Link href="/leistungen/website-erstellung" className="alcor-text-link">Leistungsseite Website-Erstellung in Wien</Link> die konkreten Pakete, Abläufe und Anfragewege.</p><p>Für passende Bezirke gibt es eigene Seiten mit lokalem
               Kontext, branchenspezifischen Beispielen, bezirksbezogener
               Pain-Point-Analyse und passenden Schema.org-Markups. Aktuell sind{' '}
               {publishedCount} Bezirke vollständig ausgearbeitet, die übrigen folgen
