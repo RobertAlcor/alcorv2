@@ -1,0 +1,32 @@
+name: Import verified reference screenshots
+on:
+  push:
+    branches: [references-projects-20261102]
+    paths: [.github/workflows/import-reference-assets.yml]
+permissions:
+  contents: write
+jobs:
+  import:
+    if: github.repository == 'RobertAlcor/alcorv2' && github.ref == 'refs/heads/references-projects-20261102'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: references-projects-20261102
+      - name: Download three approved website screenshots and verify bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/referenzen
+          for name in massagewelt-wien cleankos etikettendruck24; do
+            curl --fail --show-error --silent --location --retry 2 --max-time 30 "https://sb-212cbncvrkix.vercel.run/${name}.jpg" -o "public/referenzen/${name}.jpg"
+          done
+          printf '%s\n' \
+            'f66b6e1bf7fcab2e7ddc2b1de80d3b58fd05c9b2082f9735ee847e15dd1a600a  public/referenzen/massagewelt-wien.jpg' \
+            '106b80a337d9007244aec1804e6e0a9766efdd5bf4bdeda1588c8d15d81328de  public/referenzen/cleankos.jpg' \
+            'ad8a76513e96339211b58a38b6c408082cd26a7dcf30f25fe5451826c255e43a  public/referenzen/etikettendruck24.jpg' | sha256sum --check --strict
+          git add public/referenzen/massagewelt-wien.jpg public/referenzen/cleankos.jpg public/referenzen/etikettendruck24.jpg
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'assets: add verified original screenshots for three client references'
+          git push origin HEAD:refs/heads/references-projects-20261102
