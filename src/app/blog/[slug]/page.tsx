@@ -42,10 +42,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const related = all.filter((item) => item.slug !== post.slug).sort((a, b) => Number(b.tags.some((tag) => post.tags.includes(tag))) - Number(a.tags.some((tag) => post.tags.includes(tag)))).slice(0, 2)
   const schema = {
     '@context': 'https://schema.org', '@type': 'BlogPosting',
+    '@id': `${SITE.url}/blog/${post.slug}#article`,
+    isPartOf: { '@id': `${SITE.url}/#website` },
     headline: copy.heading, description: copy.description,
     image: `${SITE.url}${blogCover(post)}`, datePublished: post.date,
     dateModified: post.dateModified || post.date,
-    author: { '@type': 'Person', name: post.author, url: `${SITE.url}/ueber-mich` },
+    author: { '@type': 'Person', name: post.author, ...(post.author === SITE.founder.name ? { '@id': `${SITE.url}/#robert`, url: `${SITE.url}/ueber-mich` } : {}) },
     publisher: { '@type': 'Organization', '@id': `${SITE.url}/#organization`, name: SITE.name, logo: { '@type': 'ImageObject', url: `${SITE.url}/logo.svg` } },
     mainEntityOfPage: `${SITE.url}/blog/${post.slug}`, inLanguage: 'de-AT',
   }

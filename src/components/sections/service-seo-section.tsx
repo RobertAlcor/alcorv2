@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ServiceProjectEvidence } from './service-project-evidence'
 import type { Service } from '@/lib/services'
 import { serviceSchema, faqSchema } from '@/lib/schema'
 import { SITE } from '@/lib/site'
@@ -46,6 +47,7 @@ export function ServiceSeoSection({ service }: { service: Service }) {
           </nav>
         </div>
       </div>
+      {service.slug === 'website-erstellung' && <ServiceProjectEvidence />}
     </section>
   )
 }

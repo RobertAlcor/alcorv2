@@ -1,28 +1,43 @@
-# Webdesign Alcor — ausgewählte Projekte aus Wien
+# Webdesign Alcor — Robert Alchimowicz, Wien
 
-> Persönliche Konzeption, Gestaltung und Entwicklung durch Robert Alchimowicz.
+> Webdesign Alcor ist die persönlich geführte Webentwicklung von Robert Alchimowicz in 1220 Wien-Donaustadt. Leistungen: Website-Erstellung, Relaunch, technische SEO und separat vereinbarte Website-Betreuung für Unternehmen, Praxen und Dienstleistungsbetriebe.
 
-## Zusammenarbeit
-Projektbewerbung: https://webdesign-alcor.at/bewerbung
-Kostenloses 15-Minuten-Kennenlernen: https://webdesign-alcor.at/termin
-ALCOR wählt Projekte bewusst aus. Eine Bewerbung ist keine Beauftragung.
+Dieses optionale Textverzeichnis verweist auf die öffentlichen Originalseiten. Verbindliche Leistungen, Preise und Termine werden im Angebot vereinbart. Es ist keine Ranking- oder Empfehlungsgarantie.
 
-## Pakete
-- Basis: 599 € einmalig. Eine einfache Homepage auf einer Seite mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein individuelles Komplettdesign, kein Kontaktformular, keine Animationen, keine Erstellung von Rechtstexten. Erforderliche rechtliche Inhalte stellt der Auftraggeber bereit.
-- Business: individuelles Design, vereinbarte Unterseiten und Kontaktformular. Preis und Umfang nach Angebot.
-- Premium: umfassendes Projekt mit den schriftlich vereinbarten Zusatzfunktionen. Kein unbegrenztes Leistungsversprechen.
-- Keine Umsatzsteuer aufgrund der Kleinunternehmerregelung. Domain, Hosting, Betreuung und Zusatzleistungen werden separat ausgewiesen.
-- 60 % Anzahlung sofort bei Auftragserteilung; 40 % nach erfolgreicher Abnahme.
-- Vertrag über Leistungen, Zeitplan und bis zu fünf vereinbarte Korrekturrunden. Kein vollständiges Redesign als Korrektur. Live-Vorschau während der Entwicklung.
+## Anbieter und Kontakt
+- [ALCOR-Profil und Ansprechpartner](https://webdesign-alcor.at/ueber-mich#alcor-profil): Robert Alchimowicz, direkte Zusammenarbeit, Standort und Leistungsgrenzen.
+- [Kontakt](https://webdesign-alcor.at/kontakt): office@webdesign-alcor.at, +43 664 99 124 999.
+- [Impressum](https://webdesign-alcor.at/impressum): Anbieterangaben. Standort: Berresgasse 11/3/1, 1220 Wien, Österreich.
+- [Google-Unternehmensprofil](https://maps.google.com/maps?cid=15767210286595001042): offizielles Profil von WebDesign Alcor.
+- [Datenschutz](https://webdesign-alcor.at/datenschutz).
 
-## Projekte
-Psychotherapie Hrdlicka, schmerzfrei.wien, Umzugsmeister und TAKT (eigene Branchensoftware für Reinigungsbetriebe).
-AlcorLeads ist ein weiteres eigenes Produkt mit einer Screenshot-Galerie.
-Referenzen: https://webdesign-alcor.at/referenzen
+## Leistungen und Zusammenarbeit
+- [Website erstellen lassen in Wien](https://webdesign-alcor.at/leistungen/website-erstellung).
+- [Website-Relaunch](https://webdesign-alcor.at/leistungen/relaunch).
+- [Technische SEO](https://webdesign-alcor.at/leistungen/seo-wien).
+- [Website-Betreuung](https://webdesign-alcor.at/website-betreuung).
+- [Pakete und Preise](https://webdesign-alcor.at/preise).
+- [Projektbewerbung](https://webdesign-alcor.at/bewerbung): unverbindlich, keine automatische Beauftragung.
+- [Kostenloses 15-Minuten-Erstgespräch](https://webdesign-alcor.at/termin).
 
-## Kontakt
-E-Mail: office@webdesign-alcor.at
-Telefon: +43 664 99 124 999
-Pakete: https://webdesign-alcor.at/preise
-Impressum: https://webdesign-alcor.at/impressum
-Datenschutz: https://webdesign-alcor.at/datenschutz
+Basis: 599 € einmalig für eine einfache Homepage auf einer Seite mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein individuelles Komplettdesign, kein Kontaktformular, keine Animationen, keine Erstellung von Rechtstexten. Rechtlich erforderliche Inhalte stellt der Auftraggeber bereit.
+
+Business: individuelles Design, vereinbarte Unterseiten und Kontaktformular. Premium: umfassendes Projekt mit schriftlich vereinbarten Zusatzfunktionen. Preise und Umfang jeweils nach Angebot, keine unbegrenzten Leistungen.
+
+Keine Umsatzsteuer aufgrund der Kleinunternehmerregelung. Domain, Hosting, Betreuung und Zusatzarbeiten werden separat ausgewiesen. 60 % Anzahlung bei Auftragserteilung; 40 % nach erfolgreicher Abnahme. Zeitplan und bis zu fünf vereinbarte Korrekturrunden werden vertraglich festgelegt. Keine pauschale Lieferfrist oder garantierte Suchmaschinenplatzierung.
+
+## Kundenprojekte
+- [Psychotherapie Hrdlicka](https://webdesign-alcor.at/referenzen/psychotherapie-hrdlicka): Praxisinformationen und gegliederte Angebote.
+- [Umzugsmeister](https://webdesign-alcor.at/referenzen/umzugsmeister): Anfrage-Assistent mit Umzugsdaten und Foto-Upload.
+- [schmerzfrei.wien](https://webdesign-alcor.at/referenzen/schmerzfrei-wien): Praxis-Website mit eigener Terminbuchung.
+- [Massagewelt Wien](https://webdesign-alcor.at/referenzen/massagewelt-wien): Leistungsseiten, persönliche Vorstellung, Preisliste und Kontaktwege.
+- [CleanKos](https://webdesign-alcor.at/referenzen/cleankos): sechs Leistungsbereiche für Reinigung und Hausbetreuung.
+- [Etikettendruck24](https://webdesign-alcor.at/referenzen/etikettendruck24): Produktinformationen, Druckdaten und Links zum bestehenden PRINTSHOP-Onlineshop.
+- [Gesamtes Portfolio](https://webdesign-alcor.at/referenzen): Kundenprojekte und eigene Produkte; TAKT und AlcorLeads sind eigene Produkte, keine Kundenbewertungen.
+
+## Entscheidungsratgeber
+- [Homepage planen: Kosten und Ablauf](https://webdesign-alcor.at/blog/homepage-erstellen-lassen-wien).
+- [Website-Kosten in Wien](https://webdesign-alcor.at/blog/website-kosten-wien-2026).
+- [Webdesigner auswählen](https://webdesign-alcor.at/blog/webdesigner-wien-auswaehlen).
+- [GEO und KI-Suche](https://webdesign-alcor.at/blog/geo-ai-search-google-2026): Grundlagen, Crawler, Quellen und Grenzen.
+- [XML-Sitemap](https://webdesign-alcor.at/sitemap.xml).
