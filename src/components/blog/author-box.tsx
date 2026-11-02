@@ -19,14 +19,15 @@ export function AuthorBox() {
           </h3>
           <p className="text-paper-mute leading-relaxed mb-4">
             {SITE.founder.role}. Seit {SITE.founder.foundedIn} in Wien.
-            Handgeschriebener Code, keine Frameworks der Mode, kein Marketing-Geschwafel.
+            Persönliche Konzeption, Gestaltung und Entwicklung von Unternehmenswebsites.
+            Konkrete Projektbeispiele finden Sie in den Referenzen.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
               href="/ueber-mich"
               className="text-sm text-signal-2 hover:underline underline-offset-4"
             >
-              Mehr über mich
+              Autor und ALCOR kennenlernen
             </Link>
             <span className="text-paper-dim text-sm">·</span>
             <Link

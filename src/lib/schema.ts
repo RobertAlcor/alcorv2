@@ -1,4 +1,5 @@
 import { SITE } from './site'
+import { COMPANY_PROFILE } from './company-profile'
 
 export function organizationSchema() {
   return {
@@ -7,7 +8,7 @@ export function organizationSchema() {
     '@id': `${SITE.url}/#organization`,
     name: SITE.name,
     alternateName: SITE.brand,
-    description: SITE.tagline,
+    description: COMPANY_PROFILE.summary,
     url: SITE.url,
     logo: `${SITE.url}/logo.svg`,
     image: `${SITE.url}/opengraph-image`,
@@ -28,6 +29,8 @@ export function organizationSchema() {
     },
     founder: {
       '@type': 'Person',
+      '@id': `${SITE.url}/#robert`,
+      url: `${SITE.url}/ueber-mich`,
       name: SITE.founder.name,
       jobTitle: SITE.founder.role,
       knowsAbout: [
@@ -77,7 +80,10 @@ export function organizationSchema() {
         availableLanguage: ['German', 'English'],
       },
     ],
+    hasMap: COMPANY_PROFILE.mapsUrl,
     sameAs: [
+      COMPANY_PROFILE.mapsUrl,
+      COMPANY_PROFILE.facebookUrl,
       ...(SITE.social.linkedin ? [SITE.social.linkedin] : []),
       ...(SITE.social.xing ? [SITE.social.xing] : []),
     ].filter(Boolean),
@@ -89,9 +95,13 @@ export function organizationSchema() {
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            name: 'Website erstellen',
+            '@id': `${SITE.url}/leistungen/website-erstellung#basis-homepage`,
+            name: 'Basis-Homepage auf einer Seite',
+            description: 'Eine einfache Homepage mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein Kontaktformular, keine Animationen, kein individuelles Komplettdesign und keine Erstellung von Rechtstexten. Domain, Hosting und Betreuung separat.',
             url: `${SITE.url}/leistungen/website-erstellung`,
           },
+          name: 'Basis-Homepage: einmaliger Projektpreis',
+          url: `${SITE.url}/preise`,
           price: SITE.pricing.starter,
           priceCurrency: SITE.pricing.currency,
         },
@@ -138,6 +148,7 @@ export function personSchema() {
     '@context': 'https://schema.org',
     '@type': 'Person',
     '@id': `${SITE.url}/#robert`,
+    url: `${SITE.url}/ueber-mich`,
     name: SITE.founder.name,
     jobTitle: SITE.founder.role,
     worksFor: { '@id': `${SITE.url}/#organization` },
@@ -187,6 +198,8 @@ export function serviceSchema(params: {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
+    '@id': `${params.url}#service`,
+    mainEntityOfPage: params.url,
     name: params.name,
     description: params.description,
     url: params.url,
@@ -207,5 +220,19 @@ export function serviceSchema(params: {
         priceValidUntil: `${new Date().getFullYear() + 1}-12-31`,
       },
     }),
+  }
+}
+
+export function profilePageSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    '@id': `${SITE.url}/ueber-mich#webpage`,
+    url: `${SITE.url}/ueber-mich`,
+    name: `${SITE.founder.name} – die Person hinter ${SITE.name}`,
+    description: COMPANY_PROFILE.summary,
+    inLanguage: 'de-AT',
+    isPartOf: { '@id': `${SITE.url}/#website` },
+    mainEntity: personSchema(),
   }
 }
