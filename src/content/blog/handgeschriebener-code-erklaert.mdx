@@ -1,117 +1,63 @@
 ---
-title: Handgeschriebener Code – was das wirklich bedeutet
-description: "Handgeschrieben" ist ein häufig verwendeter Begriff. Hier erkläre ich, was technisch dahintersteckt – und warum es für Ihre Website konkrete Vorteile bringt.
+title: Individuell programmierte Website: Was bedeutet das konkret?
+description: Was individuelle Webentwicklung leistet, welche technischen Grundlagen sie nutzt und was Sie zu Pflege, Kosten und Übergabe vor dem Auftrag klären sollten.
 date: 2026-04-18
+dateModified: 2026-11-02
 author: Robert Alchimowicz
 category: Technik
 tags: [Architektur, Performance, Strategie]
 ---
 
-Der Begriff "handgeschriebener Code" wird häufig als Marketing-Floskel verwendet. In diesem Artikel erkläre ich, was tatsächlich dahintersteckt und warum es einen messbaren Unterschied für Ihre Website macht.
+**Eine individuell programmierte Website wird passend zu einer vereinbarten Aufgabe entwickelt.** Seitenstruktur, Gestaltung und Funktionen werden auf das Projekt abgestimmt. Der Begriff allein sagt jedoch weder etwas über die Qualität noch über Ladezeit, Sicherheit oder späteren Pflegeaufwand aus.
 
-## Drei Wege, wie Websites entstehen
+Auf Websites wird dafür häufig „handgeschriebener Code“ gesagt. Gemeint sein sollte eine nachvollziehbare technische Umsetzung – nicht das Versprechen, dass jede einzelne Zeile ohne Werkzeuge, Bibliotheken oder Frameworks entstanden ist.
 
-Es gibt im Wesentlichen drei Methoden, eine Website zu bauen.
+## Was bei ALCOR individuell geplant wird
 
-### Methode 1: Baukasten-System
+Zunächst klären wir, welche Informationen Ihre Besucher benötigen und was sie anschließend tun sollen: Kontakt aufnehmen, ein Angebot anfragen oder einen Termin anfragen. Daraus entstehen die vereinbarten Seiten und Funktionen.
 
-Sie nutzen einen Drag-and-Drop-Editor wie Wix, Squarespace oder Webflow. Sie ziehen Blöcke auf eine Leinwand, schreiben Texte hinein, fertig.
+Bei einem individuellen Business- oder Premium-Projekt werden Gestaltung, Unterseiten und technische Anforderungen schriftlich festgelegt. Die einfache [Basis-Homepage für 599 €](/preise) ist davon zu unterscheiden: Sie ist ein reduzierter Einstieg auf einer Seite mit bereitgestellten Inhalten, kein individuelles Komplettdesign.
 
-**Was im Hintergrund passiert:** Das System generiert automatisch HTML, CSS und JavaScript. Sie haben keinen direkten Zugriff auf diesen Code. Er ist meist sehr viel umfangreicher als nötig, weil er alle möglichen Funktionen abdecken muss – auch die, die Sie nicht nutzen.
+## Technische Grundlagen statt eines leeren Versprechens
 
-### Methode 2: CMS mit Theme
+Individuelle Websites können Frameworks wie Next.js und weitere Bibliotheken nutzen. Auch solche Grundlagen bringen eigene Abhängigkeiten mit. Je nach Projekt kommen Hosting, E-Mail-Versand, Datenbanken oder andere Dienste hinzu.
 
-Sie nutzen ein Content-Management-System wie WordPress mit einem Theme. Das Theme ist eine Vorlage, die das Design vorgibt. Sie befüllen es mit Ihren Inhalten.
+Die Qualität liegt darin, passende Komponenten auszuwählen, unnötige Funktionen zu vermeiden und die konkrete Umsetzung zu prüfen. „Kein WordPress“ bedeutet nicht „keine Abhängigkeiten“ oder „keine Sicherheitsupdates“. Welche Technik eingesetzt wird, sollte zur Aufgabe passen und bei der Übergabe nachvollziehbar sein.
 
-**Was im Hintergrund passiert:** Bei jedem Seitenaufruf wird die Seite dynamisch aus der Datenbank gerendert. Theme und Plugins liefern den Code, der dabei zur Anwendung kommt. Sie haben theoretisch Zugriff auf den Code, aber jede Änderung bricht beim nächsten Theme-Update.
+## Ein Beispiel: der Weg zur Anfrage
 
-### Methode 3: Handgeschrieben
+Ein allgemeines Kontaktfeld kann für eine kurze Nachricht genügen. Bei einer Umzugsanfrage braucht der Betrieb jedoch möglicherweise Angaben zu Adressen, Umfang und Fotos. In der [Referenz Umzugsmeister](/referenzen/umzugsmeister) sehen Sie einen dafür vorgesehenen Assistenten.
 
-Ein Entwickler schreibt den Code Zeile für Zeile selbst. Es gibt keine Vorlage, kein generierendes System dazwischen. Was am Ende im Browser landet, hat exakt eine Person geplant und geschrieben.
+Ein anderes Beispiel ist [Etikettendruck24](/referenzen/etikettendruck24): Die Website erklärt Materialien und Druckdaten und führt zum vorhandenen PRINTSHOP-Onlineshop. Eine eigenständige Informationsseite muss also nicht sämtliche Funktionen selbst neu entwickeln.
 
-## Was "handgeschrieben" konkret bedeutet
+## Was Sie bei der Ladezeit erwarten dürfen
 
-Wenn ich eine Website handcodiere, sieht das in der Praxis so aus.
+Ziel ist eine gut bedienbare Website auf Smartphone und Desktop. Wie schnell sie bei einem Besucher lädt, hängt jedoch auch von Verbindung, Gerät, Bildern, Hosting und eingebundenen Diensten ab.
 
-### Ich starte mit einer leeren Datei
+Deshalb sind Prüfungen unter dokumentierten Bedingungen aussagekräftiger als ein pauschaler Sekundenwert. Auch ein hoher Lighthouse-Wert ist eine Momentaufnahme, keine Zusage für jedes Gerät oder jede Nutzung. Den Zusammenhang erläutert der Ratgeber zu [Core Web Vitals](/blog/core-web-vitals-2026).
 
-Kein Theme, keine Vorlage. Ein leeres Projekt mit Next.js und TypeScript, das nichts kann außer "Hallo Welt" auszugeben. Von hier aus baue ich alles, was Ihre Site braucht.
+## Was nach der Veröffentlichung weiterläuft
 
-### Jede Komponente wird einzeln entworfen
+Domain und Hosting müssen weiter betrieben werden. Bei Software-Komponenten können Aktualisierungen nötig sein; bei Formularen und Buchungen müssen die beteiligten Dienste funktionieren. Inhaltliche Änderungen und zusätzliche Funktionen sind weitere Aufgaben.
 
-Die Navigationsleiste wird programmiert, weil sie genau diese Funktionen haben soll. Das Kontaktformular wird programmiert, weil es genau diese Felder hat. Die Galerie wird programmiert, weil sie genau diese Bilder zeigen soll.
+Der Umfang dieser Betreuung gehört ins Angebot oder in eine separate Vereinbarung. Ein einmaliger Entwicklungspreis bedeutet nicht, dass der gesamte Betrieb dauerhaft kostenlos oder wartungsfrei wäre. Auch Next.js dokumentiert [Aktualisierungsschritte für sein Framework](https://nextjs.org/docs/app/guides/upgrading).
 
-Das ist deutlich mehr Aufwand als ein fertiges Plugin einzubinden – aber das Ergebnis enthält **nur**, was Sie brauchen.
+## Können Sie Texte und Bilder selbst bearbeiten?
 
-### Es gibt keine externen Abhängigkeiten, die ich nicht überblicke
+Das ist eine Anforderung, die wir vorab besprechen. Eine individuelle Website enthält nicht automatisch einen Editor. Benötigen Sie regelmäßige eigene Änderungen, werden Pflegefunktion und Einweisung ausdrücklich eingeplant. Alternativ können Änderungen nach Vereinbarung beauftragt werden.
 
-Ein WordPress-Plugin kann auf 50 andere Pakete verweisen, die ihrerseits auf 100 weitere verweisen. Bei einem handgeschriebenen Setup zähle ich die Abhängigkeiten an einer Hand: Next.js als Framework, Tailwind für Styling, Resend für Mails, Supabase für Datenbank. Das war's.
+Für umfangreiche redaktionelle Arbeit kann ein CMS die passendere Grundlage sein. Der Vergleich [WordPress oder individuelle Entwicklung](/blog/wordpress-oder-handcodiert-2026) hilft bei der Einordnung.
 
-## Was sich daraus konkret ergibt
+## Was Sie bei der Übergabe klären sollten
 
-Diese Arbeitsweise hat messbare Konsequenzen.
+Die Übergabe sollte sich auf den vereinbarten Projektcode, die relevanten Zugänge und eine verständliche Einweisung beziehen. Halten Sie fest, welche Konten Sie verwalten, welche Leistungen separat weiterlaufen und welche Dokumentation enthalten ist. Für externe Bilder, Schriften, Software und Dienste sind die jeweiligen Nutzungsbedingungen zu berücksichtigen.
 
-### Ladezeit
+Fragen Sie außerdem, wie ein anderer Entwickler die Website künftig betreuen könnte. Eine technisch nachvollziehbare Übergabe ist hilfreicher als die pauschale Aussage, dass ein System „von jedem“ ohne Aufwand übernommen werden könne.
 
-Eine durchschnittliche WordPress-Site lädt in 2 bis 5 Sekunden. Eine handgeschriebene Site lädt typischerweise unter einer Sekunde. Das hat einen direkten Grund: weniger Code muss übertragen, geparst und ausgeführt werden.
+## Woran Sie eine nachvollziehbare Umsetzung erkennen
 
-Konkret: Diese Seite, die Sie gerade lesen, lädt mit etwa 70 KB. Eine vergleichbare WordPress-Seite lädt mit 1.500 bis 3.000 KB. Das ist 20- bis 40-mal mehr.
+Sehen Sie sich reale Referenzen an. Testen Sie Navigation und Kontaktwege auf dem Smartphone. Lassen Sie sich erklären, warum ein bestimmter Aufbau gewählt wurde, wie Änderungen möglich sind und welche Kosten nach dem Projekt anfallen.
 
-### Keine Plugin-Updates
+Ein Pfad im Quelltext oder der Name eines Frameworks beweist weder individuelle Gestaltung noch technische Qualität. Ausschlaggebend sind das Ergebnis, überprüfbare Funktionen und ein klar vereinbarter Umfang.
 
-Bei einem klassischen WordPress-Setup müssen Sie regelmäßig Updates einspielen. Plugins werden aktualisiert, das Core wird aktualisiert, Themes werden aktualisiert. Jedes Update kann etwas brechen.
-
-Eine handgeschriebene Site hat keine Plugins. Es gibt nichts, was sich automatisch ändern könnte.
-
-### Keine Sicherheitslücken durch Drittanbieter
-
-Über 95 Prozent aller WordPress-Hacks geschehen über veraltete Plugins. Eine Site ohne Plugins kann auf diesem Weg nicht angegriffen werden.
-
-Das heißt nicht, dass handgeschriebene Sites unhackbar sind. Aber die Angriffsfläche ist um eine Größenordnung kleiner.
-
-### Volle Kontrolle über das Verhalten
-
-Wenn Sie einen Effekt anpassen wollen, ein Verhalten ändern, eine zusätzliche Funktion einbauen – ich gehe in die entsprechende Code-Datei und ändere genau die Stelle, die das betrifft. Bei einem CMS-Setup müssten Sie hoffen, dass es ein Plugin gibt, das Ihre Anforderung abdeckt.
-
-## Wo handgeschrieben nicht das Beste ist
-
-Es gibt Situationen, in denen handgeschriebener Code nicht der richtige Weg ist.
-
-### Sehr häufige Inhaltsänderungen
-
-Wenn Sie täglich neue Inhalte einpflegen – ein aktiver Blog, ein Online-Shop mit täglich neuen Produkten – brauchen Sie ein CMS-Backend. Ich kann das auch handcodiert bauen, aber dann sprechen wir über deutlich höhere Erstkosten.
-
-### Sehr niedriges Budget
-
-Wenn Sie unter 500 Euro für eine Website ausgeben können, sind Baukasten-Systeme der einzig sinnvolle Weg. Handgeschriebener Code rechnet sich erst ab einer gewissen Investitionsbereitschaft.
-
-### Spezielle Plugin-Funktionen
-
-Wenn Sie eine sehr spezielle Funktion brauchen, die ein WordPress-Plugin perfekt abdeckt, kann es wirtschaftlicher sein, das Plugin zu nutzen, statt die Funktion neu zu schreiben.
-
-## Wie Sie handgeschriebenen Code erkennen
-
-Es gibt einige Indikatoren, mit denen Sie prüfen können, ob eine Website wirklich handgeschrieben ist:
-
-**Im Quelltext** (rechtsklick, "Seitenquelltext anzeigen") finden Sie keine Verweise auf `wp-content/`, `wp-includes/` oder ähnliche WordPress-Pfade. Bei einer handgeschriebenen Next.js-Site sehen Sie typischerweise `_next/static/` Pfade.
-
-**In den Browser-DevTools** (F12, Tab "Network") sehen Sie deutlich weniger Requests. Eine WordPress-Site lädt typischerweise 80 bis 150 Ressourcen pro Seitenaufruf, eine handgeschriebene Site 15 bis 40.
-
-**Mit einem Performance-Test** wie pagespeed.web.dev sehen Sie den Unterschied direkt: handgeschriebene Sites kommen meist auf Lighthouse-Scores zwischen 95 und 100, WordPress-Sites zwischen 50 und 85.
-
-## Mein Anspruch
-
-Wenn ich eine Site handcodiere, gilt folgendes:
-
-- Lighthouse-Score von 100 in allen vier Kategorien (Performance, Accessibility, SEO, Best Practices)
-- Initiale Ladezeit unter 1 Sekunde
-- JavaScript-Bundle unter 100 KB
-- Keine externen Tracker, keine Cookies ohne Einwilligung
-- Code-Übergabe in einem Repository – Sie besitzen alles
-
-Das sind nicht Wünsche, sondern Mindestanforderungen.
-
-> [!TIP] Warum das so ist
-> Ich predige Performance, Sicherheit und Code-Qualität. Wenn meine eigene Visitenkarten-Website diese Standards nicht hält, wäre ich unglaubwürdig. Sie können diese Site jederzeit gegen die Werte messen, die ich nenne.
-
-Wenn Sie überlegen, ob handgeschriebener Code für Ihr Projekt der richtige Weg ist, schreiben Sie mir kurz. In 15 Minuten klären wir gemeinsam, ob es für Sie passt – ehrlich, ohne Verkaufsdruck.
+**Der nächste Schritt:** Im [15-Minuten-Erstgespräch](/termin) klären wir, welche Anforderungen Sie haben. Sie benötigen dafür noch kein technisches Konzept. Eine Beauftragung entsteht erst durch die separate Vereinbarung.

@@ -31,7 +31,7 @@ export default function TerminPage() {
           </h1>
           <p className="alcor-intro">
             Kostenlos und unverbindlich kennenlernen. Beschreiben Sie Ihre Idee und
-            wählen Sie einen angebotenen Termin. Ein Auftrag entsteht erst durch eine gesonderte Vereinbarung.
+            fragen Sie einen angebotenen Wunschtermin an. Verbindlich wird er mit der persönlichen Bestätigung. Ein Auftrag entsteht erst durch eine gesonderte Vereinbarung.
           </p>
         </div>
       </section>

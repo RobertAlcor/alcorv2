@@ -77,8 +77,8 @@ export const CASES: Case[] = [
         "description": "Die Startseite lädt ein einziges, eigenes JavaScript. Kein Tag-Manager, kein Baukasten-Framework, keine Plugin-Bibliotheken."
       },
       {
-        "label": "Schriften DSGVO-konform",
-        "description": "Newsreader und Source Sans 3 kommen über Bunny Fonts aus der EU – ohne Übermittlung an Google."
+        "label": "Schriften über Bunny Fonts",
+        "description": "Newsreader und Source Sans 3 werden über Bunny Fonts statt Google Fonts eingebunden. Eine einzelne technische Entscheidung ersetzt keine Datenschutzprüfung des gesamten Auftritts."
       },
       {
         "label": "Sprechende URLs",
@@ -117,7 +117,7 @@ export const CASES: Case[] = [
       }
     ],
     "metaTitle": "Referenz: Praxis-Website Psychotherapie Hrdlicka, Mödling",
-    "metaDescription": "Handgeschriebene Praxis-Website für einen Psychotherapeuten in Mödling: zehn Seiten, strukturierte Daten, keine externen Skripte, DSGVO-konforme Schriften."
+    "metaDescription": "Handgeschriebene Praxis-Website für einen Psychotherapeuten in Mödling: zehn Seiten, strukturierte Daten, klare Leistungsinformationen und direkte Kontaktwege."
   },
   {
     "slug": "umzugsmeister",
@@ -219,7 +219,7 @@ export const CASES: Case[] = [
       "Inhalte neu erstellt mit Fokus auf die drei Kernbehandlungen: Heilmassage, Liebscher & Bracht, Sculptural Facelift",
       "Eigene Buchungslogik mit Verfügbarkeitsprüfung und automatischer E-Mail-Bestätigung",
       "Ruhiges, vertrauensbildendes Design mit klarer Typografie und viel Weißraum",
-      "Barrierefreiheit nach WCAG 2.2 AA – wichtig für Patient:innen mit eingeschränkter Mobilität"
+      "Barrierearme Bedienung als Projektziel: lesbare Inhalte, nachvollziehbare Navigation und zugängliche Kontaktwege"
     ],
     "highlights": [
       {

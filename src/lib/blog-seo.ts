@@ -2,6 +2,8 @@ import type { BlogPost } from './blog'
 
 type SearchCopy = { title: string; description: string }
 const SEARCH_COPY: Record<string, SearchCopy> = {
+  'wordpress-oder-handcodiert-2026': { title: 'WordPress oder individuell entwickeln? | ALCOR', description: 'Website-Technik sachlich vergleichen: Inhaltspflege, Gestaltung, Wartung und Gesamtkosten. Fragen für eine nachvollziehbare Entscheidung.' },
+  'handgeschriebener-code-erklaert': { title: 'Individuelle Website: Technik und Pflege | ALCOR', description: 'Was individuelle Webentwicklung bedeutet und welche Fragen zu Funktionen, Inhaltspflege, Kosten und Übergabe vor dem Auftrag wichtig sind.' },
   'homepage-erstellen-lassen-wien': {
     title: 'Homepage erstellen lassen Wien: Kosten & Ablauf | ALCOR',
     description: 'Homepage in Wien planen: Kosten, Anbieter und Ablauf vergleichen. Mit Checkliste, klaren Website-Paketen und persönlichem Erstgespräch.',

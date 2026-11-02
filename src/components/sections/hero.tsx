@@ -27,7 +27,7 @@ export function Hero() {
             <Link className="alcor-button" href={POSITIONING.applicationHref}>Projekt bewerben <ArrowUpRight size={20} aria-hidden="true" /></Link>
             <Link className="alcor-button alcor-button-outline" href={POSITIONING.callHref}><Clock3 size={20} aria-hidden="true" />15 Minuten kennenlernen</Link>
           </div>
-          <p className="alcor-note">Ausgewählte Projekte, persönlich betreut. Eine kurze Beschreibung Ihrer Idee genügt für den ersten Kontakt.</p>
+          <p className="alcor-note">Eine kurze Beschreibung Ihrer Idee genügt. Ihre Projektanfrage ist kostenlos und unverbindlich – noch kein Auftrag.</p>
           <div className="alcor-hero-footer"><span>ALCOR · Robert Alchimowicz · 1220 Wien</span><Link href="/preise">Pakete & einmalige Preise <ArrowRight size={17} aria-hidden="true" /></Link></div>
         </div>
         <Link href="/referenzen/umzugsmeister" className="alcor-hero-art" aria-label="Projekt Umzugsmeister ansehen">
