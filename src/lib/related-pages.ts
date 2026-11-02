@@ -90,8 +90,8 @@ export const RELATED_FOR = {
     },
     {
       href: '/termin',
-      label: 'Festpreis-Gespräch',
-      description: 'Im Erstgespräch klären wir den genauen Festpreis.',
+      label: 'Projektumfang besprechen',
+      description: 'Ziele und Umfang besprechen. Das konkrete Angebot folgt nach Klärung der Anforderungen.',
     },
   ] as RelatedPage[],
 

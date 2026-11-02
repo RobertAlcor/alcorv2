@@ -47,6 +47,7 @@ export default function KontaktPage() {
         <div className="grid lg:grid-cols-[2fr_1fr] gap-12 lg:gap-16 items-start">
           {/* Form - viel breiter jetzt */}
           <div className="max-w-2xl">
+<div className="mb-8 rounded-lg border border-line p-6"><h2 className="text-xl font-semibold text-paper">Was passiert nach Ihrer Anfrage?</h2><p className="mt-3 text-base leading-relaxed text-paper-mute">Ich prüfe Ihre Nachricht persönlich und melde mich zur Klärung der nächsten Schritte. Umfang und Preis werden separat vereinbart. Mit dem Absenden bestellen Sie noch keine Leistung.</p></div>
             <KontaktForm />
           </div>
 
@@ -112,6 +113,7 @@ export default function KontaktPage() {
                 <br />
                 {SITE.address.district}
               </p>
+              <p className="mt-3 text-sm text-paper-mute">Persönliche Termine bitte vorab vereinbaren.</p>
             </div>
 
             <div className="pt-8 border-t border-line">

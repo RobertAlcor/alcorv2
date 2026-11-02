@@ -109,36 +109,36 @@ export const BEZIRKE: Bezirk[] = [
       'Webdesign Anwalt Wien',
     ],
     h1: 'Webdesign in der Inneren Stadt — für Kanzleien, Berater und Häuser mit Geschichte.',
-    lead: 'Eine Adresse im 1. Bezirk verpflichtet. Ihre Website sollte das auch tun — ohne Plugin-Chaos und ohne Stockfoto-Beliebigkeit.',
+    lead: "Ein klarer Auftritt für Ihr Unternehmen im 1. Bezirk: Leistungen, Ansprechpartner und Kontaktwege verständlich darstellen.",
     localContext:
-      'Der 1. Bezirk ist UNESCO-Weltkulturerbe und gleichzeitig dichtestes Geschäftsviertel Wiens. Hier sitzen Top-Kanzleien, Wirtschaftsprüfer, Privatbanken, Beratungen, Galerien, traditionsreiche Hotels und über 200 Botschaften. Mietpreise zählen zu den höchsten Österreichs — entsprechend hoch ist die Erwartungshaltung der Klientel an jeden Auftritt. Eine Website, die langsam lädt, mobil bricht oder nach Baukasten aussieht, sabotiert in diesem Umfeld jeden Erstkontakt.',
+      "Für Kanzleien, Beratungen, Galerien oder Hotels in der Inneren Stadt zählen nachvollziehbare Informationen: Wer ist zuständig, welche Leistungen werden angeboten und wie lässt sich ein Termin oder ein Gespräch vereinbaren? Die Website sollte diese Fragen beantworten und Standort sowie Anfahrt verständlich zeigen.",
     industriesParagraph:
-      'Typische Klienten im 1. Bezirk sind Rechtsanwaltskanzleien, Notariate, Steuerberater, Vermögensverwalter, Architekturbüros und Boutique-Hotels. Was sie alle brauchen: einen ruhigen, vertrauensbildenden Onlineauftritt mit klarer Hierarchie, schnellen Ladezeiten unter einer Sekunde und mehrsprachiger Option (Deutsch, Englisch — bei Botschaftsumfeld auch Französisch oder Russisch). Genau das liefert handgeschriebener Code: keine WordPress-Plugins, die das Übersetzungssetup zerschießen können, keine Wartungsfenster, keine Sicherheitslücken durch veraltete Themes.',
+      "Der Ansatz eignet sich für Kanzleien, Notariate, Beratungen, Architekturbüros und Hotels, die einen individuell abgestimmten Auftritt benötigen. Gemeinsam planen wir Seitenstruktur, Kontaktwege und bei Bedarf zusätzliche Sprachen. Funktionen, Übersetzungen, Pflege und technische Prüfung werden konkret vereinbart – nicht pauschal durch die Wahl eines Systems ersetzt.",
     painPoints: [
-      'Mehrsprachige WordPress-Sites mit WPML brechen regelmäßig nach Plugin-Updates — peinlich, wenn internationale Mandanten landen.',
-      'Hotelbuchungen verlieren Conversions, wenn die Seite mobil über zwei Sekunden lädt — gerade Spontanbucher klicken weg.',
-      'Kanzlei-Websites mit veralteter Optik wirken anachronistisch — auch wenn die rechtliche Expertise erstklassig ist.',
-      'Cookie-Banner-Fehlkonfigurationen sind im 1. Bezirk besonders riskant: Anwälte und Berater sind selbst DSGVO-Profis und erkennen Mängel sofort.',
+      "Bei mehreren Sprachen müssen Inhalte, Navigation und spätere Aktualisierungen zusammenpassen.",
+      "Eine Buchungs- oder Anfragefunktion sollte auch auf einem Smartphone verständlich bedienbar sein.",
+      "Unklare Zuständigkeiten und veraltete Leistungsbeschreibungen erschweren die Vorbereitung eines Erstgesprächs.",
+      "Formulare und externe Dienste benötigen eine bewusste Planung der Datenerhebung, Zugänge und rechtlichen Informationen.",
     ],
     positioningParagraph:
-      'Ich entwickle Websites, die zur Adresse passen: zurückgenommen, präzise, technisch fehlerfrei. Mehrsprachigkeit ist sauber per Routing gelöst, nicht per Plugin. Schema.org-Markup für ProfessionalService oder LegalService stellt sicher, dass Google Ihre Kanzlei oder Beratung korrekt einordnet. Lokale SEO-Optimierung auf "Anwalt 1010 Wien", "Steuerberater Innere Stadt" oder "Hotel 1. Bezirk Wien" sorgt dafür, dass Sie auch ohne Google-Ads-Budget gefunden werden.',
+      "Ich entwickle einen zu Ihrem Angebot passenden Auftritt mit verständlicher Struktur, nachvollziehbaren Kontaktwegen und technischer Prüfung. Mehrsprachigkeit und besondere Funktionen werden separat geplant. Passende strukturierte Daten können die Inhalte für Suchmaschinen beschreiben; eine bestimmte Platzierung oder Darstellung wird damit nicht zugesagt.",
     faqs: [
       {
         question:
           'Sind handgeschriebene Websites für Kanzleien und Notariate die richtige Wahl?',
         answer:
-          'Ja — sogar besonders. Kanzleien und Notariate sind selbst sensibel für Datensicherheit, DSGVO und Vertraulichkeit. WordPress mit Plugin-Stack widerspricht diesem Anspruch fundamental. Eine handcodierte Site hat keine offenen Plugin-Schnittstellen, keine Login-URLs, die Bots scannen, und keine Update-Pflicht, die Sie oder Ihre IT belastet.',
+          "Das kann sinnvoll sein, wenn Gestaltung und Funktionen gezielt auf die Kanzlei abgestimmt werden sollen. Ob eine individuelle Entwicklung oder ein CMS passt, hängt von Pflegebedarf, Abläufen und Budget ab. Für beide Wege müssen Zuständigkeiten für Aktualisierungen, Zugriffsschutz und den Umgang mit Daten geklärt werden.",
       },
       {
         question:
-          'Können Sie mehrsprachige Websites bauen — Deutsch und Englisch ist im 1. Bezirk Standard?',
+          "Können zusätzliche Sprachen vorgesehen werden?",
         answer:
-          'Ja, Mehrsprachigkeit ist Teil des Standardangebots. Realisiert wird das per Next.js-Routing (z.B. /en/services), nicht per Plugin. Saubere hreflang-Tags, eigenständige Sitemaps pro Sprache, kein Crawling-Chaos. Auf Wunsch auch dreisprachig (z.B. + Französisch oder Russisch fürs Botschaftsumfeld).',
+          "Ja, zusätzliche Sprachversionen können im Business- oder Premium-Projekt vereinbart werden. Wir klären Seitenumfang, Übersetzungen, technische Umsetzung und spätere Pflege. Mehrsprachigkeit ist kein automatischer Bestandteil der Basis-Homepage.",
       },
       {
         question: 'Wie sieht es mit Datenschutz für Mandantendaten aus?',
         answer:
-          'Sämtliche Formulardaten landen verschlüsselt direkt in Ihrer E-Mail oder Ihrem CRM — kein WordPress-Backend speichert sie zwischen, das angreifbar wäre. Bei Bedarf richte ich auch verschlüsselte Mandantenportale ein. Hosting läuft in EU-Rechenzentren, Bunny Fonts statt Google Fonts, vollständig DSGVO-konform.',
+          "Vor der Umsetzung klären wir, welche Angaben wirklich benötigt werden, wo sie verarbeitet werden und wer Zugriff erhält. Technische Schutzmaßnahmen und eingesetzte Dienste werden projektbezogen abgestimmt. Vertrauliche Mandantenunterlagen gehören nicht in ein allgemeines Erstkontaktformular. Eine rechtliche Prüfung wird durch Webentwicklung nicht ersetzt.",
       },
     ],
     nearbyDistricts: ['leopoldstadt', 'landstrasse', 'wieden', 'mariahilf', 'neubau'],
@@ -165,9 +165,9 @@ export const BEZIRKE: Bezirk[] = [
     localContext:
       'Favoriten ist mit über 213.000 Einwohnern der bevölkerungsreichste Wiener Bezirk. Vom revitalisierten Sonnwendviertel rund um den Hauptbahnhof über den lebhaften Reumannplatz bis zu den ruhigeren Wohnvierteln rund um den Laaer Berg deckt der Bezirk eine enorme wirtschaftliche Bandbreite ab. Hier finden sich kleine Gastronomiebetriebe, Friseure, Handwerker, Arzt- und Therapie-Praxen, KFZ-Werkstätten, Steuerberater und zahlreiche inhabergeführte Geschäfte.',
     industriesParagraph:
-      'Typische Klienten in Favoriten sind Familienbetriebe und Soloselbstständige: Friseure und Kosmetikstudios, kleine Restaurants und Cafés, Allgemeinmediziner und Physiotherapeuten, Handwerker (Installateure, Elektriker, Tischler), Fahrschulen und KFZ-Werkstätten. Sie alle teilen ein Problem: Ihre Stammkundschaft kennt sie — aber Neukunden suchen heute zuerst auf Google. Eine Website mit klarer Lokal-SEO-Optimierung auf "Friseur Favoriten", "Allgemeinmediziner 1100 Wien" oder "Installateur Reumannplatz" macht den Unterschied zwischen "voller Terminkalender" und "halbleerem Geschäft".',
+      "Für Friseurbetriebe, Gastronomie, Handwerk oder Praxen in Favoriten kann ein klarer Auftritt die Vorbereitung einer Anfrage erleichtern. Wichtige Informationen sind Leistungen, Öffnungs- beziehungsweise Kontaktzeiten, Anfahrt und der passende nächste Schritt. Lokale Suchbegriffe müssen zum tatsächlichen Angebot passen; ein voller Terminkalender lässt sich daraus nicht versprechen.",
     painPoints: [
-      'Viele Betriebe haben gar keine Website — nur einen Facebook-Eintrag, der bei Google kaum rankt.',
+      "Ein Social-Media-Profil allein bietet nicht immer Raum für alle Leistungsinformationen und Kontaktwege.",
       'Bestehende Sites sind oft uralte HTML-Seiten oder Wix-Baukästen, die mobil unbenutzbar sind.',
       'Google-My-Business-Eintrag fehlt oder ist veraltet — der wichtigste lokale SEO-Hebel verschenkt.',
       'Online-Terminbuchung fehlt — gerade Praxen verlieren so täglich Anfragen außerhalb der Öffnungszeiten.',
@@ -216,33 +216,33 @@ export const BEZIRKE: Bezirk[] = [
     localContext:
       'Döbling gehört zu den wohlhabendsten Wiener Bezirken. Heuriger-Vororte wie Grinzing, Sievering und Nußdorf treffen auf Villenviertel in Hohe Warte und Cottage, dazu kommt das medizinische Cluster rund um die Privatklinik Döbling. Klientel und Patient:innen erwarten hier einen seriösen, ruhigen Auftritt — laut, blinkend oder generisch wirkt sofort fehl am Platz. Gleichzeitig ist die Konkurrenz im Premium-Segment hoch: Eine schwache Website verliert im Vergleich mit etablierten Praxen oder Kanzleien sofort an Glaubwürdigkeit.',
     industriesParagraph:
-      'Typische Klienten in Döbling sind Wahlärzte (Allgemeinmedizin, Internisten, Orthopäden, Zahnärzte), Psychotherapeut:innen, Anwaltskanzleien, Steuerberater, Architekten und Heurige-Betreiber. Wahlärzte und Therapeut:innen brauchen eine Website, die Vertrauen weckt und Online-Terminbuchung integriert. Heurige brauchen eine Site, die Saisonzeiten, Karte und Reservierung sauber abbildet — auch mobil, denn die meisten Reservierungen kommen vom Smartphone unterwegs.',
+      "Eine Praxis, Kanzlei oder ein Gastronomiebetrieb hat unterschiedliche Anforderungen. Für eine Praxis können Leistungsinformationen und ein verständlicher Terminweg sinnvoll sein. Ein Heurigenbetrieb benötigt möglicherweise aktuelle Ausschankzeiten, eine Karte und eine passende Reservierungsmöglichkeit. Diese Abläufe bestimmen die Website, nicht ein festes Standardpaket.",
     painPoints: [
-      'Wahlarzt-Sites laufen oft auf alten WordPress-Themes — die Wartung übernimmt eine Agentur, die Updates aber selten zeitnah einspielt. Sicherheitslücken bleiben.',
-      'Online-Terminbuchung über Drittanbieter (z.B. Doctolib) frisst Marge und führt Patient:innen weg von der eigenen Website.',
-      'Heurigen-Sites zeigen oft nicht klar, wann Ausschank ist — das kostet Spontanbesucher.',
-      'Mehrsprachigkeit (Englisch) fehlt häufig — internationale Patient:innen aus dem Privatklinik-Umfeld werden so verschenkt.',
+      "Bei einer bestehenden Website sollte klar sein, wer eingesetzte Komponenten aktualisiert und Änderungen prüft.",
+      "Für Buchungen sollten eigene Funktionen und externe Dienste anhand von Kosten, Bedienung und Datenverarbeitung verglichen werden.",
+      "Aktuelle Ausschankzeiten und Kontaktwege sollten ohne langes Suchen auffindbar sein.",
+      "Zusätzliche Sprachen sind sinnvoll, wenn sie zur Kundschaft passen und anschließend gepflegt werden können.",
     ],
     positioningParagraph:
-      'Ich entwickle Websites, die zum Anspruch des Bezirks passen: zurückhaltend, präzise im Detail, technisch ohne Schwachstellen. Online-Terminbuchung kann direkt auf der Website laufen — ohne Drittanbieter-Provision. Schema.org-Markup für Physician, Dentist, LegalService oder Restaurant sorgt dafür, dass Google Ihre Praxis oder Ihren Heurigen korrekt einordnet und im Local Pack anzeigt. Lokale SEO-Optimierung auf "Wahlarzt 1190 Wien", "Anwalt Döbling" oder "Heuriger Grinzing" macht Sie im Bezirk auffindbar.',
+      "Ich plane zurückhaltende, gut lesbare Websites mit klaren Leistungsinformationen und Kontaktwegen. Eine Termin- oder Reservierungsfunktion kann nach Vereinbarung hinzukommen. Standortangaben und passende strukturierte Daten unterstützen die technische Einordnung; Rankings und eine Darstellung im Google Local Pack sind keine zugesagten Ergebnisse.",
     faqs: [
       {
         question:
           'Ich habe bereits eine Website über eine größere Agentur — lohnt sich ein Wechsel zu Ihnen?',
         answer:
-          'Das hängt davon ab, was Sie monatlich für Wartung zahlen. Üblich sind in Döbling 80 bis 250 Euro pro Monat für WordPress-Wartungspakete. Wenn Sie das addieren, ergibt sich über drei Jahre schnell ein vier- bis fünfstelliger Betrag. Ein Relaunch zu handgeschriebenem Code amortisiert sich oft in unter zwei Jahren — danach zahlen Sie nichts mehr außer Hosting (€99/Jahr).',
+          "Ein Relaunch sollte anhand der bestehenden Probleme und Ihrer Ziele geprüft werden. Vergleichen Sie Erstellung, Hosting, Lizenzen, Betreuung und spätere Änderungen über denselben Zeitraum. Auch eine individuelle Website kann Pflege und Updates benötigen. Eine pauschale Amortisationsfrist oder ausschließlich Hostingkosten lassen sich ohne konkreten Umfang nicht seriös zusagen.",
       },
       {
         question:
-          'Können Sie Online-Terminbuchung direkt in die Website integrieren — ohne Doctolib oder ähnliche Drittanbieter?',
+          "Kann eine Terminbuchung in die Website integriert werden?",
         answer:
-          'Ja. Ich integriere eine eigene Terminbuchung, die Patient:innen direkt auf Ihrer Website nutzen — kein externer Anbieter, keine monatliche Provision, keine Datenweitergabe an Dritte. Die Termine landen direkt in Ihrem Outlook-, Google- oder iCloud-Kalender. DSGVO-konform, da keine Patientendaten an Drittanbieter wandern.',
+          "Ja, eine Buchungsfunktion kann individuell vereinbart werden. Welche Daten benötigt werden und ob Kalender oder andere Dienste angebunden werden, wird vorab festgelegt. Eine eigene Oberfläche bedeutet nicht automatisch, dass keine externen Dienste beteiligt sind. Laufende Kosten, Zuständigkeiten und Datenschutzanforderungen werden gesondert geklärt.",
       },
       {
         question:
           'Ich betreibe einen Heurigen in Grinzing — was ist für meine Website besonders wichtig?',
         answer:
-          'Drei Dinge: Erstens eine prominente, immer aktuelle Anzeige Ihrer Ausschank-Zeiten — idealerweise mit Schema.org-Markup, damit Google sie direkt im Snippet zeigt. Zweitens eine mobile Reservierungsmöglichkeit, weil die meisten Anfragen unterwegs entstehen. Drittens authentische Bilder Ihres Hauses und Ihrer Karte — keine Stockfotos. Auf Wunsch komme ich als ehemaliger Berufsfotograf mit mobilem Studio zu Ihnen.',
+          "Wichtig sind aktuelle Ausschankzeiten, verständliche Anfahrt, eine gut lesbare Karte und der gewünschte Reservierungsweg. Eigene, geeignete Bilder vermitteln den Betrieb konkret. Welche Inhalte Sie bereitstellen und welche zusätzliche Unterstützung erforderlich ist, besprechen wir vor Projektbeginn.",
       },
     ],
     nearbyDistricts: ['waehring', 'alsergrund', 'brigittenau', 'floridsdorf'],
@@ -268,14 +268,14 @@ export const BEZIRKE: Bezirk[] = [
     h1: 'Webdesign aus der Donaustadt — für die Unternehmen, neben denen ich arbeite.',
     lead: 'Mein Büro ist in der Berresgasse, mitten im 22. Bezirk. Ich kenne die Region — und die Unternehmen, die hier ihre Wurzeln haben.',
     localContext:
-      'Die Donaustadt ist flächenmäßig der größte Wiener Bezirk und gleichzeitig einer der dynamischsten. Vom etablierten Kagran über die UNO-City und das schnell wachsende Aspern bis zu den Gewerbegebieten in Stadlau und Hirschstetten reicht das Spektrum von international tätigen Konzernen bis zum Familienbetrieb mit zwei Mitarbeitern. Aspern Seestadt ist eines der größten Stadtentwicklungsgebiete Europas — hier siedeln sich derzeit massiv neue Unternehmen an, die alle eine Website brauchen.',
+      "Für Betriebe in Kagran, Aspern, Stadlau oder Hirschstetten sollte eine Website das konkrete Angebot und den tatsächlichen Einsatzbereich erklären. Mein Standort ist in der Berresgasse in 1220 Wien. Im Gespräch klären wir, welche Standortinformationen und Kontaktwege für Ihre Kundschaft relevant sind.",
     industriesParagraph:
-      'Typische Klienten in der Donaustadt sind Handwerksbetriebe (Bau, Installation, Elektrik, Tischlerei), Logistik- und Transportunternehmen, Arzt- und Therapie-Praxen, Gastronomie an der Alten Donau und im Donauzentrum-Umfeld, Beratungsunternehmen in Aspern und KMU im Gewerbepark Stadlau. Was sie verbindet: ein hoher Anteil B2B, klare lokale Verwurzelung und der Wunsch, ohne Plugin-Wartung und Marketing-Bullshit auszukommen. Genau das liefere ich — als Nachbar.',
+      "Der Ansatz richtet sich beispielsweise an Handwerksbetriebe, Transport- und Logistikunternehmen, Praxen und Beratungen in der Donaustadt. Im Mittelpunkt stehen verständliche Leistungen, passende Projektbeispiele und direkte Kontaktwege. Ich betreue ausgewählte Projekte persönlich und stimme Umfang sowie technische Betreuung vorab ab.",
     painPoints: [
-      'Viele Handwerksbetriebe haben Websites, die seit zehn Jahren nicht mehr angefasst wurden — keine Mobile-Optimierung, kein SSL, kein Eintrag bei Google My Business.',
-      'B2B-Unternehmen unterschätzen, dass ihre Kunden längst auf Google nach Lieferanten suchen — auch wenn die Beziehung über Empfehlungen läuft.',
-      'Aspern Seestadt-Unternehmen sind oft frisch gegründet — die "schnelle Wix-Website" wird dann zur Bremse, wenn das Geschäft wächst.',
-      'Praxen entlang der U1 (Kagran, Kagraner Platz, Aderklaaer Straße) verlieren Patient:innen, weil Online-Terminbuchung fehlt.',
+      "Eine ältere Website sollte auf mobile Bedienbarkeit, aktuelle Inhalte und funktionierende Kontaktwege geprüft werden.",
+      "Für Geschäftskunden müssen Leistungen, Einsatzgebiet und Voraussetzungen einer Anfrage klar sein.",
+      "Bei einem wachsenden Unternehmen sollte geprüft werden, ob Seitenstruktur und Funktionen noch zum Angebot passen.",
+      "Für Praxen sollte der Weg von der Leistungsinformation zur Kontakt- oder Terminanfrage nachvollziehbar sein.",
     ],
     positioningParagraph:
       'Ich arbeite persönlich an ausgewählten Website-Projekten. Die einfache Basis-Homepage für 599 € umfasst eine Seite mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein Kontaktformular, keine Animationen und keine Erstellung von Rechtstexten. Business und Premium werden individuell vereinbart. Preise sind einmalig und ohne Umsatzsteuer; Hosting und Zusatzleistungen werden separat ausgewiesen. Umfang, Zeitplan, 60 % Anzahlung, 40 % nach Abnahme und bis zu fünf Korrekturrunden werden schriftlich festgelegt.',
@@ -284,18 +284,18 @@ export const BEZIRKE: Bezirk[] = [
         question:
           'Sie sind selbst in der Donaustadt — kann ich vorbeikommen oder Sie zu mir kommen?',
         answer:
-          'Beides. Mein Büro ist in der Berresgasse 11, im 22. Bezirk. Persönliche Termine vor Ort bei Ihnen mache ich kostenlos im gesamten Bezirk und im benachbarten Floridsdorf. Auch während der Umsetzung können wir uns jederzeit treffen, falls etwas am Live-Stand zu besprechen ist.',
+          "Mein Standort ist in der Berresgasse in 1220 Wien. Persönliche Gespräche werden vorab vereinbart. Ob ein Termin telefonisch, per Video oder vor Ort sinnvoll ist, stimmen wir gemeinsam ab; Verfügbarkeit und gegebenenfalls Aufwand werden dabei geklärt.",
       },
       {
         question:
           'Mein Unternehmen sitzt in Aspern Seestadt — gibt es etwas Besonderes zu beachten?',
         answer:
-          'Aspern ist ein Gewerbestandort im starken Wachstum. Was hier oft fehlt: lokale SEO-Optimierung auf "Aspern" als Suchbegriff. Viele Unternehmen optimieren auf "Wien" und gehen im Gesamtmarkt unter. Wer "Beratung Aspern Seestadt" oder "Café Aspern" optimiert, hat oft konkurrenzfreie Top-Rankings bei hoher Kaufintention. Genau dafür baue ich Ihre Seite.',
+          "Verwenden Sie den tatsächlichen Standort und beschreiben Sie Ihr Einzugsgebiet dort, wo es für Kunden hilfreich ist. Informationen zu Leistungen, Erreichbarkeit und Anfahrt müssen zur Praxis passen. Lokale Suchbegriffe werden anhand des Angebots geprüft; konkurrenzfreie Rankings oder bestimmte Platzierungen werden nicht versprochen.",
       },
       {
         question: 'Bauen Sie auch komplexere B2B-Sites mit Kundenportal oder CRM-Anbindung?',
         answer:
-          'Ja. Ich habe für eine Reinigungsfirma im 22. Bezirk eine komplette Plattform mit CRM, Personalplanung, Tablet-PWA und Mitarbeiter-Check-in entwickelt — siehe Referenz "Büroreinigung Wien". Solche Projekte gehen über die einfache Basis-Homepage hinaus und werden individuell kalkuliert, mit Festpreis vor Projektstart.',
+          "Individuelle Anwendungen, Kundenportale oder Anbindungen können nach Prüfung des Umfangs vereinbart werden. Als Einblick finden Sie im Portfolio TAKT, ein eigenes Produkt für Reinigungsbetriebe mit Planung und Zeiterfassung. Es ist als eigenes Produkt gekennzeichnet, nicht als behaupteter Kundenauftrag aus dem Bezirk.",
       },
     ],
     nearbyDistricts: ['floridsdorf', 'leopoldstadt', 'landstrasse'],
@@ -321,11 +321,11 @@ export const BEZIRKE: Bezirk[] = [
     localContext:
       'Liesing ist Wiens südlichster Bezirk und vereint mehrere Welten: das alte Ortszentrum in Mauer mit Heurigen-Tradition, die lebhafte Geschäftsstraße in Atzgersdorf, die großen Industriegebiete in Inzersdorf, Familienunternehmen in Rodaun und Kalksburg sowie Wohnviertel rund um Erlaa und Siebenhirten. 100.000 Einwohner und ein hoher Anteil an Klein- und Mittelbetrieben prägen den Bezirk.',
     industriesParagraph:
-      'Typische Klienten in Liesing sind produzierende Betriebe und Handel im Inzersdorfer Industriegebiet, Handwerksbetriebe und Dienstleister verteilt über alle Bezirksteile, Heurige und Gastronomie in Mauer und Rodaun, Praxen und Einzelhandel an der U6-Achse Siebenhirten/Alterlaa.',
+      "Für produzierende Unternehmen, Handel, Handwerk, Gastronomie und Praxen in Liesing sind unterschiedliche Informationen wichtig. Ein B2B-Auftritt kann technische Leistungen und Anfragevoraussetzungen erklären; bei einem lokalen Dienstleister stehen Angebot, Einsatzgebiet und Kontakt oft im Vordergrund.",
     painPoints: [
-      'Industriebetriebe in Inzersdorf haben oft veraltete oder gar keine Websites — B2B-Anfragen kommen heute aber zuerst über Google.',
+      "Bei B2B-Angeboten sollten Leistungen und Voraussetzungen für eine konkrete Anfrage verständlich beschrieben sein.",
       'Lokale Geschäfte in Atzgersdorf und Mauer optimieren ihre Sites kaum auf Bezirks-Suchanfragen — die Konkurrenz aus dem Zentrum hat dadurch leichtes Spiel.',
-      'Heurige in Mauer haben oft schöne Visitenkarten-Sites, aber keine SEO — Spontanbesucher landen daher beim Mitbewerber.',
+      "Für Gastronomiebetriebe helfen aktuelle Zeiten, Anfahrt und ein erreichbarer Kontakt- oder Reservierungsweg.",
     ],
     positioningParagraph:
       'Für Betriebe in Liesing baue ich Websites, die auf die lokale Suche im 23. Bezirk ausgerichtet sind: mit den Ortsteilen, in denen Sie tatsächlich arbeiten — von Atzgersdorf, Erlaa und Inzersdorf über Mauer, Rodaun und Kalksburg bis Siebenhirten — sauber ausgezeichneten Standortdaten und Inhalten, die zu den Suchanfragen Ihrer Kundschaft passen. Handgeschrieben, ohne WordPress, mit Festpreis und einem einzigen Ansprechpartner.',
