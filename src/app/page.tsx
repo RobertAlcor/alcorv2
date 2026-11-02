@@ -11,6 +11,6 @@ import { FaqSection } from '@/components/sections/faq-accordion'
 import { CtaBand } from '@/components/sections/cta-band'
 import { PostCard } from '@/components/blog/post-card'
 import { getAllPosts } from '@/lib/blog'
-import { pageMetadata } from '@/lib/seo-metadata'
-export const metadata=pageMetadata({title:'Webdesign Wien | Individuelle Websites von ALCOR',description:'Webdesign aus Wien für ausgewählte Unternehmen. Eigenständige Gestaltung, persönliche Entwicklung und technische SEO. Projekt bei ALCOR unverbindlich vorstellen.',path:'/'})
+import { PAGE_META } from '@/lib/seo-metadata'
+export const metadata = PAGE_META.home
 export default async function HomePage(){const posts=(await getAllPosts()).slice(0,3);return <><Hero/><SelectedProjects/><BentoGrid/><WebsiteServicesSection/><SelectionSection/><CtaBand/><ProcessSection/><section className="alcor-surface"><div className="container-fluid alcor-section"><div className="alcor-section-head"><div><p className="alcor-eyebrow">Drei Ausgangspunkte</p><h2>Einfach starten.<br />Oder größer denken.</h2></div><p>599 € sind die einfache Basis-Homepage — nicht das individuelle Komplettpaket. Welcher Umfang zu Ihnen passt, klären wir persönlich.</p></div><PricingCards/></div></section>{posts.length>0&&<section className="container-fluid alcor-section"><div className="alcor-section-head"><div><p className="alcor-eyebrow">ALCOR Journal</p><h2>Gedanken für Ihren<br />nächsten Auftritt.</h2></div><Link href="/blog" className="alcor-text-link">Alle Beiträge <ArrowRight aria-hidden="true" size={20}/></Link></div><div className="alcor-journal-grid">{posts.map(p=><PostCard post={p} key={p.slug}/>)}</div></section>}<FaqSection/><CtaBand title="Ihr Projekt verdient ein persönliches Gespräch."/></>}
