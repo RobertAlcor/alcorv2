@@ -10,7 +10,7 @@ export function organizationSchema() {
     description: SITE.tagline,
     url: SITE.url,
     logo: `${SITE.url}/logo.svg`,
-    image: `${SITE.url}/og-default.jpg`,
+    image: `${SITE.url}/opengraph-image`,
     telephone: SITE.contact.phone,
     email: SITE.contact.email,
     address: {
