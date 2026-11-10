@@ -78,14 +78,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: path === '' ? 1 : 0.7,
     })),
-    ...CASES.map((project) => ({
-      url: `${SITE.url}${project.url}`,
-      lastModified: PROJECT_LAST_MODIFIED[project.slug]
-        ? new Date(PROJECT_LAST_MODIFIED[project.slug])
-        : undefined,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    })),
+    ...CASES.map((project) => {
+      const projectModified = PROJECT_LAST_MODIFIED[project.slug]
+      return {
+        url: `${SITE.url}${project.url}`,
+        lastModified: projectModified ? new Date(projectModified) : undefined,
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      }
+    }),
     ...posts.map((post) => ({
       url: `${SITE.url}/blog/${post.slug}`,
       lastModified: new Date(post.dateModified || post.date),
