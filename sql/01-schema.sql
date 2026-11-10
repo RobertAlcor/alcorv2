@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS leads (
   email       text NOT NULL,
   phone       text,
   company     text,
-  topic       text NOT NULL CHECK (topic IN ('new-website', 'relaunch', 'seo', 'other')),
+  topic       text NOT NULL CHECK (topic IN ('general', 'pricing', 'new-website', 'relaunch', 'seo', 'other')),
   message     text NOT NULL,
   source      text,
   created_at  timestamptz NOT NULL DEFAULT now()
