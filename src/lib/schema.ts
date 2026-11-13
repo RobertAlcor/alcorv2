@@ -1,6 +1,14 @@
 import { SITE } from './site'
 import { COMPANY_PROFILE } from './company-profile'
 
+function minimumPriceSpecification(price: number) {
+  return {
+    '@type': 'PriceSpecification',
+    minPrice: price,
+    priceCurrency: SITE.pricing.currency,
+  }
+}
+
 export function organizationSchema() {
   return {
     '@context': 'https://schema.org',
@@ -47,10 +55,14 @@ export function organizationSchema() {
     },
     foundingDate: String(SITE.founder.foundedIn),
     areaServed: [
-      { '@type': 'City', name: 'Wien', '@id': 'https://www.wikidata.org/wiki/Q1741' },
-      ...SITE.viennaDistricts.map((d) => ({
+      {
+        '@type': 'City',
+        name: 'Wien',
+        '@id': 'https://www.wikidata.org/wiki/Q1741',
+      },
+      ...SITE.viennaDistricts.map((district) => ({
         '@type': 'AdministrativeArea',
-        name: `${d.plz} Wien — ${d.name}`,
+        name: `${district.plz} Wien — ${district.name}`,
       })),
     ],
     serviceArea: {
@@ -62,7 +74,7 @@ export function organizationSchema() {
       },
       geoRadius: '25000',
     },
-    priceRange: `€${SITE.pricing.starter}+`,
+    priceRange: `€${SITE.pricing.starter}–€${SITE.pricing.customFrom}+`,
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
@@ -93,17 +105,63 @@ export function organizationSchema() {
       itemListElement: [
         {
           '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            '@id': `${SITE.url}/leistungen/website-erstellung#basis-homepage`,
-            name: 'Basis-Homepage auf einer Seite',
-            description: 'Eine einfache Homepage mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein Kontaktformular, keine Animationen, kein individuelles Komplettdesign und keine Erstellung von Rechtstexten. Domain, Hosting und Betreuung separat.',
-            url: `${SITE.url}/leistungen/website-erstellung`,
-          },
           name: 'Basis-Homepage: einmaliger Projektpreis',
           url: `${SITE.url}/preise`,
           price: SITE.pricing.starter,
           priceCurrency: SITE.pricing.currency,
+          itemOffered: {
+            '@type': 'Service',
+            '@id': `${SITE.url}/leistungen/website-erstellung#basis-homepage`,
+            name: 'Basis-Homepage auf einer Seite',
+            description:
+              'Eine einfache Homepage mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein Kontaktformular, keine Animationen, kein individuelles Komplettdesign und keine Erstellung von Rechtstexten. Domain, Hosting und Betreuung separat.',
+            url: `${SITE.url}/leistungen/website-erstellung`,
+          },
+        },
+        {
+          '@type': 'Offer',
+          name: 'Business-Website ab 1.490 €',
+          url: `${SITE.url}/preise`,
+          priceSpecification: minimumPriceSpecification(
+            SITE.pricing.businessFrom,
+          ),
+          itemOffered: {
+            '@type': 'Service',
+            '@id': `${SITE.url}/leistungen/website-erstellung#business-website`,
+            name: 'Business-Website',
+            description:
+              'Individuelles Design, bis zu fünf vereinbarte Seiten, Kontaktformular, technische SEO, Local-SEO-Grundlagen und strukturierte Daten.',
+            url: `${SITE.url}/leistungen/website-erstellung`,
+          },
+        },
+        {
+          '@type': 'Offer',
+          name: 'Premium-Website ab 2.490 €',
+          url: `${SITE.url}/preise`,
+          priceSpecification: minimumPriceSpecification(
+            SITE.pricing.premiumFrom,
+          ),
+          itemOffered: {
+            '@type': 'Service',
+            '@id': `${SITE.url}/leistungen/website-erstellung#premium-website`,
+            name: 'Premium-Website',
+            description:
+              'Strategie, bis zu zehn vereinbarte Seiten, vertiefte technische SEO und GEO sowie ein erweiterter Funktionsbereich nach Vereinbarung.',
+            url: `${SITE.url}/leistungen/website-erstellung`,
+          },
+        },
+        {
+          '@type': 'Offer',
+          name: 'Individuelle Web-App ab 3.900 €',
+          url: `${SITE.url}/preise`,
+          priceSpecification: minimumPriceSpecification(SITE.pricing.customFrom),
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Individuelle Web-App und Sonderentwicklung',
+            description:
+              'Eigene Abläufe, Portale oder Schnittstellen nach technischer Prüfung und schriftlich vereinbartem Umfang.',
+            url: `${SITE.url}/leistungen/website-erstellung`,
+          },
         },
         {
           '@type': 'Offer',
@@ -152,7 +210,13 @@ export function personSchema() {
     name: SITE.founder.name,
     jobTitle: SITE.founder.role,
     worksFor: { '@id': `${SITE.url}/#organization` },
-    knowsAbout: ['Webentwicklung', 'SEO', 'Next.js', 'TypeScript', 'GEO Optimization'],
+    knowsAbout: [
+      'Webentwicklung',
+      'SEO',
+      'Next.js',
+      'TypeScript',
+      'GEO Optimization',
+    ],
     address: {
       '@type': 'PostalAddress',
       addressLocality: SITE.address.city,
@@ -165,9 +229,9 @@ export function breadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, idx) => ({
+    itemListElement: items.map((item, index) => ({
       '@type': 'ListItem',
-      position: idx + 1,
+      position: index + 1,
       name: item.name,
       item: item.url,
     })),
@@ -206,16 +270,16 @@ export function serviceSchema(params: {
     provider: { '@id': `${SITE.url}/#organization` },
     areaServed: [
       { '@type': 'City', name: 'Wien' },
-      ...SITE.viennaDistricts.map((d) => ({
+      ...SITE.viennaDistricts.map((district) => ({
         '@type': 'AdministrativeArea',
-        name: `${d.plz} ${d.name}`,
+        name: `${district.plz} ${district.name}`,
       })),
     ],
     ...(params.price && {
       offers: {
         '@type': 'Offer',
         price: params.price,
-        priceCurrency: 'EUR',
+        priceCurrency: SITE.pricing.currency,
         availability: 'https://schema.org/InStock',
         priceValidUntil: `${new Date().getFullYear() + 1}-12-31`,
       },
