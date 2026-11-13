@@ -6,5 +6,105 @@ import { CtaBand } from '@/components/sections/cta-band'
 import { ProcessSection } from '@/components/sections/process-section'
 import { PriceTransparency } from '@/components/sections/price-transparency'
 import { PAGE_META } from '@/lib/seo-metadata'
+
 export const metadata = PAGE_META.preise
-export default function PreisePage(){return <><Breadcrumbs items={[{label:'Start',href:'/'},{label:'Pakete & Preise',href:'/preise'}]}/><section className="container-fluid alcor-section"><div className="alcor-section-head"><div><p className="alcor-eyebrow">Pakete & einmalige Preise</p><h1 className="alcor-page-title">Webdesign Preise in Wien.<br /><span className="text-signal-2">Ein klarer Leistungsumfang.</span></h1></div><p>Die Basis ist bewusst einfach. Business bietet mehr Gestaltung und Funktionen. Premium ist die umfassende Lösung innerhalb Ihres individuell vereinbarten Projekts.</p></div><PricingCards /><p className="mt-8 max-w-3xl text-paper-mute">Welche Leistungen sind in welchem Website-Paket enthalten? <Link href="/leistungen/website-erstellung" className="alcor-text-link">Website-Erstellung und Leistungsumfang im Detail ansehen</Link>. Zur individuellen Planung können Sie ein <Link href="/termin" className="alcor-text-link">kostenloses Erstgespräch vereinbaren</Link>.</p></section><section className="alcor-surface"><div className="container-fluid alcor-section alcor-selection"><div className="alcor-selection-image"><Image src="/media/visual/strategy" alt="Illustration einer strukturierten Projektplanung" fill sizes="(min-width:1000px) 45vw,95vw" unoptimized/></div><div><p className="alcor-eyebrow">Verbindlicher Rahmen</p><h2>Vor dem ersten Entwurf<br />steht die Vereinbarung.</h2><p className="alcor-intro">Zwischen Ihnen und ALCOR wird ein Vertrag geschlossen. Darin stehen die abgesprochenen Leistungen, der Zeitrahmen, Mitwirkungspflichten, Abnahme und die Anzahl der Korrekturrunden.</p><ul className="alcor-contract-list"><li><strong>60 %</strong><span>Anzahlung sofort bei Auftragserteilung.</span></li><li><strong>40 %</strong><span>Restzahlung nach erfolgreicher Abnahme.</span></li><li><strong>Bis 5×</strong><span>Vereinbarte Korrekturrunden innerhalb des freigegebenen Konzepts. Kein vollständiges Redesign.</span></li></ul><p className="alcor-note">Die Live-Vorschau ermöglicht laufende Abstimmung. Ein geänderter Leistungsumfang wird vor zusätzlicher Arbeit separat vereinbart.</p></div></div></section><ProcessSection/><PriceTransparency/><CtaBand/></>}
+
+export default function PreisePage() {
+  return (
+    <>
+      <Breadcrumbs
+        items={[
+          { label: 'Start', href: '/' },
+          { label: 'Pakete & Preise', href: '/preise' },
+        ]}
+      />
+      <section className="container-fluid alcor-section">
+        <div className="alcor-section-head">
+          <div>
+            <p className="alcor-eyebrow">Pakete & einmalige Preise</p>
+            <h1 className="alcor-page-title">
+              Webdesign Preise in Wien.
+              <br />
+              <span className="text-signal-2">Transparent vor dem Gespräch.</span>
+            </h1>
+          </div>
+          <p>
+            Basis 599 € fix, Business ab 1.490 € und Premium ab 2.490 €.
+            Individuelle Web-Apps und Sonderentwicklungen beginnen ab 3.900 €.
+            Der endgültige Umfang steht vor Projektbeginn schriftlich fest.
+          </p>
+        </div>
+        <PricingCards />
+        <p className="mt-8 max-w-3xl text-paper-mute">
+          Welche Leistungen sind in welchem Website-Paket enthalten?{' '}
+          <Link
+            href="/leistungen/website-erstellung"
+            className="alcor-text-link"
+          >
+            Website-Erstellung und Leistungsumfang im Detail ansehen
+          </Link>
+          . Zur individuellen Planung können Sie ein{' '}
+          <Link href="/termin" className="alcor-text-link">
+            kostenloses Erstgespräch vereinbaren
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section className="alcor-surface">
+        <div className="container-fluid alcor-section alcor-selection">
+          <div className="alcor-selection-image">
+            <Image
+              src="/media/visual/strategy"
+              alt="Illustration einer strukturierten Projektplanung"
+              fill
+              sizes="(min-width:1000px) 45vw,95vw"
+              unoptimized
+            />
+          </div>
+          <div>
+            <p className="alcor-eyebrow">Zahlung in zwei Schritten</p>
+            <h2>
+              Vor dem ersten Entwurf
+              <br />
+              steht die Vereinbarung.
+            </h2>
+            <p className="alcor-intro">
+              Zwischen Ihnen und ALCOR wird ein Vertrag geschlossen. Darin
+              stehen Leistungen, Zeitrahmen, Mitwirkungspflichten, Abnahme und
+              die Anzahl der Korrekturrunden.
+            </p>
+            <ul className="alcor-contract-list">
+              <li>
+                <strong>60 %</strong>
+                <span>Anzahlung bei Auftragserteilung.</span>
+              </li>
+              <li>
+                <strong>40 %</strong>
+                <span>Restzahlung nach erfolgreicher Abnahme.</span>
+              </li>
+              <li>
+                <strong>Bis 5×</strong>
+                <span>
+                  Vereinbarte Korrekturrunden innerhalb des freigegebenen
+                  Konzepts. Kein vollständiges Redesign.
+                </span>
+              </li>
+            </ul>
+            <p className="alcor-note">
+              Die Live-Vorschau ermöglicht laufende Abstimmung. Ein geänderter
+              Leistungsumfang wird vor zusätzlicher Arbeit separat vereinbart.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <ProcessSection />
+      <PriceTransparency />
+      <CtaBand
+        title="Welcher Umfang passt zu Ihrem Unternehmen?"
+        secondaryLabel="Projekt unverbindlich anfragen"
+      />
+    </>
+  )
+}

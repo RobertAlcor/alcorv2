@@ -12,5 +12,77 @@ import { CtaBand } from '@/components/sections/cta-band'
 import { PostCard } from '@/components/blog/post-card'
 import { getAllPosts } from '@/lib/blog'
 import { PAGE_META } from '@/lib/seo-metadata'
+
 export const metadata = PAGE_META.home
-export default async function HomePage(){const allPosts=await getAllPosts();const guideSlugs=['website-kosten-wien-2026','homepage-erstellen-lassen-wien','webdesigner-wien-auswaehlen'];const posts=guideSlugs.flatMap(slug=>{const post=allPosts.find(item=>item.slug===slug);return post?[post]:[]});return <><Hero/><SelectedProjects/><BentoGrid/><WebsiteServicesSection/><SelectionSection/><CtaBand/><ProcessSection/><section className="alcor-surface"><div className="container-fluid alcor-section"><div className="alcor-section-head"><div><p className="alcor-eyebrow">Drei Ausgangspunkte</p><h2>Einfach starten.<br />Oder größer denken.</h2></div><p>Eine einfache Präsenz oder ein individueller Unternehmensauftritt? Vergleichen Sie die Leistungen. Die Basis-Homepage kostet 599 € einmalig; Business und Premium planen wir nach Ihrem Bedarf.</p></div><PricingCards/></div></section>{posts.length>0&&<section className="container-fluid alcor-section"><div className="alcor-section-head"><div><p className="alcor-eyebrow">Vor der Entscheidung</p><h2>Was kostet das?<br />Und worauf kommt es an?</h2></div><Link href="/blog" className="alcor-text-link">Alle Beiträge <ArrowRight aria-hidden="true" size={20}/></Link></div><div className="alcor-journal-grid">{posts.map(p=><PostCard post={p} key={p.slug}/>)}</div></section>}<FaqSection/><CtaBand title="Was soll Ihre Website für Sie verändern?"/></>}
+
+export default async function HomePage() {
+  const allPosts = await getAllPosts()
+  const guideSlugs = [
+    'website-kosten-wien-2026',
+    'homepage-erstellen-lassen-wien',
+    'webdesigner-wien-auswaehlen',
+  ]
+  const posts = guideSlugs.flatMap((slug) => {
+    const post = allPosts.find((item) => item.slug === slug)
+    return post ? [post] : []
+  })
+
+  return (
+    <>
+      <Hero />
+      <SelectedProjects />
+      <BentoGrid />
+      <WebsiteServicesSection />
+      <SelectionSection />
+      <CtaBand />
+      <ProcessSection />
+
+      <section className="alcor-surface">
+        <div className="container-fluid alcor-section">
+          <div className="alcor-section-head">
+            <div>
+              <p className="alcor-eyebrow">Drei klare Pakete</p>
+              <h2>
+                Einfach starten.
+                <br />
+                Oder größer denken.
+              </h2>
+            </div>
+            <p>
+              Basis kostet 599 € fix, Business beginnt bei 1.490 € und Premium
+              bei 2.490 €. Leistungen und Zusatzkosten werden vor Projektbeginn
+              schriftlich festgehalten.
+            </p>
+          </div>
+          <PricingCards />
+        </div>
+      </section>
+
+      {posts.length > 0 && (
+        <section className="container-fluid alcor-section">
+          <div className="alcor-section-head">
+            <div>
+              <p className="alcor-eyebrow">Vor der Entscheidung</p>
+              <h2>
+                Was kostet das?
+                <br />
+                Und worauf kommt es an?
+              </h2>
+            </div>
+            <Link href="/blog" className="alcor-text-link">
+              Alle Beiträge <ArrowRight aria-hidden="true" size={20} />
+            </Link>
+          </div>
+          <div className="alcor-journal-grid">
+            {posts.map((post) => (
+              <PostCard post={post} key={post.slug} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      <FaqSection />
+      <CtaBand title="Was soll Ihre Website für Sie verändern?" />
+    </>
+  )
+}
