@@ -124,6 +124,8 @@ export default function KontaktPage() {
                 Montag – Freitag
                 <br />
                 9 bis 18 Uhr
+                <br />
+                Samstag & Sonntag geschlossen
               </p>
             </div>
           </aside>
