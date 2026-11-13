@@ -14,5 +14,11 @@ export function SelectedProjects() {
    <Link href={`/referenzen/${p.slug}`} className="alcor-project-image" aria-label={`${p.name}: Projekt ansehen`}><Image src={p.image} alt={`Website-Ansicht von ${p.name}`} fill sizes="(min-width: 1500px) 24vw, (min-width: 700px) 48vw, 95vw" className="object-cover object-top" /><span className="alcor-project-number">0{i+1}</span><span className="alcor-circle"><ArrowUpRight aria-hidden="true" /></span></Link>
    <p className="alcor-project-type">{p.type}</p><h3><Link href={`/referenzen/${p.slug}`}>{p.name}</Link></h3><p>{p.note}</p>
   </article>)}</div>
+  <nav aria-label="Weitere Webdesign-Referenzen" className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-line pt-6">
+   <span className="text-paper-mute">Weitere Projektbeispiele:</span>
+   <Link href="/referenzen/massagewelt-wien" className="alcor-text-link">Massagewelt Wien <ArrowUpRight size={17} aria-hidden="true" /></Link>
+   <Link href="/referenzen/cleankos" className="alcor-text-link">CleanKos <ArrowUpRight size={17} aria-hidden="true" /></Link>
+   <Link href="/referenzen/etikettendruck24" className="alcor-text-link">Etikettendruck24 <ArrowUpRight size={17} aria-hidden="true" /></Link>
+  </nav>
  </section>
 }
