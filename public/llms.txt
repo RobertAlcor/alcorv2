@@ -17,14 +17,16 @@ Dieses optionale Textverzeichnis verweist auf die öffentlichen Originalseiten. 
 - [Technische SEO](https://webdesign-alcor.at/leistungen/seo-wien).
 - [Website-Betreuung](https://webdesign-alcor.at/website-betreuung).
 - [Pakete und Preise](https://webdesign-alcor.at/preise).
-- [Projektbewerbung](https://webdesign-alcor.at/bewerbung): unverbindlich, keine automatische Beauftragung.
+- [Projektanfrage](https://webdesign-alcor.at/bewerbung): kostenlos und unverbindlich, keine automatische Beauftragung.
 - [Kostenloses 15-Minuten-Erstgespräch](https://webdesign-alcor.at/termin).
 
 Basis: 599 € einmalig für eine einfache Homepage auf einer Seite mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein individuelles Komplettdesign, kein Kontaktformular, keine Animationen, keine Erstellung von Rechtstexten. Rechtlich erforderliche Inhalte stellt der Auftraggeber bereit.
 
-Business: individuelles Design, vereinbarte Unterseiten und Kontaktformular. Premium: umfassendes Projekt mit schriftlich vereinbarten Zusatzfunktionen. Preise und Umfang jeweils nach Angebot, keine unbegrenzten Leistungen.
+Business: ab 1.490 € für individuelles Design, bis zu fünf vereinbarte Seiten, Kontaktformular, technische SEO, Local-SEO-Grundlagen und strukturierte Daten.
 
-Keine Umsatzsteuer aufgrund der Kleinunternehmerregelung. Domain, Hosting, Betreuung und Zusatzarbeiten werden separat ausgewiesen. 60 % Anzahlung bei Auftragserteilung; 40 % nach erfolgreicher Abnahme. Zeitplan und bis zu fünf vereinbarte Korrekturrunden werden vertraglich festgelegt. Keine pauschale Lieferfrist oder garantierte Suchmaschinenplatzierung.
+Premium: ab 2.490 € für Strategie, bis zu zehn vereinbarte Seiten, vertiefte technische SEO/GEO und einen erweiterten Funktionsbereich nach Vereinbarung. Individuelle Web-Apps und Sonderentwicklungen beginnen ab 3.900 €. Es gibt keine unbegrenzten Leistungen.
+
+Keine Umsatzsteuer aufgrund der Kleinunternehmerregelung. Domain, Hosting, externe Dienste, Betreuung und Zusatzarbeiten werden separat ausgewiesen. 60 % Anzahlung bei Auftragserteilung; 40 % nach erfolgreicher Abnahme. Zeitplan und bis zu fünf vereinbarte Korrekturrunden werden vertraglich festgelegt. Keine pauschale Lieferfrist oder garantierte Suchmaschinenplatzierung.
 
 ## Kundenprojekte
 - [Psychotherapie Hrdlicka](https://webdesign-alcor.at/referenzen/psychotherapie-hrdlicka): Praxisinformationen und gegliederte Angebote.

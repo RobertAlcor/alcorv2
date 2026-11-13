@@ -1,4 +1,82 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { SITE,NAV } from '@/lib/site'
-export function Footer(){return <footer className="mt-20 border-t border-line bg-deep"><div className="container-fluid grid gap-12 py-14 md:grid-cols-3"><div><Link href="/" className="alcor-brand" aria-label="ALCOR Startseite"><span><b>A</b>LCOR</span><small>Independent Web Development</small></Link><p className="mt-6 max-w-md text-base leading-relaxed text-paper-mute">Persönliche Webentwicklung aus Wien. Ausgewählte Projekte, eigenständige Websites und direkte Zusammenarbeit.</p><Link href="/bewerbung" className="alcor-text-link mt-4">Projekt bewerben<ArrowUpRight size={18} aria-hidden="true"/></Link></div><nav aria-label="Navigation im Seitenfuß"><h2 className="mb-5 text-base font-semibold">Entdecken</h2><div className="grid grid-cols-2 gap-x-6 gap-y-1">{NAV.main.map(item=><Link key={item.href} href={item.href} className="flex min-h-[44px] items-center text-base text-paper-mute hover:text-signal-2">{item.label}</Link>)}</div></nav><div><h2 className="mb-5 text-base font-semibold">Direkter Kontakt</h2><a href={`mailto:${SITE.contact.email}`} className="block min-h-[44px] text-base text-paper-mute hover:text-signal-2">{SITE.contact.email}</a><a href={`tel:${SITE.contact.phoneRaw}`} className="block min-h-[44px] text-base text-paper-mute hover:text-signal-2">{SITE.contact.phoneFormatted}</a><p className="mt-3 text-sm text-paper-mute">{SITE.address.street}<br/>{SITE.address.postalCode} {SITE.address.city}</p></div></div><div className="container-fluid flex flex-wrap items-center justify-between gap-5 border-t border-line py-7 text-sm text-paper-mute"><p>© {new Date().getFullYear()} {SITE.name}. Robert Alchimowicz.</p><nav aria-label="Rechtliche Informationen" className="flex gap-6">{NAV.legal.map(item=><Link key={item.href} href={item.href} className="py-2 hover:text-signal-2">{item.label}</Link>)}</nav></div></footer>}
+import { SITE, NAV } from '@/lib/site'
+
+export function Footer() {
+  return (
+    <footer className="mt-20 border-t border-line bg-deep">
+      <div className="container-fluid grid gap-12 py-14 md:grid-cols-3">
+        <div>
+          <Link
+            href="/"
+            className="alcor-brand"
+            aria-label="ALCOR Startseite"
+          >
+            <span>
+              <b>A</b>LCOR
+            </span>
+            <small>Independent Web Development</small>
+          </Link>
+          <p className="mt-6 max-w-md text-base leading-relaxed text-paper-mute">
+            Persönliche Webentwicklung aus Wien. Ausgewählte Projekte,
+            eigenständige Websites und direkte Zusammenarbeit.
+          </p>
+          <Link href="/bewerbung" className="alcor-text-link mt-4">
+            Projekt anfragen
+            <ArrowUpRight size={18} aria-hidden="true" />
+          </Link>
+        </div>
+        <nav aria-label="Navigation im Seitenfuß">
+          <h2 className="mb-5 text-base font-semibold">Entdecken</h2>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-1">
+            {NAV.main.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="flex min-h-[44px] items-center text-base text-paper-mute hover:text-signal-2"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
+        <div>
+          <h2 className="mb-5 text-base font-semibold">Direkter Kontakt</h2>
+          <a
+            href={`mailto:${SITE.contact.email}`}
+            className="block min-h-[44px] text-base text-paper-mute hover:text-signal-2"
+          >
+            {SITE.contact.email}
+          </a>
+          <a
+            href={`tel:${SITE.contact.phoneRaw}`}
+            className="block min-h-[44px] text-base text-paper-mute hover:text-signal-2"
+          >
+            {SITE.contact.phoneFormatted}
+          </a>
+          <p className="mt-3 text-sm text-paper-mute">
+            {SITE.address.street}
+            <br />
+            {SITE.address.postalCode} {SITE.address.city}
+          </p>
+        </div>
+      </div>
+      <div className="container-fluid flex flex-wrap items-center justify-between gap-5 border-t border-line py-7 text-sm text-paper-mute">
+        <p>
+          © {new Date().getFullYear()} {SITE.name}. Robert Alchimowicz.
+        </p>
+        <nav aria-label="Rechtliche Informationen" className="flex gap-6">
+          {NAV.legal.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="py-2 hover:text-signal-2"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </footer>
+  )
+}
