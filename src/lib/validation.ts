@@ -20,7 +20,15 @@ export const leadSchema = z.object({
     .optional()
     .or(z.literal('').transform(() => undefined)),
   topic: z.enum(
-    ['general', 'pricing', 'relaunch', 'new-website', 'seo', 'other'],
+    [
+      'general',
+      'pricing',
+      'relaunch',
+      'new-website',
+      'seo',
+      'it-service',
+      'other',
+    ],
     { message: 'Bitte ein Thema auswählen' },
   ),
   message: z
@@ -48,6 +56,7 @@ export const TOPIC_LABELS: Record<LeadInput['topic'], string> = {
   relaunch: 'Bestehende Website überarbeiten',
   'new-website': 'Neue Website',
   seo: 'SEO / Sichtbarkeit',
+  'it-service': 'IT-Service / PC-Hilfe',
   other: 'Sonstiges',
 }
 
