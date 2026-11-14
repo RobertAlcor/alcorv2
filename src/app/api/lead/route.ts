@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Notification an Robert - immer
-    const promises: Promise<unknown>[] = [sendLeadNotification(leadForMail, refNumber)]
+    const promises = [sendLeadNotification(leadForMail, refNumber)]
 
     // Kopie an Kunde - NUR wenn explizit gewünscht
     if (data.copyToCustomer) {
@@ -97,7 +97,27 @@ export async function POST(req: NextRequest) {
     for (const r of results) {
       if (r.status === 'rejected') {
         console.error('Lead mail failed:', r.reason)
+      } else if (r.value.error) {
+        console.error('Lead mail failed:', r.value.error)
       }
+    }
+
+    // Erfolg nur bestätigen, wenn ein verlässlicher Eingangskanal funktioniert hat.
+    const ownerMail = results[0]
+    const ownerMailAccepted =
+      ownerMail?.status === 'fulfilled' &&
+      !ownerMail.value.error &&
+      Boolean(ownerMail.value.data?.id)
+
+    if (dbError && !ownerMailAccepted) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error:
+            'Ihre Anfrage konnte nicht sicher übermittelt werden. Bitte rufen Sie uns an oder versuchen Sie es später erneut.',
+        },
+        { status: 503 },
+      )
     }
 
     return NextResponse.json({ ok: true, refNumber })
