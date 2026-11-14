@@ -3,7 +3,7 @@ export const SITE = {
   brand: 'ALCOR Group',
   domain: 'webdesign-alcor.at',
   url: 'https://webdesign-alcor.at',
-  tagline: 'Inhabergeführte Webentwicklung aus Wien',
+  tagline: 'Webentwicklung und persönlicher IT-Service aus Wien',
   founder: {
     name: 'Robert Alchimowicz',
     role: 'Webentwickler & SEO-Spezialist',
@@ -17,7 +17,7 @@ export const SITE = {
     phoneRaw: '+4366499124999',
     whatsapp: 'https://wa.me/4366499124999',
     whatsappPrefilled:
-      'https://wa.me/4366499124999?text=Hallo%20Robert%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Webdesign-Leistungen.',
+      'https://wa.me/4366499124999?text=Hallo%20Robert%2C%20ich%20interessiere%20mich%20f%C3%BCr%20Ihre%20Webdesign-%20oder%20IT-Leistungen.',
   },
   address: {
     street: 'Berresgasse 11/3/1',
@@ -47,17 +47,10 @@ export const SITE = {
     hourlyRate: 85,
     hourlyRateUnit: '€/h',
   },
-  /**
-   * Öffnungszeiten (für LocalBusiness Schema und Mikrodaten).
-   */
   openingHours: {
-    weekdays: { open: '09:00', close: '18:00' }, // Mo-Fr
-    weekend: null, // Sa/So geschlossen
+    weekdays: { open: '09:00', close: '18:00' },
+    weekend: null,
   },
-  /**
-   * Alle 23 Wiener Bezirke - für SEO-Reichweite (LocalBusiness areaServed,
-   * Footer-Erwähnung, Schema.org). Reihenfolge nach Bezirksnummer.
-   */
   viennaDistricts: [
     { num: 1, name: 'Innere Stadt', plz: '1010' },
     { num: 2, name: 'Leopoldstadt', plz: '1020' },
@@ -83,10 +76,6 @@ export const SITE = {
     { num: 22, name: 'Donaustadt', plz: '1220' },
     { num: 23, name: 'Liesing', plz: '1230' },
   ],
-  /**
-   * Primäre SEO-Keywords - werden in metadata.keywords und
-   * für Schema.org genutzt.
-   */
   seo: {
     primaryKeywords: [
       'Webdesign Wien',
@@ -94,6 +83,8 @@ export const SITE = {
       'Website erstellen Wien',
       'Webentwicklung Wien',
       'SEO Wien',
+      'PC Hilfe Wien',
+      'IT Service Wien',
     ],
     secondaryKeywords: [
       'Webdesigner Wien',
@@ -105,6 +96,11 @@ export const SITE = {
       'Webdesign ohne WordPress',
       'handgeschriebene Websites',
       'Next.js Entwickler Wien',
+      'Computer Hilfe Wien',
+      'Windows installieren Wien',
+      'PC einrichten Wien',
+      'Fernwartung Wien',
+      'WLAN einrichten Wien',
     ],
   },
 } as const
@@ -117,13 +113,10 @@ export const SISTER_SITES = [
   },
 ] as const
 
-/**
- * Hauptnavigation - Reihenfolge folgt User-Journey:
- * Was tue ich → Beweise → Kosten → Wer bin ich → Inhalte → Aktion → Kontakt
- */
 export const NAV = {
   main: [
     { label: 'Leistungen', href: '/leistungen' },
+    { label: 'IT-Service', href: '/it-service-wien' },
     { label: 'Referenzen', href: '/referenzen' },
     { label: 'Preise', href: '/preise' },
     { label: 'Über mich', href: '/ueber-mich' },
