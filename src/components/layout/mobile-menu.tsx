@@ -9,6 +9,7 @@ import { SITE } from '@/lib/site'
 const links = [
   ['Leistungen', '/leistungen'],
   ['Website-Service', '/website-service'],
+  ['IT-Service & PC-Hilfe', '/it-service-wien'],
   ['Projekte', '/referenzen'],
   ['Pakete & Preise', '/preise'],
   ['Über mich', '/ueber-mich'],
