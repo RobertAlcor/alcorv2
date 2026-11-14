@@ -13,7 +13,7 @@ const STATIC_ROUTE_LAST_MODIFIED: Record<string, string> = {
   '/leistungen/seo-wien': '2026-11-02',
   '/it-service-wien': '2026-11-14',
   '/referenzen': '2026-11-02',
-  '/preise': '2026-11-13',
+  '/preise': '2026-11-14',
   '/termin': '2026-11-02',
   '/kontakt': '2026-11-14',
 }
