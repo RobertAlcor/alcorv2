@@ -15,11 +15,11 @@ export function Footer() {
             <span>
               <b>A</b>LCOR
             </span>
-            <small>Independent Web Development</small>
+            <small>Web Development & IT Service</small>
           </Link>
           <p className="mt-6 max-w-md text-base leading-relaxed text-paper-mute">
-            Persönliche Webentwicklung aus Wien. Ausgewählte Projekte,
-            eigenständige Websites und direkte Zusammenarbeit.
+            Persönliche Webentwicklung und PC-Hilfe aus Wien. Websites,
+            technische SEO und klar vereinbarter IT-Service aus einer Hand.
           </p>
           <Link href="/bewerbung" className="alcor-text-link mt-4">
             Projekt anfragen

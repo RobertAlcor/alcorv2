@@ -8,6 +8,7 @@ import { MobileMenu } from './mobile-menu'
 const nav = [
   ['Leistungen', '/leistungen'],
   ['Website-Service', '/website-service'],
+  ['IT-Service', '/it-service-wien'],
   ['Projekte', '/referenzen'],
   ['Preise', '/preise'],
   ['Über mich', '/ueber-mich'],
@@ -28,7 +29,7 @@ export function Header() {
           <span>
             <b>A</b>LCOR
           </span>
-          <small>Independent Web Development</small>
+          <small>Web Development & IT Service</small>
         </Link>
         <nav aria-label="Hauptnavigation" className="alcor-navigation">
           {nav.map(([label, href]) => (

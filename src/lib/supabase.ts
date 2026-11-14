@@ -24,7 +24,6 @@ export type Lead = {
   message: string
   source: string
   created_at?: string
-  // Neue Felder (v23):
   package_interest?: 'starter' | 'business' | 'premium' | 'unsure' | null
   existing_website?: string | null
 }

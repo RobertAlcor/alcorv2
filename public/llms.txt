@@ -1,8 +1,8 @@
-# Webdesign Alcor — Robert Alchimowicz, Wien
+# Webdesign Alcor — Webentwicklung und IT-Service in Wien
 
-> Webdesign Alcor ist die persönlich geführte Webentwicklung von Robert Alchimowicz in 1220 Wien-Donaustadt. Leistungen: Website-Erstellung, Relaunch, technische SEO und separat vereinbarte Website-Betreuung für Unternehmen, Praxen und Dienstleistungsbetriebe.
+> Webdesign Alcor ist der persönlich geführte Web- und IT-Service von Robert Alchimowicz in 1220 Wien-Donaustadt. Leistungen: Website-Erstellung, Relaunch, technische SEO, Website-Betreuung sowie PC-Hilfe, Windows-Installation, Software-, E-Mail-, WLAN-, Drucker- und Backup-Einrichtung.
 
-Dieses optionale Textverzeichnis verweist auf die öffentlichen Originalseiten. Verbindliche Leistungen, Preise und Termine werden im Angebot vereinbart. Es ist keine Ranking- oder Empfehlungsgarantie.
+Dieses optionale Textverzeichnis verweist auf die öffentlichen Originalseiten. Verbindliche Leistungen, Preise und Termine werden im Angebot vereinbart. Es ist keine Ranking-, Verfügbarkeits- oder Reparaturgarantie.
 
 ## Anbieter und Kontakt
 - [ALCOR-Profil und Ansprechpartner](https://webdesign-alcor.at/ueber-mich#alcor-profil): Robert Alchimowicz, direkte Zusammenarbeit, Standort und Leistungsgrenzen.
@@ -11,7 +11,7 @@ Dieses optionale Textverzeichnis verweist auf die öffentlichen Originalseiten. 
 - [Google-Unternehmensprofil](https://maps.google.com/maps?cid=15767210286595001042): offizielles Profil von WebDesign Alcor.
 - [Datenschutz](https://webdesign-alcor.at/datenschutz).
 
-## Leistungen und Zusammenarbeit
+## Webdesign, SEO und Zusammenarbeit
 - [Website erstellen lassen in Wien](https://webdesign-alcor.at/leistungen/website-erstellung).
 - [Website-Relaunch](https://webdesign-alcor.at/leistungen/relaunch).
 - [Technische SEO](https://webdesign-alcor.at/leistungen/seo-wien).
@@ -27,6 +27,20 @@ Business: ab 1.490 € für individuelles Design, bis zu fünf vereinbarte Seite
 Premium: ab 2.490 € für Strategie, bis zu zehn vereinbarte Seiten, vertiefte technische SEO/GEO und einen erweiterten Funktionsbereich nach Vereinbarung. Individuelle Web-Apps und Sonderentwicklungen beginnen ab 3.900 €. Es gibt keine unbegrenzten Leistungen.
 
 Keine Umsatzsteuer aufgrund der Kleinunternehmerregelung. Domain, Hosting, externe Dienste, Betreuung und Zusatzarbeiten werden separat ausgewiesen. 60 % Anzahlung bei Auftragserteilung; 40 % nach erfolgreicher Abnahme. Zeitplan und bis zu fünf vereinbarte Korrekturrunden werden vertraglich festgelegt. Keine pauschale Lieferfrist oder garantierte Suchmaschinenplatzierung.
+
+## PC-Hilfe und IT-Service
+- [PC-Hilfe und IT-Service in Wien](https://webdesign-alcor.at/it-service-wien): Leistungsumfang, Einstiegspreise, Servicegebiet und Grenzen.
+- Fernwartung und Online-PC-Hilfe: ab 39 €.
+- Software, E-Mail und Office einrichten: ab 49 €.
+- Fehlerdiagnose und PC-Optimierung: ab 59 €.
+- PC- und Laptop-Einrichtung: ab 69 €.
+- WLAN, Router und Drucker einrichten: ab 69 €.
+- Datenübertragung und Backup-Einrichtung: ab 79 €.
+- Windows installieren und einrichten: ab 99 €, erforderliche Lizenz nicht enthalten.
+
+Anfahrt innerhalb Wiens: 0 €. Berechnet wird die vereinbarte IT-Leistung beziehungsweise Arbeitszeit. Außerhalb Wiens werden Strecke und Kilometergeld vor dem Termin schriftlich vereinbart. Fernwartung ist möglich, wenn das Gerät startet, eine stabile Internetverbindung besteht und das Problem sicher per Fernzugriff bearbeitet werden kann.
+
+ALCOR führt keine Hardware-Reparaturen, Lötarbeiten, Bauteilwechsel oder physische Datenrettung beschädigter Datenträger durch. Kostenpflichtige Software, Lizenzen, Ersatzgeräte, Speichermedien und andere Fremdkosten sind nicht enthalten. Datenübertragung oder Sicherung vor einer Neuinstallation wird ausdrücklich vereinbart.
 
 ## Kundenprojekte
 - [Psychotherapie Hrdlicka](https://webdesign-alcor.at/referenzen/psychotherapie-hrdlicka): Praxisinformationen und gegliederte Angebote.

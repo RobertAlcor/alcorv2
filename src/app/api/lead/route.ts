@@ -7,12 +7,15 @@ import {
   sendLeadCopyToCustomer,
   generateRefNumber,
 } from '@/lib/mail'
-import { checkRateLimit, getClientIp, isSuspiciousSpeed } from '@/lib/spam-protection'
+import {
+  checkRateLimit,
+  getClientIp,
+  isSuspiciousSpeed,
+} from '@/lib/spam-protection'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-// Erweiterung: copyToCustomer flag (optional)
 const extendedSchema = leadSchema.extend({
   copyToCustomer: z.boolean().optional().default(false),
 })
@@ -27,7 +30,7 @@ export async function POST(req: NextRequest) {
           ok: false,
           error: `Zu viele Anfragen. Bitte versuchen Sie es in ${Math.ceil(rl.retryAfterSeconds / 60)} Minuten wieder.`,
         },
-        { status: 429 }
+        { status: 429 },
       )
     }
 
@@ -36,26 +39,27 @@ export async function POST(req: NextRequest) {
     if (!parsed.success) {
       return NextResponse.json(
         { ok: false, errors: parsed.error.flatten().fieldErrors },
-        { status: 400 }
+        { status: 400 },
       )
     }
     const data = parsed.data
 
-    // Honeypot
     if (data.website && data.website.length > 0) {
       return NextResponse.json({ ok: true, refNumber: 'BOT-FILTERED' })
     }
 
-    // Speed-Check
     const formLoadTime = (body as { formLoadTime?: number })?.formLoadTime
-    if (typeof formLoadTime === 'number' && isSuspiciousSpeed(Date.now(), formLoadTime)) {
+    if (
+      typeof formLoadTime === 'number' &&
+      isSuspiciousSpeed(Date.now(), formLoadTime)
+    ) {
       return NextResponse.json({ ok: true, refNumber: 'SPEED-FILTERED' })
     }
 
-    const source = req.headers.get('referer') ?? req.headers.get('origin') ?? 'direct'
+    const source =
+      req.headers.get('referer') ?? req.headers.get('origin') ?? 'direct'
     const refNumber = generateRefNumber()
 
-    // Persist
     const { error: dbError } = await supabaseAdmin.from('leads').insert({
       ref_number: refNumber,
       name: data.name,
@@ -72,12 +76,16 @@ export async function POST(req: NextRequest) {
       console.error('Supabase insert error:', dbError)
     }
 
+    // Die bestehende Mailvorlage verwendet einen engeren Themenkatalog.
+    // IT-Service bleibt in der Datenbank separat auswertbar; in der Mail
+    // identifiziert der vorausgefüllte Angebotstitel die konkrete Leistung.
+    const mailTopic = data.topic === 'it-service' ? 'other' : data.topic
     const leadForMail = {
       name: data.name,
       email: data.email,
       phone: data.phone,
       company: data.company,
-      topic: data.topic,
+      topic: mailTopic,
       message: data.message,
       website: data.website,
       package_interest: data.package_interest,
@@ -85,24 +93,21 @@ export async function POST(req: NextRequest) {
       source,
     }
 
-    // Notification an Robert - immer
     const promises = [sendLeadNotification(leadForMail, refNumber)]
 
-    // Kopie an Kunde - NUR wenn explizit gewünscht
     if (data.copyToCustomer) {
       promises.push(sendLeadCopyToCustomer(leadForMail, refNumber))
     }
 
     const results = await Promise.allSettled(promises)
-    for (const r of results) {
-      if (r.status === 'rejected') {
-        console.error('Lead mail failed:', r.reason)
-      } else if (r.value.error) {
-        console.error('Lead mail failed:', r.value.error)
+    for (const result of results) {
+      if (result.status === 'rejected') {
+        console.error('Lead mail failed:', result.reason)
+      } else if (result.value.error) {
+        console.error('Lead mail failed:', result.value.error)
       }
     }
 
-    // Erfolg nur bestätigen, wenn ein verlässlicher Eingangskanal funktioniert hat.
     const ownerMail = results[0]
     const ownerMailAccepted =
       ownerMail?.status === 'fulfilled' &&
@@ -121,8 +126,11 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ ok: true, refNumber })
-  } catch (err) {
-    console.error('Lead API error:', err)
-    return NextResponse.json({ ok: false, error: 'Technischer Fehler.' }, { status: 500 })
+  } catch (error) {
+    console.error('Lead API error:', error)
+    return NextResponse.json(
+      { ok: false, error: 'Technischer Fehler.' },
+      { status: 500 },
+    )
   }
 }
