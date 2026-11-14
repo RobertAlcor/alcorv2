@@ -51,6 +51,11 @@ export function organizationSchema() {
         'Performance Optimization',
         'Local SEO',
         'Schema.org',
+        'PC-Support',
+        'Windows-Installation',
+        'E-Mail- und Office-Einrichtung',
+        'WLAN- und Druckereinrichtung',
+        'Datensicherung',
       ],
     },
     foundingDate: String(SITE.founder.foundedIn),
@@ -74,7 +79,7 @@ export function organizationSchema() {
       },
       geoRadius: '25000',
     },
-    priceRange: `€${SITE.pricing.starter}–€${SITE.pricing.customFrom}+`,
+    priceRange: `€39–€${SITE.pricing.customFrom}+`,
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
@@ -101,7 +106,7 @@ export function organizationSchema() {
     ].filter(Boolean),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'Webdesign-Leistungen',
+      name: 'Webdesign- und IT-Leistungen',
       itemListElement: [
         {
           '@type': 'Offer',
@@ -179,16 +184,50 @@ export function organizationSchema() {
             url: `${SITE.url}/leistungen/seo-wien`,
           },
         },
+        {
+          '@type': 'Offer',
+          name: 'Fernwartung und Online-PC-Hilfe ab 39 €',
+          url: `${SITE.url}/it-service-wien`,
+          priceSpecification: minimumPriceSpecification(39),
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Fernwartung und Online-PC-Hilfe',
+            description:
+              'Vereinbarte Software-, E-Mail- und Einstellungsunterstützung per Fernzugriff. Keine Hardware-Reparaturen.',
+            url: `${SITE.url}/it-service-wien`,
+          },
+        },
+        {
+          '@type': 'Offer',
+          name: 'PC- und Laptop-Einrichtung ab 69 €',
+          url: `${SITE.url}/it-service-wien`,
+          priceSpecification: minimumPriceSpecification(69),
+          itemOffered: {
+            '@type': 'Service',
+            name: 'PC- und Laptop-Einrichtung',
+            description:
+              'Benutzerkonto, Updates, Browser, E-Mail, Drucker und vereinbarte Software einrichten.',
+            url: `${SITE.url}/it-service-wien`,
+          },
+        },
+        {
+          '@type': 'Offer',
+          name: 'Windows-Installation ab 99 €',
+          url: `${SITE.url}/it-service-wien`,
+          priceSpecification: minimumPriceSpecification(99),
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Windows installieren und einrichten',
+            description:
+              'Unterstützte Windows-Version installieren oder zurücksetzen, aktualisieren und grundlegend einrichten. Lizenz nicht enthalten.',
+            url: `${SITE.url}/it-service-wien`,
+          },
+        },
       ],
     },
   }
 }
 
-/**
- * WebSite Schema für Site-Name und Publisher.
- * Die frühere SearchAction wurde entfernt, weil Google das Sitelinks-Suchfeld
- * seit November 2024 nicht mehr in den Suchergebnissen unterstützt.
- */
 export function websiteSchema() {
   return {
     '@context': 'https://schema.org',
@@ -216,6 +255,11 @@ export function personSchema() {
       'Next.js',
       'TypeScript',
       'GEO Optimization',
+      'PC-Support',
+      'Windows-Installation',
+      'E-Mail- und Office-Einrichtung',
+      'WLAN- und Druckereinrichtung',
+      'Datensicherung',
     ],
     address: {
       '@type': 'PostalAddress',
