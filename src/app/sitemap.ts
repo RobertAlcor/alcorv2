@@ -5,16 +5,17 @@ import { getPublishedBezirke } from '@/lib/bezirke'
 import { CASES } from '@/lib/cases'
 
 const STATIC_ROUTE_LAST_MODIFIED: Record<string, string> = {
-  '': '2026-11-13',
+  '': '2026-11-14',
   '/bewerbung': '2026-11-13',
-  '/leistungen': '2026-11-02',
+  '/leistungen': '2026-11-14',
   '/leistungen/website-erstellung': '2026-11-13',
   '/leistungen/relaunch': '2026-11-02',
   '/leistungen/seo-wien': '2026-11-02',
+  '/it-service-wien': '2026-11-14',
   '/referenzen': '2026-11-02',
   '/preise': '2026-11-13',
   '/termin': '2026-11-02',
-  '/kontakt': '2026-11-02',
+  '/kontakt': '2026-11-14',
 }
 
 const PROJECT_LAST_MODIFIED: Record<string, string> = {
@@ -31,6 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/leistungen/website-erstellung',
     '/leistungen/relaunch',
     '/leistungen/seo-wien',
+    '/it-service-wien',
     '/website-service',
     '/website-soforthilfe',
     '/website-betreuung',
