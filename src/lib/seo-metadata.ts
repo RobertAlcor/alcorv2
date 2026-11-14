@@ -39,9 +39,9 @@ export const PAGE_META = {
     path: '/',
   }),
   leistungen: pageMetadata({
-    title: 'Webdesign, Relaunch & technische SEO Wien | ALCOR',
+    title: 'Webdesign, SEO & IT-Service Wien | ALCOR',
     description:
-      'Konzeption, Gestaltung, Entwicklung und technische SEO. Direkte Zusammenarbeit, klarer Vertrag und Live-Vorschau. Projekt unverbindlich anfragen.',
+      'Website-Erstellung, Relaunch, technische SEO und persönliche PC-Hilfe in Wien. Klar vereinbarter Umfang, transparente Einstiegspreise und direkter Kontakt.',
     path: '/leistungen',
   }),
   websiteErstellung: pageMetadata({
@@ -61,6 +61,12 @@ export const PAGE_META = {
     description:
       'Technische Suchmaschinenoptimierung: verständliche Inhalte, interne Verlinkung, Metadaten und Performance. Nachvollziehbare Maßnahmen statt Ranking-Garantien.',
     path: '/leistungen/seo-wien',
+  }),
+  itService: pageMetadata({
+    title: 'PC-Hilfe Wien & IT-Service vor Ort | ALCOR',
+    description:
+      'PC-Hilfe in Wien: Windows installieren, PC einrichten, E-Mail, Office, WLAN, Drucker, Backup und Fernwartung. Anfahrt in Wien kostenlos.',
+    path: '/it-service-wien',
   }),
   preise: pageMetadata({
     title: 'Webdesign Preise Wien | Pakete ab 599 € | ALCOR',
@@ -95,7 +101,7 @@ export const PAGE_META = {
   kontakt: pageMetadata({
     title: 'Kontakt & Projektanfrage | Webdesign Alcor Wien',
     description:
-      'Direkter Kontakt zu ALCOR: Telefon, E-Mail oder Formular. Beschreiben Sie Ihr Vorhaben oder vereinbaren Sie ein 15-Minuten-Kennenlernen.',
+      'Direkter Kontakt zu ALCOR: Telefon, E-Mail oder Formular. Beschreiben Sie Ihr Webdesign-, SEO- oder IT-Anliegen und erhalten Sie eine persönliche Rückmeldung.',
     path: '/kontakt',
   }),
   impressum: pageMetadata({
