@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { PricingCards } from '@/components/sections/pricing-card'
 import { CtaBand } from '@/components/sections/cta-band'
@@ -49,6 +50,46 @@ export default function PreisePage() {
           </Link>
           .
         </p>
+      </section>
+
+      <section className="container-fluid alcor-section border-t border-line">
+        <div className="alcor-section-head">
+          <div>
+            <p className="alcor-eyebrow">PC-Hilfe & IT-Service</p>
+            <h2>
+              Computerhilfe mit
+              <br />
+              klaren Einstiegspreisen.
+            </h2>
+          </div>
+          <p>
+            Vor Ort in Wien ohne eigene Anfahrtskosten oder per Fernwartung.
+            Außerhalb Wiens wird Kilometergeld vor dem Termin vereinbart.
+            Hardware-Reparaturen sind nicht Teil des Angebots.
+          </p>
+        </div>
+        <div className="alcor-notes-grid">
+          <div>
+            <h3>Fernwartung</h3>
+            <p>Ab 39 € für eine vereinbarte Software- oder Einstellungshilfe.</p>
+          </div>
+          <div>
+            <h3>PC- und Laptop-Einrichtung</h3>
+            <p>Ab 69 € für Benutzerkonto, Updates und vereinbarte Programme.</p>
+          </div>
+          <div>
+            <h3>Windows-Installation</h3>
+            <p>Ab 99 € für Installation und Grundeinrichtung; Lizenz nicht enthalten.</p>
+          </div>
+          <div>
+            <h3>WLAN, Drucker & Backup</h3>
+            <p>Ab 69 € beziehungsweise ab 79 €, abhängig von Geräten und Datenmenge.</p>
+          </div>
+        </div>
+        <Link href="/it-service-wien" className="alcor-text-link mt-8">
+          Alle IT-Leistungen und Grenzen ansehen
+          <ArrowUpRight size={18} aria-hidden="true" />
+        </Link>
       </section>
 
       <section className="alcor-surface">
