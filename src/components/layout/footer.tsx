@@ -13,12 +13,30 @@ const webLinks = [
 
 const itLinks = [
   { label: 'IT-Service Übersicht', href: '/it-service-wien' },
-  { label: 'Fernwartung', href: '/it-service-wien#remote-support' },
-  { label: 'Software, E-Mail & Office', href: '/it-service-wien#software-email-office' },
-  { label: 'PC- und Laptop-Einrichtung', href: '/it-service-wien#pc-setup' },
-  { label: 'WLAN, Router & Drucker', href: '/it-service-wien#network-printer' },
-  { label: 'Daten & Backup', href: '/it-service-wien#data-backup' },
-  { label: 'Windows-Installation', href: '/it-service-wien#windows-installation' },
+  {
+    label: 'Fernwartung anfragen',
+    href: '/kontakt?thema=it-service&service=remote-support',
+  },
+  {
+    label: 'Software, E-Mail & Office',
+    href: '/kontakt?thema=it-service&service=software-email-office',
+  },
+  {
+    label: 'PC- und Laptop-Einrichtung',
+    href: '/kontakt?thema=it-service&service=pc-setup',
+  },
+  {
+    label: 'WLAN, Router & Drucker',
+    href: '/kontakt?thema=it-service&service=network-printer',
+  },
+  {
+    label: 'Daten & Backup',
+    href: '/kontakt?thema=it-service&service=data-backup',
+  },
+  {
+    label: 'Windows-Installation',
+    href: '/kontakt?thema=it-service&service=windows-installation',
+  },
 ]
 
 const orientationLinks = [
