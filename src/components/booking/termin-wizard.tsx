@@ -257,7 +257,7 @@ export function TerminWizard() {
                 slotStart={selectedSlot}
                 slotEnd={
                   new Date(
-                    new Date(selectedSlot).getTime() + 60 * 60 * 1000,
+                    new Date(selectedSlot).getTime() + 15 * 60 * 1000,
                   ).toISOString()
                 }
                 data={formData}
