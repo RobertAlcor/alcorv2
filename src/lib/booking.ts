@@ -43,11 +43,11 @@ export function getViennaDateParts(date: Date) {
       .map((part) => [part.type, Number(part.value)]),
   )
   return {
-    year: parts.year,
-    month: parts.month,
-    day: parts.day,
-    hour: parts.hour,
-    minute: parts.minute,
+    year: Number(parts.year),
+    month: Number(parts.month),
+    day: Number(parts.day),
+    hour: Number(parts.hour),
+    minute: Number(parts.minute),
   }
 }
 
