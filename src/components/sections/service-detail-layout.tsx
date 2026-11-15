@@ -85,7 +85,10 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
             </Link>
           </div>
         </div>
-        <div className="alcor-selection-image">
+        <div
+          className="alcor-selection-image"
+          style={{ aspectRatio: '5 / 3' }}
+        >
           <Image
             src={`/media/visual/${data.kind}`}
             alt={`Illustration: ${service.shortTitle}`}
@@ -93,6 +96,7 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
             sizes="(min-width:1000px) 45vw,95vw"
             unoptimized
             priority
+            style={{ objectFit: 'contain', objectPosition: 'center' }}
           />
         </div>
       </section>
