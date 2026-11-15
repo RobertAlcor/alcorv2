@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
     )
   }
 
-  const [year, month, day] = dateParam.split('-').map(Number)
+  const [year = NaN, month = NaN, day = NaN] = dateParam.split('-').map(Number)
   const date = new Date(Date.UTC(year, month - 1, day, 12))
   if (
     date.getUTCFullYear() !== year ||
