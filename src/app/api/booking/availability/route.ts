@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { generateSlotsForDate, BOOKING_CONFIG } from '@/lib/booking'
+import {
+  generateSlotsForDate,
+  BOOKING_CONFIG,
+  viennaDateTimeToUtc,
+} from '@/lib/booking'
 import { supabaseAdmin } from '@/lib/supabase'
+import { getWorkingHours } from '@/lib/settings'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url)
-  const dateParam = searchParams.get('date')
-
+  const dateParam = new URL(req.url).searchParams.get('date')
   if (!dateParam || !/^\d{4}-\d{2}-\d{2}$/.test(dateParam)) {
     return NextResponse.json(
       { error: 'Invalid date parameter (expected YYYY-MM-DD)' },
@@ -16,53 +19,76 @@ export async function GET(req: NextRequest) {
     )
   }
 
-  const [year, month, day] = dateParam.split('-').map(Number)
-  if (!year || !month || !day) {
+  const [year = NaN, month = NaN, day = NaN] = dateParam.split('-').map(Number)
+  const date = new Date(Date.UTC(year, month - 1, day, 12))
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() + 1 !== month ||
+    date.getUTCDate() !== day
+  ) {
     return NextResponse.json({ error: 'Invalid date' }, { status: 400 })
   }
-  const date = new Date(year, month - 1, day)
 
-  const dayStart = new Date(date)
-  dayStart.setHours(0, 0, 0, 0)
-  const dayEnd = new Date(date)
-  dayEnd.setHours(23, 59, 59, 999)
-
-  let busyFromBookings: { slot_start: string; slot_end: string }[] = []
-  let busyFromBlocks: { slot_start: string; slot_end: string }[] = []
+  // Query the full Vienna calendar day, including any overnight overlap.
+  const dayStart = viennaDateTimeToUtc(year, month, day, 0)
+  const nextDay = new Date(Date.UTC(year, month - 1, day + 1))
+  const dayEnd = viennaDateTimeToUtc(
+    nextDay.getUTCFullYear(),
+    nextDay.getUTCMonth() + 1,
+    nextDay.getUTCDate(),
+    0,
+  )
 
   try {
-    const { data: bookings } = await supabaseAdmin
-      .from('bookings')
-      .select('slot_start, slot_end')
-      .gte('slot_start', dayStart.toISOString())
-      .lte('slot_start', dayEnd.toISOString())
-      .neq('status', 'cancelled')
-    busyFromBookings = bookings ?? []
+    const [bookings, blocks, hours] = await Promise.all([
+      supabaseAdmin
+        .from('bookings')
+        .select('slot_start, slot_end')
+        .lt('slot_start', dayEnd.toISOString())
+        .gt('slot_end', dayStart.toISOString())
+        .not('status', 'in', '(cancelled,declined)'),
+      supabaseAdmin
+        .from('busy_slots')
+        .select('slot_start, slot_end')
+        .lt('slot_start', dayEnd.toISOString())
+        .gt('slot_end', dayStart.toISOString()),
+      getWorkingHours(),
+    ])
 
-    const { data: blocks } = await supabaseAdmin
-      .from('busy_slots')
-      .select('slot_start, slot_end')
-      .gte('slot_start', dayStart.toISOString())
-      .lte('slot_start', dayEnd.toISOString())
-    busyFromBlocks = blocks ?? []
-  } catch (err) {
-    console.error('Supabase availability query failed:', err)
+    // Supabase returns query errors as values, not rejected promises.
+    if (bookings.error || blocks.error) {
+      console.error('Supabase availability query failed', {
+        bookings: bookings.error?.code,
+        blocks: blocks.error?.code,
+      })
+      return NextResponse.json(
+        { error: 'Service vorübergehend nicht verfügbar' },
+        { status: 503 },
+      )
+    }
+
+    const slots = generateSlotsForDate(
+      date,
+      [...(bookings.data ?? []), ...(blocks.data ?? [])],
+      {
+        workingHourStart: hours.start,
+        workingHourEnd: hours.end,
+      },
+    )
+    return NextResponse.json(
+      {
+        date: dateParam,
+        duration: BOOKING_CONFIG.durationMinutes,
+        timezone: BOOKING_CONFIG.timezone,
+        slots,
+      },
+      { headers: { 'Cache-Control': 'no-store' } },
+    )
+  } catch (error) {
+    console.error('Supabase availability query failed:', error)
     return NextResponse.json(
       { error: 'Service vorübergehend nicht verfügbar' },
       { status: 503 },
     )
   }
-
-  const allBusy = [...busyFromBookings, ...busyFromBlocks]
-  const slots = generateSlotsForDate(date, allBusy)
-
-  return NextResponse.json(
-    {
-      date: dateParam,
-      duration: BOOKING_CONFIG.durationMinutes,
-      timezone: BOOKING_CONFIG.timezone,
-      slots,
-    },
-    { headers: { 'Cache-Control': 'no-store' } },
-  )
 }
