@@ -63,13 +63,17 @@ export function BentoGrid() {
               key={item.href}
               href={item.href}
             >
-              <div className="alcor-service-image">
+              <div
+                className="alcor-service-image"
+                style={{ aspectRatio: '5 / 3' }}
+              >
                 <Image
                   src={item.image}
                   alt=""
                   fill
                   sizes="(min-width: 900px) 48vw, 95vw"
                   unoptimized
+                  style={{ objectFit: 'contain', objectPosition: 'center' }}
                 />
               </div>
               <div className="alcor-service-body">
