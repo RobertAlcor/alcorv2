@@ -79,11 +79,17 @@ export default function PreisePage() {
           </div>
           <div>
             <h3>Windows-Installation</h3>
-            <p>Ab 99 € für Installation und Grundeinrichtung; Lizenz nicht enthalten.</p>
+            <p>
+              Ab 99 € für Installation und Grundeinrichtung; Lizenz nicht
+              enthalten.
+            </p>
           </div>
           <div>
             <h3>WLAN, Drucker & Backup</h3>
-            <p>Ab 69 € beziehungsweise ab 79 €, abhängig von Geräten und Datenmenge.</p>
+            <p>
+              Ab 69 € beziehungsweise ab 79 €, abhängig von Geräten und
+              Datenmenge.
+            </p>
           </div>
         </div>
         <Link href="/it-service-wien" className="alcor-text-link mt-8">
@@ -94,13 +100,17 @@ export default function PreisePage() {
 
       <section className="alcor-surface">
         <div className="container-fluid alcor-section alcor-selection">
-          <div className="alcor-selection-image">
+          <div
+            className="alcor-selection-image"
+            style={{ aspectRatio: '5 / 3' }}
+          >
             <Image
               src="/media/visual/strategy"
               alt="Illustration einer strukturierten Projektplanung"
               fill
               sizes="(min-width:1000px) 45vw,95vw"
               unoptimized
+              style={{ objectFit: 'contain', objectPosition: 'center' }}
             />
           </div>
           <div>
