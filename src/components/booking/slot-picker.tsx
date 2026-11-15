@@ -139,7 +139,7 @@ function groupByHour(
 ): { hour: number; items: FetchSlot[] }[] {
   const groups = new Map<number, FetchSlot[]>()
   for (const s of slots) {
-    const hour = new Date(s.isoStart).getHours()
+    const hour = Number(s.label.slice(0, 2))
     if (!groups.has(hour)) groups.set(hour, [])
     groups.get(hour)!.push(s)
   }
