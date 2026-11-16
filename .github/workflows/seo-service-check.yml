@@ -1,0 +1,116 @@
+name: SEO service checks
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/components/sections/service-seo-section.tsx'
+      - 'src/components/sections/seo-service-evidence.tsx'
+      - 'src/lib/services.ts'
+      - '.github/workflows/seo-service-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: seo-service-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      NEXT_PUBLIC_SITE_URL: https://webdesign-alcor.at
+      NEXT_PUBLIC_SUPABASE_URL: https://ci-placeholder.invalid
+      SUPABASE_SERVICE_ROLE_KEY: ci-build-placeholder-not-a-real-key
+      RESEND_API_KEY: re_ci_placeholder_not_a_real_key
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - run: npm run type-check
+      - name: Install isolated browser checker
+        run: |
+          npm install --prefix "$RUNNER_TEMP/alcor-browser-tools" --no-audit --no-fund agent-browser@0.38.1
+          echo "$RUNNER_TEMP/alcor-browser-tools/node_modules/.bin" >> "$GITHUB_PATH"
+          if command -v google-chrome >/dev/null; then
+            echo "AGENT_BROWSER_EXECUTABLE_PATH=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          else
+            "$RUNNER_TEMP/alcor-browser-tools/node_modules/.bin/agent-browser" install --with-deps
+          fi
+      - name: Read-only page, schema, mobile and contact checks
+        env:
+          AGENT_BROWSER_NO_WEBMCP: '1'
+        run: |
+          npm run start -- --port 3100 > /tmp/alcor-seo-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import json, pathlib, subprocess, time, urllib.request
+          base = 'http://127.0.0.1:3100'
+          for attempt in range(60):
+              try:
+                  with urllib.request.urlopen(base + '/leistungen/seo-wien', timeout=3) as response:
+                      assert response.status == 200
+                  break
+              except Exception:
+                  if attempt == 59:
+                      raise
+                  time.sleep(1)
+          pathlib.Path('browser-results').mkdir(exist_ok=True)
+          def run(*args):
+              process = subprocess.run(['agent-browser', '--session', 'seo-service-check', '--json', *args], text=True, capture_output=True, timeout=75)
+              if process.returncode:
+                  raise RuntimeError(process.stdout + process.stderr)
+              result = json.loads(process.stdout)
+              if not result.get('success'):
+                  raise RuntimeError(str(result))
+              return result.get('data', {})
+          def check(expression, label):
+              run('eval', '(() => { if (!(' + expression + ')) throw new Error(' + json.dumps(label) + '); return true; })()')
+              print('PASS:', label, flush=True)
+          def open_page(path):
+              with urllib.request.urlopen(base + path, timeout=15) as response:
+                  assert response.status == 200, path
+              run('open', base + path)
+              run('wait', '--load', 'networkidle')
+              run('wait', 'main h1')
+              check('document.querySelectorAll("main h1").length === 1', path + ': one H1')
+              canonical = 'https://webdesign-alcor.at' + path.split('?')[0]
+              check('document.querySelector("link[rel=canonical]")?.href === ' + json.dumps(canonical), path + ': canonical')
+              check('!Array.from(document.querySelectorAll("meta[name=robots]")).some(x => /noindex/i.test(x.content))', path + ': indexable')
+          try:
+              run('open')
+              run('network', 'route', '**/api/**', '--abort')
+              for width in (360, 390, 768, 1440):
+                  run('set', 'viewport', str(width), '900')
+                  open_page('/leistungen/seo-wien')
+                  check('document.documentElement.scrollWidth <= innerWidth + 1', str(width) + 'px: no overflow')
+                  check('document.querySelectorAll("#seo-pruefumfang").length === 1', 'single SEO scope section')
+                  check('Array.from(document.links).some(a => a.getAttribute("href") === "/kontakt?thema=seo")', 'SEO-specific contact link')
+                  check('document.body.innerText.includes("keine SEO-Erfolgsstudien")', 'no fabricated SEO results')
+                  check('(() => { const faq = Array.from(document.scripts).filter(s => s.type === "application/ld+json").flatMap(s => { const d = JSON.parse(s.textContent); return Array.isArray(d) ? d : [d]; }).filter(d => d["@type"] === "FAQPage"); const visible = Array.from(document.getElementById("service-questions").closest("section").querySelectorAll("details")); return faq.length === 1 && faq[0].mainEntity.length === 6 && visible.length === 6 && faq[0].mainEntity.every((q, i) => visible[i].querySelector("summary span").textContent.trim() === q.name && visible[i].querySelector("p").textContent.trim() === q.acceptedAnswer.text); })()', 'FAQ schema matches all six visible answers')
+                  errors = run('errors')
+                  assert 'errors' in errors and not errors['errors'], errors
+                  if width in (390, 1440):
+                      run('screenshot', f'browser-results/seo-{width}.png', '--full')
+              for path in ('/leistungen/website-erstellung', '/leistungen/relaunch', '/referenzen/massagewelt-wien', '/referenzen/cleankos', '/it-service-wien'):
+                  open_page(path)
+                  check('document.querySelector("#seo-pruefumfang") === null', path + ': no SEO-only content leakage')
+              for query, topic in (('thema=seo', 'seo'), ('thema=it-service&service=windows-installation', 'it-service')):
+                  open_page('/kontakt?' + query)
+                  check('document.querySelector("select[name=topic]")?.value === ' + json.dumps(topic), topic + ': correct topic preselected')
+              print('No forms submitted; API routes blocked; no real service credentials.', flush=True)
+          finally:
+              run('close')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: seo-service-browser-results
+          path: browser-results
+          if-no-files-found: ignore
+          retention-days: 7
