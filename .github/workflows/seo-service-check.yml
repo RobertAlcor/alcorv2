@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           cache: npm
       - run: npm ci --no-audit --no-fund
       - run: npm run build
@@ -90,9 +90,9 @@ jobs:
                   open_page('/leistungen/seo-wien')
                   check('document.documentElement.scrollWidth <= innerWidth + 1', str(width) + 'px: no overflow')
                   check('document.querySelectorAll("#seo-pruefumfang").length === 1', 'single SEO scope section')
-                  check('document.querySelector("a[href=\"/kontakt?thema=seo\"]") !== null', 'SEO-specific contact link')
+                  check('Array.from(document.links).some(a => a.getAttribute("href") === "/kontakt?thema=seo")', 'SEO-specific contact link')
                   check('document.body.innerText.includes("keine SEO-Erfolgsstudien")', 'no fabricated SEO results')
-                  check('(() => { const faq = Array.from(document.querySelectorAll("script[type=\"application/ld+json\"]")).flatMap(s => { const d = JSON.parse(s.textContent); return Array.isArray(d) ? d : [d]; }).filter(d => d["@type"] === "FAQPage"); const visible = Array.from(document.getElementById("service-questions").closest("section").querySelectorAll("details")); return faq.length === 1 && faq[0].mainEntity.length === 6 && visible.length === 6 && faq[0].mainEntity.every((q, i) => visible[i].querySelector("summary span").textContent.trim() === q.name && visible[i].querySelector("p").textContent.trim() === q.acceptedAnswer.text); })()', 'FAQ schema matches all six visible answers')
+                  check('(() => { const faq = Array.from(document.scripts).filter(s => s.type === "application/ld+json").flatMap(s => { const d = JSON.parse(s.textContent); return Array.isArray(d) ? d : [d]; }).filter(d => d["@type"] === "FAQPage"); const visible = Array.from(document.getElementById("service-questions").closest("section").querySelectorAll("details")); return faq.length === 1 && faq[0].mainEntity.length === 6 && visible.length === 6 && faq[0].mainEntity.every((q, i) => visible[i].querySelector("summary span").textContent.trim() === q.name && visible[i].querySelector("p").textContent.trim() === q.acceptedAnswer.text); })()', 'FAQ schema matches all six visible answers')
                   errors = run('errors')
                   assert 'errors' in errors and not errors['errors'], errors
                   if width in (390, 1440):
