@@ -7,7 +7,8 @@ import { Menu, X, ArrowUpRight, Phone } from 'lucide-react'
 import { SITE } from '@/lib/site'
 
 const links = [
-  ['Leistungen', '/leistungen'],
+  ['Webdesign', '/leistungen/website-erstellung'],
+  ['SEO & regionale Sichtbarkeit', '/leistungen/seo-wien'],
   ['Website-Service', '/website-service'],
   ['IT-Service & PC-Hilfe', '/it-service-wien'],
   ['Projekte', '/referenzen'],
@@ -57,7 +58,7 @@ export function MobileMenu() {
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-controls="alcor-mobile-menu"
-        className="inline-flex min-h-[48px] min-w-[48px] items-center justify-center text-paper"
+        className="text-paper inline-flex min-h-[48px] min-w-[48px] items-center justify-center"
       >
         <Menu aria-hidden="true" size={27} />
       </button>
@@ -67,13 +68,10 @@ export function MobileMenu() {
         onCancel={() => setOpen(false)}
         onClose={() => setOpen(false)}
         aria-labelledby="alcor-menu-title"
-        className="fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none bg-deep p-6 text-paper backdrop:bg-black/70"
+        className="bg-deep text-paper fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none p-6 backdrop:bg-black/70"
       >
-        <div className="flex items-center justify-between border-b border-line pb-5">
-          <p
-            id="alcor-menu-title"
-            className="text-xl font-semibold tracking-[0.2em]"
-          >
+        <div className="border-line flex items-center justify-between border-b pb-5">
+          <p id="alcor-menu-title" className="text-xl font-semibold tracking-[0.2em]">
             ALCOR
           </p>
           <button
@@ -85,10 +83,7 @@ export function MobileMenu() {
             <X size={27} aria-hidden="true" />
           </button>
         </div>
-        <nav
-          aria-label="Mobile Hauptnavigation"
-          className="flex flex-col gap-1 py-6"
-        >
+        <nav aria-label="Mobile Hauptnavigation" className="flex flex-col gap-1 py-6">
           {links.map(([label, href]) => (
             <Link
               key={href}
@@ -99,13 +94,11 @@ export function MobileMenu() {
                   ? 'page'
                   : pathname.startsWith(`${href}/`) ||
                       (href === '/website-service' &&
-                        ['/website-soforthilfe', '/website-betreuung'].includes(
-                          pathname,
-                        ))
+                        ['/website-soforthilfe', '/website-betreuung'].includes(pathname))
                     ? 'location'
                     : undefined
               }
-              className="flex min-h-[56px] items-center justify-between border-b border-line py-3 text-xl hover:text-signal-2"
+              className="border-line hover:text-signal-2 flex min-h-[56px] items-center justify-between border-b py-3 text-xl"
             >
               {label}
               <ArrowUpRight size={20} aria-hidden="true" />
@@ -113,11 +106,7 @@ export function MobileMenu() {
           ))}
         </nav>
         <div className="flex flex-col gap-4">
-          <Link
-            className="alcor-button"
-            href="/bewerbung"
-            onClick={() => setOpen(false)}
-          >
+          <Link className="alcor-button" href="/bewerbung" onClick={() => setOpen(false)}>
             Projekt anfragen
             <ArrowUpRight size={19} aria-hidden="true" />
           </Link>
@@ -128,10 +117,7 @@ export function MobileMenu() {
           >
             15 Minuten kennenlernen
           </Link>
-          <a
-            className="alcor-text-link"
-            href={`tel:${SITE.contact.phoneRaw}`}
-          >
+          <a className="alcor-text-link" href={`tel:${SITE.contact.phoneRaw}`}>
             <Phone size={18} aria-hidden="true" />
             {SITE.contact.phoneFormatted}
           </a>

@@ -12,18 +12,18 @@ const items = [
     text: 'Sie starten neu oder möchten endlich professionell auftreten? Ihre Website soll zeigen, für wen Sie arbeiten, was Sie anbieten und wie Interessenten Sie erreichen.',
   },
   {
-    href: '/leistungen/relaunch',
-    title: 'Gute Leistungen. Veraltete Website?',
-    label: '02 / Website-Relaunch',
-    image: '/media/visual/strategy',
-    text: 'Ihr Unternehmen hat sich weiterentwickelt, die Website nicht? Wir prüfen, was bleiben kann und wo Inhalte, Gestaltung oder Kontaktwege eine neue Richtung brauchen.',
-  },
-  {
     href: '/leistungen/seo-wien',
     title: 'Wird Ihr Angebot bei Google gefunden?',
-    label: '03 / Technische SEO',
+    label: '02 / SEO & Local SEO',
     image: '/media/visual/technology',
-    text: 'Ich prüfe technische Hindernisse und die Verständlichkeit Ihrer Inhalte. Daraus entstehen priorisierte Verbesserungen statt einer beliebigen Liste von SEO-Aufgaben.',
+    text: 'Suchmaschinenoptimierung für Ihr Einzugsgebiet: technische Kontrollen, Suchbegriffs- und Konkurrenzanalyse. Laufende SEO-Betreuung für 299 € monatlich.',
+  },
+  {
+    href: '/leistungen/relaunch',
+    title: 'Gute Leistungen. Veraltete Website?',
+    label: '03 / Website-Relaunch',
+    image: '/media/visual/strategy',
+    text: 'Ihr Unternehmen hat sich weiterentwickelt, die Website nicht? Wir prüfen, was bleiben kann und wo Inhalte, Gestaltung oder Kontaktwege eine neue Richtung brauchen.',
   },
   {
     href: '/it-service-wien',
@@ -36,10 +36,7 @@ const items = [
 
 export function BentoGrid() {
   return (
-    <section
-      className="alcor-section alcor-surface"
-      aria-labelledby="services-title"
-    >
+    <section className="alcor-section alcor-surface" aria-labelledby="services-title">
       <div className="container-fluid">
         <div className="alcor-section-head">
           <div>
@@ -51,22 +48,14 @@ export function BentoGrid() {
             </h2>
           </div>
           <p>
-            Neue Website, Relaunch, bessere Auffindbarkeit oder persönliche
-            PC-Hilfe: Sie sprechen direkt mit der Person, die Ihr Anliegen
-            prüft und umsetzt.
+            Neue Website, Relaunch, bessere Auffindbarkeit oder persönliche PC-Hilfe: Sie
+            sprechen direkt mit der Person, die Ihr Anliegen prüft und umsetzt.
           </p>
         </div>
         <div className={styles.grid}>
           {items.map((item) => (
-            <Link
-              className="alcor-service-card"
-              key={item.href}
-              href={item.href}
-            >
-              <div
-                className="alcor-service-image"
-                style={{ aspectRatio: '5 / 3' }}
-              >
+            <Link className="alcor-service-card" key={item.href} href={item.href}>
+              <div className="alcor-service-image" style={{ aspectRatio: '5 / 3' }}>
                 <Image
                   src={item.image}
                   alt=""

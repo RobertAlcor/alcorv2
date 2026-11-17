@@ -7,6 +7,7 @@ import { ProcessSection } from '@/components/sections/process-section'
 import { SelectedProjects } from '@/components/sections/selected-projects'
 import { CtaBand } from '@/components/sections/cta-band'
 import { ServiceSeoSection } from '@/components/sections/service-seo-section'
+import { SeoCareSection } from '@/components/sections/seo-care'
 
 const COPY = {
   'website-erstellung': {
@@ -21,8 +22,7 @@ const COPY = {
       'Responsive Darstellung, technische SEO und klare Anfragewege.',
       'Live-Vorschau, schriftlich vereinbarter Umfang und persönliche Übergabe.',
     ],
-    note:
-      'Das Basis-Paket enthält kein Kontaktformular, keine Animationen und keine Erstellung von Datenschutzerklärung oder anderen Rechtstexten. Erforderliche Inhalte stellt der Auftraggeber bereit.',
+    note: 'Das Basis-Paket enthält kein Kontaktformular, keine Animationen und keine Erstellung von Datenschutzerklärung oder anderen Rechtstexten. Erforderliche Inhalte stellt der Auftraggeber bereit.',
   },
   relaunch: {
     kind: 'strategy',
@@ -36,14 +36,13 @@ const COPY = {
       'Berücksichtigung bestehender URLs und nötiger Weiterleitungen.',
       'Live-Vorschau und gebündeltes Feedback innerhalb der vereinbarten Korrekturrunden.',
     ],
-    note:
-      'Ein Relaunch ist ein individuell vereinbartes Projekt. Aufwand, Zeitplan und einmaliger Preis ergeben sich aus dem festgelegten Leistungsumfang.',
+    note: 'Ein Relaunch ist ein individuell vereinbartes Projekt. Aufwand, Zeitplan und einmaliger Preis ergeben sich aus dem festgelegten Leistungsumfang.',
   },
   'seo-wien': {
     kind: 'technology',
     title: 'Verstanden werden. Gefunden werden.',
     intro:
-      'Technische SEO und klare Inhalte gehören zusammen. Ich arbeite an nachvollziehbaren Grundlagen Ihrer Website — ohne garantierte Rankings oder erfundene Erfolgszahlen.',
+      'Suchmaschinenoptimierung hilft Google und anderen Suchmaschinen, Ihr Angebot einzuordnen. Ich verbinde technische Verbesserungen mit Suchbegriffs- und Konkurrenzanalyse für Ihr Einzugsgebiet. Laufende Begleitung mit täglichen Kontrollen und wöchentlicher Übersicht: 299 € monatlich.',
     features: [
       'Prüfung der vereinbarten Seiten auf Indexierbarkeit und technische Hindernisse.',
       'Sinnvolle Seitentitel, Beschreibungen und Überschriftenstruktur.',
@@ -51,14 +50,12 @@ const COPY = {
       'Abstimmung von Mobilansicht, Bildauslieferung und Ladeverhalten.',
       'Priorisierte Maßnahmen und verständliche Dokumentation.',
     ],
-    note:
-      'Suchmaschinen entscheiden selbst über Rankings. Umfangreiche laufende SEO-Betreuung und neue Inhalte werden separat vereinbart.',
+    note: 'Einmalige Optimierungen und das monatliche 299-Euro-Service werden klar vereinbart. Suchmaschinen entscheiden selbst über Platzierungen; neue Inhalte und größere Umbauten werden gesondert abgestimmt.',
   },
 } as const
 
 export function ServiceDetailLayout({ service }: { service: Service }) {
-  const data =
-    COPY[service.slug as keyof typeof COPY] || COPY['website-erstellung']
+  const data = COPY[service.slug as keyof typeof COPY] || COPY['website-erstellung']
 
   return (
     <>
@@ -85,10 +82,7 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
             </Link>
           </div>
         </div>
-        <div
-          className="alcor-selection-image"
-          style={{ aspectRatio: '5 / 3' }}
-        >
+        <div className="alcor-selection-image" style={{ aspectRatio: '5 / 3' }}>
           <Image
             src={`/media/visual/${data.kind}`}
             alt={`Illustration: ${service.shortTitle}`}
@@ -100,6 +94,8 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
           />
         </div>
       </section>
+
+      {service.slug === 'seo-wien' && <SeoCareSection detailed />}
 
       <section className="alcor-surface">
         <div className="container-fluid alcor-section">
@@ -113,18 +109,18 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
               </h2>
             </div>
             <p>
-              Keine unbegrenzten Pauschalversprechen: Seiten, Funktionen und
-              Zeitplan stehen vor der Umsetzung im Vertrag.
+              Keine unbegrenzten Pauschalversprechen: Seiten, Funktionen und Zeitplan
+              stehen vor der Umsetzung im Vertrag.
             </p>
           </div>
           <ul className="max-w-5xl space-y-5">
             {data.features.map((feature) => (
               <li
                 key={feature}
-                className="flex gap-4 border-b border-line pb-5 text-lg text-paper-mute"
+                className="border-line text-paper-mute flex gap-4 border-b pb-5 text-lg"
               >
                 <Check
-                  className="mt-1 shrink-0 text-signal-2"
+                  className="text-signal-2 mt-1 shrink-0"
                   size={22}
                   aria-hidden="true"
                 />
@@ -133,8 +129,8 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
             ))}
           </ul>
           <p className="alcor-note mt-8 max-w-4xl">
-            {data.note} Aufgrund der Kleinunternehmerregelung wird keine
-            Umsatzsteuer verrechnet.
+            {data.note} Aufgrund der Kleinunternehmerregelung wird keine Umsatzsteuer
+            verrechnet.
           </p>
         </div>
       </section>
@@ -142,53 +138,49 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
       <SelectedProjects />
 
       {service.slug === 'website-erstellung' && (
-        <section className="container-fluid alcor-section border-t border-line">
+        <section className="container-fluid alcor-section border-line border-t">
           <div className="max-w-5xl">
             <p className="alcor-eyebrow">Homepage erstellen lassen · Wien</p>
-            <h2 className="mb-6 font-serif text-3xl text-paper md:text-4xl">
+            <h2 className="text-paper mb-6 font-serif text-3xl md:text-4xl">
               Drei klare Pakete. Ein schriftlich vereinbarter Umfang.
             </h2>
-            <p className="mb-8 text-lg text-paper-mute">
-              Eine professionelle Website muss Ihr Angebot verständlich
-              erklären, auf Mobilgeräten funktionieren und interessierte
-              Besucher zur passenden Kontaktmöglichkeit führen. Die Pakete
-              geben einen realistischen Preisrahmen; das Angebot hält den
-              tatsächlichen Umfang fest.
+            <p className="text-paper-mute mb-8 text-lg">
+              Eine professionelle Website muss Ihr Angebot verständlich erklären, auf
+              Mobilgeräten funktionieren und interessierte Besucher zur passenden
+              Kontaktmöglichkeit führen. Die Pakete geben einen realistischen Preisrahmen;
+              das Angebot hält den tatsächlichen Umfang fest.
             </p>
             <div className="grid gap-6 md:grid-cols-3">
               <div>
-                <h3 className="mb-3 font-serif text-2xl text-paper">
-                  Basis · 599 €
-                </h3>
+                <h3 className="text-paper mb-3 font-serif text-2xl">Basis · 599 €</h3>
                 <p className="text-paper-mute">
-                  Eine Seite mit bereitgestellten Texten und Bildern,
-                  responsiver Darstellung und Basis-SEO. Ohne Kontaktformular,
-                  Animationen oder Erstellung von Rechtstexten.
+                  Eine Seite mit bereitgestellten Texten und Bildern, responsiver
+                  Darstellung und Basis-SEO. Ohne Kontaktformular, Animationen oder
+                  Erstellung von Rechtstexten.
                 </p>
               </div>
               <div>
-                <h3 className="mb-3 font-serif text-2xl text-paper">
+                <h3 className="text-paper mb-3 font-serif text-2xl">
                   Business · ab 1.490 €
                 </h3>
                 <p className="text-paper-mute">
-                  Individuelles Design, bis zu fünf vereinbarte Seiten,
-                  Kontaktformular, technische SEO, Local-SEO-Grundlagen und
-                  strukturierte Daten.
+                  Individuelles Design, bis zu fünf vereinbarte Seiten, Kontaktformular,
+                  technische SEO, Local-SEO-Grundlagen und strukturierte Daten.
                 </p>
               </div>
               <div>
-                <h3 className="mb-3 font-serif text-2xl text-paper">
+                <h3 className="text-paper mb-3 font-serif text-2xl">
                   Premium · ab 2.490 €
                 </h3>
                 <p className="text-paper-mute">
-                  Strategie, bis zu zehn vereinbarte Seiten, vertiefte SEO/GEO
-                  und ein erweiterter Funktionsbereich nach Vereinbarung.
+                  Strategie, bis zu zehn vereinbarte Seiten, vertiefte SEO/GEO und ein
+                  erweiterter Funktionsbereich nach Vereinbarung.
                 </p>
               </div>
             </div>
-            <p className="mt-8 text-paper-mute">
-              Individuelle Web-Apps, Portale oder umfangreiche
-              Schnittstellenprojekte beginnen ab 3.900 €. Details zu den{' '}
+            <p className="text-paper-mute mt-8">
+              Individuelle Web-Apps, Portale oder umfangreiche Schnittstellenprojekte
+              beginnen ab 3.900 €. Details zu den{' '}
               <Link href="/preise" className="alcor-text-link">
                 Webdesign-Preisen in Wien
               </Link>
@@ -210,10 +202,7 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
                 15-Minuten-Erstgespräch
                 <ArrowUpRight size={20} aria-hidden="true" />
               </Link>
-              <Link
-                href="/bewerbung"
-                className="alcor-button alcor-button-outline"
-              >
+              <Link href="/bewerbung" className="alcor-button alcor-button-outline">
                 Projekt unverbindlich anfragen
               </Link>
             </div>

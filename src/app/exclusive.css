@@ -17,7 +17,7 @@
 .alcor-brand>span { font-size:30px;font-weight:700;line-height:1;letter-spacing:.28em; }
 .alcor-brand b { color:var(--color-signal-2); }
 .alcor-brand small { font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--color-paper-mute); }
-.alcor-navigation { display:flex;gap:clamp(22px,2.2vw,42px); }
+.alcor-navigation { display:flex;gap:clamp(14px,1.4vw,26px); }
 .alcor-navigation a { font-size:16px;color:var(--color-paper-mute);padding-block:18px;white-space:nowrap;transition:color .2s; }
 .alcor-navigation a:hover,.alcor-navigation a[aria-current='page'] { color:var(--color-signal-2); }
 .alcor-header-actions { display:flex;align-items:center;gap:16px; }

@@ -127,8 +127,7 @@ export const SERVICES: Service[] = [
     process: [
       {
         step: 'Bestandsaufnahme',
-        description:
-          'Wir prüfen Ziele, Inhalte und technische Voraussetzungen.',
+        description: 'Wir prüfen Ziele, Inhalte und technische Voraussetzungen.',
       },
       {
         step: 'Vereinbarung',
@@ -175,12 +174,12 @@ export const SERVICES: Service[] = [
   },
   {
     slug: 'seo-wien',
-    title: 'Technische SEO',
+    title: 'SEO & Local SEO',
     shortTitle: 'SEO',
-    h1: 'Technische SEO in Wien',
+    h1: 'SEO in Wien. Regional gefunden werden.',
     tagline: 'Verstanden werden. Gefunden werden.',
     description:
-      'Nachvollziehbare technische Grundlagen und klare Inhalte. Maßnahmen werden nach Relevanz und vereinbartem Umfang umgesetzt.',
+      'Technische Suchmaschinenoptimierung und regionale Sichtbarkeit. Laufende SEO-Betreuung mit täglichen Kontrollen und wöchentlicher Übersicht für 299 € monatlich.',
     href: '/leistungen/seo-wien',
     features: [
       'Indexierbarkeit prüfen',
@@ -207,8 +206,7 @@ export const SERVICES: Service[] = [
       },
       {
         step: 'Umsetzung',
-        description:
-          'Die beauftragten Anpassungen werden nachvollziehbar umgesetzt.',
+        description: 'Die beauftragten Anpassungen werden nachvollziehbar umgesetzt.',
       },
       {
         step: 'Kontrolle',
@@ -221,10 +219,7 @@ export const SERVICES: Service[] = [
       'Neue Business- und Premium-Projekte',
       'Klare Ziele und realistische Erwartungen',
     ],
-    notForWhom: [
-      'Garantierte Platzierungen',
-      'Garantierte Neukundenzahlen',
-    ],
+    notForWhom: ['Garantierte Platzierungen', 'Garantierte Neukundenzahlen'],
     faqs: [
       {
         question: 'Ist umfassende SEO im Basispreis enthalten?',

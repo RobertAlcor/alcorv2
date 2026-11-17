@@ -23,13 +23,15 @@ const pathways = {
   },
   seo: {
     href: '/leistungen/seo-wien',
-    label: 'Technische SEO',
-    description: 'Indexierbarkeit, Struktur, interne Links und lokale Sichtbarkeit verbessern.',
+    label: 'SEO & regionale Sichtbarkeit',
+    description:
+      'Tägliche Kontrollen, lokale Suchbegriffe und Google-Auswertungen. 299 € monatlich.',
   },
   it: {
     href: '/it-service-wien',
     label: 'PC-Hilfe & IT-Service',
-    description: 'Windows, PC-Einrichtung, E-Mail, WLAN, Drucker und Fernwartung in Wien.',
+    description:
+      'Windows, PC-Einrichtung, E-Mail, WLAN, Drucker und Fernwartung in Wien.',
   },
   websiteService: {
     href: '/website-service',
@@ -69,7 +71,7 @@ function selectPathways(pathname: string): Pathway[] {
   }
 
   if (pathname.startsWith('/preise')) {
-    return [pathways.website, pathways.it, pathways.references, pathways.contact]
+    return [pathways.website, pathways.seo, pathways.references, pathways.contact]
   }
 
   if (pathname.startsWith('/leistungen/seo-wien')) {
@@ -89,7 +91,7 @@ function selectPathways(pathname: string): Pathway[] {
   }
 
   if (pathname.startsWith('/blog')) {
-    return [pathways.website, pathways.it, pathways.references, pathways.contact]
+    return [pathways.website, pathways.seo, pathways.references, pathways.contact]
   }
 
   if (pathname.startsWith('/referenzen')) {
@@ -105,10 +107,10 @@ function selectPathways(pathname: string): Pathway[] {
     pathname.startsWith('/bewerbung') ||
     pathname.startsWith('/termin')
   ) {
-    return [pathways.website, pathways.it, pathways.prices, pathways.references]
+    return [pathways.website, pathways.seo, pathways.prices, pathways.references]
   }
 
-  return [pathways.website, pathways.it, pathways.prices, pathways.references]
+  return [pathways.website, pathways.seo, pathways.prices, pathways.references]
 }
 
 export function SitePathways() {
@@ -119,14 +121,14 @@ export function SitePathways() {
   const selected = selectPathways(pathname).filter(
     (item, index, items) =>
       item.href !== pathname &&
-      items.findIndex((candidate) => candidate.href === item.href) === index,
+      items.findIndex((candidate) => candidate.href === item.href) === index
   )
 
   if (selected.length === 0) return null
 
   return (
     <section
-      className="container-fluid border-t border-line py-14 md:py-18"
+      className="container-fluid border-line border-t py-14 md:py-18"
       aria-labelledby="site-pathways-title"
     >
       <div className="mb-7 max-w-3xl">
@@ -143,17 +145,17 @@ export function SitePathways() {
           <Link
             key={item.href}
             href={item.href}
-            className="group flex min-h-[170px] flex-col justify-between rounded-lg border border-line bg-deep-2 p-6 transition-colors hover:border-signal-2/60 focus-visible:border-signal-2"
+            className="group border-line bg-deep-2 hover:border-signal-2/60 focus-visible:border-signal-2 flex min-h-[170px] flex-col justify-between rounded-lg border p-6 transition-colors"
           >
             <div>
-              <h3 className="text-xl leading-tight text-paper transition-colors group-hover:text-signal-2">
+              <h3 className="text-paper group-hover:text-signal-2 text-xl leading-tight transition-colors">
                 {item.label}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-paper-mute">
+              <p className="text-paper-mute mt-3 text-sm leading-relaxed">
                 {item.description}
               </p>
             </div>
-            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-signal-2">
+            <span className="text-signal-2 mt-5 inline-flex items-center gap-2 text-sm font-semibold">
               Seite öffnen
               <ArrowRight size={16} aria-hidden="true" />
             </span>

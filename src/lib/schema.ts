@@ -1,4 +1,5 @@
 import { SITE } from './site'
+import { SEO_CARE } from './seo-care'
 import { COMPANY_PROFILE } from './company-profile'
 
 function minimumPriceSpecification(price: number) {
@@ -106,7 +107,7 @@ export function organizationSchema() {
     ].filter(Boolean),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'Webdesign- und IT-Leistungen',
+      name: 'Webdesign-, SEO- und IT-Leistungen',
       itemListElement: [
         {
           '@type': 'Offer',
@@ -127,9 +128,7 @@ export function organizationSchema() {
           '@type': 'Offer',
           name: 'Business-Website ab 1.490 €',
           url: `${SITE.url}/preise`,
-          priceSpecification: minimumPriceSpecification(
-            SITE.pricing.businessFrom,
-          ),
+          priceSpecification: minimumPriceSpecification(SITE.pricing.businessFrom),
           itemOffered: {
             '@type': 'Service',
             '@id': `${SITE.url}/leistungen/website-erstellung#business-website`,
@@ -143,9 +142,7 @@ export function organizationSchema() {
           '@type': 'Offer',
           name: 'Premium-Website ab 2.490 €',
           url: `${SITE.url}/preise`,
-          priceSpecification: minimumPriceSpecification(
-            SITE.pricing.premiumFrom,
-          ),
+          priceSpecification: minimumPriceSpecification(SITE.pricing.premiumFrom),
           itemOffered: {
             '@type': 'Service',
             '@id': `${SITE.url}/leistungen/website-erstellung#premium-website`,
@@ -182,6 +179,27 @@ export function organizationSchema() {
             '@type': 'Service',
             name: 'SEO Wien',
             url: `${SITE.url}/leistungen/seo-wien`,
+          },
+        },
+        {
+          '@type': 'Offer',
+          name: SEO_CARE.title,
+          url: `${SITE.url}${SEO_CARE.path}`,
+          price: SEO_CARE.amount,
+          priceCurrency: 'EUR',
+          priceSpecification: {
+            '@type': 'UnitPriceSpecification',
+            price: SEO_CARE.amount,
+            priceCurrency: 'EUR',
+            unitText: 'Monat',
+          },
+          itemOffered: {
+            '@type': 'Service',
+            '@id': `${SITE.url}/leistungen/seo-wien#seo-betreuung`,
+            name: SEO_CARE.title,
+            description:
+              'Laufende SEO-Betreuung für eine Website und ein vereinbartes Einzugsgebiet. LinkedIn optional nach Vereinbarung.',
+            url: `${SITE.url}${SEO_CARE.path}`,
           },
         },
         {

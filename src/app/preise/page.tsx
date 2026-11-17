@@ -7,6 +7,7 @@ import { CtaBand } from '@/components/sections/cta-band'
 import { ProcessSection } from '@/components/sections/process-section'
 import { PriceTransparency } from '@/components/sections/price-transparency'
 import { PAGE_META } from '@/lib/seo-metadata'
+import { SeoCareSection } from '@/components/sections/seo-care'
 
 export const metadata = PAGE_META.preise
 
@@ -22,7 +23,7 @@ export default function PreisePage() {
       <section className="container-fluid alcor-section">
         <div className="alcor-section-head">
           <div>
-            <p className="alcor-eyebrow">Pakete & einmalige Preise</p>
+            <p className="alcor-eyebrow">Webdesign-Pakete & laufende SEO-Betreuung</p>
             <h1 className="alcor-page-title">
               Webdesign Preise in Wien.
               <br />
@@ -30,18 +31,15 @@ export default function PreisePage() {
             </h1>
           </div>
           <p>
-            Basis 599 € fix, Business ab 1.490 € und Premium ab 2.490 €.
-            Individuelle Web-Apps und Sonderentwicklungen beginnen ab 3.900 €.
-            Der endgültige Umfang steht vor Projektbeginn schriftlich fest.
+            Basis 599 € fix, Business ab 1.490 € und Premium ab 2.490 €. Individuelle
+            Web-Apps und Sonderentwicklungen beginnen ab 3.900 €. Der endgültige Umfang
+            steht vor Projektbeginn schriftlich fest.
           </p>
         </div>
         <PricingCards />
-        <p className="mt-8 max-w-3xl text-paper-mute">
+        <p className="text-paper-mute mt-8 max-w-3xl">
           Welche Leistungen sind in welchem Website-Paket enthalten?{' '}
-          <Link
-            href="/leistungen/website-erstellung"
-            className="alcor-text-link"
-          >
+          <Link href="/leistungen/website-erstellung" className="alcor-text-link">
             Website-Erstellung und Leistungsumfang im Detail ansehen
           </Link>
           . Zur individuellen Planung können Sie ein{' '}
@@ -52,7 +50,9 @@ export default function PreisePage() {
         </p>
       </section>
 
-      <section className="container-fluid alcor-section border-t border-line">
+      <SeoCareSection />
+
+      <section className="container-fluid alcor-section border-line border-t">
         <div className="alcor-section-head">
           <div>
             <p className="alcor-eyebrow">PC-Hilfe & IT-Service</p>
@@ -63,9 +63,9 @@ export default function PreisePage() {
             </h2>
           </div>
           <p>
-            Vor Ort in Wien ohne eigene Anfahrtskosten oder per Fernwartung.
-            Außerhalb Wiens wird Kilometergeld vor dem Termin vereinbart.
-            Hardware-Reparaturen sind nicht Teil des Angebots.
+            Vor Ort in Wien ohne eigene Anfahrtskosten oder per Fernwartung. Außerhalb
+            Wiens wird Kilometergeld vor dem Termin vereinbart. Hardware-Reparaturen sind
+            nicht Teil des Angebots.
           </p>
         </div>
         <div className="alcor-notes-grid">
@@ -79,17 +79,11 @@ export default function PreisePage() {
           </div>
           <div>
             <h3>Windows-Installation</h3>
-            <p>
-              Ab 99 € für Installation und Grundeinrichtung; Lizenz nicht
-              enthalten.
-            </p>
+            <p>Ab 99 € für Installation und Grundeinrichtung; Lizenz nicht enthalten.</p>
           </div>
           <div>
             <h3>WLAN, Drucker & Backup</h3>
-            <p>
-              Ab 69 € beziehungsweise ab 79 €, abhängig von Geräten und
-              Datenmenge.
-            </p>
+            <p>Ab 69 € beziehungsweise ab 79 €, abhängig von Geräten und Datenmenge.</p>
           </div>
         </div>
         <Link href="/it-service-wien" className="alcor-text-link mt-8">
@@ -100,10 +94,7 @@ export default function PreisePage() {
 
       <section className="alcor-surface">
         <div className="container-fluid alcor-section alcor-selection">
-          <div
-            className="alcor-selection-image"
-            style={{ aspectRatio: '5 / 3' }}
-          >
+          <div className="alcor-selection-image" style={{ aspectRatio: '5 / 3' }}>
             <Image
               src="/media/visual/strategy"
               alt="Illustration einer strukturierten Projektplanung"
@@ -121,9 +112,9 @@ export default function PreisePage() {
               steht die Vereinbarung.
             </h2>
             <p className="alcor-intro">
-              Zwischen Ihnen und ALCOR wird ein Vertrag geschlossen. Darin
-              stehen Leistungen, Zeitrahmen, Mitwirkungspflichten, Abnahme und
-              die Anzahl der Korrekturrunden.
+              Zwischen Ihnen und ALCOR wird ein Vertrag geschlossen. Darin stehen
+              Leistungen, Zeitrahmen, Mitwirkungspflichten, Abnahme und die Anzahl der
+              Korrekturrunden.
             </p>
             <ul className="alcor-contract-list">
               <li>
@@ -137,8 +128,8 @@ export default function PreisePage() {
               <li>
                 <strong>Bis 5×</strong>
                 <span>
-                  Vereinbarte Korrekturrunden innerhalb des freigegebenen
-                  Konzepts. Kein vollständiges Redesign.
+                  Vereinbarte Korrekturrunden innerhalb des freigegebenen Konzepts. Kein
+                  vollständiges Redesign.
                 </span>
               </li>
             </ul>

@@ -5,15 +5,15 @@ import { getPublishedBezirke } from '@/lib/bezirke'
 import { CASES } from '@/lib/cases'
 
 const STATIC_ROUTE_LAST_MODIFIED: Record<string, string> = {
-  '': '2026-11-14',
+  '': '2026-11-17',
   '/bewerbung': '2026-11-13',
-  '/leistungen': '2026-11-14',
+  '/leistungen': '2026-11-17',
   '/leistungen/website-erstellung': '2026-11-13',
   '/leistungen/relaunch': '2026-11-02',
-  '/leistungen/seo-wien': '2026-11-02',
+  '/leistungen/seo-wien': '2026-11-17',
   '/it-service-wien': '2026-11-14',
   '/referenzen': '2026-11-02',
-  '/preise': '2026-11-14',
+  '/preise': '2026-11-17',
   '/termin': '2026-11-02',
   '/kontakt': '2026-11-14',
 }
@@ -63,13 +63,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter(([, count]) => count >= 2)
     .map(([tag]) => tag)
 
-  const latestPostModified = posts.reduce<Date | undefined>(
-    (latest, post) => {
-      const modified = new Date(post.dateModified || post.date)
-      return !latest || modified > latest ? modified : latest
-    },
-    undefined,
-  )
+  const latestPostModified = posts.reduce<Date | undefined>((latest, post) => {
+    const modified = new Date(post.dateModified || post.date)
+    return !latest || modified > latest ? modified : latest
+  }, undefined)
 
   const entries: MetadataRoute.Sitemap = [
     ...routes.map((path) => ({
@@ -87,9 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const projectModified = PROJECT_LAST_MODIFIED[project.slug]
       return {
         url: `${SITE.url}${project.url}`,
-        lastModified: projectModified
-          ? new Date(projectModified)
-          : undefined,
+        lastModified: projectModified ? new Date(projectModified) : undefined,
         changeFrequency: 'monthly' as const,
         priority: 0.7,
       }

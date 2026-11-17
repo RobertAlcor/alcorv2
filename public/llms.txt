@@ -14,7 +14,7 @@ Dieses optionale Textverzeichnis verweist auf die öffentlichen Originalseiten. 
 ## Webdesign, SEO und Zusammenarbeit
 - [Website erstellen lassen in Wien](https://webdesign-alcor.at/leistungen/website-erstellung).
 - [Website-Relaunch](https://webdesign-alcor.at/leistungen/relaunch).
-- [Technische SEO](https://webdesign-alcor.at/leistungen/seo-wien).
+- [SEO und lokale Sichtbarkeit](https://webdesign-alcor.at/leistungen/seo-wien).
 - [Website-Betreuung](https://webdesign-alcor.at/website-betreuung).
 - [Pakete und Preise](https://webdesign-alcor.at/preise).
 - [Projektanfrage](https://webdesign-alcor.at/bewerbung): kostenlos und unverbindlich, keine automatische Beauftragung.
@@ -57,3 +57,7 @@ ALCOR führt keine Hardware-Reparaturen, Lötarbeiten, Bauteilwechsel oder physi
 - [Webdesigner auswählen](https://webdesign-alcor.at/blog/webdesigner-wien-auswaehlen).
 - [GEO und KI-Suche](https://webdesign-alcor.at/blog/geo-ai-search-google-2026): Grundlagen, Crawler, Quellen und Grenzen.
 - [XML-Sitemap](https://webdesign-alcor.at/sitemap.xml).
+
+## Laufende SEO-Betreuung
+
+299 € pro Monat für eine bestehende Website und ein vereinbartes Einzugsgebiet: tägliche automatisierte technische Kontrollen der vereinbarten Seiten, Auswertung freigegebener Google-Analytics-4- und Search-Console-Konten, Suchbegriffs- und regionale Konkurrenzanalyse sowie eine wöchentliche Übersicht mit vorhandenen Interessenten. LinkedIn optional mit freigegebenem Profil und vereinbartem Umfang. Keine feste Anzahl an Interessenten oder Ranking-Garantie. Details: https://webdesign-alcor.at/leistungen/seo-wien#seo-betreuung

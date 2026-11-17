@@ -3,7 +3,7 @@ export const SITE = {
   brand: 'ALCOR Group',
   domain: 'webdesign-alcor.at',
   url: 'https://webdesign-alcor.at',
-  tagline: 'Webentwicklung und persönlicher IT-Service aus Wien',
+  tagline: 'Webdesign, SEO und persönlicher IT-Service aus Wien',
   founder: {
     name: 'Robert Alchimowicz',
     role: 'Webentwickler & SEO-Spezialist',
@@ -115,7 +115,8 @@ export const SISTER_SITES = [
 
 export const NAV = {
   main: [
-    { label: 'Leistungen', href: '/leistungen' },
+    { label: 'Webdesign', href: '/leistungen/website-erstellung' },
+    { label: 'SEO', href: '/leistungen/seo-wien' },
     { label: 'IT-Service', href: '/it-service-wien' },
     { label: 'Referenzen', href: '/referenzen' },
     { label: 'Preise', href: '/preise' },

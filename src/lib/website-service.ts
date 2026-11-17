@@ -1,4 +1,5 @@
 import { getItService } from './it-service'
+import { SEO_CARE } from './seo-care'
 
 export type WebsiteServiceKey = 'soforthilfe' | 'betreuung'
 
@@ -139,12 +140,10 @@ export const WEBSITE_SERVICES: Record<WebsiteServiceKey, WebsiteService> = {
   },
 }
 
-export const WEBSITE_SERVICE_KEYS: WebsiteServiceKey[] = [
-  'soforthilfe',
-  'betreuung',
-]
+export const WEBSITE_SERVICE_KEYS: WebsiteServiceKey[] = ['soforthilfe', 'betreuung']
 
 export function getWebsiteService(value: string | null | undefined) {
+  if (value === SEO_CARE.key) return SEO_CARE
   if (value === 'soforthilfe' || value === 'betreuung') {
     return WEBSITE_SERVICES[value]
   }

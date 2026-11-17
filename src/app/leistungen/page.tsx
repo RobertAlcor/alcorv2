@@ -3,6 +3,7 @@ import { BentoGrid } from '@/components/sections/bento-grid'
 import { ProcessSection } from '@/components/sections/process-section'
 import { CtaBand } from '@/components/sections/cta-band'
 import { PAGE_META } from '@/lib/seo-metadata'
+import { SeoCareSection } from '@/components/sections/seo-care'
 
 export const metadata = PAGE_META.leistungen
 
@@ -23,12 +24,13 @@ export default function LeistungenPage() {
           <span className="text-signal-2">Eine passende Lösung.</span>
         </h1>
         <p className="alcor-intro">
-          Von Website-Erstellung und technischer SEO bis zur persönlichen
-          PC-Hilfe in Wien. Umfang, Preis, Termin und Leistungsgrenzen werden
-          vor Beginn transparent vereinbart.
+          Von Website-Erstellung und technischer SEO bis zur persönlichen PC-Hilfe in
+          Wien. Umfang, Preis, Termin und Leistungsgrenzen werden vor Beginn transparent
+          vereinbart.
         </p>
       </section>
       <BentoGrid />
+      <SeoCareSection />
       <ProcessSection />
       <CtaBand />
     </>

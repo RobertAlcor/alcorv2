@@ -6,7 +6,8 @@ import { ArrowUpRight } from 'lucide-react'
 import { MobileMenu } from './mobile-menu'
 
 const nav = [
-  ['Leistungen', '/leistungen'],
+  ['Webdesign', '/leistungen/website-erstellung'],
+  ['SEO', '/leistungen/seo-wien'],
   ['Website-Service', '/website-service'],
   ['IT-Service', '/it-service-wien'],
   ['Projekte', '/referenzen'],
@@ -21,15 +22,11 @@ export function Header() {
   return (
     <header className="alcor-header">
       <div className="container-fluid alcor-header-inner">
-        <Link
-          href="/"
-          className="alcor-brand"
-          aria-label="ALCOR – Startseite"
-        >
+        <Link href="/" className="alcor-brand" aria-label="ALCOR – Startseite">
           <span>
             <b>A</b>LCOR
           </span>
-          <small>Web Development & IT Service</small>
+          <small>Webdesign · SEO · IT-Service</small>
         </Link>
         <nav aria-label="Hauptnavigation" className="alcor-navigation">
           {nav.map(([label, href]) => (
@@ -41,9 +38,7 @@ export function Header() {
                   ? 'page'
                   : path.startsWith(`${href}/`) ||
                       (href === '/website-service' &&
-                        ['/website-soforthilfe', '/website-betreuung'].includes(
-                          path,
-                        ))
+                        ['/website-soforthilfe', '/website-betreuung'].includes(path))
                     ? 'location'
                     : undefined
               }

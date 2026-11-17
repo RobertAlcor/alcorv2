@@ -33,9 +33,9 @@ export function pageMetadata(args: {
 
 export const PAGE_META = {
   home: pageMetadata({
-    title: 'Webdesign Wien | Individuelle Websites von ALCOR',
+    title: 'Webdesign & SEO Wien | Individuell von ALCOR',
     description:
-      'Individuelles Webdesign aus Wien. Basis 599 €, Business ab 1.490 €, Premium ab 2.490 €. Persönliche Entwicklung, klare Pakete und technische SEO.',
+      'Webdesign und SEO aus Wien: individuelle Websites, technische und lokale Suchmaschinenoptimierung. Laufende SEO-Betreuung für 299 € monatlich.',
     path: '/',
   }),
   leistungen: pageMetadata({
@@ -57,9 +57,9 @@ export const PAGE_META = {
     path: '/leistungen/relaunch',
   }),
   seoWien: pageMetadata({
-    title: 'Technische SEO Wien | Struktur & Sichtbarkeit | ALCOR',
+    title: 'SEO & Local SEO Wien | Betreuung 299 €/Monat | ALCOR',
     description:
-      'Technische Suchmaschinenoptimierung: verständliche Inhalte, interne Verlinkung, Metadaten und Performance. Nachvollziehbare Maßnahmen statt Ranking-Garantien.',
+      'SEO in Wien: tägliche Kontrollen, Google-Auswertungen, Keyword- und Konkurrenzanalyse für Ihr Einzugsgebiet. Betreuung 299 € monatlich; LinkedIn optional.',
     path: '/leistungen/seo-wien',
   }),
   itService: pageMetadata({
@@ -106,8 +106,7 @@ export const PAGE_META = {
   }),
   impressum: pageMetadata({
     title: 'Impressum',
-    description:
-      'Angaben zum Anbieter Webdesign Alcor – Robert Alchimowicz, Wien.',
+    description: 'Angaben zum Anbieter Webdesign Alcor – Robert Alchimowicz, Wien.',
     path: '/impressum',
   }),
   datenschutz: pageMetadata({

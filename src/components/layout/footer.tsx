@@ -4,8 +4,12 @@ import { SITE, NAV } from '@/lib/site'
 
 const webLinks = [
   { label: 'Website erstellen lassen', href: '/leistungen/website-erstellung' },
+  { label: 'SEO & Local SEO', href: '/leistungen/seo-wien' },
+  {
+    label: 'SEO-Betreuung · 299 € monatlich',
+    href: '/leistungen/seo-wien#seo-betreuung',
+  },
   { label: 'Website-Relaunch', href: '/leistungen/relaunch' },
-  { label: 'Technische SEO', href: '/leistungen/seo-wien' },
   { label: 'Website-Service', href: '/website-service' },
   { label: 'Website-Soforthilfe', href: '/website-soforthilfe' },
   { label: 'Website-Betreuung', href: '/website-betreuung' },
@@ -64,7 +68,7 @@ function FooterLinkList({
           <Link
             key={item.href}
             href={item.href}
-            className="flex min-h-[40px] items-center text-sm leading-snug text-paper-mute hover:text-signal-2"
+            className="text-paper-mute hover:text-signal-2 flex min-h-[40px] items-center text-sm leading-snug"
           >
             {item.label}
           </Link>
@@ -76,37 +80,33 @@ function FooterLinkList({
 
 export function Footer() {
   return (
-    <footer className="mt-20 border-t border-line bg-deep">
+    <footer className="border-line bg-deep mt-20 border-t">
       <div className="container-fluid grid gap-12 py-14 sm:grid-cols-2 xl:grid-cols-[1.15fr_repeat(3,minmax(0,1fr))]">
         <div>
-          <Link
-            href="/"
-            className="alcor-brand"
-            aria-label="ALCOR Startseite"
-          >
+          <Link href="/" className="alcor-brand" aria-label="ALCOR Startseite">
             <span>
               <b>A</b>LCOR
             </span>
-            <small>Web Development & IT Service</small>
+            <small>Webdesign · SEO · IT-Service</small>
           </Link>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-paper-mute">
-            Persönliche Webentwicklung und PC-Hilfe aus Wien. Websites,
-            technische SEO und klar vereinbarter IT-Service aus einer Hand.
+          <p className="text-paper-mute mt-6 max-w-md text-base leading-relaxed">
+            Webdesign und Suchmaschinenoptimierung aus Wien. Individuelle Websites,
+            regionale Sichtbarkeit und persönlicher IT-Service.
           </p>
           <div className="mt-5 flex flex-col items-start gap-2">
             <a
               href={`mailto:${SITE.contact.email}`}
-              className="min-h-[40px] text-sm text-paper-mute hover:text-signal-2"
+              className="text-paper-mute hover:text-signal-2 min-h-[40px] text-sm"
             >
               {SITE.contact.email}
             </a>
             <a
               href={`tel:${SITE.contact.phoneRaw}`}
-              className="min-h-[40px] text-sm text-paper-mute hover:text-signal-2"
+              className="text-paper-mute hover:text-signal-2 min-h-[40px] text-sm"
             >
               {SITE.contact.phoneFormatted}
             </a>
-            <p className="text-sm text-paper-mute">
+            <p className="text-paper-mute text-sm">
               {SITE.address.street}
               <br />
               {SITE.address.postalCode} {SITE.address.city}
@@ -123,17 +123,13 @@ export function Footer() {
         <FooterLinkList title="Orientierung" links={orientationLinks} />
       </div>
 
-      <div className="container-fluid flex flex-wrap items-center justify-between gap-5 border-t border-line py-7 text-sm text-paper-mute">
+      <div className="container-fluid border-line text-paper-mute flex flex-wrap items-center justify-between gap-5 border-t py-7 text-sm">
         <p>
           © {new Date().getFullYear()} {SITE.name}. Robert Alchimowicz.
         </p>
         <nav aria-label="Rechtliche Informationen" className="flex gap-6">
           {NAV.legal.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="py-2 hover:text-signal-2"
-            >
+            <Link key={item.href} href={item.href} className="hover:text-signal-2 py-2">
               {item.label}
             </Link>
           ))}

@@ -12,6 +12,7 @@ import { CtaBand } from '@/components/sections/cta-band'
 import { PostCard } from '@/components/blog/post-card'
 import { getAllPosts } from '@/lib/blog'
 import { PAGE_META } from '@/lib/seo-metadata'
+import { SeoCareSection } from '@/components/sections/seo-care'
 
 export const metadata = PAGE_META.home
 
@@ -30,6 +31,7 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
+      <SeoCareSection />
       <SelectedProjects />
       <BentoGrid />
       <WebsiteServicesSection />
@@ -49,9 +51,9 @@ export default async function HomePage() {
               </h2>
             </div>
             <p>
-              Basis kostet 599 € fix, Business beginnt bei 1.490 € und Premium
-              bei 2.490 €. Leistungen und Zusatzkosten werden vor Projektbeginn
-              schriftlich festgehalten.
+              Basis kostet 599 € fix, Business beginnt bei 1.490 € und Premium bei 2.490
+              €. Leistungen und Zusatzkosten werden vor Projektbeginn schriftlich
+              festgehalten.
             </p>
           </div>
           <PricingCards />

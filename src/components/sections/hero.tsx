@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, ArrowRight, Clock3 } from 'lucide-react'
+import { ArrowUpRight, ArrowRight, Search } from 'lucide-react'
 import { POSITIONING } from '@/lib/positioning'
 
 export function Hero() {
@@ -31,15 +31,15 @@ export function Hero() {
             <span className="alcor-dot" /> Webentwicklung · SEO · IT-Service
           </p>
           <h1>
-            Webdesign Wien.
+            Webdesign in Wien.
             <br />
-            <span>Gut aussehen ist erst der Anfang.</span>
+            <span>SEO mit klarem Plan.</span>
           </h1>
           <p className="alcor-intro">
-            Verstehen Besucher sofort, warum sie gerade Sie anfragen sollten?
-            Ich entwickle Websites für Unternehmen, Praxen und Dienstleister,
-            die ihr Angebot klar erklären, Vertrauen aufbauen und den Kontakt
-            einfach machen. Persönlich umgesetzt von Robert Alchimowicz.
+            Eine klare Website macht Ihr Angebot verständlich. SEO –
+            Suchmaschinenoptimierung – hilft Suchmaschinen, es einzuordnen. Ich verbinde
+            individuelles Webdesign mit technischer und lokaler SEO für Unternehmen,
+            Praxen und Dienstleister. Persönlich umgesetzt von Robert Alchimowicz.
           </p>
           <div className="alcor-actions">
             <Link className="alcor-button" href={POSITIONING.applicationHref}>
@@ -48,18 +48,22 @@ export function Hero() {
             </Link>
             <Link
               className="alcor-button alcor-button-outline"
-              href={POSITIONING.callHref}
+              href="/leistungen/seo-wien#seo-betreuung"
             >
-              <Clock3 size={20} aria-hidden="true" />
-              15 Minuten kennenlernen
+              <Search size={20} aria-hidden="true" />
+              SEO · 299 € monatlich
             </Link>
           </div>
           <p className="alcor-note">
-            Eine kurze Beschreibung Ihrer Idee genügt. Ihre Projektanfrage ist
-            kostenlos und unverbindlich – noch kein Auftrag.
+            Eine kurze Beschreibung Ihrer Idee genügt. Ihre Projektanfrage ist kostenlos
+            und unverbindlich – noch kein Auftrag.
           </p>
           <div className="alcor-hero-footer">
             <span>ALCOR · Robert Alchimowicz · 1220 Wien</span>
+            <Link href={POSITIONING.callHref}>
+              15 Minuten kennenlernen
+              <ArrowRight size={17} aria-hidden="true" />
+            </Link>
             <Link href="/preise">
               Pakete & einmalige Preise
               <ArrowRight size={17} aria-hidden="true" />
