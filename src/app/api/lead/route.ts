@@ -76,16 +76,12 @@ export async function POST(req: NextRequest) {
       console.error('Supabase insert error:', dbError)
     }
 
-    // Die bestehende Mailvorlage verwendet einen engeren Themenkatalog.
-    // IT-Service bleibt in der Datenbank separat auswertbar; in der Mail
-    // identifiziert der vorausgefüllte Angebotstitel die konkrete Leistung.
-    const mailTopic = data.topic === 'it-service' ? 'other' : data.topic
     const leadForMail = {
       name: data.name,
       email: data.email,
       phone: data.phone,
       company: data.company,
-      topic: mailTopic,
+      topic: data.topic,
       message: data.message,
       website: data.website,
       package_interest: data.package_interest,
