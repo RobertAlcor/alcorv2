@@ -15,7 +15,7 @@
   "src/content/blog/wordpress-oder-handcodiert-2026.mdx": "fa58da127a9b7c9f20b46ba3d28a4d75962562be44157528f6768c6435452145",
   "src/lib/bezirke.ts": "5559cab34195be8918a25c2fab93c8709c62ca6719440f936d8695d93a1b0d36",
   "src/lib/booking.ts": "e785fb66f55bad6def1f260c346f69801872b407c5a8cc04c594f31618316809",
-  "src/lib/mail.ts": "54188c139a8f3146876ce6bc2eee6d49306ecab9e519d74671478d516e74c0b5",
+  "src/lib/mail.ts": "65d259e9631b30d2b363909355bd56bd647a3ca45e9e88716be6722b46f8f34e",
   "src/lib/related-pages.ts": "bd1677172019cff08e11d4a5647b1fa1de72359406d7e15cbddf4d66b53d5264",
   "src/lib/services.ts": "25f29327ac81443f91d3aadd33683330f840540393b90bf85265e5f843fdf914",
   "src/lib/validation.ts": "f709f5cd48fe84ea3c168a1754ed8cdf8fe669c9808eb2edb50dbb3e44cf08c7"

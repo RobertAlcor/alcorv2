@@ -19,6 +19,7 @@ const TOPIC_LABEL: Record<Lead['topic'], string> = {
   'new-website': 'Neue Website erstellen',
   relaunch: 'Bestehende Website überarbeiten',
   seo: 'SEO / Sichtbarkeit',
+  'it-service': 'IT-Service / PC-Hilfe',
   other: 'Sonstiges',
 }
 
