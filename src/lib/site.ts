@@ -1,6 +1,6 @@
 export const SITE = {
   name: 'Webdesign Alcor',
-  brand: 'ALCOR Group',
+  brand: 'WebDesign Alcor',
   domain: 'webdesign-alcor.at',
   url: 'https://webdesign-alcor.at',
   tagline: 'Webdesign, SEO und persönlicher IT-Service aus Wien',
