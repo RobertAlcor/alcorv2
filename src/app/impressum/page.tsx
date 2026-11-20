@@ -23,7 +23,7 @@ export default function ImpressumPage() {
       eyebrow="Rechtliches"
       title="Impressum"
       subtitle="Angaben gemäß §5 ECG und §25 MedienG"
-      lastUpdated="21. September 2026"
+      lastUpdated="20. November 2026"
       breadcrumbs={[
         { label: 'Start', href: '/' },
         { label: 'Impressum', href: '/impressum' },
@@ -39,8 +39,7 @@ export default function ImpressumPage() {
           phone="+43 664 99 124 999"
         />
         <P>
-          Tätig unter der Bezeichnung <Strong>Alcor Group</Strong> bzw.{' '}
-          <Strong>Webdesign Alcor</Strong>.
+          Tätig unter der Bezeichnung <Strong>WebDesign Alcor</Strong>.
         </P>
       </Section>
 
