@@ -364,9 +364,9 @@ export const CASES: Case[] = [
         "hint": "läuft im Browser"
       }
     ],
-    "businessNote": "Takt ist ein eigenes Produkt der WebDesign Alcor. Es zeigt, was über eine klassische Website hinaus möglich ist: Wenn Ihr Betrieb einen Ablauf hat, der in keine Standardsoftware passt, baue ich die passende Web-Anwendung.",
+    "businessNote": "Takt ist ein eigenes Produkt von WebDesign Alcor. Es zeigt, was über eine klassische Website hinaus möglich ist: Wenn Ihr Betrieb einen Ablauf hat, der in keine Standardsoftware passt, baue ich die passende Web-Anwendung.",
     "metaTitle": "Referenz: Takt – Software für Reinigungsbetriebe",
-    "metaDescription": "Eigenes Produkt der WebDesign Alcor: Dienstplan, Zeiterfassung per QR-Code, Mitarbeiter-App, Kundenportal und Rechnungen für österreichische Reinigungsbetriebe."
+    "metaDescription": "Eigenes Produkt von WebDesign Alcor: Dienstplan, Zeiterfassung per QR-Code, Mitarbeiter-App, Kundenportal und Rechnungen für österreichische Reinigungsbetriebe."
   },
   {
     "slug": "alcorleads",
@@ -424,7 +424,7 @@ export const CASES: Case[] = [
       }
     ],
     "metaTitle": "Referenz: AlcorLeads – eigene Web-Anwendung für Leads",
-    "metaDescription": "AlcorLeads ist eine eigene, handgeschriebene Web-Anwendung der WebDesign Alcor zur Lead-Verwaltung – in PHP, ohne Framework, gehostet in Österreich."
+    "metaDescription": "AlcorLeads ist eine eigene, handgeschriebene Web-Anwendung von WebDesign Alcor zur Lead-Verwaltung – in PHP, ohne Framework, gehostet in Österreich."
   },
   {
     "slug": "psychologen-webdesign",
@@ -437,7 +437,7 @@ export const CASES: Case[] = [
     "brandColor": "#7C3AED",
     "brandColorAccent": "#C4B5FD",
     "screenshot": "/referenzen/psychologen-webdesign.webp",
-    "shortDescription": "Spezialisierte Landing-Page für Psycholog:innen und Psychotherapeut:innen in Wien. Eigene Marke der WebDesign Alcor mit klarem Starter-Paket um € 599,–.",
+    "shortDescription": "Spezialisierte Landing-Page für Psycholog:innen und Psychotherapeut:innen in Wien. Eigene Marke von WebDesign Alcor mit klarem Starter-Paket um € 599,–.",
     "tags": [
       "Eigene Marke",
       "Local SEO",
@@ -489,9 +489,9 @@ export const CASES: Case[] = [
         "hint": "für die lokale Suche"
       }
     ],
-    "businessNote": "Die Marke psychologen-webdesign.at ist Teil der WebDesign Alcor und richtet sich gezielt an Therapeut:innen mit eigener Praxis. Das Starter-Paket ist auf die typischen Anforderungen abgestimmt – Therapie-Spektrum, Termine, Anfahrt, Hinweise zur Kostenübernahme.",
+    "businessNote": "Die Marke psychologen-webdesign.at gehört zu WebDesign Alcor und richtet sich gezielt an Therapeut:innen mit eigener Praxis. Das Starter-Paket ist auf die typischen Anforderungen abgestimmt – Therapie-Spektrum, Termine, Anfahrt, Hinweise zur Kostenübernahme.",
     "metaTitle": "Referenz: psychologen-webdesign.at – Marke für Praxis-Websites",
-    "metaDescription": "Spezialisierte Landing-Page für Psycholog:innen und Psychotherapeut:innen in Wien. Eigene Marke der WebDesign Alcor mit Starter-Paket um € 599,–."
+    "metaDescription": "Spezialisierte Landing-Page für Psycholog:innen und Psychotherapeut:innen in Wien. Eigene Marke von WebDesign Alcor mit Starter-Paket um € 599,–."
   }
 ]
 
