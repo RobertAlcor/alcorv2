@@ -12,16 +12,19 @@ const STATIC_ROUTE_LAST_MODIFIED: Record<string, string> = {
   '/leistungen/relaunch': '2026-11-02',
   '/leistungen/seo-wien': '2026-11-17',
   '/it-service-wien': '2026-11-14',
-  '/referenzen': '2026-11-02',
+  '/referenzen': '2026-11-22',
   '/preise': '2026-11-17',
   '/termin': '2026-11-02',
   '/kontakt': '2026-11-14',
+  '/impressum': '2026-11-20',
 }
 
 const PROJECT_LAST_MODIFIED: Record<string, string> = {
   'massagewelt-wien': '2026-11-02',
   cleankos: '2026-11-02',
   etikettendruck24: '2026-11-02',
+  alcorleads: '2026-11-22',
+  'psychologen-webdesign': '2026-11-22',
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
