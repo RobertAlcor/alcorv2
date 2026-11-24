@@ -5,14 +5,14 @@ import { getPublishedBezirke } from '@/lib/bezirke'
 import { CASES } from '@/lib/cases'
 
 const STATIC_ROUTE_LAST_MODIFIED: Record<string, string> = {
-  '': '2026-11-17',
+  '': '2026-11-24',
   '/bewerbung': '2026-11-13',
   '/leistungen': '2026-11-17',
   '/leistungen/website-erstellung': '2026-11-13',
   '/leistungen/relaunch': '2026-11-02',
   '/leistungen/seo-wien': '2026-11-24',
   '/it-service-wien': '2026-11-14',
-  '/referenzen': '2026-11-22',
+  '/referenzen': '2026-11-24',
   '/preise': '2026-11-17',
   '/termin': '2026-11-02',
   '/kontakt': '2026-11-14',
@@ -23,7 +23,9 @@ const PROJECT_LAST_MODIFIED: Record<string, string> = {
   'massagewelt-wien': '2026-11-02',
   cleankos: '2026-11-02',
   etikettendruck24: '2026-11-02',
-  alcorleads: '2026-11-22',
+  alcorleads: '2026-11-24',
+  'therapieplan-android': '2026-11-24',
+  umzugsmeister: '2026-11-24',
   'psychologen-webdesign': '2026-11-22',
 }
 

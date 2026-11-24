@@ -1,0 +1,62 @@
+---
+title: Android-App planen: Was offline funktioniert und wann ein Server nötig ist
+description: Persönliche Termine und Erinnerungen lokal nutzen, gemeinsame Daten gezielt freigeben: praktische Planungsfragen aus dem Android-Pilotprojekt Therapieplan.
+date: 2026-11-24
+author: Robert Alchimowicz
+category: Entwicklung
+tags: [Android, Offline, Individuelle Software]
+ogImage: /media/therapieplan-android-illustration-2026.webp
+---
+
+„Die App soll auch ohne Internet funktionieren.“ Das klingt nach einer einzigen Anforderung. In der Planung verbergen sich dahinter jedoch zwei unterschiedliche Aufgaben: Informationen auf dem eigenen Gerät nutzen und Änderungen mit anderen Menschen austauschen.
+
+Beim unabhängig entwickelten [Android-Projekt Therapieplan im Projektkontext Grüner Kreis](/referenzen/therapieplan-android) sind diese Bereiche ausdrücklich getrennt. Der dokumentierte Stand ist ein kontrollierter Pilot. Er zeigt, welche Fragen schon vor der Entwicklung einer Organisations-App geklärt werden sollten.
+
+## Was bleibt auf dem eigenen Handy?
+
+Eigene Termine, Notizen, Kontakte und Einstellungen können als persönliche Gerätefunktionen aufgebaut werden. Im Therapieplan-Pilot gibt es dafür eine Tagesübersicht, lokale Erinnerungen und einen persönlichen Bereich. Für diese Funktionen ist kein Einrichtungsserver nötig.
+
+Für die Planung ist die konkrete Frage hilfreicher als das Wort „offline“: Was muss eine Person sehen oder bearbeiten können, wenn gerade keine Verbindung besteht? Ein bereits gespeicherter Termin ist etwas anderes als eine neue Dienstzuteilung, die ein Mitarbeiter erst auf einem anderen Gerät erstellt hat.
+
+## Gemeinsame Daten brauchen einen geregelten Austausch
+
+Sobald mehrere Geräte denselben Datenstand benötigen, müssen sie Änderungen übertragen können. Im dokumentierten Pilot betrifft der Einrichtungsbereich unter anderem freigegebene Patientenlisten, Medikationspläne, Dienstzuteilungen und einen gemeinsamen Speiseplan. Dafür sind ein erreichbarer HTTPS-Server und ein persönlich freigegebener Zugang vorgesehen.
+
+Eine lokal ausgewählte Mitarbeiterrolle reicht dafür nicht aus. Die Einrichtung muss festlegen, wer welchen Bereich sehen und bearbeiten darf. Für eine öffentliche Projektvorstellung sind weder echte Namen noch Gesundheitsdaten erforderlich; eine Demonstration kann mit neutralen Beispielen erfolgen.
+
+## Gespeichert ist nicht gleich angekommen
+
+Bei einer gemeinsam genutzten Anwendung gibt es mehrere Zustände, die in der Oberfläche verständlich sein müssen:
+
+- Eine Änderung wurde zunächst nur auf dem eigenen Gerät erfasst.
+- Der Server hat die Speicherung bestätigt.
+- Das andere Gerät hat den neuen Stand abgerufen.
+- Die zuständige Person hat die Information ausdrücklich als gelesen bestätigt.
+
+Diese Zustände sollten nicht zu einem einzigen grünen Häkchen zusammenfallen. Im Therapieplan-Pilot ist beispielsweise eine Gesehen-Bestätigung von der Erledigung einer Aufgabe zu unterscheiden. Bei einem Verbindungsfehler muss erkennbar bleiben, welcher Stand tatsächlich vorliegt.
+
+## Erinnerungen auf dem Gerät ausprobieren
+
+Eine gespeicherte Erinnerung ist noch kein Nachweis, dass ein konkretes Android-Gerät sie später sichtbar anzeigt. Freigaben und Geräteeinstellungen spielen dabei eine Rolle. Die Übergabeunterlagen enthalten deshalb einen eigenen Test für Erinnerungen.
+
+Planen Sie eine solche Prüfung in die Abnahme ein: einen Termin anlegen, einen passenden Vorlauf wählen, die App verlassen und den tatsächlichen Hinweis kontrollieren. Für die Freigabe zählen die vereinbarten Geräte und Einstellungen. Eine erfolgreiche Prüfung auf einem Handy ist keine pauschale Aussage über alle Android-Versionen.
+
+## PIN, Backup und Gerätewechsel gehören zum Produkt
+
+Eine App wird nicht nur am ersten Tag benutzt. Ein Gerät kann verloren gehen oder ausgetauscht werden. Persönliche Daten sollen dann weder ungewollt offenliegen noch allein wegen eines unklaren Updateablaufs verschwinden.
+
+Für den Pilotstand sind ein lokales Profil, eine PIN-Sperre, Wiederherstellung und ein persönliches Gerätebackup dokumentiert. Welcher Teil gesichert wird und wie ein Gerätewechsel abläuft, gehört in die Bedienungsanleitung. Persönliches Backup und gemeinsamer Serverbestand erfüllen dabei unterschiedliche Aufgaben.
+
+## Ein Pilot braucht einen klaren Rahmen
+
+Der dokumentierte Therapieplan-Stand 1.2.1 / Build 5 ist eine unabhängig entwickelte Organisationshilfe und kein behaupteter offizieller Produktivbetrieb der Einrichtung. Persönliche Funktionen, gemeinsamer Zugang, Geräteeignung und organisatorische Zuständigkeiten müssen zusammen geprüft werden. Die App ist kein Notfallkanal.
+
+Dieser Rahmen ist auch außerhalb des Gesundheitsbereichs hilfreich. Bei einer Mitarbeiter-App, einem mobilen Serviceprotokoll oder einem Kundenportal sollte feststehen, welche Daten lokal vorliegen, wer Änderungen bestätigen darf und wie die Oberfläche einen alten Datenstand kennzeichnet.
+
+## Drei Fragen vor dem Entwicklungsstart
+
+Beginnen Sie mit einem konkreten Tagesablauf: Welche Information braucht die Person unterwegs? Was darf sie ohne Verbindung ändern? Wer muss die Änderung danach sehen und bestätigen? Mit diesen Antworten lassen sich Oberfläche, Speicherung und Austausch sinnvoll planen.
+
+[Das Android-Projekt ansehen](/referenzen/therapieplan-android) oder [eine Demonstration bei Robert anfragen](/kontakt?projekt=therapieplan-android). Die Anwendung und die APK sind nicht öffentlich freigegeben; den passenden Einblick stimmt Robert persönlich ab.
+
+*Das Beitragsbild ist eine Produktillustration. Es ist kein Original-Screenshot und zeigt keine Personen- oder Gesundheitsdaten.*

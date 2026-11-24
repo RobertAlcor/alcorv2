@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = await getPostBySlug(slug)
   if (!post) notFound()
   const copy = getBlogSearchCopy(post)
-  const image = { url: `${SITE.url}${blogCover(post)}`, width: 1200, height: 720, alt: blogCoverAlt(post) }
+  const image = { url: `${SITE.url}${blogCover(post)}`, width: post.ogImage ? 1440 : 1200, height: post.ogImage ? 960 : 720, alt: blogCoverAlt(post) }
   return {
     title: copy.title,
     description: copy.description,

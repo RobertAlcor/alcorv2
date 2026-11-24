@@ -52,6 +52,12 @@ for (const ext of ['.ts','.tsx']) {
   const posts=await getAllPosts(); assert(posts.length>0);
   const output=path.join(process.cwd(),'../validated-covers');fs.mkdirSync(output,{recursive:true});
   for (const post of posts) {
+    if (post.ogImage?.startsWith('/media/')) {
+      const cover = blogCover(post);
+      assert.equal(cover, post.ogImage);
+      assert(fs.existsSync(path.join(process.cwd(), 'public', cover)));
+      continue;
+    }
     assert.equal(blogCover(post),`/media/blog/${encodeURIComponent(post.slug)}`);
     const seed=[...post.slug].reduce((a,c)=>a+c.charCodeAt(0),0);
     const response=editorialImage(['design','strategy','technology'][seed%3],post.title,post.category);
@@ -59,5 +65,5 @@ for (const ext of ['.ts','.tsx']) {
     assert.equal(image.slice(1,4).toString(),'PNG');
     fs.writeFileSync(path.join(output,post.slug+'.png'),image);
   }
-  console.log(JSON.stringify({packages:'PASS',booking15Minutes:'PASS',authWithIsolatedTestCredentials:'PASS',blogCoverMapping:'PASS',renderedBlogPNGs:posts.length,liveMailTest:'NOT PERFORMED',liveAdminLogin:'NOT PERFORMED',deployment:'NOT PERFORMED'},null,2));
+  console.log(JSON.stringify({packages:'PASS',booking15Minutes:'PASS',authWithIsolatedTestCredentials:'PASS',blogCoverMapping:'PASS',renderedBlogPNGs:posts.filter(post=>!post.ogImage?.startsWith('/media/')).length,staticBlogPhotos:posts.filter(post=>post.ogImage?.startsWith('/media/')).length,liveMailTest:'NOT PERFORMED',liveAdminLogin:'NOT PERFORMED',deployment:'NOT PERFORMED'},null,2));
 })().catch(error=>{console.error(error.message);process.exitCode=1});

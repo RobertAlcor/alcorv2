@@ -1,6 +1,6 @@
 {
   "public/llms.txt": "b63917e2ca70085f4e313ed2bb66c3693584dfbcc5dfaa1f0e2ebb7d83ead8b2",
-  "scripts/audit-preview.cjs": "b882aefe7473e0f9ab91ac72d464af1a1eaccdab48840d170df784a8ee8ef6af",
+  "scripts/audit-preview.cjs": "6638fe304c6028e56826ac0318208c04fc37217884ee811c6978c7a8f2f3eec4",
   "src/app/exclusive.css": "e3aa73eb48758ac8766deeada9145eb3511d483b9a5dacad173148faa312bca2",
   "src/app/layout.tsx": "c5804c437864c23cc4cde7ed58929d315c40b6782e12d87b37dec898e03057e9",
   "src/app/readability.css": "98ad2f39e12004c6344580e414dcfdce087235b26cf318b91c3d64883d0c2eeb",

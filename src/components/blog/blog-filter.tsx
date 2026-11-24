@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Search, X } from 'lucide-react'
 
 export type BlogPost = {
@@ -11,6 +12,8 @@ export type BlogPost = {
   date: string // ISO
   tags: readonly string[]
   readingMinutes: number
+  cover: string
+  coverAlt: string
 }
 
 const POSTS_PER_PAGE = 9
@@ -201,6 +204,9 @@ export function BlogFilter({ posts }: { posts: BlogPost[] }) {
 function PostCard({ post }: { post: BlogPost }) {
   return (
     <article className="group flex flex-col bg-deep-2 border border-line rounded-sm overflow-hidden hover:border-signal-2/40 transition-all">
+      <Link href={`/blog/${post.slug}`} aria-label={post.title} className="relative block aspect-[5/3] overflow-hidden border-b border-line">
+        <Image src={post.cover} alt={post.coverAlt} fill sizes="(min-width:1024px) 31vw,(min-width:768px) 47vw,95vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transform-none" unoptimized />
+      </Link>
       <Link href={`/blog/${post.slug}`} className="flex-1 flex flex-col p-7">
         <div className="flex items-center gap-3 mb-4 text-[0.7rem] font-mono uppercase tracking-wider text-paper-dim">
           <time dateTime={post.date}>

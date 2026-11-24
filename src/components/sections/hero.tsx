@@ -97,7 +97,7 @@ export function Hero() {
               <ArrowUpRight size={15} />
             </div>
             <Image
-              src="/media/umzugsmeister.webp"
+              src="/media/umzugsmeister-2026-11.webp"
               alt="Startseite des Projekts Umzugsmeister mit Online-Umzugsangebot"
               width={1280}
               height={735}

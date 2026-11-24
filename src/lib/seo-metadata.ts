@@ -77,7 +77,7 @@ export const PAGE_META = {
   referenzen: pageMetadata({
     title: 'Ausgewählte Webdesign-Projekte & Anwendungen | ALCOR',
     description:
-      'Einblicke in Psychotherapie Hrdlicka, schmerzfrei.wien, Umzugsmeister, TAKT und weitere Projekte. Mit Screenshots, Aufgaben und Live-Links.',
+      'Einblicke in Psychotherapie Hrdlicka, schmerzfrei.wien, Umzugsmeister, TAKT, ALCOR Leads und die Android-App Therapieplan. Mit Bildern, Projektbeschreibungen und Zugang auf Anfrage zu privaten Anwendungen.',
     path: '/referenzen',
   }),
   uebermich: pageMetadata({

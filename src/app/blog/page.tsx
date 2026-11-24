@@ -3,6 +3,7 @@ import { Breadcrumbs } from '@/components/layout/breadcrumbs'
 import { CtaBand } from '@/components/sections/cta-band'
 import { BlogFilter, type BlogPost } from '@/components/blog/blog-filter'
 import { getAllPosts } from '@/lib/blog'
+import { blogCover, blogCoverAlt } from '@/lib/blog-cover'
 import { RelatedPages } from '@/components/sections/related-pages'
 import { RELATED_FOR } from '@/lib/related-pages'
 import { PAGE_META } from '@/lib/seo-metadata'
@@ -24,6 +25,8 @@ export default async function BlogPage() {
     date: p.date,
     tags: p.tags,
     readingMinutes: p.readingTimeMinutes,
+    cover: blogCover(p),
+    coverAlt: blogCoverAlt(p),
   }))
 
   return (
