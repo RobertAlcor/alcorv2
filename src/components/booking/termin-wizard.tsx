@@ -10,6 +10,7 @@ import { BookingFormStep, type BookingStepData } from './booking-form'
 import { BookingReview } from './booking-review'
 import { SuccessState } from './success-state'
 import { getBookableDates } from '@/lib/booking'
+import { trackConfirmedLead } from '@/lib/lead-analytics'
 
 type ConflictAlt = {
   isoStart: string
@@ -177,6 +178,7 @@ export function TerminWizard() {
       }
 
       const body = await res.json()
+      trackConfirmedLead('booking-form', body)
       setSubmit({
         status: 'success',
         refNumber: body.refNumber,

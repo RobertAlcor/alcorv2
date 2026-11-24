@@ -10,7 +10,7 @@ const STATIC_ROUTE_LAST_MODIFIED: Record<string, string> = {
   '/leistungen': '2026-11-17',
   '/leistungen/website-erstellung': '2026-11-13',
   '/leistungen/relaunch': '2026-11-02',
-  '/leistungen/seo-wien': '2026-11-17',
+  '/leistungen/seo-wien': '2026-11-24',
   '/it-service-wien': '2026-11-14',
   '/referenzen': '2026-11-22',
   '/preise': '2026-11-17',
@@ -25,6 +25,11 @@ const PROJECT_LAST_MODIFIED: Record<string, string> = {
   etikettendruck24: '2026-11-02',
   alcorleads: '2026-11-22',
   'psychologen-webdesign': '2026-11-22',
+}
+
+const DISTRICT_LAST_MODIFIED: Record<string, string> = {
+  donaustadt: '2026-11-24',
+  liesing: '2026-11-24',
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -104,11 +109,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.4,
     })),
-    ...getPublishedBezirke().map((district) => ({
-      url: `${SITE.url}/webdesign/${district.slug}`,
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    })),
+    ...getPublishedBezirke().map((district) => {
+      const modified = DISTRICT_LAST_MODIFIED[district.slug]
+      return {
+        url: `${SITE.url}/webdesign/${district.slug}`,
+        lastModified: modified ? new Date(modified) : undefined,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+      }
+    }),
   ]
 
   return [...new Map(entries.map((entry) => [entry.url, entry])).values()]

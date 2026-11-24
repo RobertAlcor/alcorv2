@@ -1,5 +1,19 @@
 # Update webdesign-alcor.at (Next.js bleibt, Supabase/Resend/Vercel bleiben)
 
+## 24.11.2026 – lokale Inhalte und bestätigte Anfragen
+
+Vorbereiteter Release auf Basis von `c6c596f0bd8e311fbd87664c1247f1739e955779`. Veröffentlichung und anschließende Liveprüfung erfolgen über den bestehenden GitHub-/Vercel-Prozess.
+
+- **06 – Anfragemessung:** Kontakt- und Buchungsformular melden `generate_lead` erst nach bestätigtem API-Erfolg mit gültiger Referenz und Statistikeinwilligung im Produktionsmodus. Spam-Bestätigungen werden ausgeschlossen, wiederholte Erfolgsantworten dedupliziert. An GA4 gehen nur Formularart und Ereignisname, keine Kunden- oder Referenzdaten. GA4-Eingang und Key-Event-Einstellung sind damit noch nicht nachgewiesen.
+- **09/10 – Donaustadt und Liesing:** `/webdesign/donaustadt` zeigt die reale Umzugsmeister-Referenz aus 1220 Wien. Beide Seiten erklären Standort, Angebot und Anfrageweg genauer; unbelegte Mitbewerber-, Einwohner- und Reisezeitangaben auf der Liesing-Seite wurden entfernt. Das gemeinsame Bezirkslayout bietet direkte Links zu Anfrage, Website-Erstellung, Preisen und SEO.
+- **11 – Ratgeber und Angebot:** `/blog/homepage-erstellen-lassen-wien` ergänzt einen Angebotsvergleich und trennt Entscheidungshilfe, Website-Erstellung, Relaunch und Preisübersicht. Paketangaben entsprechen den vorhandenen veröffentlichten Leistungen. Keine Seiten wurden zusammengelegt und keine neuen URLs erstellt.
+- **12 – Handwerk und KMU:** `/blog/website-fuer-handwerker-wien`, `/blog/seo-fuer-kmu-wien-2026` und `/leistungen/seo-wien` verbinden typische betriebliche Anforderungen mit den tatsächlichen Angeboten. Unbelegte Ladezeit- und Rankingversprechen im Handwerker-Ratgeber wurden ersetzt.
+- **16/17 – Metadaten und Links:** Angepasste lokale Beschreibungen und sichtbare FAQ; das FAQ-Schema verwendet dieselben Inhalte. Bestehende Canonicals und Leistungs-/Ratgeberzuordnungen bleiben erhalten. Änderungsdaten der sechs substanziell bearbeiteten Zielseiten sind auf den 24.11.2026 gesetzt.
+
+**Prüfung des kombinierten Stands:** `npm run type-check`, Produktionsbuild, sieben isolierte Analytics-Tests und die bestehende SEO-HTTP-Regression bestanden (55 Sitemap-Seiten, 535 Prüfungen, keine Fehler). Zusätzlich wurden direkte Leistungs-/Anfragelinks, einzelne H1 und die Änderungsdaten der sechs Zielseiten am lokalen Produktionsserver kontrolliert. Der Build verwendete nicht funktionale lokale Supabase-/Resend-Platzhalter; produktive Datenbanken und Mailversand wurden nicht getestet oder angesprochen. Keine echten Formulare, Testmails oder Kunden-Uploads wurden gesendet. Die responsive Struktur wurde im Quellcode geprüft; eine separate Bildschirm-/Browserabnahme ist damit nicht behauptet.
+
+## Historischer Änderungsstand vom 21.09.2026
+
 Stand: 21.09.2026 · geprüft mit `tsc --noEmit` und `next build` (Next 15.5) – beides fehlerfrei; alle neuen Seiten, Bilder, Weiterleitungen und die Sitemap im Produktionsmodus getestet.
 
 ## So spielst du es ein
