@@ -45,6 +45,12 @@ export type Bezirk = {
   painPoints: string[]
   /** Welche Mitbewerber-Probleme habe ich gelöst (mit Bezug zum Bezirk falls möglich) */
   positioningParagraph: string
+  /** Belegbares Projekt mit Bezug zum Bezirk */
+  projectEvidence?: {
+    title: string
+    description: string
+    href: string
+  }
   /** 2-4 hyperlokale FAQ */
   faqs: BezirkFAQ[]
   /** Slugs der angrenzenden/verwandten Bezirke für Internal Linking */
@@ -256,7 +262,7 @@ export const BEZIRKE: Bezirk[] = [
     status: 'full',
     metaTitle: 'Webdesign 1220 Wien | Webagentur Donaustadt | Alcor',
     metaDescription:
-      'Webdesign aus der Donaustadt für die Donaustadt — handgeschriebene Websites für KMU, Handwerk und Praxen im 22. Bezirk. Direkt vor Ort, ab €599.',
+      'Webdesign in 1220 Wien: individuelle Websites, Relaunch und SEO für Betriebe in der Donaustadt. Persönlich aus der Berresgasse, mit echten Projektbeispielen.',
     keywords: [
       'Webdesign 1220 Wien',
       'Webdesign Donaustadt',
@@ -265,8 +271,8 @@ export const BEZIRKE: Bezirk[] = [
       'Webdesign Kagran',
       'Webdesign Aspern',
     ],
-    h1: 'Webdesign aus der Donaustadt — für die Unternehmen, neben denen ich arbeite.',
-    lead: 'Mein Büro ist in der Berresgasse, mitten im 22. Bezirk. Ich kenne die Region — und die Unternehmen, die hier ihre Wurzeln haben.',
+    h1: 'Webdesign in 1220 Wien — persönlich aus der Donaustadt.',
+    lead: 'Von meinem Standort in der Berresgasse plane und entwickle ich Websites für Unternehmen im 22. Bezirk. Ob neuer Auftritt, Überarbeitung oder SEO: Ausgangspunkt sind Ihre Leistungen, Ihr tatsächliches Einsatzgebiet und der Weg zur Anfrage.',
     localContext:
       "Für Betriebe in Kagran, Aspern, Stadlau oder Hirschstetten sollte eine Website das konkrete Angebot und den tatsächlichen Einsatzbereich erklären. Mein Standort ist in der Berresgasse in 1220 Wien. Im Gespräch klären wir, welche Standortinformationen und Kontaktwege für Ihre Kundschaft relevant sind.",
     industriesParagraph:
@@ -279,6 +285,12 @@ export const BEZIRKE: Bezirk[] = [
     ],
     positioningParagraph:
       'Ich arbeite persönlich an ausgewählten Website-Projekten. Die einfache Basis-Homepage für 599 € umfasst eine Seite mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein Kontaktformular, keine Animationen und keine Erstellung von Rechtstexten. Business und Premium werden individuell vereinbart. Preise sind einmalig und ohne Umsatzsteuer; Hosting und Zusatzleistungen werden separat ausgewiesen. Umfang, Zeitplan, 60 % Anzahlung, 40 % nach Abnahme und bis zu fünf Korrekturrunden werden schriftlich festgelegt.',
+    projectEvidence: {
+      title: 'Umzugsmeister: eine Website für einen Betrieb aus 1220 Wien',
+      description:
+        'Umzugsmeister hat seinen Standort in der Donaustadt. Die Projektseite zeigt Leistungs- und Ortsseiten sowie einen Anfrage-Assistenten für Umzugsdaten und Fotos. Die Referenz erklärt die umgesetzten Funktionen und verlinkt den veröffentlichten Auftritt.',
+      href: '/referenzen/umzugsmeister',
+    },
     faqs: [
       {
         question:
@@ -309,7 +321,7 @@ export const BEZIRKE: Bezirk[] = [
     status: 'full',
     metaTitle: 'Webdesign 1230 Wien | Webagentur Liesing | Alcor',
     metaDescription:
-      'Webdesign für Liesing — handgeschriebene Websites für KMU im 23. Bezirk, von Atzgersdorf über Mauer bis Siebenhirten. Basis-Homepage 599 €, Zeitplan nach Vereinbarung.',
+      'Webdesign für Unternehmen in 1230 Wien: Website-Erstellung, Relaunch und SEO für Liesing. Leistungen, Preise und Projektbeispiele von ALCOR aus Wien vergleichen.',
     keywords: [
       'Webdesign 1230 Wien',
       'Webdesign Liesing',
@@ -317,23 +329,33 @@ export const BEZIRKE: Bezirk[] = [
       'Webdesigner Liesing',
     ],
     h1: 'Webdesign in Liesing — vom Stadtrand bis ins Industriegebiet.',
-    lead: 'Liesing hat einen eigenen Charakter zwischen Wienerwald und Wiener Becken. Wer hier gefunden werden will, braucht eine Website, die auf den Bezirk und seine Ortsteile abgestimmt ist.',
+    lead: 'Ich betreue Website-Projekte für Betriebe in Liesing persönlich von meinem Standort in 1220 Wien aus. Für Ihren Auftritt im 23. Bezirk klären wir Leistungen, Kundengruppen, Einsatzgebiet und die passende Kontaktmöglichkeit.',
     localContext:
-      'Liesing ist Wiens südlichster Bezirk und vereint mehrere Welten: das alte Ortszentrum in Mauer mit Heurigen-Tradition, die lebhafte Geschäftsstraße in Atzgersdorf, die großen Industriegebiete in Inzersdorf, Familienunternehmen in Rodaun und Kalksburg sowie Wohnviertel rund um Erlaa und Siebenhirten. 100.000 Einwohner und ein hoher Anteil an Klein- und Mittelbetrieben prägen den Bezirk.',
+      'Ein Betrieb in Atzgersdorf, Mauer, Inzersdorf oder Siebenhirten kann unterschiedliche Kundengruppen bedienen: Besucher am Standort, Auftraggeber in mehreren Wiener Bezirken oder Geschäftskunden außerhalb Wiens. Die Website sollte zeigen, wo Sie tatsächlich arbeiten, welche Leistungen dort verfügbar sind und welche Angaben Sie für eine Anfrage benötigen.',
     industriesParagraph:
       "Für produzierende Unternehmen, Handel, Handwerk, Gastronomie und Praxen in Liesing sind unterschiedliche Informationen wichtig. Ein B2B-Auftritt kann technische Leistungen und Anfragevoraussetzungen erklären; bei einem lokalen Dienstleister stehen Angebot, Einsatzgebiet und Kontakt oft im Vordergrund.",
     painPoints: [
       "Bei B2B-Angeboten sollten Leistungen und Voraussetzungen für eine konkrete Anfrage verständlich beschrieben sein.",
-      'Lokale Geschäfte in Atzgersdorf und Mauer optimieren ihre Sites kaum auf Bezirks-Suchanfragen — die Konkurrenz aus dem Zentrum hat dadurch leichtes Spiel.',
+      'Bei Leistungen vor Ort sollten Kunden erkennen, ob ihr Standort zum tatsächlichen Einsatzgebiet gehört und wie sie eine Anfrage stellen können.',
       "Für Gastronomiebetriebe helfen aktuelle Zeiten, Anfahrt und ein erreichbarer Kontakt- oder Reservierungsweg.",
     ],
     positioningParagraph:
-      'Für Betriebe in Liesing baue ich Websites, die auf die lokale Suche im 23. Bezirk ausgerichtet sind: mit den Ortsteilen, in denen Sie tatsächlich arbeiten — von Atzgersdorf, Erlaa und Inzersdorf über Mauer, Rodaun und Kalksburg bis Siebenhirten — sauber ausgezeichneten Standortdaten und Inhalten, die zu den Suchanfragen Ihrer Kundschaft passen. Handgeschrieben, ohne WordPress, mit Festpreis und einem einzigen Ansprechpartner.',
+      'Für Betriebe in Liesing entwickle ich individuelle Websites mit verständlichen Leistungsseiten, nachvollziehbaren Standortangaben und direkten Anfragewegen. Bei einer bestehenden Website prüfen wir zuerst, ob ein Relaunch oder gezielte Verbesserungen sinnvoll sind. Seiten, Funktionen, Inhalte, Preis und Zeitplan werden vor Beginn schriftlich vereinbart. Projektbeispiele und die beschriebenen Pakete helfen, den passenden Umfang einzuschätzen.',
     faqs: [
       {
         question: 'Sie sind im 22. Bezirk — sind persönliche Termine in Liesing möglich?',
         answer:
-          'Ja, problemlos. Liesing ist mit dem Auto in 25 Minuten erreichbar, mit der U6 + S-Bahn in unter 45 Minuten. Persönliche Termine vor Ort kosten nichts extra.',
+          'Mein Standort liegt in der Berresgasse in 1220 Wien; ich betreue auch Unternehmen in Liesing. Das erste Gespräch kann telefonisch oder per Video stattfinden. Einen persönlichen Termin in Wien und dessen Rahmen vereinbaren wir vorab.',
+      },
+      {
+        question: 'Welcher Website-Umfang passt zu meinem Betrieb in Liesing?',
+        answer:
+          'Die Basis-Homepage für 599 € ist eine einfache Seite mit bereitgestellten Inhalten und ohne Kontaktformular. Für mehrere Leistungsseiten oder individuelle Funktionen kommen Business oder Premium nach Vereinbarung infrage. Entscheidend sind Ihre Inhalte, die gewünschte Anfrage und die vereinbarten Funktionen; Hosting und zusätzliche Betreuung sind getrennte Leistungen.',
+      },
+      {
+        question: 'Muss meine bestehende Website vollständig neu gebaut werden?',
+        answer:
+          'Nicht automatisch. Zuerst prüfen wir die vorhandenen Inhalte, die Technik und die gewünschten Kontaktwege. Je nach Ausgangslage können einzelne Korrekturen, eine SEO-Betreuung oder ein gesondert vereinbarter Relaunch passen.',
       },
     ],
     nearbyDistricts: ['hietzing', 'meidling', 'favoriten'],

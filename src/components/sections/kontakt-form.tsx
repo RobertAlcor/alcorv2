@@ -12,6 +12,7 @@ import {
 } from '@/lib/validation'
 import { getWebsiteService } from '@/lib/website-service'
 import { SITE } from '@/lib/site'
+import { trackConfirmedLead } from '@/lib/lead-analytics'
 
 type Errors = Partial<Record<keyof LeadInput | 'privacy', string>>
 const inputClass =
@@ -153,6 +154,10 @@ function Form({ application }: { application: boolean }) {
             : 'Die Anfrage konnte nicht übermittelt werden. Bitte versuchen Sie es erneut oder rufen Sie direkt an.',
         )
       }
+      trackConfirmedLead(
+        application ? 'project-application-form' : 'contact-form',
+        result,
+      )
       setRefNumber(
         typeof result.refNumber === 'string'
           ? result.refNumber
@@ -211,6 +216,7 @@ function Form({ application }: { application: boolean }) {
 
   return (
     <form
+      id={application ? 'project-application-form' : 'contact-form'}
       ref={formRef}
       onSubmit={submit}
       noValidate

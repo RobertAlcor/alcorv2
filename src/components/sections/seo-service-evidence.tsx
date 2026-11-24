@@ -56,6 +56,23 @@ const EXAMPLES = [
   },
 ]
 
+const BUSINESS_NEEDS = [
+  {
+    title: 'Handwerk und lokale Dienstleistungen',
+    detail:
+      'Welche Arbeiten übernehmen Sie, wo arbeiten Sie tatsächlich und welche Angaben brauchen Sie für ein Angebot? Daraus ergeben sich passende Leistungsseiten, regionale Informationen und Kontaktwege. Eine Anfrage ist ein anderes Ziel als der bloße Besuch einer Seite.',
+    href: '/blog/website-fuer-handwerker-wien',
+    label: 'Checkliste für Handwerker-Websites',
+  },
+  {
+    title: 'Kleine und mittlere Unternehmen',
+    detail:
+      'Bei mehreren Leistungen legen wir für jede wichtige Suchabsicht eine passende Zielseite fest. Wir prüfen vorhandene Seiten und Referenzen, bevor neue Inhalte entstehen. Die Auswertung unterscheidet Suchsichtbarkeit, Website-Besuche und tatsächlich messbare Anfragen.',
+    href: '/blog/seo-fuer-kmu-wien-2026',
+    label: 'SEO-Prioritäten für KMU in Wien',
+  },
+]
+
 export function SeoServiceEvidence() {
   return (
     <section
@@ -79,6 +96,22 @@ export function SeoServiceEvidence() {
             <p className="text-paper-mute mt-4 leading-relaxed">{check.detail}</p>
           </div>
         ))}
+      </div>
+      <div className="mt-10">
+        <h3 className="text-paper text-2xl font-semibold">
+          Welche Anforderungen hat Ihr Betrieb?
+        </h3>
+        <div className="mt-6 grid gap-6 md:grid-cols-2">
+          {BUSINESS_NEEDS.map((need) => (
+            <div key={need.href} className="border-line rounded-lg border p-6">
+              <h4 className="text-paper text-xl font-semibold">{need.title}</h4>
+              <p className="text-paper-mute mt-4 leading-relaxed">{need.detail}</p>
+              <Link href={need.href} className="alcor-text-link mt-5 inline-block">
+                {need.label}
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="mt-10 max-w-5xl">
         <h3 className="text-paper text-2xl font-semibold">

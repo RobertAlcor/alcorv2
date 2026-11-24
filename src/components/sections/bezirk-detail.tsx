@@ -4,7 +4,6 @@ import { CtaBand } from '@/components/sections/cta-band'
 import type { Bezirk } from '@/lib/bezirke'
 import { getBezirkBySlug } from '@/lib/bezirke'
 import { faqSchema } from '@/lib/schema'
-import { SITE } from '@/lib/site'
 
 /**
  * Detail-Layout für /webdesign/[bezirk] Pages.
@@ -51,6 +50,14 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
           <p className="font-serif italic text-xl md:text-2xl text-paper-mute max-w-3xl leading-snug">
             {bezirk.lead}
           </p>
+          <div className="alcor-actions mt-8">
+            <Link href="/kontakt?thema=new-website" className="alcor-button">
+              Webdesign für {bezirk.name} anfragen
+            </Link>
+            <Link href="/leistungen/website-erstellung" className="alcor-button alcor-button-outline">
+              Website-Leistungen ansehen
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -89,6 +96,30 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
           </div>
         </div>
       </section>
+
+      {bezirk.projectEvidence && (
+        <section className="container-fluid py-16 md:py-20 border-t border-line">
+          <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20">
+            <div>
+              <p className="alcor-eyebrow">Ein Projekt aus {bezirk.name}</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-paper text-balance">
+                Umsetzung konkret ansehen.
+              </h2>
+            </div>
+            <div className="rounded-lg border border-line p-6 md:p-8">
+              <h3 className="font-serif text-2xl text-paper mb-4">
+                {bezirk.projectEvidence.title}
+              </h3>
+              <p className="text-paper-mute leading-relaxed text-lg mb-6">
+                {bezirk.projectEvidence.description}
+              </p>
+              <Link href={bezirk.projectEvidence.href} className="alcor-text-link">
+                Projekt und Live-Website ansehen
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Pain Points */}
       {bezirk.painPoints.length > 0 && (
@@ -134,6 +165,21 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
           </div>
           <div className="space-y-6 text-paper-mute leading-relaxed text-lg">
             <p>{bezirk.positioningParagraph}</p>
+            <p>
+              Vergleichen Sie die{' '}
+              <Link href="/leistungen/website-erstellung" className="alcor-text-link">
+                Leistungen zur Website-Erstellung
+              </Link>{' '}
+              und die{' '}
+              <Link href="/preise" className="alcor-text-link">
+                Pakete und Preise
+              </Link>
+              . Für eine bestehende Website finden Sie unter{' '}
+              <Link href="/leistungen/seo-wien" className="alcor-text-link">
+                SEO und regionale Sichtbarkeit
+              </Link>{' '}
+              den gesonderten Prüf- und Betreuungsumfang.
+            </p>
           </div>
         </div>
       </section>
