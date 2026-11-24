@@ -80,9 +80,11 @@ export function getBlogService(post: Pick<BlogPost, 'slug' | 'tags'>) {
   if (post.slug === 'website-relaunch-2026') {
     return { href: '/leistungen/relaunch', label: 'Website-Relaunch in Wien planen' }
   }
+  if (post.slug === 'google-unternehmensprofil-wien') {
+    return { href: '/leistungen/seo-wien', label: 'Local SEO und Unternehmensprofil besprechen' }
+  }
   if (
     [
-      'google-unternehmensprofil-wien',
       'seo-fuer-kmu-wien-2026',
       'geo-ai-search-google-2026',
       'core-web-vitals-2026',
