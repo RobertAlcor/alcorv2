@@ -1,3 +1,5 @@
+import type { LeadInput } from './validation'
+
 export type LeadStatus = 'new' | 'contacted' | 'qualified' | 'won' | 'lost'
 
 export const LEAD_STATUS_ORDER: LeadStatus[] = [
@@ -60,7 +62,7 @@ export type AdminLead = {
   email: string
   phone: string | null
   company: string | null
-  topic: 'general' | 'pricing' | 'new-website' | 'relaunch' | 'seo' | 'other'
+  topic: LeadInput['topic']
   message: string
   source: string | null
   status: LeadStatus
@@ -79,6 +81,7 @@ export const LEAD_TOPIC_LABEL: Record<AdminLead['topic'], string> = {
   'new-website': 'Neue Website',
   relaunch: 'Relaunch',
   seo: 'SEO-Beratung',
+  'it-service': 'IT-Service',
   other: 'Sonstiges',
 }
 
