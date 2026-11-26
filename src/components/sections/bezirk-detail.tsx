@@ -85,10 +85,10 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
           <div>
             <p className="text-xs font-semibold tracking-[0.16em] uppercase text-signal-2 mb-6">
               <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
-              Für wen ich hier arbeite
+              Für welche Betriebe das Angebot passt
             </p>
             <h2 className="font-serif text-3xl md:text-4xl text-paper text-balance">
-              Typische Klienten in {bezirk.name}.
+              Webdesign für Unternehmen in {bezirk.name}.
             </h2>
           </div>
           <div className="space-y-6 text-paper-mute leading-relaxed text-lg">
@@ -131,7 +131,7 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
                 Typische Probleme
               </p>
               <h2 className="font-serif text-3xl md:text-4xl text-paper text-balance">
-                Was im {bezirk.num}. Bezirk oft schiefgeht.
+                Worauf es bei Ihrer Website ankommt.
               </h2>
             </div>
             <ul className="space-y-5">
