@@ -139,13 +139,13 @@ export function SitePathways() {
       </div>
       <nav
         aria-label="Thematisch passende Seiten"
-        className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+        className="grid auto-rows-fr gap-4 sm:grid-cols-2 xl:grid-cols-4"
       >
         {selected.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="group border-line bg-deep-2 hover:border-signal-2/60 focus-visible:border-signal-2 flex min-h-[170px] flex-col justify-between rounded-lg border p-6 transition-colors"
+            className="group border-line bg-deep-2 hover:border-signal-2/60 focus-visible:border-signal-2 flex h-full min-h-[170px] min-w-0 flex-col justify-between rounded-lg border p-6 transition-colors"
           >
             <div>
               <h3 className="text-paper group-hover:text-signal-2 text-xl leading-tight transition-colors">

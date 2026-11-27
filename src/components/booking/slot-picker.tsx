@@ -48,7 +48,7 @@ export function SlotPicker({ date, selectedSlot, onSelect }: Props) {
   return (
     <div>
       <div className="flex items-center gap-2 mb-2">
-        <Clock className="w-4 h-4 text-signal-2" strokeWidth={1.75} />
+        <Clock className="w-4 h-4 shrink-0 text-signal-2" strokeWidth={1.75} />
         <h3 className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-signal-2">
           Uhrzeit für {formatGermanDate(date)}
         </h3>
@@ -85,7 +85,7 @@ export function SlotPicker({ date, selectedSlot, onSelect }: Props) {
               <div className="text-[0.65rem] font-mono uppercase tracking-wider text-paper-mute mb-2">
                 {String(hour).padStart(2, '0')}:00 Uhr
               </div>
-              <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
+              <div className="grid grid-cols-2 min-[400px]:grid-cols-4 gap-2">
                 {items.map((slot) => {
                   const isSelected = selectedSlot === slot.isoStart
                   return (

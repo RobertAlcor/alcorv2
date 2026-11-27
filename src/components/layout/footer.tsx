@@ -61,14 +61,14 @@ function FooterLinkList({
   links: { label: string; href: string }[]
 }) {
   return (
-    <nav aria-label={title}>
+    <nav aria-label={title} className="min-w-0">
       <h2 className="mb-5 text-base font-semibold">{title}</h2>
       <div className="flex flex-col gap-1">
         {links.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="text-paper-mute hover:text-signal-2 flex min-h-[40px] items-center text-sm leading-snug"
+            className="text-paper-mute hover:text-signal-2 flex min-h-[44px] items-center text-sm leading-snug [overflow-wrap:anywhere]"
           >
             {item.label}
           </Link>
@@ -82,7 +82,7 @@ export function Footer() {
   return (
     <footer className="border-line bg-deep mt-20 border-t">
       <div className="container-fluid grid gap-12 py-14 sm:grid-cols-2 xl:grid-cols-[1.15fr_repeat(3,minmax(0,1fr))]">
-        <div>
+        <div className="min-w-0">
           <Link href="/" className="alcor-brand" aria-label="ALCOR Startseite">
             <span>
               <b>A</b>LCOR
@@ -96,13 +96,13 @@ export function Footer() {
           <div className="mt-5 flex flex-col items-start gap-2">
             <a
               href={`mailto:${SITE.contact.email}`}
-              className="text-paper-mute hover:text-signal-2 min-h-[40px] text-sm"
+              className="text-paper-mute hover:text-signal-2 min-h-[44px] max-w-full text-sm [overflow-wrap:anywhere]"
             >
               {SITE.contact.email}
             </a>
             <a
               href={`tel:${SITE.contact.phoneRaw}`}
-              className="text-paper-mute hover:text-signal-2 min-h-[40px] text-sm"
+              className="text-paper-mute hover:text-signal-2 min-h-[44px] max-w-full text-sm"
             >
               {SITE.contact.phoneFormatted}
             </a>
@@ -127,7 +127,7 @@ export function Footer() {
         <p>
           © {new Date().getFullYear()} {SITE.name}. Robert Alchimowicz.
         </p>
-        <nav aria-label="Rechtliche Informationen" className="flex gap-6">
+        <nav aria-label="Rechtliche Informationen" className="flex flex-wrap gap-x-6 gap-y-2">
           {NAV.legal.map((item) => (
             <Link key={item.href} href={item.href} className="hover:text-signal-2 py-2">
               {item.label}

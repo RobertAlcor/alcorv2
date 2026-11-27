@@ -17,7 +17,7 @@ import { trackConfirmedLead } from '@/lib/lead-analytics'
 
 type Errors = Partial<Record<keyof LeadInput | 'privacy', string>>
 const inputClass =
-  'w-full min-h-[52px] rounded-md border border-paper-dim/40 bg-deep px-4 py-3 text-base text-paper focus:border-signal-2'
+  'w-full min-w-0 max-w-full min-h-[52px] rounded-md border border-paper-dim/40 bg-deep px-4 py-3 text-base text-paper focus:border-signal-2'
 
 export function KontaktForm({ application = false }: { application?: boolean }) {
   return (
@@ -202,7 +202,7 @@ Mein Vorhaben / gewünschter Einsatz: `
       ref={formRef}
       onSubmit={submit}
       noValidate
-      className="space-y-6"
+      className="min-w-0 space-y-6"
     >
       {message && (
         <div
@@ -219,8 +219,8 @@ Mein Vorhaben / gewünschter Einsatz: `
         </div>
       )}
 
-      <fieldset disabled={busy} className="space-y-6">
-        <legend className="mb-5 text-xl font-semibold">
+      <fieldset disabled={busy} className="min-w-0 space-y-6">
+        <legend className="mb-5 max-w-full text-xl font-semibold [overflow-wrap:anywhere]">
           {application
             ? 'Ihre Projektanfrage'
             : service
@@ -272,7 +272,7 @@ Mein Vorhaben / gewünschter Einsatz: `
               auto: 'tel',
             },
           ].map((field) => (
-            <div key={field.name}>
+            <div key={field.name} className="min-w-0">
               <label
                 htmlFor={`contact-${field.name}`}
                 className="text-paper-mute mb-2 block text-sm font-medium"

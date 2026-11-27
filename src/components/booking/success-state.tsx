@@ -31,7 +31,7 @@ export function SuccessState({ refNumber, slotStart, slotEnd, name }: Props) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="text-center"
+      className="min-w-0 text-center [overflow-wrap:anywhere]"
     >
       <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-signal/15 border border-signal/30 mb-6">
         <Clock className="w-7 h-7 text-signal" strokeWidth={1.5} />
@@ -79,7 +79,7 @@ export function SuccessState({ refNumber, slotStart, slotEnd, name }: Props) {
         <p className="text-[0.65rem] font-mono uppercase tracking-[0.2em] text-paper-mute mb-3">
           Sie haben Fragen oder es eilt?
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <div className="flex flex-col gap-3">
           <a
             href={`tel:${SITE.contact.phoneRaw}`}
             className="inline-flex items-center justify-center gap-2 min-h-[44px] px-5 py-2.5 bg-deep-2 border border-line text-paper text-sm rounded-sm hover:border-signal-2 transition-colors"

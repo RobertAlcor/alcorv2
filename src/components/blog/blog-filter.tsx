@@ -99,7 +99,7 @@ export function BlogFilter({ posts }: { posts: BlogPost[] }) {
           <button
             type="button"
             onClick={() => updateTag(null)}
-            className={`min-h-[36px] px-3 py-1.5 text-xs rounded-sm border transition-colors ${
+            className={`min-h-[44px] max-w-full px-3 py-1.5 text-xs rounded-sm border transition-colors ${
               activeTag === null
                 ? 'bg-signal text-deep border-signal'
                 : 'bg-deep-2 text-paper-mute border-line hover:border-paper-mute'
@@ -115,7 +115,7 @@ export function BlogFilter({ posts }: { posts: BlogPost[] }) {
                 key={tag}
                 type="button"
                 onClick={() => updateTag(isActive ? null : tag)}
-                className={`min-h-[36px] px-3 py-1.5 text-xs rounded-sm border transition-colors ${
+                className={`min-h-[44px] max-w-full break-words px-3 py-1.5 text-xs rounded-sm border transition-colors ${
                   isActive
                     ? 'bg-signal text-deep border-signal'
                     : 'bg-deep-2 text-paper-mute border-line hover:border-paper-mute'
@@ -129,7 +129,7 @@ export function BlogFilter({ posts }: { posts: BlogPost[] }) {
             <button
               type="button"
               onClick={reset}
-              className="inline-flex items-center gap-1.5 min-h-[36px] px-3 py-1.5 text-xs text-paper-dim hover:text-paper transition-colors"
+              className="inline-flex items-center gap-1.5 min-h-[44px] px-3 py-1.5 text-xs text-paper-dim hover:text-paper transition-colors"
               aria-label="Filter zurücksetzen"
             >
               <X className="w-3 h-3" strokeWidth={2} />
@@ -163,7 +163,7 @@ export function BlogFilter({ posts }: { posts: BlogPost[] }) {
           </button>
         </div>
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 auto-rows-fr xl:grid-cols-3 gap-6 lg:gap-8">
           {visiblePosts.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}
@@ -173,7 +173,7 @@ export function BlogFilter({ posts }: { posts: BlogPost[] }) {
       {/* Pagination */}
       {totalPages > 1 && (
         <nav
-          className="mt-12 flex items-center justify-center gap-2"
+          className="mt-12 grid grid-cols-2 items-center gap-3 sm:flex sm:flex-wrap sm:justify-center"
           aria-label="Seitennavigation"
         >
           <button
@@ -184,7 +184,7 @@ export function BlogFilter({ posts }: { posts: BlogPost[] }) {
           >
             ← Zurück
           </button>
-          <span className="px-4 text-sm text-paper-mute font-mono">
+          <span className="col-span-2 row-start-1 px-2 text-center text-sm text-paper-mute font-mono sm:px-4">
             Seite {currentPage} / {totalPages}
           </span>
           <button
@@ -203,12 +203,12 @@ export function BlogFilter({ posts }: { posts: BlogPost[] }) {
 
 function PostCard({ post }: { post: BlogPost }) {
   return (
-    <article className="group flex flex-col bg-deep-2 border border-line rounded-sm overflow-hidden hover:border-signal-2/40 transition-all">
-      <Link href={`/blog/${post.slug}`} aria-label={post.title} className="relative block aspect-[5/3] overflow-hidden border-b border-line">
-        <Image src={post.cover} alt={post.coverAlt} fill sizes="(min-width:1024px) 31vw,(min-width:768px) 47vw,95vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transform-none" unoptimized />
+    <article className="group flex h-full min-w-0 flex-col bg-deep-2 border border-line rounded-sm overflow-hidden hover:border-signal-2/40 transition-all">
+      <Link href={`/blog/${post.slug}`} aria-label={post.title} className="relative block shrink-0 aspect-[5/3] overflow-hidden border-b border-line">
+        <Image src={post.cover} alt={post.coverAlt} fill sizes="(min-width:1280px) 31vw,(min-width:768px) 47vw,95vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transform-none" unoptimized />
       </Link>
-      <Link href={`/blog/${post.slug}`} className="flex-1 flex flex-col p-7">
-        <div className="flex items-center gap-3 mb-4 text-[0.7rem] font-mono uppercase tracking-wider text-paper-dim">
+      <Link href={`/blog/${post.slug}`} className="flex-1 flex min-w-0 flex-col p-5 sm:p-7 [overflow-wrap:anywhere]">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-4 text-[0.7rem] font-mono uppercase tracking-wider text-paper-dim">
           <time dateTime={post.date}>
             {new Date(post.date).toLocaleDateString('de-AT', {
               year: 'numeric',
@@ -222,14 +222,14 @@ function PostCard({ post }: { post: BlogPost }) {
         <h3 className="font-serif text-xl md:text-2xl text-paper mb-3 leading-tight group-hover:text-signal-2 transition-colors">
           {post.title}
         </h3>
-        <p className="text-paper-mute text-sm leading-relaxed line-clamp-3 mb-5">
+        <p className="text-paper-mute text-sm leading-relaxed mb-5">
           {post.description}
         </p>
         <div className="mt-auto pt-4 border-t border-line flex flex-wrap gap-1.5">
           {post.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 text-[0.65rem] font-mono uppercase tracking-wider text-paper-mute bg-deep border border-line rounded-sm"
+              className="max-w-full px-2 py-0.5 text-[0.65rem] font-mono uppercase tracking-wider text-paper-mute bg-deep border border-line rounded-sm"
             >
               {tag}
             </span>

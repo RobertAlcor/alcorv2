@@ -129,7 +129,7 @@ function ReviewItem({
           {label}
         </div>
         <div
-          className={`text-paper text-sm ${multiline ? 'whitespace-pre-wrap' : 'truncate'}`}
+          className={`text-paper text-sm [overflow-wrap:anywhere] ${multiline ? 'whitespace-pre-wrap' : ''}`}
         >
           {value}
         </div>
@@ -138,7 +138,7 @@ function ReviewItem({
         type="button"
         onClick={onEdit}
         aria-label={`${label} bearbeiten`}
-        className="shrink-0 w-9 h-9 flex items-center justify-center rounded-sm text-paper-mute hover:text-signal-2 hover:bg-deep transition-colors"
+        className="shrink-0 w-11 h-11 flex items-center justify-center rounded-sm text-paper-mute hover:text-signal-2 hover:bg-deep transition-colors"
       >
         <Pencil className="w-3.5 h-3.5" strokeWidth={1.75} />
       </button>

@@ -12,7 +12,7 @@ const STATUS_ICONS = {
 
 export function ToolsGrid({ tools }: { tools: Tool[] }) {
   return (
-    <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+    <div className="grid auto-rows-fr grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
       {tools.map((tool, idx) => {
         const StatusIcon = STATUS_ICONS[tool.status]
         return (
@@ -26,7 +26,7 @@ export function ToolsGrid({ tools }: { tools: Tool[] }) {
               delay: idx * 0.08,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="group relative bg-deep-2 border border-line rounded-sm p-7 md:p-8 hover:border-paper-mute/30 transition-all duration-500"
+            className="group relative flex h-full min-w-0 flex-col bg-deep-2 border border-line rounded-sm p-5 sm:p-7 lg:p-8 hover:border-paper-mute/30 transition-all duration-500"
           >
             {/* Visual identifier - subtle pattern */}
             <div
@@ -37,11 +37,11 @@ export function ToolsGrid({ tools }: { tools: Tool[] }) {
               }}
             />
 
-            <div className="relative">
+            <div className="relative flex min-w-0 flex-1 flex-col">
               {/* Header: Status + Visibility */}
-              <div className="flex items-center justify-between gap-3 mb-5">
+              <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 mb-5">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[0.65rem] font-mono uppercase tracking-wider text-paper-mute bg-deep border border-line rounded-sm">
-                  <StatusIcon className="w-3 h-3" strokeWidth={1.75} />
+                  <StatusIcon className="w-3 h-3 shrink-0" strokeWidth={1.75} />
                   {tool.status}
                 </span>
                 <span className="font-mono text-[0.65rem] text-paper-dim uppercase tracking-wider">
@@ -49,7 +49,7 @@ export function ToolsGrid({ tools }: { tools: Tool[] }) {
                 </span>
               </div>
 
-              <h3 className="font-serif text-2xl md:text-3xl text-paper mb-3 leading-tight">
+              <h3 className="break-words font-serif text-2xl md:text-3xl text-paper mb-3 leading-tight">
                 {tool.name}
               </h3>
 
@@ -58,7 +58,7 @@ export function ToolsGrid({ tools }: { tools: Tool[] }) {
               </p>
 
               {/* Features list */}
-              <div className="mb-6">
+              <div className="mb-6 flex-1">
                 <p className="text-[0.7rem] font-mono uppercase tracking-wider text-signal-2 mb-3">
                   Was es kann
                 </p>
@@ -72,7 +72,7 @@ export function ToolsGrid({ tools }: { tools: Tool[] }) {
                         className="w-1 h-1 rounded-full bg-signal-2 mt-2 shrink-0"
                         aria-hidden
                       />
-                      <span>{feature}</span>
+                      <span className="min-w-0 break-words">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -87,7 +87,7 @@ export function ToolsGrid({ tools }: { tools: Tool[] }) {
                   {tool.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-0.5 text-[0.65rem] font-mono text-paper-mute bg-deep border border-line rounded-sm"
+                      className="max-w-full break-words px-2 py-0.5 text-[0.65rem] font-mono text-paper-mute bg-deep border border-line rounded-sm"
                     >
                       {tech}
                     </span>

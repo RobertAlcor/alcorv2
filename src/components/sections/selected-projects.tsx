@@ -86,7 +86,7 @@ export function SelectedProjects() {
                 src={p.image}
                 alt={`${'illustration' in p ? 'Produktillustration' : 'Website-Ansicht'}: ${p.name}`}
                 fill
-                sizes="(min-width: 1500px) 24vw, (min-width: 700px) 48vw, 95vw"
+                sizes="(min-width: 1280px) 31vw, (min-width: 700px) 46vw, 95vw"
                 className="object-cover object-top"
               />
               <span className="alcor-project-number">0{i + 1}</span>

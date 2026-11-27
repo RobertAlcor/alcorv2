@@ -30,19 +30,19 @@ export function RelatedPages({
         {title}
       </p>
       <div
-        className={`grid gap-4 md:gap-5 ${
+        className={`grid grid-cols-1 gap-4 auto-rows-fr md:gap-5 ${
           pages.length === 2
             ? 'md:grid-cols-2'
             : pages.length === 3
-              ? 'md:grid-cols-3'
-              : 'md:grid-cols-2 lg:grid-cols-4'
+              ? 'md:grid-cols-2 xl:grid-cols-3'
+              : 'md:grid-cols-2 xl:grid-cols-4'
         }`}
       >
         {pages.map((page) => (
           <Link
             key={page.href}
             href={page.href}
-            className="group block bg-deep-2 border border-line rounded-sm p-6 hover:border-signal-2/40 transition-all duration-300"
+            className="group flex h-full min-w-0 flex-col bg-deep-2 border border-line rounded-sm p-6 [overflow-wrap:anywhere] hover:border-signal-2/40 transition-all duration-300"
           >
             <h3 className="font-serif text-xl text-paper mb-2 group-hover:text-signal-2 transition-colors leading-tight">
               {page.label}
@@ -50,7 +50,7 @@ export function RelatedPages({
             <p className="text-sm text-paper-mute leading-relaxed mb-4">
               {page.description}
             </p>
-            <span className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-signal-2 group-hover:gap-2.5 transition-all">
+            <span className="mt-auto inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-signal-2 group-hover:gap-2.5 transition-all">
               Ansehen
               <ArrowRight className="w-3 h-3" strokeWidth={2} />
             </span>

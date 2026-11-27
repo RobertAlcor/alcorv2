@@ -73,7 +73,7 @@ export default async function TagPage({
       </section>
 
       <section className="container-fluid pb-24">
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 auto-rows-fr gap-6 lg:gap-8">
           {posts.map((post) => (
             <PostCard key={post.slug} post={post} />
           ))}

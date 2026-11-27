@@ -92,7 +92,7 @@ export function ConsentModal() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="consent-modal-title"
-      className="fixed inset-0 z-50 flex items-start sm:items-center justify-center px-4 py-8 overflow-y-auto"
+      className="fixed inset-0 z-[70] flex items-start justify-center px-4 py-4 sm:py-8 overflow-y-auto overscroll-contain"
     >
       <div
         className="fixed inset-0 bg-deep/80 backdrop-blur-sm"
@@ -101,13 +101,13 @@ export function ConsentModal() {
       />
       <div
         ref={modalRef}
-        className="relative w-full max-w-2xl bg-deep-2 border border-line rounded-sm p-6 md:p-8 shadow-2xl"
+        className="relative my-auto w-full min-w-0 max-w-2xl bg-deep-2 border border-line rounded-sm p-5 sm:p-6 md:p-8 shadow-2xl"
       >
         <button
           ref={closeButtonRef}
           type="button"
           onClick={closeSettings}
-          className="absolute top-3 right-3 w-9 h-9 inline-flex items-center justify-center text-paper-mute hover:text-paper rounded-sm hover:bg-deep transition-colors"
+          className="absolute top-2 right-2 w-11 h-11 inline-flex items-center justify-center text-paper-mute hover:text-paper rounded-sm hover:bg-deep transition-colors"
           aria-label="Schließen"
         >
           <X className="w-4 h-4" strokeWidth={1.75} />
@@ -115,7 +115,7 @@ export function ConsentModal() {
 
         <h2
           id="consent-modal-title"
-          className="font-serif text-2xl text-paper mb-2"
+          className="font-serif text-2xl text-paper mb-2 pr-9 [overflow-wrap:anywhere]"
         >
           Cookie-Einstellungen
         </h2>
@@ -136,7 +136,7 @@ export function ConsentModal() {
               >
                 <div className="flex items-start gap-4">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
                       <h3 className="font-medium text-paper">{info.label}</h3>
                       {disabled && (
                         <span className="text-[0.65rem] font-mono uppercase tracking-wider text-paper-mute bg-paper-dim/10 px-2 py-0.5 rounded-sm">
@@ -160,7 +160,7 @@ export function ConsentModal() {
           })}
         </ul>
 
-        <div className="flex flex-col-reverse sm:flex-row gap-2 sm:gap-3 sm:items-center pt-4 border-t border-line">
+        <div className="grid auto-rows-fr gap-2 sm:grid-cols-3 sm:gap-3 pt-4 border-t border-line">
           <button
             type="button"
             onClick={handleRejectAll}
@@ -178,7 +178,7 @@ export function ConsentModal() {
           <button
             type="button"
             onClick={handleSave}
-            className="min-h-[44px] px-5 py-2.5 inline-flex items-center justify-center gap-2 bg-signal text-deep text-sm font-medium rounded-sm hover:bg-signal-2 transition-colors sm:ml-auto"
+            className="min-h-[44px] px-5 py-2.5 inline-flex items-center justify-center gap-2 bg-signal text-deep text-sm font-medium rounded-sm hover:bg-signal-2 transition-colors"
           >
             <Check className="w-4 h-4" strokeWidth={2.5} />
             Auswahl speichern

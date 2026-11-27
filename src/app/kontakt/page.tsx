@@ -44,15 +44,15 @@ export default function KontaktPage() {
         </div>
 
         {/* Form-Bereich: voll ausnutzen */}
-        <div className="grid lg:grid-cols-[2fr_1fr] gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] gap-12 lg:gap-16 items-start">
           {/* Form - viel breiter jetzt */}
-          <div className="max-w-2xl">
+          <div className="min-w-0 w-full max-w-2xl">
 <div className="mb-8 rounded-lg border border-line p-6"><h2 className="text-xl font-semibold text-paper">Was passiert nach Ihrer Anfrage?</h2><p className="mt-3 text-base leading-relaxed text-paper-mute">Ich prüfe Ihre Nachricht persönlich und melde mich zur Klärung der nächsten Schritte. Umfang und Preis werden separat vereinbart. Mit dem Absenden bestellen Sie noch keine Leistung.</p></div>
             <KontaktForm />
           </div>
 
           {/* Sidebar - schmaler */}
-          <aside className="space-y-8 lg:pt-2 lg:sticky lg:top-24">
+          <aside className="min-w-0 space-y-8 lg:pt-2 lg:sticky lg:top-24">
             <div>
               <h2 className="text-xs font-semibold tracking-[0.16em] uppercase text-paper-dim mb-3">
                 Direkt erreichen

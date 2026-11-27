@@ -17,9 +17,9 @@ export function ConsentBanner() {
       role="dialog"
       aria-modal="false"
       aria-labelledby="consent-banner-title"
-      className="fixed bottom-0 inset-x-0 z-40 px-4 pb-4 sm:px-6 sm:pb-6 pointer-events-none"
+      className="fixed bottom-0 inset-x-0 z-[60] px-4 pb-4 sm:px-6 sm:pb-6 pointer-events-none"
     >
-      <div className="pointer-events-auto max-w-3xl mx-auto bg-deep-2 border border-line rounded-sm shadow-2xl p-5 sm:p-6">
+      <div className="pointer-events-auto max-h-[calc(100dvh-2rem)] max-w-3xl mx-auto overflow-y-auto overscroll-contain bg-deep-2 border border-line rounded-sm shadow-2xl p-5 sm:p-6">
         <h2
           id="consent-banner-title"
           className="font-serif text-lg sm:text-xl text-paper mb-2"
@@ -39,7 +39,7 @@ export function ConsentBanner() {
           .
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+        <div className="grid auto-rows-fr gap-2 sm:grid-cols-3 sm:gap-3">
           <button
             type="button"
             onClick={acceptAll}
@@ -57,7 +57,7 @@ export function ConsentBanner() {
           <button
             type="button"
             onClick={openSettings}
-            className="min-h-[44px] px-5 py-2.5 inline-flex items-center justify-center text-paper-mute text-sm hover:text-paper transition-colors sm:ml-auto"
+            className="min-h-[44px] px-5 py-2.5 inline-flex items-center justify-center text-paper-mute text-sm hover:text-paper transition-colors"
           >
             Einstellungen
           </button>

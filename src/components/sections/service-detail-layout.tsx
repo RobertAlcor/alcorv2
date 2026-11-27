@@ -150,7 +150,7 @@ export function ServiceDetailLayout({ service }: { service: Service }) {
               Kontaktmöglichkeit führen. Die Pakete geben einen realistischen Preisrahmen;
               das Angebot hält den tatsächlichen Umfang fest.
             </p>
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 auto-rows-fr xl:grid-cols-3">
               <div>
                 <h3 className="text-paper mb-3 font-serif text-2xl">Basis · 599 €</h3>
                 <p className="text-paper-mute">

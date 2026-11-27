@@ -54,22 +54,22 @@ export function BentoGrid() {
         </div>
         <div className={styles.grid}>
           {items.map((item) => (
-            <Link className="alcor-service-card" key={item.href} href={item.href}>
-              <div className="alcor-service-image" style={{ aspectRatio: '5 / 3' }}>
+            <Link className={`alcor-service-card ${styles.card}`} key={item.href} href={item.href}>
+              <div className={`alcor-service-image ${styles.image}`}>
                 <Image
                   src={item.image}
                   alt=""
                   fill
-                  sizes="(min-width: 900px) 48vw, 95vw"
+                  sizes="(min-width: 700px) 46vw, 95vw"
                   unoptimized
                   style={{ objectFit: 'contain', objectPosition: 'center' }}
                 />
               </div>
-              <div className="alcor-service-body">
+              <div className={`alcor-service-body ${styles.body}`}>
                 <p className="alcor-eyebrow">{item.label}</p>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
-                <span className="alcor-text-link">
+                <span className={`alcor-text-link ${styles.link}`}>
                   Leistung kennenlernen
                   <ArrowUpRight size={20} aria-hidden="true" />
                 </span>

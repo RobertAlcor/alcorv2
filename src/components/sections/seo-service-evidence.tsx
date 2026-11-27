@@ -89,9 +89,9 @@ export function SeoServiceEvidence() {
           werden klar voneinander abgegrenzt.
         </p>
       </div>
-      <div className="mt-8 grid gap-6 lg:grid-cols-3">
+      <div className="mt-8 grid auto-rows-fr grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {CHECKS.map((check) => (
-          <div key={check.title} className="border-line rounded-lg border p-6">
+          <div key={check.title} className="border-line h-full min-w-0 rounded-lg border p-5 sm:p-6">
             <h3 className="text-paper text-xl font-semibold">{check.title}</h3>
             <p className="text-paper-mute mt-4 leading-relaxed">{check.detail}</p>
           </div>
@@ -101,12 +101,12 @@ export function SeoServiceEvidence() {
         <h3 className="text-paper text-2xl font-semibold">
           Welche Anforderungen hat Ihr Betrieb?
         </h3>
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
+        <div className="mt-6 grid auto-rows-fr grid-cols-1 gap-6 md:grid-cols-2">
           {BUSINESS_NEEDS.map((need) => (
-            <div key={need.href} className="border-line rounded-lg border p-6">
+            <div key={need.href} className="border-line flex h-full min-w-0 flex-col rounded-lg border p-5 sm:p-6">
               <h4 className="text-paper text-xl font-semibold">{need.title}</h4>
               <p className="text-paper-mute mt-4 leading-relaxed">{need.detail}</p>
-              <Link href={need.href} className="alcor-text-link mt-5 inline-block">
+              <Link href={need.href} className="alcor-text-link mt-auto self-start pt-5">
                 {need.label}
               </Link>
             </div>
@@ -146,9 +146,9 @@ export function SeoServiceEvidence() {
           Original-Screenshots. Sie sind keine SEO-Erfolgsstudien und kein Nachweis für
           bestimmte Platzierungen oder Kundenzahlen.
         </p>
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
+        <div className="mt-6 grid auto-rows-fr grid-cols-1 gap-6 md:grid-cols-2">
           {EXAMPLES.map((example) => (
-            <div key={example.href} className="border-line rounded-lg border p-6">
+            <div key={example.href} className="border-line h-full min-w-0 rounded-lg border p-5 sm:p-6">
               <Link href={example.href} className="alcor-text-link">
                 {example.title} →
               </Link>

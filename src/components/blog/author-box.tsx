@@ -10,7 +10,7 @@ export function AuthorBox() {
             R
           </div>
         </div>
-        <div className="flex-1">
+        <div className="min-w-0 flex-1 [overflow-wrap:anywhere]">
           <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-paper-dim mb-2">
             Geschrieben von
           </p>

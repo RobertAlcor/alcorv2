@@ -314,6 +314,10 @@
 }
 
 .prose-blog table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
   width: 100%;
   margin: 2rem 0;
   border-collapse: collapse;
@@ -338,4 +342,14 @@
 
 .prose-blog table td {
   color: var(--color-paper-mute);
+}
+
+.prose-blog {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.prose-blog pre {
+  max-width: 100%;
+  overflow-x: auto;
 }

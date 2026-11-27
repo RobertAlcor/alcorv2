@@ -76,7 +76,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       <div className="prose-blog max-w-4xl" dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }} />
       <div className="max-w-4xl"><AuthorBox /></div>
     </article>
-    {related.length > 0 && <section className="container-fluid alcor-section border-t border-line"><div className="alcor-section-head"><h2>Mehr aus dem Journal.</h2><Link href="/blog" className="alcor-text-link">Alle Beiträge →</Link></div><div className="grid gap-7 md:grid-cols-2">{related.map((item) => <PostCard key={item.slug} post={item} />)}</div></section>}
+    {related.length > 0 && <section className="container-fluid alcor-section border-t border-line"><div className="alcor-section-head"><h2>Mehr aus dem Journal.</h2><Link href="/blog" className="alcor-text-link">Alle Beiträge →</Link></div><div className="grid grid-cols-1 gap-7 md:grid-cols-2 auto-rows-fr">{related.map((item) => <PostCard key={item.slug} post={item} />)}</div></section>}
     <CtaBand />
   </>
 }

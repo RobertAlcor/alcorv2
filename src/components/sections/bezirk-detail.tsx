@@ -63,7 +63,7 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
 
       {/* Local Context */}
       <section className="container-fluid py-16 md:py-20 border-t border-line">
-        <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-12 lg:gap-20 [&>*]:min-w-0">
           <div>
             <p className="text-xs font-semibold tracking-[0.16em] uppercase text-signal-2 mb-6">
               <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
@@ -81,7 +81,7 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
 
       {/* Industries */}
       <section className="container-fluid py-16 md:py-20 border-t border-line">
-        <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-12 lg:gap-20 [&>*]:min-w-0">
           <div>
             <p className="text-xs font-semibold tracking-[0.16em] uppercase text-signal-2 mb-6">
               <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
@@ -99,7 +99,7 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
 
       {bezirk.projectEvidence && (
         <section className="container-fluid py-16 md:py-20 border-t border-line">
-          <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-12 lg:gap-20 [&>*]:min-w-0">
             <div>
               <p className="alcor-eyebrow">Ein Projekt aus {bezirk.name}</p>
               <h2 className="font-serif text-3xl md:text-4xl text-paper text-balance">
@@ -124,7 +124,7 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
       {/* Pain Points */}
       {bezirk.painPoints.length > 0 && (
         <section className="container-fluid py-16 md:py-20 border-t border-line">
-          <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-12 lg:gap-20 [&>*]:min-w-0">
             <div>
               <p className="text-xs font-semibold tracking-[0.16em] uppercase text-signal-2 mb-6">
                 <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
@@ -153,7 +153,7 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
 
       {/* Positioning */}
       <section className="container-fluid py-16 md:py-20 border-t border-line">
-        <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-12 lg:gap-20 [&>*]:min-w-0">
           <div>
             <p className="text-xs font-semibold tracking-[0.16em] uppercase text-signal-2 mb-6">
               <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
@@ -222,7 +222,7 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
       {/* FAQ */}
       {bezirk.faqs.length > 0 && (
         <section className="container-fluid py-16 md:py-20 border-t border-line">
-          <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-12 lg:gap-20 [&>*]:min-w-0">
             <div>
               <p className="text-xs font-semibold tracking-[0.16em] uppercase text-signal-2 mb-6">
                 <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
@@ -256,12 +256,12 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
           <h2 className="font-serif text-2xl md:text-3xl text-paper mb-10 text-balance">
             Nachbar-Bezirke, in denen ich auch arbeite.
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 auto-rows-fr lg:grid-cols-3 gap-4">
             {nearby.map((b) => (
               <Link
                 key={b.slug}
                 href={`/webdesign/${b.slug}`}
-                className="group flex items-center justify-between gap-4 p-5 border border-line hover:border-signal-2 transition-colors"
+                className="group flex min-w-0 items-center justify-between gap-4 p-5 border border-line [overflow-wrap:anywhere] hover:border-signal-2 transition-colors"
               >
                 <div>
                   <span className="font-mono text-xs text-paper-dim block mb-1">
@@ -272,7 +272,7 @@ export function BezirkDetailLayout({ bezirk }: { bezirk: Bezirk }) {
                   </span>
                 </div>
                 <svg
-                  className="w-4 h-4 text-paper-dim group-hover:text-signal-2 group-hover:translate-x-1 transition-all"
+                  className="w-4 h-4 shrink-0 text-paper-dim group-hover:text-signal-2 group-hover:translate-x-1 transition-all"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"

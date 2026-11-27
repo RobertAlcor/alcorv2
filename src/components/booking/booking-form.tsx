@@ -46,10 +46,10 @@ const LABEL_CLASS =
   'block text-xs font-semibold tracking-[0.12em] uppercase text-paper-mute mb-2'
 
 const INPUT_CLASS =
-  'w-full min-h-[48px] px-4 py-3 bg-deep-2 border border-paper-dim/30 rounded-sm text-paper placeholder:text-paper-mute/70 focus:border-signal-2 focus:outline-none transition-colors'
+  'w-full min-w-0 max-w-full min-h-[48px] px-4 py-3 bg-deep-2 border border-paper-dim/30 rounded-sm text-base text-paper placeholder:text-paper-mute/70 focus:border-signal-2 focus:outline-none transition-colors'
 
 const TEXTAREA_CLASS =
-  'w-full px-4 py-3 bg-deep-2 border border-paper-dim/30 rounded-sm text-paper placeholder:text-paper-mute/70 focus:border-signal-2 focus:outline-none transition-colors resize-y min-h-[100px]'
+  'w-full min-w-0 max-w-full px-4 py-3 bg-deep-2 border border-paper-dim/30 rounded-sm text-base text-paper placeholder:text-paper-mute/70 focus:border-signal-2 focus:outline-none transition-colors resize-y min-h-[100px]'
 
 export function BookingFormStep({ data, onChange, errors }: Props) {
   function update<K extends keyof BookingStepData>(
@@ -69,7 +69,7 @@ export function BookingFormStep({ data, onChange, errors }: Props) {
       </div>
 
       {/* Channel */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+      <div className="grid auto-rows-fr grid-cols-1 sm:grid-cols-3 gap-2">
         {CHANNELS.map((c) => {
           const Icon = c.icon
           const isActive = data.channel === c.value
@@ -79,7 +79,7 @@ export function BookingFormStep({ data, onChange, errors }: Props) {
               type="button"
               onClick={() => update('channel', c.value)}
               aria-pressed={isActive}
-              className={`min-h-[72px] p-3 rounded-sm border text-left transition-all ${
+              className={`h-full min-w-0 min-h-[72px] p-3 rounded-sm border text-left transition-all ${
                 isActive
                   ? 'bg-signal/10 border-signal-2 text-paper'
                   : 'bg-deep-2 border-paper-dim/30 text-paper-mute hover:border-paper-mute'
@@ -159,7 +159,7 @@ export function BookingFormStep({ data, onChange, errors }: Props) {
       </div>
 
       {/* Email + Phone */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-6 [&>div]:min-w-0">
         <div>
           <label htmlFor="bk-email" className={LABEL_CLASS}>
             E-Mail <span className="text-signal-2">*</span>

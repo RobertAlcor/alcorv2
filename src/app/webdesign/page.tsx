@@ -53,7 +53,7 @@ export default function WebdesignHubPage() {
 
       {/* Intro Paragraph */}
       <section className="container-fluid py-16 md:py-20 border-t border-line">
-        <div className="grid lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] gap-12 lg:gap-20 [&>*]:min-w-0">
           <div>
             <p className="text-xs font-semibold tracking-[0.16em] uppercase text-signal-2 mb-6">
               <span className="inline-block w-8 h-px bg-signal-2 mr-3 align-middle" />
@@ -92,7 +92,7 @@ export default function WebdesignHubPage() {
           Wählen Sie Ihren Bezirk.
         </h2>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 auto-rows-fr lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {allBezirke.map((b) => {
             const isPublished = b.status === 'full'
             const Wrapper = isPublished ? Link : 'div'
@@ -104,7 +104,7 @@ export default function WebdesignHubPage() {
               <Wrapper
                 key={b.slug}
                 {...(wrapperProps as any)}
-                className={`group flex items-center justify-between gap-4 p-5 border border-line transition-colors ${
+                className={`group flex min-w-0 items-center justify-between gap-4 p-5 border border-line [overflow-wrap:anywhere] transition-colors ${
                   isPublished
                     ? 'hover:border-signal-2 cursor-pointer'
                     : 'opacity-50 cursor-default'
@@ -131,7 +131,7 @@ export default function WebdesignHubPage() {
                 </div>
                 {isPublished && (
                   <svg
-                    className="w-4 h-4 text-paper-dim group-hover:text-signal-2 group-hover:translate-x-1 transition-all"
+                    className="w-4 h-4 shrink-0 text-paper-dim group-hover:text-signal-2 group-hover:translate-x-1 transition-all"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"

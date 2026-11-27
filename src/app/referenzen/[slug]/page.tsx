@@ -141,11 +141,11 @@ export default async function CasePage({
             </h2>
           </div>
         </div>
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 auto-rows-fr">
           {project.highlights.map((highlight) => (
             <div
               key={highlight.label}
-              className="border-line bg-deep-2 rounded-lg border p-7"
+              className="border-line bg-deep-2 min-w-0 rounded-lg border p-5 sm:p-7 [overflow-wrap:anywhere]"
             >
               <h3 className="mb-4 text-2xl font-semibold">{highlight.label}</h3>
               <p className="text-paper-mute text-base leading-relaxed">
@@ -154,9 +154,9 @@ export default async function CasePage({
             </div>
           ))}
         </div>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 auto-rows-fr xl:grid-cols-4">
           {project.results.map((result) => (
-            <div key={result.label} className="border-line border-t pt-6">
+            <div key={result.label} className="border-line min-w-0 border-t pt-6 [overflow-wrap:anywhere]">
               <p className="text-paper-mute text-sm">{result.label}</p>
               <p className="text-signal-2 my-3 text-3xl font-semibold">{result.value}</p>
               {result.hint && <p className="text-paper-mute text-sm">{result.hint}</p>}

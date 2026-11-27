@@ -29,6 +29,15 @@ export function MobileMenu() {
   }, [pathname])
 
   useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 96rem)')
+    const closeOnDesktop = () => {
+      if (desktop.matches) setOpen(false)
+    }
+    desktop.addEventListener('change', closeOnDesktop)
+    return () => desktop.removeEventListener('change', closeOnDesktop)
+  }, [])
+
+  useEffect(() => {
     const currentDialog = dialog.current
     if (!currentDialog) return
 
@@ -49,7 +58,7 @@ export function MobileMenu() {
   }, [open])
 
   return (
-    <div className="xl:hidden">
+    <div className="2xl:hidden">
       <button
         ref={trigger}
         type="button"
@@ -68,7 +77,7 @@ export function MobileMenu() {
         onCancel={() => setOpen(false)}
         onClose={() => setOpen(false)}
         aria-labelledby="alcor-menu-title"
-        className="bg-deep text-paper fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none p-6 backdrop:bg-black/70"
+        className="bg-deep text-paper fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto overscroll-contain p-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:p-6 backdrop:bg-black/70"
       >
         <div className="border-line flex items-center justify-between border-b pb-5">
           <p id="alcor-menu-title" className="text-xl font-semibold tracking-[0.2em]">
@@ -98,10 +107,10 @@ export function MobileMenu() {
                     ? 'location'
                     : undefined
               }
-              className="border-line hover:text-signal-2 flex min-h-[56px] items-center justify-between border-b py-3 text-xl"
+              className="border-line hover:text-signal-2 flex min-h-[56px] items-center justify-between gap-4 border-b py-3 text-xl"
             >
               {label}
-              <ArrowUpRight size={20} aria-hidden="true" />
+              <ArrowUpRight className="shrink-0" size={20} aria-hidden="true" />
             </Link>
           ))}
         </nav>

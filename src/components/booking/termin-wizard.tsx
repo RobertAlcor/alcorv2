@@ -206,7 +206,7 @@ export function TerminWizard() {
   }
 
   return (
-    <div ref={wizardTopRef}>
+    <div ref={wizardTopRef} className="min-w-0">
       <StepIndicator
         currentStep={step}
         totalSteps={4}
@@ -311,7 +311,7 @@ export function TerminWizard() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="mt-10 pt-6 border-t border-line flex items-center justify-between gap-4">
+      <div className="mt-10 pt-6 border-t border-line flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 [&>button]:justify-center">
         <button
           type="button"
           onClick={goBack}
