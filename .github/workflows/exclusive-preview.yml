@@ -45,7 +45,10 @@ jobs:
           NODE
       - name: Verify packages, booking, authentication and all blog covers
         run: node scripts/audit-preview.cjs
+      - name: Check booking conflicts without external services
+        run: node scripts/check-booking-conflicts.cjs
       - run: npm run build
+      - run: npm run type-check
       - name: Package source without credentials or dependencies
         if: always()
         run: git archive --format=zip --output=alcor-exclusive-source.zip HEAD

@@ -102,37 +102,67 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Konflikt-Check (überlappende non-cancelled bookings)
-    const { data: overlapping } = await supabaseAdmin
-      .from('bookings')
-      .select('slot_start, slot_end')
-      .lt('slot_start', slotCheck.end.toISOString())
-      .gt('slot_end', slotCheck.start.toISOString())
-      .not('status', 'in', '(cancelled,declined)')
-      .limit(1)
+    // Recheck bookings and manual blocks immediately before saving.
+    const [bookings, blocks] = await Promise.all([
+      supabaseAdmin
+        .from('bookings')
+        .select('slot_start, slot_end')
+        .lt('slot_start', slotCheck.end.toISOString())
+        .gt('slot_end', slotCheck.start.toISOString())
+        .not('status', 'in', '(cancelled,declined)')
+        .limit(1),
+      supabaseAdmin
+        .from('busy_slots')
+        .select('slot_start, slot_end')
+        .lt('slot_start', slotCheck.end.toISOString())
+        .gt('slot_end', slotCheck.start.toISOString())
+        .limit(1),
+    ])
 
-    if (overlapping && overlapping.length > 0) {
-      const alternatives = await findAlternativeSlots(
-        slotCheck.start,
-        async (dayStart: Date, dayEnd: Date) => {
-          const [bRes, sRes] = await Promise.all([
-            supabaseAdmin
-              .from('bookings')
-              .select('slot_start, slot_end')
-              .gte('slot_start', dayStart.toISOString())
-              .lte('slot_start', dayEnd.toISOString())
-              .not('status', 'in', '(cancelled,declined)'),
-            supabaseAdmin
-              .from('busy_slots')
-              .select('slot_start, slot_end')
-              .gte('slot_start', dayStart.toISOString())
-              .lte('slot_start', dayEnd.toISOString()),
-          ])
-          return [...(bRes.data ?? []), ...(sRes.data ?? [])]
-        },
-        3,
-        slotConfig,
+    if (bookings.error || blocks.error) {
+      console.error('Booking conflict query failed', {
+        bookings: bookings.error?.code,
+        blocks: blocks.error?.code,
+      })
+      return NextResponse.json(
+        { ok: false, error: 'Service vorübergehend nicht verfügbar.' },
+        { status: 503 },
       )
+    }
+
+    if ((bookings.data?.length ?? 0) > 0 || (blocks.data?.length ?? 0) > 0) {
+      let alternatives
+      try {
+        alternatives = await findAlternativeSlots(
+          slotCheck.start,
+          async (dayStart: Date, dayEnd: Date) => {
+            const [bRes, sRes] = await Promise.all([
+              supabaseAdmin
+                .from('bookings')
+                .select('slot_start, slot_end')
+                .lt('slot_start', dayEnd.toISOString())
+                .gt('slot_end', dayStart.toISOString())
+                .not('status', 'in', '(cancelled,declined)'),
+              supabaseAdmin
+                .from('busy_slots')
+                .select('slot_start, slot_end')
+                .lt('slot_start', dayEnd.toISOString())
+                .gt('slot_end', dayStart.toISOString()),
+            ])
+            if (bRes.error || sRes.error) {
+              throw new Error('Alternative availability query failed')
+            }
+            return [...(bRes.data ?? []), ...(sRes.data ?? [])]
+          },
+          3,
+          slotConfig,
+        )
+      } catch {
+        return NextResponse.json(
+          { ok: false, error: 'Service vorübergehend nicht verfügbar.' },
+          { status: 503 },
+        )
+      }
       return NextResponse.json(
         { ok: false, error: 'Slot bereits vergeben.', alternatives },
         { status: 409 },
