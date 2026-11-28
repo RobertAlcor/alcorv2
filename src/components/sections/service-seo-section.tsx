@@ -7,6 +7,7 @@ import { SITE } from '@/lib/site'
 
 const GUIDES: Record<string, { href: string; label: string }[]> = {
   'website-erstellung': [
+    { href: '/website-betreuung', label: 'Website-Betreuung: Umfang und Grenzen' },
     { href: '/blog/homepage-erstellen-lassen-wien', label: 'Homepage erstellen lassen: Kosten und Ablauf' },
     { href: '/preise', label: 'Webdesign-Preise und Pakete vergleichen' },
     { href: '/blog/website-fuer-handwerker-wien', label: 'Was eine Website für Handwerker braucht' },

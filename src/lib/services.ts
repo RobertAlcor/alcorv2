@@ -72,6 +72,11 @@ export const SERVICES: Service[] = [
     ],
     faqs: [
       {
+        question: 'Kann ich Texte und Bilder später selbst ändern?',
+        answer:
+          'Welche Inhalte Sie selbst bearbeiten können, hängt vom vereinbarten System ab. Sprechen Sie gewünschte Selbstpflege vor Projektbeginn an; Bearbeitungsmöglichkeiten und Übergabe halten wir im Leistungsumfang fest. Möchten Sie spätere Änderungen abgeben, können Sie eine separate Website-Betreuung vereinbaren.',
+      },
+      {
         question: 'Was umfasst die Homepage für 599 €?',
         answer:
           'Eine einfache Basis-Homepage auf einer Seite mit bereitgestellten Inhalten, responsiver Darstellung und Basis-SEO. Kein Kontaktformular, keine Animationen, keine Erstellung von Datenschutzerklärung oder anderen Rechtstexten. Der Preis ist einmalig; aufgrund der Kleinunternehmerregelung wird keine Umsatzsteuer verrechnet.',
