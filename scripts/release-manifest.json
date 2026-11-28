@@ -1,14 +1,14 @@
 {
   "public/llms.txt": "b63917e2ca70085f4e313ed2bb66c3693584dfbcc5dfaa1f0e2ebb7d83ead8b2",
   "scripts/audit-preview.cjs": "6638fe304c6028e56826ac0318208c04fc37217884ee811c6978c7a8f2f3eec4",
-  "src/app/exclusive.css": "e3aa73eb48758ac8766deeada9145eb3511d483b9a5dacad173148faa312bca2",
+  "src/app/exclusive.css": "b521a25837e391e5e601b0d6840de02200f60d2c74cf5ccb80906595b3145f69",
   "src/app/layout.tsx": "c5804c437864c23cc4cde7ed58929d315c40b6782e12d87b37dec898e03057e9",
   "src/app/readability.css": "98ad2f39e12004c6344580e414dcfdce087235b26cf318b91c3d64883d0c2eeb",
   "src/app/termin/page.tsx": "79c00014c85bccfa8277976011098d9122f1218c0a57dadf457b380038721a2d",
-  "src/app/webdesign/page.tsx": "1adf21774b2559ff7032d4d973081703778c17308e187441072cd686e8c1a292",
-  "src/components/booking/booking-review.tsx": "c07585d0b5107b69eb553330f4c73b9ef3c3184157d35f4cd267d951f2d4bd84",
+  "src/app/webdesign/page.tsx": "4cd20603886952800b2bdd1787837f982ec5cd4393a828c86d15a0a39e239f52",
+  "src/components/booking/booking-review.tsx": "9d73856fb1935d761c91bf5bf4e672e049e997c59d74506dea21a8d9d568cdb1",
   "src/components/booking/calendar.tsx": "4bfbd251f4500c3d7df8ef051153dfba3031333083e502826ae2d58d73beab7d",
-  "src/components/booking/slot-picker.tsx": "ce0dfb57a19a715331ce1fb8acfee91d74b8fddb67c2f526be52f3086f94c997",
+  "src/components/booking/slot-picker.tsx": "5d80d8da63457dd35b05a17cabf9064b1e8bca1a95e4f3ad43f3e05af9927c3e",
   "src/content/blog/homepage-erstellen-lassen-wien.mdx": "439f61c8075c87fef9fc94483215406e32cca0651391badfc887901bf99b974f",
   "src/content/blog/website-fuer-handwerker-wien.mdx": "1902890acac5fea4162a0ffa42eb3233be1d2224765f94e28efb947604610456",
   "src/content/blog/website-kosten-wien-2026.mdx": "11af4518af648b5adcfd24c044dac9ced48cca1d058de8d58ca9d92d9747bd74",
@@ -17,6 +17,6 @@
   "src/lib/booking.ts": "e785fb66f55bad6def1f260c346f69801872b407c5a8cc04c594f31618316809",
   "src/lib/mail.ts": "65d259e9631b30d2b363909355bd56bd647a3ca45e9e88716be6722b46f8f34e",
   "src/lib/related-pages.ts": "bd1677172019cff08e11d4a5647b1fa1de72359406d7e15cbddf4d66b53d5264",
-  "src/lib/services.ts": "25f29327ac81443f91d3aadd33683330f840540393b90bf85265e5f843fdf914",
+  "src/lib/services.ts": "899cb5ca9d00e633a26b9d9f8e768c85cac33c9f679edd40deba48bddcb3d833",
   "src/lib/validation.ts": "f709f5cd48fe84ea3c168a1754ed8cdf8fe669c9808eb2edb50dbb3e44cf08c7"
 }
